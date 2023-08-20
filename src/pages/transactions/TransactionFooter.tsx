@@ -15,6 +15,7 @@ const Container = styled.div`
         margin-right: 1rem;
         font-size: 0.8rem;
     }
+     
 `
 
 const TransactionFooter: FC<ITransactionProps> = ({ item }) => {

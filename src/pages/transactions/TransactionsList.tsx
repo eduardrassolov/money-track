@@ -1,5 +1,6 @@
 import { useLoaderData } from "react-router-dom"
-import Transaction from "./Transaction";
+import Transaction from "./TransactionCard";
+import Header from "../../components/header/Header";
 
 const TransactionsList = () => {
     const data = useLoaderData();
@@ -10,11 +11,10 @@ const TransactionsList = () => {
     const handleDelete = (id: number) =>
         console.log(id);
 
-
-    console.log(data);
     return (
         <>
-            <h1>Transactions</h1>
+            <Header>Transactions</Header>
+
 
             {data.map((transaction) =>
                 <Transaction

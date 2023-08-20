@@ -16,10 +16,16 @@ const Container = styled.div`
   display: flex;
   width: 90%;
   margin: 0 auto 10px;
-  padding: 10px;
+  padding: 1rem 1.5rem;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(0,0,0,0.15);
   justify-content: space-between;
+
+  @media (max-width: 800px) {
+    margin: 0 5px 10px;
+    max-width: 100%;
+
+  }
 `
 const InfoSection = styled.div`
   display: flex;
@@ -31,7 +37,7 @@ const OperationSection = styled.div`
   align-items: center;
 `
 
-const Transaction: FC<ITransactionProps> = ({ item, onDelete }) => {
+const TransactionCard: FC<ITransactionProps> = ({ item, onDelete }) => {
   return (
     <Container>
       <InfoSection>
@@ -45,4 +51,4 @@ const Transaction: FC<ITransactionProps> = ({ item, onDelete }) => {
     </Container>
   )
 }
-export default Transaction;
+export default TransactionCard;
