@@ -5,7 +5,7 @@ import { styled } from 'styled-components'
 const StyledLayout = styled.div`
     display: flex;
     width: 100vw;
-    background-color: #e1e1e1;
+    background-color: #fff;
 `
 const Section = styled.section`
     width: 100%;

@@ -5,11 +5,19 @@ type StatsProps = {
     calcValue: number;
 }
 
+function formatNumberWithSpaces(number: number): string {
+    const parts = number.toFixed(2).toString().split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    return parts.join('.');
+}
+
 const Stats: FC<StatsProps> = ({ text, calcValue }) => {
+    const formateValue = formatNumberWithSpaces(calcValue);
     return (
         <div>
-            <p>{text}{calcValue}</p>
+            <p>{text}{formateValue}</p>
         </div>
     )
 }
-export default Stats
+export default Stats;
+

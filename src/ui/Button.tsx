@@ -25,13 +25,14 @@ const StyledButton = styled.button <{ $variant?: string }> `
 
 interface IButtonProps {
     children: React.ReactNode;
+    onClick?: () => void;
     type?: "button" | "submit" | "reset";
     variant?: "primary" | "secondary";
 }
 
-const Button: FC<IButtonProps> = ({ children, type = "button", variant = "primary" }) => {
+const Button: FC<IButtonProps> = ({ children, type = "button", variant = "primary", onClick }) => {
     return (
-        <StyledButton $variant={variant} type={type}>{children}</StyledButton>
+        <StyledButton onClick={onClick} $variant={variant} type={type}>{children}</StyledButton>
     )
 }
 

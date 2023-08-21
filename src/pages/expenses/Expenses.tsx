@@ -1,10 +1,11 @@
 import { styled } from "styled-components";
-import Header from "../../components/header/Header";
-import NewExpense from "./NewExpense";
-import ExpensesList from "./ExpensesList";
+import Header from "../../ui/header/Header";
 import { useLoaderData } from "react-router";
 import { ITransaction } from "../../interface/ITransactions";
 import Stats from "../../components/stats/Stats";
+import NewTransactionForm from "../../components/newTransaction/NewTransactionForm";
+import TYPES_TRANSACTION from "../../config/typeTransactions";
+import ExpensesList from "./ExpensesList";
 
 const StyledDiv = styled.div`
     display: grid;
@@ -19,7 +20,7 @@ const StyledDiv = styled.div`
 `
 export default function Expenses() {
   const data = useLoaderData();
-  if (!Array.isArray(data) || !data.length) return null;
+  // if (!Array.isArray(data) || !data.length) return null;
 
   const totalExpenses: number = data.reduce((acc: number, curr: ITransaction) => acc + curr.amount, 0);
 
@@ -30,7 +31,7 @@ export default function Expenses() {
       <Stats text="Total Expenses: $" calcValue={totalExpenses} />
 
       <StyledDiv>
-        <NewExpense />
+        <NewTransactionForm type={TYPES_TRANSACTION.EXPENSE} />
         <ExpensesList />
       </StyledDiv>
     </>

@@ -1,19 +1,20 @@
-import { RouteObject, createBrowserRouter } from "react-router-dom";
+import { RouteObject, createBrowserRouter, redirect } from "react-router-dom";
 import AppLayout from "./layout/AppLayout.tsx";
-import TransactionsList from "./pages/transactions/TransactionsList.tsx";
 import Incomes from "./pages/income/Incomes.tsx";
 import Expenses from "./pages/expenses/Expenses.tsx";
 import Dashboard from "./pages/dashboard/Dashboard.tsx";
-
-import { loaderTransactions } from "./pages/transactions/loader.ts";
 import { loaderExpenses } from "./pages/expenses/loader.ts";
 import { loaderIncomes } from "./pages/income/loader.ts";
+import { loaderTransactions } from "./components/transactionCard/loader.ts";
+import TransactionsList from "./components/transactionCard/TransactionsList.tsx";
+import actionIncomes from "./pages/income/action.ts";
+import actionExpenses from "./pages/expenses/action.ts";
 
 
 export const ROUTES = {
     ROOT: "/app",
     TRANSACTIONS: `/app/transactions`,
-    INCOME: "/app/income",
+    INCOMES: "/app/incomes",
     EXPENSES: "/app/expenses",
     DASHBOARD: "/app/dashboard",
 }
@@ -30,18 +31,21 @@ const routes: RouteObject[] = [
                 loader: async () => loaderTransactions(),
             },
             {
-                path: ROUTES.INCOME,
+                path: ROUTES.INCOMES,
                 element: <Incomes />,
                 loader: async () => loaderIncomes(),
+                action: async ({ request }) => actionIncomes(request),
             },
             {
                 path: ROUTES.EXPENSES,
                 element: <Expenses />,
                 loader: async () => loaderExpenses(),
+                action: async ({ request }) => actionExpenses(request)
             },
             {
                 path: ROUTES.DASHBOARD,
-                element: <Dashboard />
+                element: <Dashboard />,
+                loader: async () => loaderTransactions(),
             }
         ]
     },

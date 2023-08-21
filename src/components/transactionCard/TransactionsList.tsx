@@ -1,21 +1,25 @@
-import { useLoaderData } from "react-router-dom"
+import { useLoaderData, useLocation, useNavigate } from "react-router-dom"
 import Transaction from "./TransactionCard";
-import Header from "../../components/header/Header";
+import Header from "../../ui/header/Header";
 import deleteTransaction from "../../api/deleteTransaction";
 
 const TransactionsList = () => {
-    const data = useLoaderData();
+    const data = useLoaderData()
+    const location = useLocation();
+    const navigate = useNavigate();
 
     if (!Array.isArray(data))
         return (<div>loading...</div>);
 
-    const handleDelete = (id: number) =>
-        deleteTransaction(id);
+    const handleDelete = async (id: number) => {
+        await deleteTransaction(id);
+        navigate(location.pathname);
+
+    }
 
     return (
         <>
             <Header>Transactions</Header>
-
 
             {data.map((transaction) =>
                 <Transaction

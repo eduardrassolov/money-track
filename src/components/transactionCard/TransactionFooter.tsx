@@ -3,6 +3,8 @@ import { styled } from "styled-components";
 import { formatDate } from "../../helpers/dateFormat";
 import FooterItem from "./FooterItem"
 import { ITransaction } from "../../interface/ITransactions";
+import { TbMoneybag, TbCalendar, TbInfoSquareRounded } from "react-icons/tb";
+
 
 interface ITransactionProps {
     item: ITransaction;
@@ -10,12 +12,7 @@ interface ITransactionProps {
 
 const Container = styled.div`
     display: flex;
- 
-    span{
-        margin-right: 1rem;
-        font-size: 0.8rem;
-    }
-     
+    
 `
 
 const TransactionFooter: FC<ITransactionProps> = ({ item }) => {
@@ -23,9 +20,9 @@ const TransactionFooter: FC<ITransactionProps> = ({ item }) => {
 
     return (
         <Container>
-            <FooterItem title={`$ ${item.amount}`} />
-            <FooterItem title={formatedDate} />
-            <FooterItem title={item.typeTransaction?.name} />
+            <FooterItem title={`$ ${item.amount}`} icon={<TbMoneybag />} />
+            <FooterItem title={formatedDate} icon={<TbCalendar />} />
+            <FooterItem title={item.typeTransaction?.name} icon={<TbInfoSquareRounded />} />
         </Container>
     )
 }

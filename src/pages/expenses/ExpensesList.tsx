@@ -1,5 +1,6 @@
 import { styled } from 'styled-components'
-import TransactionsList from '../transactions/TransactionsList';
+import TransactionsList from '../../components/transactionCard/TransactionsList'
+
 
 const Div = styled.div`
     display: flex;

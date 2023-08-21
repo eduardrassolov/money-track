@@ -1,10 +1,11 @@
 import { useLoaderData } from "react-router"
-import Header from "../../components/header/Header";
-import NewIncome from "./NewIncome";
+import Header from "../../ui/header/Header";
 import { styled } from "styled-components";
 import IncomesList from "./IncomesList";
 import { ITransaction } from "../../interface/ITransactions";
 import Stats from "../../components/stats/Stats";
+import NewTransactionForm from "../../components/newTransaction/NewTransactionForm";
+import TYPES_TRANSACTION from "../../config/typeTransactions";
 
 const StyledDiv = styled.div`
     display: grid;
@@ -20,10 +21,8 @@ const StyledDiv = styled.div`
 
 export default function Incomes() {
     const data = useLoaderData();
-    if (!Array.isArray(data) || !data.length) return null;
 
-    const totalIncomes: number = data.reduce((acc: number, curr: ITransaction) => acc += curr.amount, 0);
-    console.log(totalIncomes);
+    const totalIncomes: number = data?.reduce((acc: number, curr: ITransaction) => acc += curr.amount, 0);
 
     return (
         <>
@@ -31,7 +30,7 @@ export default function Incomes() {
             <Stats text="Total Incomes: $" calcValue={totalIncomes} />
 
             <StyledDiv>
-                <NewIncome />
+                <NewTransactionForm type={TYPES_TRANSACTION.INCOME} />
                 <IncomesList />
             </StyledDiv>
         </>
