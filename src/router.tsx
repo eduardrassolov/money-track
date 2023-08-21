@@ -9,6 +9,7 @@ import { loaderTransactions } from "./components/transactionCard/loader.ts";
 import TransactionsList from "./components/transactionCard/TransactionsList.tsx";
 import actionIncomes from "./pages/income/action.ts";
 import actionExpenses from "./pages/expenses/action.ts";
+import { toast } from "react-toastify";
 
 
 export const ROUTES = {
@@ -34,13 +35,23 @@ const routes: RouteObject[] = [
                 path: ROUTES.INCOMES,
                 element: <Incomes />,
                 loader: async () => loaderIncomes(),
-                action: async ({ request }) => actionIncomes(request),
+                action: async ({ request }) => {
+                    const { data, error } = await actionIncomes(request);
+                    data ? toast.success('Income added successfully') : toast.error(error);
+
+                    return redirect(ROUTES.INCOMES);
+                },
             },
             {
                 path: ROUTES.EXPENSES,
                 element: <Expenses />,
                 loader: async () => loaderExpenses(),
-                action: async ({ request }) => actionExpenses(request)
+                action: async ({ request }) => {
+                    const { data, error } = await actionExpenses(request);
+                    data ? toast.success('Expense added successfully') : toast.error(error);
+
+                    return redirect(ROUTES.EXPENSES);
+                }
             },
             {
                 path: ROUTES.DASHBOARD,

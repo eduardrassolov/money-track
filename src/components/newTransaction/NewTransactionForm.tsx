@@ -4,7 +4,6 @@ import TYPES_TRANSACTION from '../../config/typeTransactions'
 import { FC } from 'react'
 import { Form } from 'react-router-dom';
 
-
 const StyledForm = styled(Form)`
     display: flex;
     flex-direction: column;
@@ -52,7 +51,6 @@ interface INewTransactionProps {
 }
 
 const NewTransactionForm: FC<INewTransactionProps> = ({ type }) => {
-
     return (
         <StyledForm method='post'>
             {type === TYPES_TRANSACTION.INCOME ?
@@ -75,7 +73,7 @@ const NewTransactionForm: FC<INewTransactionProps> = ({ type }) => {
 
             <FormFooter>
                 <Button variant='secondary' type='reset'>Clear</Button>
-                <Button type='submit'>Confirm</Button>
+                <Button type='submit' >Confirm</Button>
             </FormFooter>
         </StyledForm>
     )

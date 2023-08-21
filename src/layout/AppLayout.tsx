@@ -1,6 +1,8 @@
 import Aside from '../components/aside/Aside'
 import { Outlet } from 'react-router-dom'
 import { styled } from 'styled-components'
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const StyledLayout = styled.div`
     display: flex;
@@ -24,6 +26,13 @@ export default function AppLayout() {
             <Section>
                 <Outlet />
             </Section>
+
+            <ToastContainer
+                position="top-right"
+                hideProgressBar={true}
+                pauseOnHover={false}
+                autoClose={2000}
+            />
         </StyledLayout>
     )
 }

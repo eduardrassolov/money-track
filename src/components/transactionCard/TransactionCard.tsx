@@ -13,9 +13,9 @@ interface ITransactionProps {
 
 const Container = styled.div<{ $bg: string }>`
   background: ${props =>
-    props.$bg === 'expenses' ? 'rgba(36, 143, 233, 0.05)' : 'rgba(0, 255, 17, 0.05)'};
+    props.$bg === 'expenses' ? 'rgba(36, 143, 233, 0.05)' : 'rgba(142, 230, 20, 0.05)'};
   border: 1px solid ${props =>
-    props.$bg === 'expenses' ? 'rgb(36, 143, 233)' : 'rgb(0, 255, 17)'};
+    props.$bg === 'expenses' ? 'rgb(36, 143, 233)' : 'rgb(142, 230, 20)'};
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(4.1px);
