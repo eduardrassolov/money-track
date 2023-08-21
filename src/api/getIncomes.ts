@@ -1,12 +1,8 @@
+import TYPES_TRANSACTION from "../config/typeTransactions";
 import { ITransaction } from "../interface/ITransactions";
 import supabase from "../services/supabase";
 import { TransactionDTO } from "./dto/transactions.dto";
 import { QUERY } from "./getTransactions";
-
-export const TYPES_TRANSACTION = {
-  EXPENSE: 1,
-  INCOME: 2,
-};
 
 export default async function getIncomes(): Promise<Array<ITransaction>> {
   const { data } = await supabase

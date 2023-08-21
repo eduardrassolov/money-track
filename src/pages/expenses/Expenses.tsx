@@ -2,6 +2,9 @@ import { styled } from "styled-components";
 import Header from "../../components/header/Header";
 import NewExpense from "./NewExpense";
 import ExpensesList from "./ExpensesList";
+import { useLoaderData } from "react-router";
+import { ITransaction } from "../../interface/ITransactions";
+import Stats from "../../components/stats/Stats";
 
 const StyledDiv = styled.div`
     display: grid;
@@ -15,9 +18,16 @@ const StyledDiv = styled.div`
     }
 `
 export default function Expenses() {
+  const data = useLoaderData();
+  if (!Array.isArray(data) || !data.length) return null;
+
+  const totalExpenses: number = data.reduce((acc: number, curr: ITransaction) => acc + curr.amount, 0);
+
   return (
     <>
       <Header>Expenses</Header>
+
+      <Stats text="Total Expenses: $" calcValue={totalExpenses} />
 
       <StyledDiv>
         <NewExpense />

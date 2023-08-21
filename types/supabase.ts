@@ -15,7 +15,7 @@ export interface Database {
           completed_at: string
           description: string
           id: number
-          type: number
+          type_id: number
           user_id: number
         }
         Insert: {
@@ -23,7 +23,7 @@ export interface Database {
           completed_at?: string
           description: string
           id?: number
-          type: number
+          type_id: number
           user_id: number
         }
         Update: {
@@ -31,13 +31,13 @@ export interface Database {
           completed_at?: string
           description?: string
           id?: number
-          type?: number
+          type_id?: number
           user_id?: number
         }
         Relationships: [
           {
-            foreignKeyName: "transactions_type_fkey"
-            columns: ["type"]
+            foreignKeyName: "transactions_type_id_fkey"
+            columns: ["type_id"]
             referencedRelation: "type_transaction"
             referencedColumns: ["id"]
           },

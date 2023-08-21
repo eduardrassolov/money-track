@@ -1,4 +1,8 @@
 import { styled } from 'styled-components'
+import Button from '../../ui/button'
+import createTransaction from '../../services/createTransaction'
+import TYPES_TRANSACTION from '../../config/typeTransactions'
+import { useState } from 'react'
 
 const Form = styled.form`
     display: flex;
@@ -30,35 +34,41 @@ const FormGroup = styled.div`
 const FormFooter = styled.div`
     display: flex;
     justify-content: flex-end;
-
-    button{
-        margin-left: 0.3rem;
-    }
+    gap: 0.5rem;
 `
 
 export default function NewExpense() {
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+        const data = Object.fromEntries(formData.entries());
+        createTransaction({ ...data, type_id: TYPES_TRANSACTION.EXPENSE });
+
+        e.currentTarget.reset();
+    }
     return (
-        <Form>
+        <Form onSubmit={handleSubmit}>
             <h4>Add new expense:</h4>
 
             <FormGroup>
                 <label htmlFor="description">Description:</label>
-                <input type="text" id="description" name="description" placeholder='Enter description' />
+                <input type="text" id="description" name="description" placeholder='Enter description' required />
             </FormGroup>
 
             <FormGroup>
-                <label htmlFor="income">Amount:</label>
-                <input type="number" id="amount" name="amount" min={1} placeholder='Enter amount' />
+                <label htmlFor="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" min={1} placeholder='Enter amount' required />
             </FormGroup>
 
             <FormGroup>
-                <label htmlFor="income">Date:</label>
-                <input type="datetime-local" id="income" name="income" />
+                <label htmlFor="completed_at">Date:</label>
+                <input type="datetime-local" id="completed_at" name="completed_at" required />
             </FormGroup>
 
             <FormFooter>
-                <button>Clear</button>
-                <button>Confirm</button>
+                <Button variant='secondary' type='reset'>Clear</Button>
+                <Button type='submit'>Confirm</Button>
             </FormFooter>
         </Form>
     )

@@ -4,6 +4,7 @@ import { styled } from "styled-components";
 import TransactionHeader from "./TransactionHeader";
 import TransactionFooter from "./TransactionFooter";
 import { ITransaction } from "../../interface/ITransactions";
+import { DeleteOutlined } from "@ant-design/icons";
 
 interface ITransactionProps {
   item: ITransaction;
@@ -46,7 +47,7 @@ const TransactionCard: FC<ITransactionProps> = ({ item, onDelete }) => {
       </InfoSection>
 
       <OperationSection>
-        <button onClick={() => onDelete(item.id)}>Delete</button>
+        <DeleteOutlined style={{ fontSize: '1.5rem', cursor: 'pointer' }} onClick={() => onDelete(item.id)} />
       </OperationSection>
     </Container>
   )

@@ -1,4 +1,7 @@
 import { styled } from 'styled-components'
+import Button from '../../ui/button'
+import createTransaction from '../../services/createTransaction'
+import TYPES_TRANSACTION from '../../config/typeTransactions'
 
 const Form = styled.form`
     display: flex;
@@ -6,9 +9,6 @@ const Form = styled.form`
     padding: 1rem;
     border: 1px solid #ccc;
     border-radius: 7px;
-    /* margin: 0 1rem; */
-    
-
     h4{
         margin: 0 auto 1rem 0;
         font-size: 1.1rem;
@@ -32,15 +32,22 @@ const FormGroup = styled.div`
 const FormFooter = styled.div`
     display: flex;
     justify-content: flex-end;
+    gap: 0.5rem;
 
-    button{
-        margin-left: 0.3rem;
-    }
 `
 
 export default function NewIncome() {
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+        const data = Object.fromEntries(formData.entries());
+        createTransaction({ ...data, type_id: TYPES_TRANSACTION.INCOME });
+
+        e.currentTarget.reset();
+    }
     return (
-        <Form>
+        <Form onSubmit={handleSubmit}>
             <h4>Add new income:</h4>
 
             <FormGroup>
@@ -59,8 +66,8 @@ export default function NewIncome() {
             </FormGroup>
 
             <FormFooter>
-                <button>Clear</button>
-                <button>Confirm</button>
+                <Button variant='secondary' type='reset'>Clear</Button>
+                <Button type='submit'>Confirm</Button>
             </FormFooter>
         </Form>
     )
