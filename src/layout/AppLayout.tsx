@@ -1,11 +1,13 @@
 import Aside from '../components/aside/Aside'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigation } from 'react-router-dom'
 import { styled } from 'styled-components'
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import LoadingUi from '../components/spinner/LoadingUi';
 
 const StyledLayout = styled.div`
     display: flex;
+    flex-direction: row;
     width: 100vw;
     background-color: #fff;
 `
@@ -19,8 +21,13 @@ const Section = styled.section`
 `
 
 export default function AppLayout() {
+    const navigation = useNavigation();
+
+    console.log(navigation.state);
     return (
         <StyledLayout>
+            {navigation.state === 'loading' ? <LoadingUi /> : null}
+
             <Aside />
 
             <Section>

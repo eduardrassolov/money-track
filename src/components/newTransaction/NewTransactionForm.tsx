@@ -1,13 +1,13 @@
 import { styled } from 'styled-components'
-import Button from '../../ui/button'
 import TYPES_TRANSACTION from '../../config/typeTransactions'
 import { FC } from 'react'
 import { Form } from 'react-router-dom';
+import Button from '../../ui/Button';
 
 const StyledForm = styled(Form)`
     display: flex;
     flex-direction: column;
-    padding: 2rem 1rem 1rem;
+    padding: 1.5rem;
     border: 1px solid #ccc;
     border-radius: 7px;
     height: fit-content;

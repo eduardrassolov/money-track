@@ -11,7 +11,6 @@ export const QUERY = {
 
 export default async function getTransactions(): Promise<Array<ITransaction>> {
   const { data } = await supabase.from("transactions").select(QUERY.ALL_TRANSACTIONS);
-  console.log(data);
 
   if (!data) {
     return new Array<ITransaction>();

@@ -20,7 +20,7 @@ export interface Database {
         }
         Insert: {
           amount: number
-          completed_at?: string
+          completed_at: string
           description: string
           id?: number
           type_id: number

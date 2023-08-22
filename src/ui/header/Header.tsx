@@ -5,16 +5,16 @@ type HeaderProps = {
     children: React.ReactNode
 }
 
-const H3 = styled.h3`
-    font-size: 1.7rem;
+const H1 = styled.h1`
     font-weight: 600;
     text-align: center;
-    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
 `
 
 const Header: FC<HeaderProps> = ({ children }) => {
     return (
-        <H3>{children}</H3>
+        <H1>{children}</H1>
     )
 }
 export default Header;

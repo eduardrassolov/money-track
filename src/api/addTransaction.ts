@@ -8,7 +8,7 @@ export default async function addTransaction(transaction: INewTransaction) {
       amount: transaction.amount,
       completed_at: transaction.completedAt,
       description: transaction.description,
-      type_id: transaction.type_id,
+      type_id: transaction.typeId,
       user_id: 1,
     };
 

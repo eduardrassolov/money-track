@@ -6,18 +6,9 @@ import { ITransaction } from "../../interface/ITransactions";
 import Stats from "../../components/stats/Stats";
 import NewTransactionForm from "../../components/newTransaction/NewTransactionForm";
 import TYPES_TRANSACTION from "../../config/typeTransactions";
+import { FormContainer, ListContainer, StatsContainer, StyledGrid } from "../../styles/gridLayout";
 
-const StyledDiv = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 1rem;
-    width: 95%;
 
-    @media (max-width: 800px){
-        display: flex;
-        flex-direction: column;
-    }
-`
 
 export default function Incomes() {
     const data = useLoaderData();
@@ -27,12 +18,21 @@ export default function Incomes() {
     return (
         <>
             <Header>Incomes</Header>
-            <Stats text="Total Incomes: $" calcValue={totalIncomes} />
 
-            <StyledDiv>
-                <NewTransactionForm type={TYPES_TRANSACTION.INCOME} />
-                <IncomesList />
-            </StyledDiv>
+            <StyledGrid>
+                <StatsContainer>
+                    <Stats text="Total Incomes: " calcValue={totalIncomes} />
+                </StatsContainer>
+
+                <FormContainer>
+                    <NewTransactionForm type={TYPES_TRANSACTION.INCOME} />
+                </FormContainer>
+
+                <ListContainer>
+                    <IncomesList />
+                </ListContainer>
+
+            </StyledGrid>
         </>
 
     )

@@ -1,7 +1,8 @@
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom"
 import Transaction from "./TransactionCard";
-import Header from "../../ui/header/Header";
 import deleteTransaction from "../../api/deleteTransaction";
+import { toast } from "react-toastify";
+import sortByDate from "../../services/sortTransactions";
 
 const TransactionsList = () => {
     const data = useLoaderData()
@@ -12,16 +13,17 @@ const TransactionsList = () => {
         return (<div>loading...</div>);
 
     const handleDelete = async (id: number) => {
-        await deleteTransaction(id);
-        navigate(location.pathname);
+        const error = await deleteTransaction(id);
+        error ? toast.error(error.message) : toast.success('Successfully deleted.');
 
+        navigate(location.pathname);
     }
+
+    const sortedData = sortByDate([...data]);
 
     return (
         <>
-            <Header>Transactions</Header>
-
-            {data.map((transaction) =>
+            {sortedData.map((transaction) =>
                 <Transaction
                     key={transaction.id}
                     item={transaction}

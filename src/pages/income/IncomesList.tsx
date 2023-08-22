@@ -5,9 +5,7 @@ import TransactionsList from '../../components/transactionCard/TransactionsList'
 const Div = styled.div`
     display: flex;
     flex-direction: column;
-    padding: 0 1rem;
-    border: 1px solid #ccc;
-    border-radius: 7px;
+    padding: 2rem 1rem;
 `
 
 export default function IncomesList() {
