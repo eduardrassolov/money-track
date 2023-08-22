@@ -31,7 +31,7 @@ const routes: RouteObject[] = [
             {
                 path: ROUTES.TRANSACTIONS,
                 element: <Transactions />,
-                loader: async () => loaderTransactions(),
+                loader: loaderTransactions,
             },
             {
                 path: ROUTES.INCOMES,
@@ -58,6 +58,7 @@ const routes: RouteObject[] = [
             {
                 path: ROUTES.DASHBOARD,
                 element: <Dashboard />,
+                loader: loaderTransactions,
             }
         ]
     },

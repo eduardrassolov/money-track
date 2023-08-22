@@ -23,7 +23,7 @@ const StyledDiv = styled.div`
 const StatsDiv = styled.div`
    grid-area: 1 / 1 / 2 / 3; 
    border: 1px solid #ccc;
-    border-radius: 7px;
+   border-radius: 7px;
 `
 const FormDiv = styled.div`
   grid-area: 2 / 1 / 3 / 2; 
