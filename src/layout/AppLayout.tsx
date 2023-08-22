@@ -24,6 +24,8 @@ export default function AppLayout() {
     const navigation = useNavigation();
 
     console.log(navigation.state);
+
+    console.log('vite', import.meta.env.VITE_HELLO);
     return (
         <StyledLayout>
             {navigation.state === 'loading' ? <LoadingUi /> : null}
