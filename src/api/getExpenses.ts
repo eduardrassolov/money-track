@@ -2,13 +2,14 @@ import TYPES_TRANSACTION from "../config/typeTransactions";
 import { ITransaction } from "../interface/ITransactions";
 import supabase from "../services/supabase";
 import { TransactionDTO } from "./dto/transactions.dto";
-import { QUERY } from "./getTransactions";
+import { SELECT } from "./getTransactions";
 
 export default async function getExpenses(): Promise<Array<ITransaction>> {
   const { data } = await supabase
     .from("transactions")
-    .select(QUERY.ALL_TRANSACTIONS)
-    .eq("type_id", TYPES_TRANSACTION.EXPENSE);
+    .select(SELECT.ALL_TRANSACTIONS)
+    .eq("type_id", TYPES_TRANSACTION.EXPENSE)
+    .order("completed_at", { ascending: false });
 
   if (!data) {
     return new Array<ITransaction>();

@@ -6,6 +6,7 @@ import Stats from "../../components/stats/Stats";
 import NewTransactionForm from "../../components/newTransaction/NewTransactionForm";
 import TYPES_TRANSACTION from "../../config/typeTransactions";
 import ExpensesList from "./ExpensesList";
+import Filter from "../../components/filter/Filter";
 
 const StyledDiv = styled.div`
     display: grid;

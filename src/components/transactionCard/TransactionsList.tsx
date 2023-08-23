@@ -19,11 +19,10 @@ const TransactionsList = () => {
         navigate(location.pathname);
     }
 
-    const sortedData = sortByDate([...data]);
 
     return (
         <>
-            {sortedData.map((transaction) =>
+            {data.map((transaction) =>
                 <Transaction
                     key={transaction.id}
                     item={transaction}

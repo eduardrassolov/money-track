@@ -3,6 +3,11 @@ import { styled } from "styled-components";
 import StatCard from "./StatCard";
 import { HiOutlineShoppingBag, HiOutlineCash, HiOutlineCalculator } from "react-icons/hi";
 import { StatsCardData } from "../../types/statsCardData";
+import IDashboardData from '../../interface/IDashboardData.ts';
+import { ITransaction } from "../../interface/ITransactions.ts";
+import formatNumberWithSpaces from "../../helpers/formatWithSpace.ts";
+import Diagram from "./Diagram.tsx";
+
 
 
 const StyledContainer = styled.div`
@@ -17,12 +22,6 @@ const RowContainer = styled.div`
   margin: 0 0 1rem;
 `
 
-const ChartContainer = styled.div`
-  width: 100%;
-  border: 1px solid #ccc;
-  padding: 0.5rem 1.5rem;
-  border-radius: 7px;
-`
 
 const statCardData: Array<StatsCardData> = [
   {
@@ -45,23 +44,30 @@ const statCardData: Array<StatsCardData> = [
   }
 ]
 
-
 export default function Dashboard() {
   const data = useLoaderData();
-  console.log(data);
+
+  if (!data?.expenses || !data?.incomes) return <div>loading...</div>;
+
+  const { expenses, incomes } = data as IDashboardData;
+  const totalExpenses: number = expenses.reduce((acc: number, item: ITransaction) => acc + item.amount, 0);
+  const totalIncomes: number = incomes.reduce((acc: number, item: ITransaction) => acc + item.amount, 0);
+  const coefficent: string = `${(totalExpenses / totalIncomes) * 100} % `;
+
+  const values = [`$ ${formatNumberWithSpaces(totalExpenses)}`, `$ ${formatNumberWithSpaces(totalIncomes)}`, coefficent];
 
   return (
     <StyledContainer>
       <h1>Dashboard</h1>
 
       <RowContainer>
-        {statCardData.map((item) => <StatCard key={item.name} item={item} value={"$ 1 000.00"} />)}
+        {statCardData.map((item, index) => <StatCard key={item.name} item={item} value={values[index]} />)}
       </RowContainer>
 
       <RowContainer>
-        <ChartContainer>c</ChartContainer>
+        <Diagram data={[...incomes, ...expenses]} />
       </RowContainer>
 
-    </StyledContainer>
+    </StyledContainer >
   )
 }

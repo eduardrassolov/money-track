@@ -1,10 +1,12 @@
 import { FC } from "react"
 import { styled } from "styled-components";
+import formatNumberWithSpaces from "../../helpers/formatWithSpace";
 
 type StatsProps = {
     text: string;
     calcValue: number;
     currency?: string;
+    size?: string;
 }
 
 const H3 = styled.h3`
@@ -20,16 +22,11 @@ const H3 = styled.h3`
     }
 `
 
-function formatNumberWithSpaces(number: number): string {
-    const parts = number.toFixed(2).toString().split('.');
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-    return parts.join('.');
-}
-
 const Stats: FC<StatsProps> = ({ text, calcValue, currency = "$" }) => {
-    const formateValue = formatNumberWithSpaces(calcValue);
+    const formatedValue = formatNumberWithSpaces(calcValue);
+
     return (
-        <H3>{text}<span>{currency}{formateValue}</span></H3>
+        <H3>{text}<span>{currency}{formatedValue}</span></H3>
     )
 }
 export default Stats;

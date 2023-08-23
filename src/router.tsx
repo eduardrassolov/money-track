@@ -5,12 +5,12 @@ import Expenses from "./pages/expenses/Expenses.page.tsx";
 import Dashboard from "./pages/dashboard/Dashboard.page.tsx";
 import { loaderExpenses } from "./pages/expenses/loader.ts";
 import { loaderIncomes } from "./pages/income/loader.ts";
-import TransactionsList from "./components/transactionCard/TransactionsList.tsx";
 import actionIncomes from "./pages/income/action.ts";
 import actionExpenses from "./pages/expenses/action.ts";
 import { toast } from "react-toastify";
 import { loaderTransactions } from "./pages/transactions/loader.ts";
 import Transactions from "./pages/transactions/Transactions.page.tsx";
+import { loaderDashboard } from "./pages/dashboard/loader.ts";
 
 
 
@@ -31,7 +31,7 @@ const routes: RouteObject[] = [
             {
                 path: ROUTES.TRANSACTIONS,
                 element: <Transactions />,
-                loader: loaderTransactions,
+                loader: ({ request }) => loaderTransactions(request),
             },
             {
                 path: ROUTES.INCOMES,
@@ -58,7 +58,7 @@ const routes: RouteObject[] = [
             {
                 path: ROUTES.DASHBOARD,
                 element: <Dashboard />,
-                loader: loaderTransactions,
+                loader: loaderDashboard,
             }
         ]
     },

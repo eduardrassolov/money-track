@@ -2,15 +2,18 @@ import { ITransaction } from "../interface/ITransactions";
 import supabase from "../services/supabase";
 import { TransactionDTO } from "./dto/transactions.dto";
 
-export const QUERY = {
+export const SELECT = {
   ALL_TRANSACTIONS: `
     amount, completed_at, description, id, 
     type_transaction(id, name)
   `,
 };
 
-export default async function getTransactions(): Promise<Array<ITransaction>> {
-  const { data } = await supabase.from("transactions").select(QUERY.ALL_TRANSACTIONS);
+export default async function getTransactions(sorting = false): Promise<Array<ITransaction>> {
+  const { data } = await supabase
+    .from("transactions")
+    .select(SELECT.ALL_TRANSACTIONS)
+    .order("completed_at", { ascending: sorting });
 
   if (!data) {
     return new Array<ITransaction>();
