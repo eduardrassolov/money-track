@@ -8,7 +8,7 @@ const StyledNavLink = styled(NavLink)`
     padding: 0.8rem 1rem;
     color: #000;
     font-size: 1.5rem;
-    transition: background-color 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     border-bottom: 1px solid #ccc;
     align-items: center;
 

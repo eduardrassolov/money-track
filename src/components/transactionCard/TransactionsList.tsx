@@ -1,8 +1,7 @@
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom"
-import Transaction from "./TransactionCard";
+import TransactionCard from "./TransactionCard";
 import deleteTransaction from "../../api/deleteTransaction";
 import { toast } from "react-toastify";
-import sortByDate from "../../services/sortTransactions";
 
 const TransactionsList = () => {
     const data = useLoaderData()
@@ -19,11 +18,10 @@ const TransactionsList = () => {
         navigate(location.pathname);
     }
 
-
     return (
         <>
             {data.map((transaction) =>
-                <Transaction
+                <TransactionCard
                     key={transaction.id}
                     item={transaction}
                     onDelete={handleDelete}

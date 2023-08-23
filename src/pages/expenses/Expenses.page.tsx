@@ -6,7 +6,7 @@ import Stats from "../../components/stats/Stats";
 import NewTransactionForm from "../../components/newTransaction/NewTransactionForm";
 import TYPES_TRANSACTION from "../../config/typeTransactions";
 import ExpensesList from "./ExpensesList";
-import Filter from "../../components/filter/Filter";
+import TransactionsList from "../../components/transactionCard/TransactionsList";
 
 const StyledDiv = styled.div`
     display: grid;
@@ -15,9 +15,11 @@ const StyledDiv = styled.div`
     grid-column-gap: 1.2rem;
     grid-row-gap: 1rem;
     margin: 1rem;
+    max-width: 800px;
 
-    @media (max-width: 800px){
+    @media (max-width: 900px){
         display: flex;
+        /* width: 90%; */
         flex-direction: column;
     }
 `
@@ -30,7 +32,7 @@ const FormDiv = styled.div`
   grid-area: 2 / 1 / 3 / 2; 
 `
 const ListDiv = styled.div`
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   grid-area: 2 / 2 / 3 / 3;  
   border-radius: 7px;
 `
@@ -53,7 +55,7 @@ export default function Expenses() {
         </FormDiv>
 
         <ListDiv>
-          <ExpensesList />
+          <TransactionsList />
         </ListDiv>
       </StyledDiv>
     </>

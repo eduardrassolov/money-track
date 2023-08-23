@@ -12,7 +12,7 @@ interface ITransactionProps {
 
 const Container = styled.div`
     display: flex;
-    
+    flex-wrap: wrap;
 `
 
 const TransactionFooter: FC<ITransactionProps> = ({ item }) => {

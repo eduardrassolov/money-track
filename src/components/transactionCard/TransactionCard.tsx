@@ -21,24 +21,20 @@ const Container = styled.div<{ $bg: string }>`
   backdrop-filter: blur(4.1px);
   -webkit-backdrop-filter: blur(4.1px);
 
-  max-width: 450px;
   display: flex;
-  width: 90%;
-  margin: 0 auto 10px;
+  /* margin: 0 auto 10px auto; */
+  margin: 0 0 0.8rem;
   padding: 1rem 1.5rem;
-
-
-
   justify-content: space-between;
 
   @media (max-width: 800px) {
-    margin: 0 5px 10px;
-    max-width: 100%;
+    margin: 0 0 10px;
   }
 `
 const InfoSection = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 0 1rem 0 0;
 `
 const OperationSection = styled.div`
   display: flex;
