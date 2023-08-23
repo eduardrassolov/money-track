@@ -3,17 +3,18 @@ import { styled } from "styled-components";
 import StatCard from "./StatCard";
 import { HiOutlineShoppingBag, HiOutlineCash, HiOutlineCalculator } from "react-icons/hi";
 import { StatsCardData } from "../../types/statsCardData";
-import IDashboardData from '../../interface/IDashboardData.ts';
 import { ITransaction } from "../../interface/ITransactions.ts";
 import formatNumberWithSpaces from "../../helpers/formatWithSpace.ts";
 import Diagram from "./Diagram.tsx";
+import TYPES_TRANSACTION from "../../config/typeTransactions.ts";
 
 
 
 const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 650px;
+  width: max(90%, 500px);
+
 `
 
 const RowContainer = styled.div`
@@ -44,12 +45,18 @@ const statCardData: Array<StatsCardData> = [
   }
 ]
 
+// TODO - refactor component Dashboard. Remove caclulation from component
 export default function Dashboard() {
   const data = useLoaderData();
 
-  if (!data?.expenses || !data?.incomes) return <div>loading...</div>;
+  if (!data) {
+    return <div>loading...</div>;
+  }
 
-  const { expenses, incomes } = data as IDashboardData;
+  const transactions = data as Array<ITransaction>;
+  const expenses: Array<ITransaction> = transactions.filter((item) => item.typeTransaction?.id === TYPES_TRANSACTION.EXPENSE);
+  const incomes: Array<ITransaction> = transactions.filter((item) => item.typeTransaction?.id === TYPES_TRANSACTION.INCOME);
+
   const totalExpenses: number = expenses.reduce((acc: number, item: ITransaction) => acc + item.amount, 0);
   const totalIncomes: number = incomes.reduce((acc: number, item: ITransaction) => acc + item.amount, 0);
   const coefficent: string = `${(totalExpenses / totalIncomes) * 100} % `;
@@ -65,7 +72,7 @@ export default function Dashboard() {
       </RowContainer>
 
       <RowContainer>
-        <Diagram data={[...incomes, ...expenses]} />
+        <Diagram data={[...transactions]} />
       </RowContainer>
 
     </StyledContainer >
