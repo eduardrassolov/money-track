@@ -34,7 +34,7 @@ const Diagram: FC<IDiagramProps> = ({ data }) => {
                 <LineChart data={diagramData} margin={{
                     top: 20, right: 20, bottom: 20, left: 20,
                 }}>
-                    <CartesianGrid strokeDasharray="2 2 2" />
+
                     <XAxis dataKey="name" />
                     <YAxis />
                     <Tooltip />

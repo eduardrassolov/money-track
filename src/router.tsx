@@ -11,10 +11,12 @@ import { toast } from "react-toastify";
 import { loaderTransactions } from "./pages/transactions/loader.ts";
 import Transactions from "./pages/transactions/Transactions.page.tsx";
 import { loaderDashboard } from "./pages/dashboard/loader.ts";
+import HomePage from "./pages/home/HomePage.tsx";
 
 
 
 export const ROUTES = {
+    HOME: "/",
     ROOT: "/app",
     TRANSACTIONS: `/app/transactions`,
     INCOMES: "/app/incomes",
@@ -23,6 +25,10 @@ export const ROUTES = {
 }
 
 const routes: RouteObject[] = [
+    {
+        path: ROUTES.HOME,
+        element: <HomePage />,
+    },
     {
         path: ROUTES.ROOT,
         element: <AppLayout />,
