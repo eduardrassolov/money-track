@@ -39,8 +39,8 @@ const Diagram: FC<IDiagramProps> = ({ data }) => {
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Line type="monotone" dataKey="Expenses" stroke="#8884d8" />
-                    <Line type="monotone" dataKey="Incomes" stroke="#82ca9d" />
+                    <Line type="monotone" dataKey="Expenses" stroke="rgb(36, 143, 233)" />
+                    <Line type="monotone" dataKey="Incomes" stroke="rgb(142, 230, 20)" />
                 </LineChart>
             </ResponsiveContainer>
         </ChartContainer>
