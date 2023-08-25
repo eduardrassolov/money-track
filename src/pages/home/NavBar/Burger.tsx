@@ -5,6 +5,13 @@ import NavLinks from "./NavLinks";
 
 const StyledBurger = styled.div<{ $isOpen: boolean }>`
     display: none;
+
+    &:hover{
+        cursor: pointer;
+        transform: scale(1.1);
+        transition: all 300ms;
+    }
+
     div{
         width: 2rem;
         height: 0.2rem;
@@ -20,7 +27,7 @@ const StyledBurger = styled.div<{ $isOpen: boolean }>`
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;;
+        align-items: center;
 
         div:nth-child(1){
             transform: ${(props) => props.$isOpen ? 'rotate(45deg)' : 'rotate(0)'};
@@ -51,6 +58,7 @@ export default function Burger() {
                 <div></div>
                 <div></div>
             </StyledBurger>
+
             <NavLinks isOpen={isOpen} onClose={setOpen} />
 
         </>

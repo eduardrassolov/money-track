@@ -13,6 +13,14 @@ const Ul = styled.ul<{ $isOpen: NavLinksProps }>`
     li{
         margin: 0 0 0 2rem;     
         letter-spacing: 0.1rem;
+        cursor: pointer;
+        padding: 1rem 0.5rem;
+        
+        &:hover{
+            border-bottom: 1px solid #7286D3;
+            transition: all 100ms;
+            color: #7286D3;
+        }
     }
 
     @media only screen and ${devices.md} {
@@ -25,31 +33,22 @@ const Ul = styled.ul<{ $isOpen: NavLinksProps }>`
         right: 0;
         margin: 0;
         padding: 3rem 0 0 0;
-        background: #fff;
+        background: #F9F5F6;
         align-items: start;
         width: 175px;
+        -webkit-box-shadow: -5px 0px 19px -1px rgba(0,0,0,0.35);
+        -moz-box-shadow: -5px 0px 19px -1px rgba(0,0,0,0.35);
+        box-shadow: -5px 0px 19px -1px rgba(0,0,0,0.35);
+
 
         li{
-            margin: 1rem auto 1rem 0.5rem;
+            margin: 1rem auto 1rem 1rem;
         }
-    }
-`
-const A = styled.a`
-    text-decoration: none;
-    font-size: 1.2rem;
-    transition: all 0.3s ease-in-out;
-    color: black;
-
-
-    &:hover{
-        color: #8c8a8a;
-        transition: all 300ms;
     }
 `
 
 const StyledNavLink = styled(NavLink)`
     text-decoration: none;
-    font-size: 1.2rem;
     transition: all 0.3s ;
     color: black;
 
@@ -60,8 +59,6 @@ const StyledNavLink = styled(NavLink)`
 
     }
 `
-
-
 
 type NavLinksProps = {
     isOpen?: boolean;
@@ -82,7 +79,6 @@ export default function NavLinks({ isOpen = false, onClose }: NavLinksProps) {
                     <span onClick={() => handleClick("header")}>Home</span>
                 </li >
                 <li>
-                    {/* <A href="#feature">Features</A> */}
                     <span onClick={() => handleClick("feature")}>Features</span>
                 </li>
                 <li>

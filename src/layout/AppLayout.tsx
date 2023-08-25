@@ -4,6 +4,7 @@ import { styled } from 'styled-components'
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import LoadingUi from '../components/spinner/LoadingUi';
+import Footer from '../components/Footer/Footer';
 
 const StyledLayout = styled.div`
     display: flex;
@@ -40,6 +41,7 @@ export default function AppLayout() {
                 pauseOnHover={false}
                 autoClose={2000}
             />
+
         </StyledLayout>
     )
 }

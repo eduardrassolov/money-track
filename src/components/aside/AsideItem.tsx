@@ -36,9 +36,10 @@ type Props = {
 }
 
 export default function AsideItem({ name, icon }: Props) {
+    const ref = name.toLowerCase() === 'home' ? '/' : `/app/${name.toLowerCase()}`
     return (
         <li>
-            <StyledNavLink to={`/app/${name.toLowerCase()}`}>
+            <StyledNavLink to={ref}>
                 {icon} <Span>{name}</Span>
             </StyledNavLink>
         </li>
