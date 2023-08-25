@@ -32,7 +32,6 @@ export default function NavBarHome() {
                 <p>E-Budget</p>
             </NavLogo>
             <Burger />
-            <NavLinks />
         </Nav >
     )
 }

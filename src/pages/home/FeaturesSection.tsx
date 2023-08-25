@@ -1,4 +1,5 @@
 import { styled } from "styled-components"
+import { devices } from "../../styles/breakPoints"
 
 const Section = styled.section`
     display: flex;
@@ -33,13 +34,21 @@ const ContainerLeft = styled.div`
         line-height: 1.8;
         color: gray;
     }
+
+    @media only screen and ${devices.md} {
+        flex-direction: column;
+        max-width: 310px;
+        flex-direction: column-reverse;
+    }
 `
 
 const ContainerRight = styled.div`
     display: flex;
+    flex-direction: row-reverse;
     width: 900px;
     margin: 2rem auto;  
     justify-content: space-between;
+
 
     border: 1px solid #E5E5E5;
     border-radius: 10px;
@@ -54,6 +63,12 @@ const ContainerRight = styled.div`
      p{
         line-height: 1.8;
         color: gray;
+    }
+
+    @media only screen and ${devices.md} {
+        flex-direction: column;
+        max-width: 310px;
+        flex-direction: column-reverse;
     }
 `
 
@@ -86,11 +101,11 @@ export default function FeaturesSection({ id }: IHeader) {
             </ContainerLeft>
 
             <ContainerRight>
-                <div> <img src="public/chart.avif" alt="" /></div>
                 <div>
                     <h2>Real-Time Budget Visualization</h2>
                     <p>Visualize your budget in real time with intuitive graphs and charts. See where your money is going, identify trends, and make informed decisions to optimize your spending.</p>
                 </div>
+                <div> <img src="public/chart.avif" alt="" /></div>
             </ContainerRight>
 
             <ContainerLeft>
@@ -102,11 +117,11 @@ export default function FeaturesSection({ id }: IHeader) {
             </ContainerLeft>
 
             <ContainerRight>
-                <div> <img src="public/img3.avif" alt="" /></div>
                 <div>
                     <h2>Access Anytime, Anywhere</h2>
                     <p>Access your financial information on the go. E-Budget is available on web, ensuring you're always in control of your money.</p>
                 </div>
+                <div> <img src="public/img3.avif" alt="" /></div>
             </ContainerRight>
         </Section>
     )

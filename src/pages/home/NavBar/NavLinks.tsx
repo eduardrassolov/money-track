@@ -61,26 +61,34 @@ const StyledNavLink = styled(NavLink)`
     }
 `
 
+
+
 type NavLinksProps = {
     isOpen?: boolean;
+    onClose: () => void;
 }
 
 
-export default function NavLinks({ isOpen = false }: NavLinksProps) {
+export default function NavLinks({ isOpen = false, onClose }: NavLinksProps) {
+    const handleClick = (id: string) => {
+        onClose();
+        document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+
+    }
     return (
-        <Ul $isOpen={isOpen}>
-            <li>
-                <A href="#header">Home</A>
-            </li >
-            <li>
-                <A href="#feature">Features</A>
-            </li>
-            <li>
-                <A href="#feature">Features</A>
-            </li>
-            <li>
-                <StyledNavLink to={ROUTES.ROOT}>Start</StyledNavLink>
-            </li>
-        </Ul>
+        <>
+            <Ul $isOpen={isOpen}>
+                <li>
+                    <span onClick={() => handleClick("header")}>Home</span>
+                </li >
+                <li>
+                    {/* <A href="#feature">Features</A> */}
+                    <span onClick={() => handleClick("feature")}>Features</span>
+                </li>
+                <li>
+                    <StyledNavLink to={ROUTES.ROOT}>Start</StyledNavLink>
+                </li>
+            </Ul>
+        </>
     )
 }

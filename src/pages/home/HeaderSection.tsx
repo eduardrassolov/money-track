@@ -11,19 +11,6 @@ const Section = styled.section`
     letter-spacing: 0.1rem;
     border-bottom: 2px solid #E5E5E5;
 
-    @media only screen and ${devices.md} {
-        display: flex;
-        flex-direction: column;
-        div{
-            text-align: center;
-        }
-
-        img{
-            width: 100%;
-            margin: 1.5rem 0;
-        }
-    }
-
     p{
         font-size: 2.8rem;
         font-weight: 500;
@@ -45,6 +32,24 @@ const Section = styled.section`
         border-radius: 10px;
         box-shadow: 0px 6px 16px 1px rgba(0,0,0, 0.4);  
     }
+
+
+    @media only screen and ${devices.md} {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        img{
+            max-width: 320px;
+            margin: 1.5rem 0;
+        }
+        p{
+            font-size: 2rem;
+            text-align: center;
+        }
+    }
+
+    
 `
 
 interface IHeader {

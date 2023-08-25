@@ -51,7 +51,7 @@ export default function Burger() {
                 <div></div>
                 <div></div>
             </StyledBurger>
-            <NavLinks isOpen={isOpen} />
+            <NavLinks isOpen={isOpen} onClose={setOpen} />
 
         </>
     )
