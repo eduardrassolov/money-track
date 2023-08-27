@@ -3,6 +3,8 @@ import TYPES_TRANSACTION from '../../config/typeTransactions'
 import { FC } from 'react'
 import { Form } from 'react-router-dom';
 import Button from '../../ui/Button';
+import Category from '../category/Category';
+import { EXPENSE_OPTIONS, INCOME_OPTIONS } from '../../config/category';
 
 const StyledForm = styled(Form)`
     display: flex;
@@ -51,6 +53,10 @@ interface INewTransactionProps {
 }
 
 const NewTransactionForm: FC<INewTransactionProps> = ({ type }) => {
+    const optionsSelect = type === TYPES_TRANSACTION.INCOME ? INCOME_OPTIONS : EXPENSE_OPTIONS;
+
+    console.log(optionsSelect);
+
     return (
         <StyledForm method='post'>
             {type === TYPES_TRANSACTION.INCOME ?
@@ -58,12 +64,17 @@ const NewTransactionForm: FC<INewTransactionProps> = ({ type }) => {
 
             <FormGroup>
                 <label htmlFor="description">*Description:</label>
-                <input type="text" id="description" name="description" placeholder='Enter description' required autoFocus />
+                <input type="text" id="description" name="description" placeholder='Enter description' required autoFocus autoComplete="off" />
+            </FormGroup>
+
+            <FormGroup>
+                <label htmlFor="category">*Category:</label>
+                <Category options={optionsSelect} />
             </FormGroup>
 
             <FormGroup>
                 <label htmlFor="amount">*Amount:</label>
-                <input type="number" id="amount" step={0.01} name="amount" min={1} placeholder='Enter amount' required />
+                <input type="number" id="amount" step={0.01} name="amount" min={1} placeholder='Enter amount' required autoComplete='off' />
             </FormGroup>
 
             <FormGroup>

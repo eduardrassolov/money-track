@@ -9,8 +9,9 @@ export default async function actionExpenses(request: Request) {
   const description = formData.get("description");
   const amount = formData.get("amount");
   const completed_at = formData.get("completed_at");
+  const category = formData.get("category");
 
-  if (!description || !amount || !completed_at) {
+  if (!description || !amount || !completed_at || !category) {
     console.log("No data");
     return;
   }
@@ -19,7 +20,8 @@ export default async function actionExpenses(request: Request) {
     description: description.toString(),
     amount: Number(amount),
     completedAt: completed_at.toString(),
-    typeId: TYPES_TRANSACTION.EXPENSE,
+
+    categoryId: Number(category),
   };
 
   return await addTransaction({ ...data });

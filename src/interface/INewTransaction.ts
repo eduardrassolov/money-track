@@ -1,6 +1,6 @@
-export default interface INewTransaction {
+export default interface IInsertTransaction {
   description: string;
   amount: number;
-  typeId: number;
   completedAt: string;
+  categoryId: number;
 }

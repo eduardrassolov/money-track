@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import AsideItem from "./AsideItem";
 import { asideItemsName } from "../../config/configAsideItems";
 import { AreaChartOutlined, DollarOutlined, ShoppingCartOutlined, CarryOutOutlined } from "@ant-design/icons";
+import { HiOutlineHome } from "react-icons/hi2";
 
 const StyledAside = styled.aside`
     display: flex;
@@ -22,7 +23,7 @@ const StyledAside = styled.aside`
 `
 
 const icons: Array<JSX.Element> =
-    [<AreaChartOutlined />, <ShoppingCartOutlined />, <DollarOutlined />, <CarryOutOutlined />]
+    [<AreaChartOutlined />, <ShoppingCartOutlined />, <DollarOutlined />, <CarryOutOutlined />, <HiOutlineHome />]
 
 export default function Aside() {
     return (

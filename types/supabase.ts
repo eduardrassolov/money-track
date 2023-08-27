@@ -9,36 +9,61 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      category: {
+        Row: {
+          id: number
+          name: string
+          type_id: number
+        }
+        Insert: {
+          id?: never
+          name: string
+          type_id: number
+        }
+        Update: {
+          id?: never
+          name?: string
+          type_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "category_type_id_fkey"
+            columns: ["type_id"]
+            referencedRelation: "type_transaction"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       transactions: {
         Row: {
           amount: number
+          category_id: number
           completed_at: string
           description: string
           id: number
-          type_id: number
           user_id: number
         }
         Insert: {
           amount: number
+          category_id: number
           completed_at: string
           description: string
           id?: number
-          type_id: number
           user_id: number
         }
         Update: {
           amount?: number
+          category_id?: number
           completed_at?: string
           description?: string
           id?: number
-          type_id?: number
           user_id?: number
         }
         Relationships: [
           {
-            foreignKeyName: "transactions_type_id_fkey"
-            columns: ["type_id"]
-            referencedRelation: "type_transaction"
+            foreignKeyName: "transactions_category_id_fkey"
+            columns: ["category_id"]
+            referencedRelation: "category"
             referencedColumns: ["id"]
           },
           {

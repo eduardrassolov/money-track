@@ -5,7 +5,7 @@ import { ITransaction } from "../../interface/ITransactions";
 import Stats from "../../components/stats/Stats";
 import NewTransactionForm from "../../components/newTransaction/NewTransactionForm";
 import TYPES_TRANSACTION from "../../config/typeTransactions";
-import ExpensesList from "./ExpensesList";
+import TransactionsList from "../../components/transactionCard/TransactionsList";
 
 const StyledDiv = styled.div`
     display: grid;
@@ -14,28 +14,33 @@ const StyledDiv = styled.div`
     grid-column-gap: 1.2rem;
     grid-row-gap: 1rem;
     margin: 1rem;
+    max-width: 800px;
 
-    @media (max-width: 800px){
+    @media (max-width: 900px){
         display: flex;
+        /* width: 90%; */
         flex-direction: column;
     }
 `
 const StatsDiv = styled.div`
    grid-area: 1 / 1 / 2 / 3; 
    border: 1px solid #ccc;
-    border-radius: 7px;
+   border-radius: 7px;
 `
 const FormDiv = styled.div`
   grid-area: 2 / 1 / 3 / 2; 
 `
 const ListDiv = styled.div`
-  border: 1px solid #ccc;
   grid-area: 2 / 2 / 3 / 3;  
   border-radius: 7px;
 `
 
 export default function Expenses() {
-  const data = useLoaderData();
+  const data = useLoaderData() as Array<ITransaction> | undefined;
+
+  if (!data)
+    return;
+
   const totalExpenses: number = data.reduce((acc: number, curr: ITransaction) => acc + curr.amount, 0);
 
   return (
@@ -52,7 +57,7 @@ export default function Expenses() {
         </FormDiv>
 
         <ListDiv>
-          <ExpensesList />
+          <TransactionsList />
         </ListDiv>
       </StyledDiv>
     </>

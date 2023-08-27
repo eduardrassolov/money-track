@@ -1,9 +1,11 @@
 import Aside from '../components/aside/Aside'
-import { Outlet, useNavigation } from 'react-router-dom'
+import { Outlet, useLoaderData, useNavigation } from 'react-router-dom'
 import { styled } from 'styled-components'
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import LoadingUi from '../components/spinner/LoadingUi';
+import Footer from '../components/Footer/Footer';
+import { useEffect } from 'react';
 
 const StyledLayout = styled.div`
     display: flex;
@@ -23,7 +25,6 @@ const Section = styled.section`
 export default function AppLayout() {
     const navigation = useNavigation();
 
-    console.log(navigation.state);
     return (
         <StyledLayout>
             {navigation.state === 'loading' ? <LoadingUi /> : ''}
@@ -40,6 +41,7 @@ export default function AppLayout() {
                 pauseOnHover={false}
                 autoClose={2000}
             />
+
         </StyledLayout>
     )
 }

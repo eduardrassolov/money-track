@@ -8,7 +8,7 @@ const StyledNavLink = styled(NavLink)`
     padding: 0.8rem 1rem;
     color: #000;
     font-size: 1.5rem;
-    transition: background-color 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     border-bottom: 1px solid #ccc;
     align-items: center;
 
@@ -36,9 +36,10 @@ type Props = {
 }
 
 export default function AsideItem({ name, icon }: Props) {
+    const ref = name.toLowerCase() === 'home' ? '/' : `/app/${name.toLowerCase()}`
     return (
         <li>
-            <StyledNavLink to={`/app/${name.toLowerCase()}`}>
+            <StyledNavLink to={ref}>
                 {icon} <Span>{name}</Span>
             </StyledNavLink>
         </li>

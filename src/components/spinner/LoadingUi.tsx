@@ -14,14 +14,13 @@ const Overlay = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    animation : appear 0.3s ease-in-out;
+    animation : appear 250ms ease-in;
     backdrop-filter: blur(2px);
 
     @keyframes appear { 
     0% {
         opacity: 0;
     }
-
     100% {
         opacity: 1;
     }

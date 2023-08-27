@@ -10,7 +10,7 @@ interface IFooterItemProps {
 const Div = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 0.5rem;
+  margin: 0 0.5rem 0.2rem 0;
   font-size: 1.2rem;
   border: 1px solid #ccc;
   border-radius: 7px;
@@ -24,7 +24,6 @@ const Div = styled.div`
 
 const FooterItem: FC<IFooterItemProps> = ({ title, icon }) => {
   return (
-    // <p>{icon} <span>{title}</span></p>
     <Div>
       {icon} <span> {title}</span>
     </Div>
