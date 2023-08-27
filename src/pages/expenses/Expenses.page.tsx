@@ -5,7 +5,6 @@ import { ITransaction } from "../../interface/ITransactions";
 import Stats from "../../components/stats/Stats";
 import NewTransactionForm from "../../components/newTransaction/NewTransactionForm";
 import TYPES_TRANSACTION from "../../config/typeTransactions";
-import ExpensesList from "./ExpensesList";
 import TransactionsList from "../../components/transactionCard/TransactionsList";
 
 const StyledDiv = styled.div`
@@ -32,13 +31,16 @@ const FormDiv = styled.div`
   grid-area: 2 / 1 / 3 / 2; 
 `
 const ListDiv = styled.div`
-  /* border: 1px solid #ccc; */
   grid-area: 2 / 2 / 3 / 3;  
   border-radius: 7px;
 `
 
 export default function Expenses() {
-  const data = useLoaderData();
+  const data = useLoaderData() as Array<ITransaction> | undefined;
+
+  if (!data)
+    return;
+
   const totalExpenses: number = data.reduce((acc: number, curr: ITransaction) => acc + curr.amount, 0);
 
   return (

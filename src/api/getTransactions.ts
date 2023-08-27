@@ -1,11 +1,11 @@
 import { ITransaction } from "../interface/ITransactions";
 import supabase from "../services/supabase";
-import { TransactionDTO } from "./dto/transactions.dto";
+import { GetAllTransactionsDTO } from "./dto/getTransactions.dto";
 
 export const SELECT = {
   ALL_TRANSACTIONS: `
-    amount, completed_at, description, id, 
-    type_transaction(id, name)
+    id, amount, completed_at, description, 
+    category!inner(id, name, type:type_transaction!inner(id, name))
   `,
 };
 
@@ -19,12 +19,13 @@ export default async function getTransactions(sorting = false): Promise<Array<IT
     return new Array<ITransaction>();
   }
 
-  const allTransactions: Array<ITransaction> = data.map((transaction: TransactionDTO) => {
+  const allTransactions: Array<ITransaction> = data.map((transaction: GetAllTransactionsDTO) => {
     return {
       id: transaction.id,
       description: transaction.description,
       amount: transaction.amount,
-      typeTransaction: transaction.type_transaction,
+      type: { id: transaction.category.type.id, name: transaction.category.type.name },
+      category: { id: transaction.category.id, name: transaction.category.name },
       completedAt: new Date(transaction.completed_at),
     };
   });

@@ -3,8 +3,12 @@ export interface ITransaction {
   description: string;
   amount: number;
   completedAt: Date;
-  typeTransaction: {
+  category: {
     id: number;
     name: string;
-  } | null;
+  };
+  type: {
+    id: number;
+    name: string;
+  };
 }

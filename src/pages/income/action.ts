@@ -1,4 +1,3 @@
-import TYPES_TRANSACTION from "../../config/typeTransactions";
 import addTransaction from "../../api/addTransaction";
 import INewTransaction from "../../interface/INewTransaction";
 
@@ -8,8 +7,11 @@ export default async function actionIncomes(request: Request) {
   const description = formData.get("description");
   const amount = formData.get("amount");
   const completed_at = formData.get("completed_at");
+  const category = formData.get("category");
 
-  if (!description || !amount || !completed_at) {
+  console.log("cc", category);
+
+  if (!description || !amount || !completed_at || !category) {
     console.log("No data");
     return;
   }
@@ -18,7 +20,7 @@ export default async function actionIncomes(request: Request) {
     description: description.toString(),
     amount: Number(amount),
     completedAt: completed_at.toString(),
-    typeId: TYPES_TRANSACTION.INCOME,
+    categoryId: Number(category),
   };
 
   return await addTransaction({ ...data });

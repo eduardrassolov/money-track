@@ -24,7 +24,6 @@ const Div = styled.div`
 
 const FooterItem: FC<IFooterItemProps> = ({ title, icon }) => {
   return (
-    // <p>{icon} <span>{title}</span></p>
     <Div>
       {icon} <span> {title}</span>
     </Div>

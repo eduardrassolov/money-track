@@ -6,6 +6,7 @@ const Section = styled.section`
     grid-template-columns: 1fr 1fr;
     height: 90vh;
     place-items: center;
+    justify-content: center;
     background: #F9F5F6;
     padding: 1rem 2rem;
     letter-spacing: 0.1rem;

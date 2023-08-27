@@ -1,27 +1,27 @@
 import TYPES_TRANSACTION from "../config/typeTransactions";
 import { ITransaction } from "../interface/ITransactions";
 import supabase from "../services/supabase";
-import { TransactionDTO } from "./dto/transactions.dto";
+import { GetAllTransactionsDTO } from "./dto/getTransactions.dto";
 import { SELECT } from "./getTransactions";
 
 export default async function getIncomes(): Promise<Array<ITransaction>> {
   const { data } = await supabase
     .from("transactions")
     .select(SELECT.ALL_TRANSACTIONS)
-    .eq("type_id", TYPES_TRANSACTION.INCOME)
+    .eq("category.type.id", TYPES_TRANSACTION.INCOME)
     .order("completed_at", { ascending: false });
 
   if (!data) {
     return new Array<ITransaction>();
   }
-  console.log(data);
 
-  const allTransactions: Array<ITransaction> = data.map((transaction: TransactionDTO) => {
+  const allTransactions: Array<ITransaction> = data.map((transaction: GetAllTransactionsDTO) => {
     return {
       id: transaction.id,
       description: transaction.description,
       amount: transaction.amount,
-      typeTransaction: transaction.type_transaction,
+      type: { id: transaction.category.type.id, name: transaction.category.type.name },
+      category: { id: transaction.category.id, name: transaction.category.name },
       completedAt: new Date(transaction.completed_at),
     };
   });

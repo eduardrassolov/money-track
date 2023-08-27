@@ -1,14 +1,14 @@
 import INewTransaction from "../interface/INewTransaction";
 import supabase from "../services/supabase";
-import { InsertTransaction } from "./dto/createTransaction.dto";
+import { InsertTransactionDTO } from "./dto/createTransaction.dto";
 
 export default async function addTransaction(transaction: INewTransaction) {
   try {
-    const transactionDTO: InsertTransaction = {
+    const transactionDTO: InsertTransactionDTO = {
       amount: transaction.amount,
       completed_at: transaction.completedAt,
       description: transaction.description,
-      type_id: transaction.typeId,
+      category_id: transaction.categoryId,
       user_id: 1,
     };
 

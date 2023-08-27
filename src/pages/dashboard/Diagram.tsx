@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { styled } from 'styled-components'
-import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { ITransaction } from '../../interface/ITransactions';
 import TYPES_TRANSACTION from '../../config/typeTransactions';
 
@@ -23,8 +23,8 @@ const Diagram: FC<IDiagramProps> = ({ data }) => {
     const diagramData = data.map((transaction) => {
         return {
             name: formatDate(new Date(transaction.completedAt)),
-            Expenses: transaction.typeTransaction?.id === TYPES_TRANSACTION.EXPENSE ? transaction.amount : 0,
-            Incomes: transaction.typeTransaction?.id === TYPES_TRANSACTION.INCOME ? transaction.amount : 0,
+            Expenses: transaction.type.id === TYPES_TRANSACTION.EXPENSE ? transaction.amount : 0,
+            Incomes: transaction.type.id === TYPES_TRANSACTION.INCOME ? transaction.amount : 0,
         }
     })
 

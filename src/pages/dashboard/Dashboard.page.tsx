@@ -9,6 +9,7 @@ import { ITransaction } from "../../interface/ITransactions.ts";
 import formatNumberWithSpaces from "../../helpers/formatWithSpace.ts";
 import Diagram from "./Diagram.tsx";
 import TYPES_TRANSACTION from "../../config/typeTransactions.ts";
+import Header from "../../ui/header/Header.tsx";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -71,8 +72,8 @@ export default function Dashboard() {
   }
 
   const transactions = data as Array<ITransaction>;
-  const expenses: Array<ITransaction> = transactions.filter((item) => item.typeTransaction?.id === TYPES_TRANSACTION.EXPENSE);
-  const incomes: Array<ITransaction> = transactions.filter((item) => item.typeTransaction?.id === TYPES_TRANSACTION.INCOME);
+  const expenses: Array<ITransaction> = transactions.filter((item) => item.type.id === TYPES_TRANSACTION.EXPENSE);
+  const incomes: Array<ITransaction> = transactions.filter((item) => item.type.id === TYPES_TRANSACTION.INCOME);
 
   const totalExpenses: number = expenses.reduce((acc: number, item: ITransaction) => acc + item.amount, 0);
   const totalIncomes: number = incomes.reduce((acc: number, item: ITransaction) => acc + item.amount, 0);
@@ -84,7 +85,7 @@ export default function Dashboard() {
 
   return (
     <StyledContainer>
-      <h1>Dashboard</h1>
+      <Header>Dashboard</Header>
 
       <RowContainerCards>
         {statCardData.map((item, index) => <StatCard key={item.name} item={item} value={values[index]} />)}

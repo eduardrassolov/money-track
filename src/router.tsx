@@ -12,8 +12,8 @@ import { loaderTransactions } from "./pages/transactions/loader.ts";
 import Transactions from "./pages/transactions/Transactions.page.tsx";
 import { loaderDashboard } from "./pages/dashboard/loader.ts";
 import HomePage from "./pages/home/HomePage.tsx";
-
-
+import loadData from "./layout/loader.ts";
+import ErrorELement from "./components/error/ErrorELement.tsx";
 
 export const ROUTES = {
     HOME: "/",
@@ -32,7 +32,8 @@ const routes: RouteObject[] = [
     {
         path: ROUTES.ROOT,
         element: <AppLayout />,
-        errorElement: <div>error</div>,
+        loader: loadData,
+        errorElement: <ErrorELement />,
         children: [
             {
                 path: ROUTES.TRANSACTIONS,

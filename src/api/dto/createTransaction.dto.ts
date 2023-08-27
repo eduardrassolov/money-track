@@ -1,7 +1,7 @@
-export type InsertTransaction = {
+export type InsertTransactionDTO = {
   amount: number;
+  category_id: number;
   completed_at: string;
   description: string;
-  type_id: number;
   user_id: number;
 };

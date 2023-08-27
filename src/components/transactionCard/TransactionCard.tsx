@@ -5,7 +5,6 @@ import { FaRegTrashAlt } from 'react-icons/fa'
 import TransactionFooter from "./TransactionFooter";
 import TransactionHeader from "./TransactionHeader";
 
-
 interface ITransactionProps {
   item: ITransaction;
   onDelete: (id: number) => void;
@@ -53,8 +52,9 @@ const StyledIcon = styled(FaRegTrashAlt)`
 `
 
 const TransactionCard: FC<ITransactionProps> = ({ item, onDelete }) => {
+  console.log(item.type);
   return (
-    <Container $bg={item.typeTransaction?.name}>
+    <Container $bg={item.type.name}>
       <InfoSection>
         <TransactionHeader name={item.description} />
         <TransactionFooter item={item} />
