@@ -6,6 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import LoadingUi from '../components/spinner/LoadingUi';
 import Footer from '../components/Footer/Footer';
 import { useEffect } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import getCategory from '../api/getCategory';
 
 const StyledLayout = styled.div`
     display: flex;

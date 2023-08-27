@@ -4,27 +4,33 @@ import { FC } from 'react'
 import Button from '../../ui/Button';
 import Category from '../category/Category';
 import { EXPENSE_OPTIONS, INCOME_OPTIONS } from '../../config/category';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 import addTransaction from '../../api/addTransaction';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { QUERY_KEY } from '../../config/queryClientKeys';
 import IInsertTransaction from '../../interface/IInsertTransaction';
+import getCategory from '../../api/getCategory';
 
+const Form = styled.form`
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    padding: 1rem 2rem;
+`
 
 const FormGroup = styled.div`
     display: flex;
     flex-direction: column;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     
     label{
-        margin-bottom: 0.2rem;
+        margin-bottom: 0.5rem;
     }
     input{
         font-size: 1rem;
         padding: 0.8rem 1rem;
         border-radius: 7px;
-        border: 1px solid #ccc;
+        border: 1px solid transparent;
         background: #f4f4f4;
 
         &:focus{
@@ -34,6 +40,11 @@ const FormGroup = styled.div`
             transition: all 0.3s ease-in-out;
         }
     }
+`
+const ErrorP = styled.p`
+    font-size: 0.7rem;
+    color: red;
+    margin: 0 0 0.5rem;
 `
 const FormFooter = styled.div`
     display: flex;
@@ -54,10 +65,13 @@ export type Inputs = {
 }
 
 const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
-    const optionsSelect = type === TYPES_TRANSACTION.INCOME ? INCOME_OPTIONS : EXPENSE_OPTIONS;
-
     const queryClient = useQueryClient();
-    const { register, handleSubmit, reset } = useForm<Inputs>();
+    // const optionsSelect = type === TYPES_TRANSACTION.INCOME ? INCOME_OPTIONS : EXPENSE_OPTIONS;
+
+    //TODO remove fetching data for SELECT and put globally
+    const { data: optionsList } = useQuery({ queryKey: ['categories'], queryFn: () => getCategory(type) });
+
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<Inputs>();
 
     const { mutate } = useMutation({
         mutationFn: (newTransaction: IInsertTransaction) => addTransaction(newTransaction),
@@ -69,7 +83,7 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
     })
 
     const onSubmit: SubmitHandler<Inputs> = ({ description, amount, completed_at, category }) => {
-        if (!description || !amount || !completed_at || !category)
+        if (!description.trim() || !amount || !completed_at || !category)
             return;
 
         mutate({
@@ -79,38 +93,55 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
             categoryId: category,
         })
     }
+    const onError: SubmitErrorHandler<Inputs> = (error) => {
+        console.log(error);
+    }
 
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit(onSubmit, onError)}>
             {type === TYPES_TRANSACTION.INCOME ?
                 <h4>Add new income:</h4> : <h4>Add new expense:</h4>}
 
             <FormGroup>
-                <label htmlFor="description">*Description:</label>
-                <input type="text" id="description" placeholder='Enter description' required autoFocus autoComplete="off" {...register("description")} />
+                <label htmlFor="description">Description:</label>
+                {errors?.description ? <ErrorP>{errors.description?.message}</ErrorP> : ''}
+
+                <input type="text" id="description" placeholder='Enter description' autoFocus autoComplete="off" {...register("description", {
+                    required: '*This field is required',
+                })} />
+            </FormGroup>
+
+            {optionsList
+                ?
+                <FormGroup>
+                    <label htmlFor="category">Category:</label>
+                    <Category options={optionsList} register={register} />
+                </FormGroup>
+                : ''
+            }
+
+
+            <FormGroup>
+                <label htmlFor="amount">Amount:</label>
+                {errors?.amount ? <ErrorP>{errors.amount?.message}</ErrorP> : ''}
+                <input type="number" id="amount" step={0.01} min={1} placeholder='Enter amount' autoComplete='off' {...register("amount", {
+                    required: '*This field is required',
+                })} />
             </FormGroup>
 
             <FormGroup>
-                <label htmlFor="category">*Category:</label>
-                <Category options={optionsSelect} register={register} />
-            </FormGroup>
-
-            <FormGroup>
-                <label htmlFor="amount">*Amount:</label>
-                <input type="number" id="amount" step={0.01} min={1} placeholder='Enter amount' required autoComplete='off' {...register("amount")} />
-            </FormGroup>
-
-            <FormGroup>
-                <label htmlFor="completed_at">*Date:</label>
-                <input type="datetime-local" id="completed_at" required {...register("completed_at")} />
+                <label htmlFor="completed_at">Date:</label>
+                <input type="datetime-local" id="completed_at"  {...register("completed_at", {
+                    required: '*This field is required',
+                })} />
             </FormGroup>
 
             <FormFooter>
                 <Button variant='secondary' type='reset'>Clear</Button>
                 <Button type='submit'>Confirm</Button>
             </FormFooter>
-        </form>
+        </Form>
     )
 }
 export default TransactionForm;

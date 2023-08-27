@@ -14,11 +14,7 @@ export default async function addTransaction(transaction: INewTransaction) {
       user_id: 1,
     };
 
-    const { data, error } = await supabase
-      .from("transactions")
-      .insert({ ...transactionDTO })
-      .select()
-      .order("completed_at", { ascending: false });
+    const { data, error } = await supabase.from("transactions").insert([transactionDTO]);
 
     if (error) {
       throw error;

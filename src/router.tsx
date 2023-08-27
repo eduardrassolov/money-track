@@ -54,12 +54,12 @@ const routes: RouteObject[] = [
                 path: ROUTES.EXPENSES,
                 element: <Expenses />,
                 // loader: loaderExpenses,
-                action: async ({ request }) => {
-                    const { data, error } = await actionExpenses(request);
-                    data ? toast.success('Expense added successfully') : toast.error(error);
+                // action: async ({ request }) => {
+                //     const { data, error } = await actionExpenses(request);
+                //     data ? toast.success('Expense added successfully') : toast.error(error);
 
-                    return redirect(ROUTES.EXPENSES);
-                }
+                //     return redirect(ROUTES.EXPENSES);
+                // }
             },
             {
                 path: ROUTES.DASHBOARD,
