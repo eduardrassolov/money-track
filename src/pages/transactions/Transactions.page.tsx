@@ -3,6 +3,7 @@ import TransactionsList from '../../components/transactionCard/TransactionsList'
 import Header from '../../ui/header/Header'
 import { useQuery } from '@tanstack/react-query'
 import getTransactions from '../../api/getTransactions'
+import { QUERY_KEY } from '../../config/queryClientKeys'
 
 const Div = styled.div`
     display: flex;
@@ -12,7 +13,7 @@ const Div = styled.div`
 `
 
 export default function Transactions() {
-    const { data, error } = useQuery({ queryKey: ['transactions'], queryFn: getTransactions });
+    const { data, error } = useQuery({ queryKey: [QUERY_KEY.TRANSACTIONS], queryFn: getTransactions });
 
     if (!data || error instanceof Error)
         return;
@@ -22,7 +23,7 @@ export default function Transactions() {
             <Header>Transactions</Header>
 
             <Div>
-                <TransactionsList data={data} listType={'transactions'} />
+                <TransactionsList data={data} listType={QUERY_KEY.TRANSACTIONS} />
             </Div>
         </>
     )

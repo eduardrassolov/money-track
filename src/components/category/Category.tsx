@@ -1,6 +1,8 @@
 import { FC } from "react";
+import { UseFormRegister } from "react-hook-form";
 
 import { styled } from "styled-components";
+import { Inputs } from "../newTransaction/FormTransaction";
 
 const Select = styled.select`
     font-size: 1rem;
@@ -17,13 +19,15 @@ const Select = styled.select`
     }
 `
 
+//TODO refactor
 interface ICategory {
-    options: Array<IExpensesCategory>
+    options: Array<IExpensesCategory>,
+    register: UseFormRegister<Inputs>;
 }
 
-const Category: FC<ICategory> = ({ options }) => {
+const Category: FC<ICategory> = ({ options, register }) => {
     return (
-        <Select id="category" name="category">
+        <Select id="category" {...register("category")}>
             {options.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
         </Select >
     )

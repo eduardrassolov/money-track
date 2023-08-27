@@ -8,6 +8,8 @@ import TYPES_TRANSACTION from "../../config/typeTransactions";
 import TransactionsList from "../../components/transactionCard/TransactionsList";
 import { useQuery } from "@tanstack/react-query";
 import getIncomes from "../../api/getIncomes";
+import { QUERY_KEY } from "../../config/queryClientKeys";
+import TransactionForm from "../../components/newTransaction/FormTransaction";
 
 
 
@@ -40,8 +42,7 @@ const ListDiv = styled.div`
 
 
 export default function Incomes() {
-    // const data = useLoaderData() as Array<ITransaction> | undefined;
-    const { data, error } = useQuery({ queryKey: ['incomes'], queryFn: getIncomes });
+    const { data, error } = useQuery({ queryKey: [QUERY_KEY.INCOMES], queryFn: getIncomes });
 
     if (error instanceof Error || !data)
         return;
@@ -58,7 +59,8 @@ export default function Incomes() {
                 </StatsDiv>
 
                 <FormDiv>
-                    <NewTransactionForm type={TYPES_TRANSACTION.INCOME} />
+                    {/* <NewTransactionForm type={TYPES_TRANSACTION.INCOME} /> */}
+                    <TransactionForm type={TYPES_TRANSACTION.INCOME} />
                 </FormDiv>
 
                 <ListDiv>

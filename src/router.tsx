@@ -43,12 +43,12 @@ const routes: RouteObject[] = [
                 path: ROUTES.INCOMES,
                 element: <Incomes />,
                 // loader: loaderIncomes,
-                action: async ({ request }) => {
-                    const { data, error } = await actionIncomes(request);
-                    data ? toast.success('Income added successfully') : toast.error(error);
+                // action: async ({ request }) => {
+                //     const { data, error } = await actionIncomes(request);
+                //     data ? toast.success('Income added successfully') : toast.error(error);
 
-                    return redirect(ROUTES.INCOMES);
-                },
+                //     return redirect(ROUTES.INCOMES);
+                // },
             },
             {
                 path: ROUTES.EXPENSES,

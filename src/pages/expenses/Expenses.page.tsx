@@ -1,13 +1,13 @@
 import { styled } from "styled-components";
 import Header from "../../ui/header/Header";
-import { useLoaderData } from "react-router";
 import { ITransaction } from "../../interface/ITransactions";
 import Stats from "../../components/stats/Stats";
-import NewTransactionForm from "../../components/newTransaction/NewTransactionForm";
 import TYPES_TRANSACTION from "../../config/typeTransactions";
 import TransactionsList from "../../components/transactionCard/TransactionsList";
 import { useQuery } from "@tanstack/react-query";
 import { loaderExpenses } from "./loader";
+import { QUERY_KEY } from "../../config/queryClientKeys";
+import TransactionForm from "../../components/newTransaction/FormTransaction";
 
 const StyledDiv = styled.div`
     display: grid;
@@ -20,7 +20,6 @@ const StyledDiv = styled.div`
 
     @media (max-width: 900px){
         display: flex;
-        /* width: 90%; */
         flex-direction: column;
     }
 `
@@ -39,7 +38,7 @@ const ListDiv = styled.div`
 
 export default function Expenses() {
   // const data = useLoaderData() as Array<ITransaction> | undefined;
-  const { data, error } = useQuery({ queryKey: ['expenses'], queryFn: loaderExpenses })
+  const { data, error } = useQuery({ queryKey: [QUERY_KEY.EXPENSES], queryFn: loaderExpenses })
 
   if (!data || error instanceof Error)
     return;
@@ -56,11 +55,12 @@ export default function Expenses() {
         </StatsDiv>
 
         <FormDiv>
-          <NewTransactionForm type={TYPES_TRANSACTION.EXPENSE} />
+          {/* <NewTransactionForm type={TYPES_TRANSACTION.EXPENSE} /> */}
+          <TransactionForm type={TYPES_TRANSACTION.EXPENSE} />
         </FormDiv>
 
         <ListDiv>
-          <TransactionsList data={data} listType={"expenses"} />
+          <TransactionsList data={data} listType={QUERY_KEY.EXPENSES} />
         </ListDiv>
       </StyledDiv>
     </>

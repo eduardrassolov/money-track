@@ -52,7 +52,6 @@ const StyledIcon = styled(FaRegTrashAlt)`
 `
 
 const TransactionCard: FC<ITransactionProps> = ({ item, onDelete }) => {
-  console.log(item.type);
   return (
     <Container $bg={item.type.name}>
       <InfoSection>

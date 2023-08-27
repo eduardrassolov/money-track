@@ -1,6 +1,6 @@
 import addTransaction from "../../api/addTransaction";
 import TYPES_TRANSACTION from "../../config/typeTransactions";
-import INewTransaction from "../../interface/INewTransaction";
+import INewTransaction from "../../interface/IInsertTransaction";
 
 export default async function actionExpenses(request: Request) {
   const formData = await request.formData();
