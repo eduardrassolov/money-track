@@ -6,6 +6,8 @@ import Stats from "../../components/stats/Stats";
 import NewTransactionForm from "../../components/newTransaction/NewTransactionForm";
 import TYPES_TRANSACTION from "../../config/typeTransactions";
 import TransactionsList from "../../components/transactionCard/TransactionsList";
+import { useQuery } from "@tanstack/react-query";
+import { loaderExpenses } from "./loader";
 
 const StyledDiv = styled.div`
     display: grid;
@@ -36,9 +38,10 @@ const ListDiv = styled.div`
 `
 
 export default function Expenses() {
-  const data = useLoaderData() as Array<ITransaction> | undefined;
+  // const data = useLoaderData() as Array<ITransaction> | undefined;
+  const { data, error } = useQuery({ queryKey: ['expenses'], queryFn: loaderExpenses })
 
-  if (!data)
+  if (!data || error instanceof Error)
     return;
 
   const totalExpenses: number = data.reduce((acc: number, curr: ITransaction) => acc + curr.amount, 0);
@@ -57,7 +60,7 @@ export default function Expenses() {
         </FormDiv>
 
         <ListDiv>
-          <TransactionsList />
+          <TransactionsList data={data} listType={"expenses"} />
         </ListDiv>
       </StyledDiv>
     </>
