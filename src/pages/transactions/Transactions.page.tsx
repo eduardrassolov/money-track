@@ -1,29 +1,24 @@
 import { styled } from 'styled-components'
-import TransactionsList from '../../components/transactionCard/TransactionsList'
 import Header from '../../ui/header/Header'
-import { useQuery } from '@tanstack/react-query'
-import getTransactions from '../../api/getTransactions'
 import { QUERY_KEY } from '../../config/queryClientKeys'
+import TransactionArr from './TransactionArr'
+import { loaderTransactions } from './loader'
 
 const Div = styled.div`
     display: flex;
     flex-direction: column;
     padding: 2rem 0 1rem;
-    width: clamp(30px, 800px, 95%);
+    width: clamp(30px, 500px, 95%);
 `
 
 export default function Transactions() {
-    const { data, error } = useQuery({ queryKey: [QUERY_KEY.TRANSACTIONS], queryFn: getTransactions });
-
-    if (!data || error instanceof Error)
-        return;
 
     return (
         <>
             <Header>Transactions</Header>
 
             <Div>
-                <TransactionsList data={data} listType={QUERY_KEY.TRANSACTIONS} />
+                <TransactionArr listType={QUERY_KEY.TRANSACTIONS} loader={loaderTransactions} />
             </Div>
         </>
     )

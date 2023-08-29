@@ -1,9 +1,8 @@
 import { styled } from 'styled-components'
 import TYPES_TRANSACTION from '../../config/typeTransactions'
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import Button from '../../ui/Button';
 import Category from '../category/Category';
-import { EXPENSE_OPTIONS, INCOME_OPTIONS } from '../../config/category';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 import addTransaction from '../../api/addTransaction';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -64,9 +63,8 @@ export type Inputs = {
     completed_at: Date,
 }
 
-const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
+const TransactionForm: FC<INewTransactionProps> = memo(function ({ type }) {
     const queryClient = useQueryClient();
-    // const optionsSelect = type === TYPES_TRANSACTION.INCOME ? INCOME_OPTIONS : EXPENSE_OPTIONS;
 
     //TODO remove fetching data for SELECT and put globally
     const { data: optionsList } = useQuery({ queryKey: ['categories'], queryFn: () => getCategory(type) });
@@ -143,5 +141,5 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
             </FormFooter>
         </Form>
     )
-}
+})
 export default TransactionForm;

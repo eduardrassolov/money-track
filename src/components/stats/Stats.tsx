@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import formatNumberWithSpaces from "../../helpers/formatWithSpace";
 
 type StatsProps = {
-    text: string;
+    listType: string;
     calcValue: number;
     currency?: string;
     size?: string;
@@ -22,11 +22,11 @@ const H3 = styled.h3`
     }
 `
 
-const Stats: FC<StatsProps> = ({ text, calcValue, currency = "$" }) => {
+const Stats: FC<StatsProps> = ({ listType, calcValue, currency = "$" }) => {
     const formatedValue = formatNumberWithSpaces(calcValue);
 
     return (
-        <H3>{text}<span>{currency}{formatedValue}</span></H3>
+        <H3>Total {listType}: <span>{currency}{formatedValue}</span></H3>
     )
 }
 export default Stats;

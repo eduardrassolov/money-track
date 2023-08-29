@@ -7,7 +7,6 @@ export default async function getCategory(type: number) {
   if (!data) {
     return null;
   }
-  console.log("cat", data);
 
   return data as Array<ICategory>;
 }

@@ -12,6 +12,7 @@ interface ITransactionList {
 const TransactionsList = ({ data, listType }: ITransactionList) => {
     const queryClient = useQueryClient();
 
+    console.log(data);
     const mutation = useMutation({
         mutationFn: deleteTransaction,
         onSuccess: () => {
