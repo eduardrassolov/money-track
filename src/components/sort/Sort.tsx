@@ -1,13 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 import { styled } from 'styled-components'
-
-
-const Select = styled.select`
-    padding: 0.3rem 0.6rem;
-    border-radius: 7px;
-    cursor: pointer;
-`
-
+import { Select } from '../filter/DropDown.style';
 
 export default function Sort() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -33,10 +26,10 @@ export default function Sort() {
         <Select onChange={handleChange} value={selected}>
             <option value="completed_at-desc">Sort by date ⬇</option>
             <option value="completed_at-asc">Sort by date ⬆</option>
-            <option value="amount-desc">Sort by amount ⬇</option>
-            <option value="amount-asc">Sort by amount ⬆</option>
             <option value="description-desc">Sort by name ⬇</option>
             <option value="description-asc">Sort by name ⬆</option>
+            <option value="amount-desc">Sort by amount ⬇</option>
+            <option value="amount-asc">Sort by amount ⬆</option>
         </Select>
     )
 }

@@ -12,7 +12,8 @@ interface ITransactionProps {
 
 const Container = styled.div`
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap;    
+    gap: 0.4rem;
 `
 
 const TransactionFooter: FC<ITransactionProps> = ({ item }) => {
@@ -20,12 +21,11 @@ const TransactionFooter: FC<ITransactionProps> = ({ item }) => {
 
     return (
         <Container>
+            <FooterItem title={`${item.type.name}`} />
             <FooterItem title={`$ ${item.amount}`} icon={<TbMoneybag />} />
             <FooterItem title={formatedDate} icon={<TbCalendar />} />
-            {/* <FooterItem title={item.type?.name || ''} icon={<TbInfoSquareRounded />} /> */}
             <FooterItem title={item.category.name || ''} icon={<TbTag />} />
-
-        </Container>
+        </Container >
     )
 }
 export default TransactionFooter;

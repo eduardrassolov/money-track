@@ -11,11 +11,13 @@ import { toast } from "react-toastify";
 import { FILTER_DATE_OPTIONS, FILTER_KEYS } from "../../components/filter/filterParameters";
 import { ITransaction } from "../../interface/ITransactions";
 import { Iloader } from "../expenses/loader";
+import Header from "../../ui/header/Header";
 
 const Div = styled.div`
     display: flex;
-    gap:1rem;
+    gap: 1rem;
     margin: 0 0 1rem;
+    justify-content: end;
 `
 export type SortBy = {
     field: string,
@@ -55,6 +57,8 @@ export default function TransactionArr({ listType, loader }: ITransactionList) {
     }
     return (
         <>
+            <Header text={`List of ${listType}`} />
+
             <Div>
                 <Filter options={FILTER_DATE_OPTIONS} filterKey={FILTER_KEYS.DATE} />
                 <Sort />

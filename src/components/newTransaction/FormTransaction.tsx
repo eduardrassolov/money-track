@@ -10,17 +10,22 @@ import { QUERY_KEY } from '../../config/queryClientKeys';
 import IInsertTransaction from '../../interface/IInsertTransaction';
 import getCategory from '../../api/getCategory';
 import { PrimaryBtn, SecondaryBtn } from '../../styles/Button';
+import { devices } from '../../styles/breakPoints';
 
 const Form = styled.form`
-    border: 1px solid #ccc;
-    border-radius: 7px;
+    border: 1px solid #fff;
+    background: #fff;
+    border-radius: 15px;
     padding: 1rem 2rem;
+
+
 `
 
 const FormGroup = styled.div`
     display: flex;
     flex-direction: column;
     margin-bottom: 2rem;
+
     
     label{
         margin-bottom: 0.5rem;
@@ -118,7 +123,6 @@ const TransactionForm: FC<INewTransactionProps> = memo(function ({ type }) {
                 </FormGroup>
                 : ''
             }
-
 
             <FormGroup>
                 <label htmlFor="amount">Amount:</label>

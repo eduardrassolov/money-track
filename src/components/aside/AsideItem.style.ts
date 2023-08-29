@@ -10,19 +10,24 @@ export const StyledNavLink = styled(NavLink)`
   transition: all 0.3s ease-in-out;
   border-bottom: 1px solid #ccc;
   align-items: center;
+  border-right: 3px solid #fff;
 
   &:hover {
-    background-color: #e0e0e0;
+    background-color: #e5e5e5;
+    border-right: 3px solid #e5e5e5;
   }
   &.active {
-    background-color: #c0c0c0;
-    color: #383636;
+    background-color: #e5e5e5;
+    border-right: 3px solid #7e22ce;
+    transition: 300ms ease-in-out;
+    color: #7e22ce;
   }
 `;
 
 export const Span = styled.span`
   margin-left: 0.5rem;
-  font-size: 1rem;
+  font-size: 0.8rem;
+  color: #383636;
 
   @media (max-width: 800px) {
     display: none;

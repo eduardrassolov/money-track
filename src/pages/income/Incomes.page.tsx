@@ -1,6 +1,4 @@
-import Header from "../../ui/header/Header";
 import TYPES_TRANSACTION from "../../config/typeTransactions";
-
 
 import { QUERY_KEY } from "../../config/queryClientKeys";
 import TransactionForm from "../../components/newTransaction/FormTransaction";
@@ -12,8 +10,6 @@ import { Container, FormDiv, ListDiv } from "../../styles/TransactionContainer";
 export default function Incomes() {
     return (
         <>
-            <Header>Incomes</Header>
-
             <Container>
                 <FormDiv>
                     <TransactionForm type={TYPES_TRANSACTION.INCOME} />
