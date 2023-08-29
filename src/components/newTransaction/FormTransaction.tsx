@@ -4,7 +4,7 @@ import { FC, memo } from 'react'
 import Button from '../../ui/Button';
 import Category from '../category/Category';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
-import addTransaction from '../../api/addTransaction';
+import createTransaction from '../../api/createTransaction';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { QUERY_KEY } from '../../config/queryClientKeys';
@@ -72,7 +72,7 @@ const TransactionForm: FC<INewTransactionProps> = memo(function ({ type }) {
     const { register, handleSubmit, reset, formState: { errors } } = useForm<Inputs>();
 
     const { mutate } = useMutation({
-        mutationFn: (newTransaction: IInsertTransaction) => addTransaction(newTransaction),
+        mutationFn: (newTransaction: IInsertTransaction) => createTransaction(newTransaction),
         onSuccess: () => {
             toast.success('Added successfully');
             queryClient.invalidateQueries({ queryKey: [type === TYPES_TRANSACTION.INCOME ? QUERY_KEY.INCOMES : QUERY_KEY.EXPENSES] });

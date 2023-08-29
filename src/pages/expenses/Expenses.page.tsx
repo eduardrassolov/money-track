@@ -1,17 +1,9 @@
 import { styled } from "styled-components";
 import Header from "../../ui/header/Header";
-import { ITransaction } from "../../interface/ITransactions";
-import Stats from "../../components/stats/Stats";
 import TYPES_TRANSACTION from "../../config/typeTransactions";
-import TransactionsList from "../../components/transactionCard/TransactionsList";
-import { useQuery } from "@tanstack/react-query";
 import { loaderExpenses } from "./loader";
 import { QUERY_KEY } from "../../config/queryClientKeys";
 import TransactionForm from "../../components/newTransaction/FormTransaction";
-import Filter from "../../components/filter/Filter";
-import { FILTER_DATE_OPTIONS, FILTER_KEYS } from "../../components/filter/filterParameters";
-import { useParams, useSearchParams } from "react-router-dom";
-import * as filter from "../../services/filter";
 import TransactionArr from "../transactions/TransactionArr";
 
 const StyledDiv = styled.div`
