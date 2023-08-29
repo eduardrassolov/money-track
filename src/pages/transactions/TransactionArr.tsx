@@ -31,10 +31,7 @@ export default function TransactionArr({ listType, loader }: ITransactionList) {
     const queryClient = useQueryClient();
     const mutation = useMutation({
         mutationFn: deleteTransaction,
-        onSuccess: () => {
-            toast.success('Successfully deleted.');
-            queryClient.invalidateQueries({ queryKey: [listType] });
-        }
+        onSuccess: succesHandle
     });
 
     const filterValue = params.get(FILTER_KEYS.DATE);
@@ -51,6 +48,10 @@ export default function TransactionArr({ listType, loader }: ITransactionList) {
 
     const handleDelete = (id: number) => {
         mutation.mutate(id);
+    }
+    function succesHandle() {
+        toast.success('Successfully deleted.');
+        queryClient.invalidateQueries({ queryKey: [listType] });
     }
     return (
         <>

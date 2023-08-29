@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import { devices } from "./breakPoints";
 
 const StyledGrid = styled.div`
   display: grid;
@@ -8,7 +9,7 @@ const StyledGrid = styled.div`
   grid-row-gap: 1rem;
   margin: 1rem;
 
-  @media (max-width: 800px) {
+  @media only screen and ${devices.md} {
     display: flex;
     flex-direction: column;
   }

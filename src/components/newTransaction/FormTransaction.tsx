@@ -1,7 +1,6 @@
 import { styled } from 'styled-components'
 import TYPES_TRANSACTION from '../../config/typeTransactions'
 import { FC, memo } from 'react'
-import Button from '../../ui/Button';
 import Category from '../category/Category';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 import createTransaction from '../../api/createTransaction';
@@ -10,6 +9,7 @@ import { toast } from 'react-toastify';
 import { QUERY_KEY } from '../../config/queryClientKeys';
 import IInsertTransaction from '../../interface/IInsertTransaction';
 import getCategory from '../../api/getCategory';
+import { PrimaryBtn, SecondaryBtn } from '../../styles/Button';
 
 const Form = styled.form`
     border: 1px solid #ccc;
@@ -136,8 +136,8 @@ const TransactionForm: FC<INewTransactionProps> = memo(function ({ type }) {
             </FormGroup>
 
             <FormFooter>
-                <Button variant='secondary' type='reset'>Clear</Button>
-                <Button type='submit'>Confirm</Button>
+                <SecondaryBtn type='reset'>Clear</SecondaryBtn>
+                <PrimaryBtn type='submit'>Confirm</PrimaryBtn>
             </FormFooter>
         </Form>
     )
