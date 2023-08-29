@@ -1,13 +1,14 @@
 import { useSearchParams } from 'react-router-dom';
 import { Select } from './DropDown.style';
 import { Option } from './filterParameters';
+import { memo } from 'react';
 
 interface IFilter {
     options: Array<Option>;
     filterKey: string;
 }
 
-export default function Filter({ options, filterKey }: IFilter) {
+const Filter = memo(function ({ options, filterKey }: IFilter) {
     const [defaultValue] = options;
 
     const [searchParams, setSearchParams] = useSearchParams();
@@ -32,9 +33,11 @@ export default function Filter({ options, filterKey }: IFilter) {
     console.log(options);
 
     return (
-        <Select onChange={handleChange} value={selected}>
+        <Select onChange={handleChange} value={selected} >
             {options.map((opt) => <option key={opt.value} value={opt.value}>{opt.text}</option>)}
-        </Select>
+        </Select >
 
     )
-}
+})
+
+export default Filter

@@ -17,8 +17,11 @@ const Form = styled.form`
     background: #fff;
     border-radius: 15px;
     padding: 1rem 2rem;
+    width: 320px;
 
-
+    @media only screen and ${devices.md} {
+        width: auto;
+    }
 `
 
 const FormGroup = styled.div`
@@ -26,13 +29,12 @@ const FormGroup = styled.div`
     flex-direction: column;
     margin-bottom: 2rem;
 
-    
     label{
         margin-bottom: 0.5rem;
     }
     input{
         font-size: 1rem;
-        padding: 0.8rem 1rem;
+        padding: 0.5rem;
         border-radius: 7px;
         border: 1px solid transparent;
         background: #f4f4f4;

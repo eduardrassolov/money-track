@@ -10,7 +10,12 @@ import formatNumberWithSpaces from "../../helpers/formatWithSpace.ts";
 import Diagram from "./Diagram.tsx";
 import TYPES_TRANSACTION from "../../config/typeTransactions.ts";
 import Header from "../../ui/header/Header.tsx";
-import { Pie, PieChart, ResponsiveContainer } from "recharts";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { QUERY_KEY } from "../../config/queryClientKeys.ts";
+import { loaderExpenses } from "../expenses/loader.ts";
+import { loaderIncomes } from "../income/loader.ts";
+import { loaderTransactions } from "../transactions/loader.ts";
+import calcStats from "../../helpers/calculateStats.ts";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -66,30 +71,22 @@ const statCardData: Array<StatsCardData> = [
 
 // TODO - refactor component Dashboard. Remove caclulation from component
 export default function Dashboard() {
-  const data = useLoaderData();
+  const { data: expenses } = useQuery({ queryKey: [QUERY_KEY.EXPENSES], queryFn: loaderExpenses });
+  const { data: incomes } = useQuery({ queryKey: [QUERY_KEY.INCOMES], queryFn: loaderIncomes });
+  // TODO - change to default params
+  const { data: transactions } = useQuery({ queryKey: [QUERY_KEY.TRANSACTIONS], queryFn: () => loaderTransactions({ filter: null, sortBy: { field: "completed_at", direction: "asc" } }) });
 
-  if (!data) {
-    return <div>loading...</div>;
-  }
+  if (!transactions || !incomes || !expenses)
+    return null;
 
-  const transactions = data as Array<ITransaction>;
-  const expenses: Array<ITransaction> = transactions.filter((item) => item.type.id === TYPES_TRANSACTION.EXPENSE);
-  const incomes: Array<ITransaction> = transactions.filter((item) => item.type.id === TYPES_TRANSACTION.INCOME);
-
-  const totalExpenses: number = expenses.reduce((acc: number, item: ITransaction) => acc + item.amount, 0);
-  const totalIncomes: number = incomes.reduce((acc: number, item: ITransaction) => acc + item.amount, 0);
-  const balance: number = totalIncomes - totalExpenses;
-  const coefficent: number = Math.round((totalExpenses / totalIncomes) * 100);
-
-  const values = [`$ ${formatNumberWithSpaces(totalExpenses)}`, `$ ${formatNumberWithSpaces(totalIncomes)}`, `$ ${formatNumberWithSpaces(balance)}`, `${coefficent} %`];
-
+  const stats = calcStats({ expenses, incomes });
 
   return (
     <StyledContainer>
-      <Header>Dashboard</Header>
+      <Header text="Dashboard" />
 
       <RowContainerCards>
-        {statCardData.map((item, index) => <StatCard key={item.name} item={item} value={values[index]} />)}
+        {statCardData.map((item, index) => <StatCard key={item.name} item={item} value={stats[index]} />)}
       </RowContainerCards>
 
       <RowContainer>

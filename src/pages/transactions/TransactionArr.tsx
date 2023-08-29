@@ -12,6 +12,7 @@ import { FILTER_DATE_OPTIONS, FILTER_KEYS } from "../../components/filter/filter
 import { ITransaction } from "../../interface/ITransactions";
 import { Iloader } from "../expenses/loader";
 import Header from "../../ui/header/Header";
+import formatNumberWithSpaces from "../../helpers/formatWithSpace";
 
 const Div = styled.div`
     display: flex;
@@ -55,14 +56,18 @@ export default function TransactionArr({ listType, loader }: ITransactionList) {
         toast.success('Successfully deleted.');
         queryClient.invalidateQueries({ queryKey: [listType] });
     }
+
+
+
+
     return (
         <>
-            <Header text={`List of ${listType}`} />
+            {/* <Header text={`Total ${listType}: $ ${formatNumberWithSpaces(total)}`} />
 
             <Div>
                 <Filter options={FILTER_DATE_OPTIONS} filterKey={FILTER_KEYS.DATE} />
                 <Sort />
-            </Div>
+            </Div> */}
 
             {transactions.map((transaction: ITransaction) =>
                 <TransactionCard

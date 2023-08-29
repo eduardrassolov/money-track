@@ -31,7 +31,7 @@ export default function AppLayout() {
             </Section>
 
             <ToastContainer
-                position="top-right"
+                position="top-center"
                 hideProgressBar={true}
                 pauseOnHover={false}
                 autoClose={2000}

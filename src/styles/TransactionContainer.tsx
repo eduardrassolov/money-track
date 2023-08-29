@@ -7,7 +7,7 @@ const Container = styled.div`
     grid-template-rows: auto;
     grid-column-gap: 1.2rem;
     margin: 0 1rem 1rem;
-    max-width: 800px;
+    max-width: 1000px;
 
     @media only screen and ${devices.md} {
         display: flex;
@@ -21,7 +21,7 @@ const FormDiv = styled.div`
 `
 const ListDiv = styled.div`
   grid-area: 2 / 2 / 3 / 3;  
-  border-radius: 7px;
+  border-radius: 15px;
 `
 
 export { Container, FormDiv, ListDiv }
