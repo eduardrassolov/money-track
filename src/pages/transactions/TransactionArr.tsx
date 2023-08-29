@@ -57,18 +57,8 @@ export default function TransactionArr({ listType, loader }: ITransactionList) {
         queryClient.invalidateQueries({ queryKey: [listType] });
     }
 
-
-
-
     return (
         <>
-            {/* <Header text={`Total ${listType}: $ ${formatNumberWithSpaces(total)}`} />
-
-            <Div>
-                <Filter options={FILTER_DATE_OPTIONS} filterKey={FILTER_KEYS.DATE} />
-                <Sort />
-            </Div> */}
-
             {transactions.map((transaction: ITransaction) =>
                 <TransactionCard
                     key={transaction.id}

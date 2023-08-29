@@ -16,6 +16,10 @@ import { loaderExpenses } from "../expenses/loader.ts";
 import { loaderIncomes } from "../income/loader.ts";
 import { loaderTransactions } from "../transactions/loader.ts";
 import calcStats from "../../helpers/calculateStats.ts";
+import Filter from "../../components/filter/Filter.tsx";
+import { FILTER_DATE_OPTIONS, FILTER_KEYS } from "../../components/filter/filterParameters.ts";
+import { useSearchParams } from "react-router-dom";
+import { SortBy } from "../transactions/TransactionArr.tsx";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -71,10 +75,15 @@ const statCardData: Array<StatsCardData> = [
 
 // TODO - refactor component Dashboard. Remove caclulation from component
 export default function Dashboard() {
-  const { data: expenses } = useQuery({ queryKey: [QUERY_KEY.EXPENSES], queryFn: loaderExpenses });
-  const { data: incomes } = useQuery({ queryKey: [QUERY_KEY.INCOMES], queryFn: loaderIncomes });
+  const [params] = useSearchParams();
+  const filterValue = params.get(FILTER_KEYS.DATE);
+  const filter = !filterValue ? null : filterValue;
+  const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
+
+  const { data: transactions } = useQuery({ queryKey: [QUERY_KEY.TRANSACTIONS, filter, sortBy], queryFn: () => loaderTransactions({ filter, sortBy }) });
+  const { data: expenses } = useQuery({ queryKey: [QUERY_KEY.EXPENSES, filter, sortBy], queryFn: () => loaderExpenses({ filter, sortBy }) });
+  const { data: incomes } = useQuery({ queryKey: [QUERY_KEY.INCOMES, filter, sortBy], queryFn: () => loaderIncomes({ filter, sortBy }) });
   // TODO - change to default params
-  const { data: transactions } = useQuery({ queryKey: [QUERY_KEY.TRANSACTIONS], queryFn: () => loaderTransactions({ filter: null, sortBy: { field: "completed_at", direction: "asc" } }) });
 
   if (!transactions || !incomes || !expenses)
     return null;
@@ -82,17 +91,21 @@ export default function Dashboard() {
   const stats = calcStats({ expenses, incomes });
 
   return (
-    <StyledContainer>
-      <Header text="Dashboard" />
+    <>
 
-      <RowContainerCards>
-        {statCardData.map((item, index) => <StatCard key={item.name} item={item} value={stats[index]} />)}
-      </RowContainerCards>
+      <StyledContainer>
+        <Header text="Dashboard" />
+        {/* <Filter options={FILTER_DATE_OPTIONS} filterKey={FILTER_KEYS.DATE} /> */}
 
-      <RowContainer>
-        <Diagram data={[...transactions]} />
-      </RowContainer>
+        <RowContainerCards>
+          {statCardData.map((item, index) => <StatCard key={item.name} item={item} value={stats[index]} />)}
+        </RowContainerCards>
 
-    </StyledContainer >
+        <RowContainer>
+          <Diagram data={[...transactions]} />
+        </RowContainer>
+
+      </StyledContainer >
+    </>
   )
 }

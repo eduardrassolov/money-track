@@ -26,7 +26,7 @@ export default function Expenses() {
         </FormDiv>
 
         <ListDiv>
-          <Header text={`Total incomes: $${formatNumberWithSpaces(total)}`} />
+          <Header text={`Total expenses: $${formatNumberWithSpaces(total)}`} />
 
 
           {!transactions?.length ?
