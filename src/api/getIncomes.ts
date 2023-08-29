@@ -4,12 +4,18 @@ import supabase from "../services/supabase";
 import { GetAllTransactionsDTO } from "./dto/getTransactions.dto";
 import { SELECT } from "./getTransactions";
 
-export default async function getIncomes(): Promise<Array<ITransaction>> {
-  const { data } = await supabase
+export default async function getIncomes(filterByDate, sortBy): Promise<Array<ITransaction>> {
+  let query = supabase
     .from("transactions")
     .select(SELECT.ALL_TRANSACTIONS)
-    .eq("category.type.id", TYPES_TRANSACTION.INCOME)
-    .order("completed_at", { ascending: false });
+    .eq("category.type.id", TYPES_TRANSACTION.INCOME);
+
+  if (filterByDate) {
+    query = query.gt("completed_at", filterByDate);
+  }
+
+  query = query.order(sortBy.field, { ascending: sortBy.direction === "asc" ? true : false });
+  const { data } = await query;
 
   if (!data) {
     return new Array<ITransaction>();

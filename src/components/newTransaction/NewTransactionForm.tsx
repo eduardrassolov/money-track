@@ -13,6 +13,7 @@ const StyledForm = styled(Form)`
     border: 1px solid #ccc;
     border-radius: 7px;
     height: fit-content;
+    max-width: 300px;
     h4{
         margin: 0 auto 1.5rem 0;
         font-size: 1.1rem;

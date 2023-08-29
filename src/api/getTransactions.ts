@@ -9,11 +9,15 @@ export const SELECT = {
   `,
 };
 
-export default async function getTransactions(sorting = false): Promise<Array<ITransaction>> {
-  const { data } = await supabase
-    .from("transactions")
-    .select(SELECT.ALL_TRANSACTIONS)
-    .order("completed_at", { ascending: sorting });
+export default async function getTransactions(filterByDate, sortBy): Promise<Array<ITransaction>> {
+  let query = supabase.from("transactions").select(SELECT.ALL_TRANSACTIONS);
+
+  if (filterByDate) {
+    query = query.gt("completed_at", filterByDate);
+  }
+
+  query = query.order(sortBy.field, { ascending: sortBy.direction === "asc" ? true : false });
+  const { data } = await query;
 
   if (!data) {
     return new Array<ITransaction>();

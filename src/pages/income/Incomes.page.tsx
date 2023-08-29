@@ -1,11 +1,17 @@
-import { useLoaderData } from "react-router"
+
 import Header from "../../ui/header/Header";
 import { styled } from "styled-components";
 import { ITransaction } from "../../interface/ITransactions";
 import Stats from "../../components/stats/Stats";
-import NewTransactionForm from "../../components/newTransaction/NewTransactionForm";
 import TYPES_TRANSACTION from "../../config/typeTransactions";
 import TransactionsList from "../../components/transactionCard/TransactionsList";
+import { useQuery } from "@tanstack/react-query";
+
+import { QUERY_KEY } from "../../config/queryClientKeys";
+import TransactionForm from "../../components/newTransaction/FormTransaction";
+import { useSearchParams } from "react-router-dom";
+import { loaderIncomes } from "./loader";
+import TransactionArr from "../transactions/TransactionArr";
 
 
 
@@ -23,11 +29,7 @@ const StyledDiv = styled.div`
         flex-direction: column;
     }
 `
-const StatsDiv = styled.div`
-   grid-area: 1 / 1 / 2 / 3; 
-   border: 1px solid #ccc;
-   border-radius: 7px;
-`
+
 const FormDiv = styled.div`
   grid-area: 2 / 1 / 3 / 2; 
 `
@@ -38,28 +40,17 @@ const ListDiv = styled.div`
 
 
 export default function Incomes() {
-    const data = useLoaderData() as Array<ITransaction> | undefined;
-
-    if (!data)
-        return;
-
-    const totalIncomes: number = data?.reduce((acc: number, curr: ITransaction) => acc += curr.amount, 0);
-
     return (
         <>
             <Header>Incomes</Header>
 
             <StyledDiv>
-                <StatsDiv>
-                    <Stats text="Total Incomes: " calcValue={totalIncomes} />
-                </StatsDiv>
-
                 <FormDiv>
-                    <NewTransactionForm type={TYPES_TRANSACTION.INCOME} />
+                    <TransactionForm type={TYPES_TRANSACTION.INCOME} />
                 </FormDiv>
 
                 <ListDiv>
-                    <TransactionsList />
+                    <TransactionArr listType={QUERY_KEY.INCOMES} loader={loaderIncomes} />
                 </ListDiv>
 
             </StyledDiv>

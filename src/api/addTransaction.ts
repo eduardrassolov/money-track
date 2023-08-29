@@ -1,8 +1,10 @@
-import INewTransaction from "../interface/INewTransaction";
+import INewTransaction from "../interface/IInsertTransaction";
 import supabase from "../services/supabase";
 import { InsertTransactionDTO } from "./dto/createTransaction.dto";
 
 export default async function addTransaction(transaction: INewTransaction) {
+  console.log("income data ", transaction);
+
   try {
     const transactionDTO: InsertTransactionDTO = {
       amount: transaction.amount,
@@ -12,11 +14,7 @@ export default async function addTransaction(transaction: INewTransaction) {
       user_id: 1,
     };
 
-    const { data, error } = await supabase
-      .from("transactions")
-      .insert({ ...transactionDTO })
-      .select()
-      .order("completed_at", { ascending: false });
+    const { data, error } = await supabase.from("transactions").insert([transactionDTO]);
 
     if (error) {
       throw error;

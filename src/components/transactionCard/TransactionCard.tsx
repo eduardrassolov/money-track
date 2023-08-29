@@ -15,13 +15,12 @@ const Container = styled.div<{ $bg: string }>`
     props.$bg === 'expenses' ? 'rgba(36, 143, 233, 0.05)' : 'rgba(142, 230, 20, 0.05)'};
   border: 1px solid ${props =>
     props.$bg === 'expenses' ? 'rgb(36, 143, 233)' : 'rgb(142, 230, 20)'};
-  border-radius: 16px;
+  border-radius: 7px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(4.1px);
   -webkit-backdrop-filter: blur(4.1px);
 
   display: flex;
-  /* margin: 0 auto 10px auto; */
   margin: 0 0 0.8rem;
   padding: 1rem 1.5rem;
   justify-content: space-between;
@@ -40,7 +39,6 @@ const OperationSection = styled.div`
   justify-content: flex-end;
   align-items: center;
 `
-
 const StyledIcon = styled(FaRegTrashAlt)`
   font-size: 1.3rem;
   cursor: pointer;
@@ -52,7 +50,6 @@ const StyledIcon = styled(FaRegTrashAlt)`
 `
 
 const TransactionCard: FC<ITransactionProps> = ({ item, onDelete }) => {
-  console.log(item.type);
   return (
     <Container $bg={item.type.name}>
       <InfoSection>

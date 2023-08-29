@@ -1,5 +1,5 @@
 import addTransaction from "../../api/addTransaction";
-import INewTransaction from "../../interface/INewTransaction";
+import INewTransaction from "../../interface/IInsertTransaction";
 
 export default async function actionIncomes(request: Request) {
   const formData = await request.formData();

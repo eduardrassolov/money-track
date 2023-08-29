@@ -10,6 +10,7 @@ import formatNumberWithSpaces from "../../helpers/formatWithSpace.ts";
 import Diagram from "./Diagram.tsx";
 import TYPES_TRANSACTION from "../../config/typeTransactions.ts";
 import Header from "../../ui/header/Header.tsx";
+import { Pie, PieChart, ResponsiveContainer } from "recharts";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -20,7 +21,7 @@ const StyledContainer = styled.div`
 const RowContainer = styled.div`
   display: flex;
   justify-content: space-between; 
-   margin: 0 0 1rem;
+  margin: 0 0 1rem;
 
   @media (max-width: 670px) {
     margin: 0 0 0.5rem;
@@ -80,8 +81,8 @@ export default function Dashboard() {
   const balance: number = totalIncomes - totalExpenses;
   const coefficent: number = Math.round((totalExpenses / totalIncomes) * 100);
 
-
   const values = [`$ ${formatNumberWithSpaces(totalExpenses)}`, `$ ${formatNumberWithSpaces(totalIncomes)}`, `$ ${formatNumberWithSpaces(balance)}`, `${coefficent} %`];
+
 
   return (
     <StyledContainer>

@@ -1,11 +1,18 @@
 import { styled } from "styled-components";
 import Header from "../../ui/header/Header";
-import { useLoaderData } from "react-router";
 import { ITransaction } from "../../interface/ITransactions";
 import Stats from "../../components/stats/Stats";
-import NewTransactionForm from "../../components/newTransaction/NewTransactionForm";
 import TYPES_TRANSACTION from "../../config/typeTransactions";
 import TransactionsList from "../../components/transactionCard/TransactionsList";
+import { useQuery } from "@tanstack/react-query";
+import { loaderExpenses } from "./loader";
+import { QUERY_KEY } from "../../config/queryClientKeys";
+import TransactionForm from "../../components/newTransaction/FormTransaction";
+import Filter from "../../components/filter/Filter";
+import { FILTER_DATE_OPTIONS, FILTER_KEYS } from "../../components/filter/filterParameters";
+import { useParams, useSearchParams } from "react-router-dom";
+import * as filter from "../../services/filter";
+import TransactionArr from "../transactions/TransactionArr";
 
 const StyledDiv = styled.div`
     display: grid;
@@ -18,15 +25,10 @@ const StyledDiv = styled.div`
 
     @media (max-width: 900px){
         display: flex;
-        /* width: 90%; */
         flex-direction: column;
     }
 `
-const StatsDiv = styled.div`
-   grid-area: 1 / 1 / 2 / 3; 
-   border: 1px solid #ccc;
-   border-radius: 7px;
-`
+
 const FormDiv = styled.div`
   grid-area: 2 / 1 / 3 / 2; 
 `
@@ -36,28 +38,17 @@ const ListDiv = styled.div`
 `
 
 export default function Expenses() {
-  const data = useLoaderData() as Array<ITransaction> | undefined;
-
-  if (!data)
-    return;
-
-  const totalExpenses: number = data.reduce((acc: number, curr: ITransaction) => acc + curr.amount, 0);
-
   return (
     <>
       <Header>Expenses</Header>
 
       <StyledDiv>
-        <StatsDiv>
-          <Stats text="Total Expenses: " calcValue={totalExpenses} />
-        </StatsDiv>
-
         <FormDiv>
-          <NewTransactionForm type={TYPES_TRANSACTION.EXPENSE} />
+          <TransactionForm type={TYPES_TRANSACTION.EXPENSE} />
         </FormDiv>
 
         <ListDiv>
-          <TransactionsList />
+          <TransactionArr listType={QUERY_KEY.EXPENSES} loader={loaderExpenses} />
         </ListDiv>
       </StyledDiv>
     </>
