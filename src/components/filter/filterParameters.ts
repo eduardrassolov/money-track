@@ -1,22 +1,27 @@
-export const FILTER_DATE_OPTIONS = [
+export type Option = {
+  value: string;
+  text: string;
+};
+
+export const FILTER_DATE_OPTIONS: Array<Option> = [
   {
-    value: "ALL",
+    value: "all",
     text: "All",
   },
   {
-    value: "TODAY",
+    value: "today",
     text: "Today",
   },
   {
-    value: "WEEK",
+    value: "week",
     text: "Last Week",
   },
   {
-    value: "MONTH",
+    value: "month",
     text: "Last Month",
   },
   {
-    value: "YEAR",
+    value: "year",
     text: "Last Year",
   },
 ];

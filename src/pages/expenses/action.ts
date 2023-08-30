@@ -1,4 +1,4 @@
-import addTransaction from "../../api/addTransaction";
+import addTransaction from "../../api/createTransaction";
 import TYPES_TRANSACTION from "../../config/typeTransactions";
 import INewTransaction from "../../interface/IInsertTransaction";
 

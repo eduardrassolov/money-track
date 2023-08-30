@@ -27,7 +27,6 @@ const routes: RouteObject[] = [
     {
         path: ROUTES.ROOT,
         element: <AppLayout />,
-        loader: loadData,
         errorElement: <ErrorELement />,
         children: [
             {
@@ -45,7 +44,6 @@ const routes: RouteObject[] = [
             {
                 path: ROUTES.DASHBOARD,
                 element: <Dashboard />,
-                loader: loaderDashboard,
             }
         ]
     },

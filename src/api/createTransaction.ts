@@ -1,20 +1,18 @@
 import INewTransaction from "../interface/IInsertTransaction";
 import supabase from "../services/supabase";
-import { InsertTransactionDTO } from "./dto/createTransaction.dto";
+import { CreateTransactionDTO } from "./dto/createTransaction.dto";
 
-export default async function addTransaction(transaction: INewTransaction) {
-  console.log("income data ", transaction);
-
+export default async function createTransaction(transaction: INewTransaction) {
   try {
-    const transactionDTO: InsertTransactionDTO = {
+    const newTransactionDTO: CreateTransactionDTO = {
       amount: transaction.amount,
+      category_id: transaction.categoryId,
       completed_at: transaction.completedAt,
       description: transaction.description,
-      category_id: transaction.categoryId,
       user_id: 1,
     };
 
-    const { data, error } = await supabase.from("transactions").insert([transactionDTO]);
+    const { data, error } = await supabase.from("transactions").insert([newTransactionDTO]);
 
     if (error) {
       throw error;

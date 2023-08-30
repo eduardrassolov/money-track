@@ -1,33 +1,40 @@
 import { styled } from 'styled-components'
 import TYPES_TRANSACTION from '../../config/typeTransactions'
 import { FC, memo } from 'react'
-import Button from '../../ui/Button';
 import Category from '../category/Category';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
-import addTransaction from '../../api/addTransaction';
+import createTransaction from '../../api/createTransaction';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { QUERY_KEY } from '../../config/queryClientKeys';
 import IInsertTransaction from '../../interface/IInsertTransaction';
 import getCategory from '../../api/getCategory';
+import { PrimaryBtn, SecondaryBtn } from '../../styles/Button';
+import { devices } from '../../styles/breakPoints';
 
 const Form = styled.form`
-    border: 1px solid #ccc;
-    border-radius: 7px;
+    border: 1px solid #fff;
+    background: #fff;
+    border-radius: 15px;
     padding: 1rem 2rem;
+    width: 320px;
+
+    @media only screen and ${devices.md} {
+        width: auto;
+    }
 `
 
 const FormGroup = styled.div`
     display: flex;
     flex-direction: column;
     margin-bottom: 2rem;
-    
+
     label{
         margin-bottom: 0.5rem;
     }
     input{
         font-size: 1rem;
-        padding: 0.8rem 1rem;
+        padding: 0.5rem;
         border-radius: 7px;
         border: 1px solid transparent;
         background: #f4f4f4;
@@ -72,7 +79,7 @@ const TransactionForm: FC<INewTransactionProps> = memo(function ({ type }) {
     const { register, handleSubmit, reset, formState: { errors } } = useForm<Inputs>();
 
     const { mutate } = useMutation({
-        mutationFn: (newTransaction: IInsertTransaction) => addTransaction(newTransaction),
+        mutationFn: (newTransaction: IInsertTransaction) => createTransaction(newTransaction),
         onSuccess: () => {
             toast.success('Added successfully');
             queryClient.invalidateQueries({ queryKey: [type === TYPES_TRANSACTION.INCOME ? QUERY_KEY.INCOMES : QUERY_KEY.EXPENSES] });
@@ -119,7 +126,6 @@ const TransactionForm: FC<INewTransactionProps> = memo(function ({ type }) {
                 : ''
             }
 
-
             <FormGroup>
                 <label htmlFor="amount">Amount:</label>
                 {errors?.amount ? <ErrorP>{errors.amount?.message}</ErrorP> : ''}
@@ -136,8 +142,8 @@ const TransactionForm: FC<INewTransactionProps> = memo(function ({ type }) {
             </FormGroup>
 
             <FormFooter>
-                <Button variant='secondary' type='reset'>Clear</Button>
-                <Button type='submit'>Confirm</Button>
+                <SecondaryBtn type='reset'>Clear</SecondaryBtn>
+                <PrimaryBtn type='submit'>Confirm</PrimaryBtn>
             </FormFooter>
         </Form>
     )

@@ -32,11 +32,12 @@ const Description = styled.div`
 const StatContainer = styled.div<{ $borderColor?: string, $bgColor?: string }>`
     display: flex;
     align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 7px;
+    border: 1px solid #fff;
+    background: #fff;
+    border-radius: 15px;
     padding: 0.8rem 1rem; 
     transition: all 300ms ease-in-out;
-    width: fit-content;
+    min-width: fit-content;
     flex-wrap: no-wrap;
 
     h3, p{
@@ -46,7 +47,7 @@ const StatContainer = styled.div<{ $borderColor?: string, $bgColor?: string }>`
     h3{
         font-size: 0.8rem;
         font-weight: normal;
-        /* letter-spacing: 0.05rem; */
+
     }
     p{
         font-size: 1rem;

@@ -4,13 +4,12 @@ import { styled } from "styled-components";
 type Title = string | number;
 interface IFooterItemProps {
   title: Title;
-  icon: JSX.Element;
+  icon?: JSX.Element;
 }
 
 const Div = styled.div`
   display: flex;
   align-items: center;
-  margin: 0 0.5rem 0.2rem 0;
   font-size: 1.2rem;
   border: 1px solid #ccc;
   border-radius: 7px;

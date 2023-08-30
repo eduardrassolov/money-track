@@ -6,9 +6,10 @@ import TYPES_TRANSACTION from '../../config/typeTransactions';
 
 const ChartContainer = styled.div`
   width: 100%;
-  border: 1px solid #ccc;
+  border: 1px solid #fff;
+  background: #fff;
   padding: 2rem 0;
-  border-radius: 7px;
+  border-radius: 15px;
 `
 
 interface IDiagramProps {

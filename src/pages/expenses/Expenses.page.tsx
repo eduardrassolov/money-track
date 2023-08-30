@@ -1,56 +1,48 @@
-import { styled } from "styled-components";
-import Header from "../../ui/header/Header";
-import { ITransaction } from "../../interface/ITransactions";
-import Stats from "../../components/stats/Stats";
+
 import TYPES_TRANSACTION from "../../config/typeTransactions";
-import TransactionsList from "../../components/transactionCard/TransactionsList";
-import { useQuery } from "@tanstack/react-query";
 import { loaderExpenses } from "./loader";
 import { QUERY_KEY } from "../../config/queryClientKeys";
 import TransactionForm from "../../components/newTransaction/FormTransaction";
+import TransactionArr from "../transactions/TransactionArr";
+import { Container, FormDiv, ListDiv } from "../../styles/TransactionContainer";
 import Filter from "../../components/filter/Filter";
 import { FILTER_DATE_OPTIONS, FILTER_KEYS } from "../../components/filter/filterParameters";
-import { useParams, useSearchParams } from "react-router-dom";
-import * as filter from "../../services/filter";
-import TransactionArr from "../transactions/TransactionArr";
-
-const StyledDiv = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    grid-template-rows: auto;
-    grid-column-gap: 1.2rem;
-    grid-row-gap: 1rem;
-    margin: 1rem;
-    max-width: 800px;
-
-    @media (max-width: 900px){
-        display: flex;
-        flex-direction: column;
-    }
-`
-
-const FormDiv = styled.div`
-  grid-area: 2 / 1 / 3 / 2; 
-`
-const ListDiv = styled.div`
-  grid-area: 2 / 2 / 3 / 3;  
-  border-radius: 7px;
-`
+import Header from "../../ui/header/Header";
+import { Operations } from "../transactions/Transactions.page";
+import Sort from "../../components/sort/Sort";
+import formatNumberWithSpaces from "../../helpers/formatWithSpace";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Expenses() {
+  const { data: transactions } = useQuery({ queryKey: [QUERY_KEY.EXPENSES, null, { field: 'completed_at', direction: 'desc' }], queryFn: loaderExpenses });
+
+  const total = transactions?.reduce((acc, cur) => acc + cur.amount, 0) || 0;
+  console.log(transactions?.length);
   return (
     <>
-      <Header>Expenses</Header>
-
-      <StyledDiv>
+      <Container>
         <FormDiv>
           <TransactionForm type={TYPES_TRANSACTION.EXPENSE} />
         </FormDiv>
 
         <ListDiv>
-          <TransactionArr listType={QUERY_KEY.EXPENSES} loader={loaderExpenses} />
+          <Header text={`Total expenses: $${formatNumberWithSpaces(total)}`} />
+
+
+          {!transactions?.length ?
+            '' :
+            <>
+              <Operations>
+                <Filter options={FILTER_DATE_OPTIONS} filterKey={FILTER_KEYS.DATE} />
+                <Sort />
+              </Operations>
+
+              <TransactionArr listType={QUERY_KEY.EXPENSES} loader={loaderExpenses} />
+            </>}
+
         </ListDiv>
-      </StyledDiv>
+
+      </Container>
     </>
   )
 }

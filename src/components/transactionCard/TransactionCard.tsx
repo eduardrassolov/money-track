@@ -11,20 +11,28 @@ interface ITransactionProps {
 }
 
 const Container = styled.div<{ $bg: string }>`
-  background: ${props =>
-    props.$bg === 'expenses' ? 'rgba(36, 143, 233, 0.05)' : 'rgba(142, 230, 20, 0.05)'};
-  border: 1px solid ${props =>
-    props.$bg === 'expenses' ? 'rgb(36, 143, 233)' : 'rgb(142, 230, 20)'};
-  border-radius: 7px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(4.1px);
-  -webkit-backdrop-filter: blur(4.1px);
+  /* background: ${props =>
+    props.$bg === 'expenses' ? 'rgba(36, 143, 233, 0.05)' : 'rgba(142, 230, 20, 0.05)'}; */
+   
+  /* border: 1px solid ${props =>
+    props.$bg === 'expenses' ? 'rgb(36, 143, 233)' : 'rgb(142, 230, 20)'}; */
+  background: #fff;
+  border-radius: 15px;
+  border: 1px solid #fff;
 
   display: flex;
   margin: 0 0 0.8rem;
-  padding: 1rem 1.5rem;
+  padding: 1.5rem 1.8rem;
   justify-content: space-between;
 
+  transition: all 300ms;
+
+  &:hover{
+     background: ${(props) => props.$bg === 'expenses' ? 'rgba(36, 143, 233, 0.05)' : 'rgba(142, 230, 20, 0.05)'};
+     border: 1px solid ${(props) => props.$bg === 'expenses' ? 'rgb(36, 143, 233)' : 'rgb(142, 230, 20)'};
+     cursor: pointer;
+     transition: all 300ms;
+  }
   @media (max-width: 800px) {
     margin: 0 0 10px;
   }
@@ -50,6 +58,7 @@ const StyledIcon = styled(FaRegTrashAlt)`
 `
 
 const TransactionCard: FC<ITransactionProps> = ({ item, onDelete }) => {
+  console.log(item);
   return (
     <Container $bg={item.type.name}>
       <InfoSection>

@@ -10,7 +10,18 @@ import formatNumberWithSpaces from "../../helpers/formatWithSpace.ts";
 import Diagram from "./Diagram.tsx";
 import TYPES_TRANSACTION from "../../config/typeTransactions.ts";
 import Header from "../../ui/header/Header.tsx";
-import { Pie, PieChart, ResponsiveContainer } from "recharts";
+import { useQuery } from "@tanstack/react-query";
+import { QUERY_KEY } from "../../config/queryClientKeys.ts";
+import { loaderExpenses } from "../expenses/loader.ts";
+import { loaderIncomes } from "../income/loader.ts";
+import { loaderTransactions } from "../transactions/loader.ts";
+import calcStats from "../../helpers/calculateStats.ts";
+import Filter from "../../components/filter/Filter.tsx";
+import { FILTER_KEYS } from "../../components/filter/filterParameters.ts";
+import { useSearchParams } from "react-router-dom";
+import { SortBy } from "../transactions/TransactionArr.tsx";
+
+import { devices } from "../../styles/breakPoints.ts";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -29,8 +40,9 @@ const RowContainer = styled.div`
 `
 
 const RowContainerCards = styled(RowContainer)`
-  gap: 1rem;flex-wrap: wrap;
-  @media (max-width: 920px) {
+  gap: 1rem;
+  flex-wrap: wrap;
+  @media only screen and  ${devices.md} {
     justify-content: start;
     gap: 0.5rem;
   }
@@ -66,36 +78,37 @@ const statCardData: Array<StatsCardData> = [
 
 // TODO - refactor component Dashboard. Remove caclulation from component
 export default function Dashboard() {
-  const data = useLoaderData();
+  const [params] = useSearchParams();
 
-  if (!data) {
-    return <div>loading...</div>;
-  }
+  const filterValue = params.get(FILTER_KEYS.DATE);
+  const filter = !filterValue ? null : filterValue;
+  const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
 
-  const transactions = data as Array<ITransaction>;
-  const expenses: Array<ITransaction> = transactions.filter((item) => item.type.id === TYPES_TRANSACTION.EXPENSE);
-  const incomes: Array<ITransaction> = transactions.filter((item) => item.type.id === TYPES_TRANSACTION.INCOME);
+  const { data: transactions } = useQuery({ queryKey: [QUERY_KEY.TRANSACTIONS, filter, sortBy], queryFn: () => loaderTransactions({ filter, sortBy }) });
+  const { data: expenses } = useQuery({ queryKey: [QUERY_KEY.EXPENSES, filter, sortBy], queryFn: () => loaderExpenses({ filter, sortBy }) });
+  const { data: incomes } = useQuery({ queryKey: [QUERY_KEY.INCOMES, filter, sortBy], queryFn: () => loaderIncomes({ filter, sortBy }) });
+  // TODO - change to default params
 
-  const totalExpenses: number = expenses.reduce((acc: number, item: ITransaction) => acc + item.amount, 0);
-  const totalIncomes: number = incomes.reduce((acc: number, item: ITransaction) => acc + item.amount, 0);
-  const balance: number = totalIncomes - totalExpenses;
-  const coefficent: number = Math.round((totalExpenses / totalIncomes) * 100);
+  if (!transactions || !incomes || !expenses)
+    return null;
 
-  const values = [`$ ${formatNumberWithSpaces(totalExpenses)}`, `$ ${formatNumberWithSpaces(totalIncomes)}`, `$ ${formatNumberWithSpaces(balance)}`, `${coefficent} %`];
-
+  const stats = calcStats({ expenses, incomes });
 
   return (
-    <StyledContainer>
-      <Header>Dashboard</Header>
+    <>
 
-      <RowContainerCards>
-        {statCardData.map((item, index) => <StatCard key={item.name} item={item} value={values[index]} />)}
-      </RowContainerCards>
+      <StyledContainer>
+        <Header text="Dashboard" />
 
-      <RowContainer>
-        <Diagram data={[...transactions]} />
-      </RowContainer>
+        <RowContainerCards>
+          {statCardData.map((item, index) => <StatCard key={item.name} item={item} value={stats[index]} />)}
+        </RowContainerCards>
 
-    </StyledContainer >
+        <RowContainer>
+          <Diagram data={[...transactions]} />
+        </RowContainer>
+
+      </StyledContainer >
+    </>
   )
 }
