@@ -8,6 +8,7 @@ export const StyledBurger = styled.div<{ $isOpen: boolean }>`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: fixed;
     z-index: 20;
     right: 1rem;
     top: 1.6rem;

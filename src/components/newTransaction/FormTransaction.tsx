@@ -17,10 +17,10 @@ const Form = styled.form`
     background: #fff;
     border-radius: 15px;
     padding: 1rem 2rem;
-    width: 320px;
+    width: auto;
 
     @media only screen and ${devices.md} {
-        width: auto;
+    min-width: 340px;
     }
 `
 

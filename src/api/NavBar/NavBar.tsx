@@ -1,45 +1,37 @@
 import BurgerMenu from "../../components/burger/BurgerMenu";
 import { styled } from "styled-components";
-import useBurgerMenu from "./useBurger";
-import { StyledAside } from "../../components/aside/Aside.style";
-import { asideItemsName } from "../../config/configAsideItems";
-import AsideItem from "../../components/aside/AsideItem";
-
-import { AreaChartOutlined, CarryOutOutlined, DollarOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { HiOutlineHome } from "react-icons/hi";
 import Overlay from "../../components/overlay/Overlay";
+import { devices } from "../../styles/breakPoints";
+import { FC } from "react";
 
 const Nav = styled.nav`
     background: #fff;
     display: flex;
     justify-content: space-between;
     width: 100%;
+    height: 1.5rem;
     position: fixed;
     padding: 1rem;
-   
+    transition: all 300ms ease-in-out;
+    transform: translateY(0);
+
+    @media only screen and ${devices.md}{
+        transform: translateY(-5rem);
+    }
 `
 
-const icons: Array<JSX.Element> =
-    [<AreaChartOutlined />,
-    <ShoppingCartOutlined />,
-    <DollarOutlined />,
-    <CarryOutOutlined />,
-    <HiOutlineHome />]
+export interface IBar {
+    isBurgerOpen: boolean;
+    onClose: () => void;
+}
 
-export default function NavBar() {
-    const { isBurgerOpen, handleBurger } = useBurgerMenu();
 
-    console.log(isBurgerOpen)
+const NavBar: FC<IBar> = ({ isBurgerOpen, onClose }) => {
     return (
         <Nav>
-            <BurgerMenu isOpen={isBurgerOpen} handleBurger={handleBurger} />
-            <Overlay isShow={isBurgerOpen} onClose={handleBurger} />
-
-            <StyledAside $isBurgerOpen={isBurgerOpen} >
-                <ul>
-                    {asideItemsName.map((item, index) => <AsideItem key={item} name={item} icon={icons[index]} handleBurger={handleBurger} />)}
-                </ul>
-            </StyledAside>
+            {/* <BurgerMenu isOpen={isBurgerOpen} onClose={onClose} /> */}
+            <Overlay isShow={isBurgerOpen} onClose={onClose} />
         </Nav >
     )
 }
+export default NavBar;

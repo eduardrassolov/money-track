@@ -18,6 +18,6 @@ type OverlayProps = {
 
 export default function Overlay({ isShow, onClose }: OverlayProps) {
     return (
-        <StyledOverlay $isShow={isShow} onClick={onClose}>Overlay</StyledOverlay>
+        <StyledOverlay $isShow={isShow} onClick={onClose}></StyledOverlay>
     )
 }

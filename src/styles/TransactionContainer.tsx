@@ -8,11 +8,12 @@ const Container = styled.div`
     grid-column-gap: 1.2rem;
     margin: 0 1rem 1rem;
     max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 
     @media only screen and ${devices.md} {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
+        flex-direction: row;
     }
 `
 
