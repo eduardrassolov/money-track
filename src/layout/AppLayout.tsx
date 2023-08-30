@@ -17,7 +17,7 @@ const StyledLayout = styled.div`
 const Section = styled.section`
     background-color: #f5f5f5;
     width: 100%;
-    height: 90vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;

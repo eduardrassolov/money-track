@@ -7,7 +7,6 @@ export const StyledAside = styled.div<{ $isBurgerOpen: boolean }>`
   padding: 3rem 0;
   position: fixed;
   height: 100vh;
-
   transform: ${(props) => (props.$isBurgerOpen ? "translateX(0)" : "translateX(-10rem)")};
   transition: all 300ms ease-in-out;
 

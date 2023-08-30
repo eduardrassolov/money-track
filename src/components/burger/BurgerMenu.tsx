@@ -13,7 +13,7 @@ export const StyledBurgerMenu = styled.div<{ $isOpen: boolean }>`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    position: fixed;
     top: 1rem;
     left: 1rem;
 

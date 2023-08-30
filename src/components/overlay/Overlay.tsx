@@ -1,4 +1,5 @@
 import { styled } from "styled-components"
+import { devices } from "../../styles/breakPoints";
 
 const StyledOverlay = styled.div<{ $isShow: boolean }>`
     position: fixed;
@@ -9,6 +10,10 @@ const StyledOverlay = styled.div<{ $isShow: boolean }>`
     height: 100vh;
     background-color: rgba(0,0,0,0.5);
     z-index: 10;
+
+    @media only screen and ${devices.md}{
+        display: none;
+    }
 `
 
 type OverlayProps = {
