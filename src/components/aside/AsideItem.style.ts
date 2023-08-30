@@ -28,8 +28,4 @@ export const Span = styled.span`
   margin-left: 0.5rem;
   font-size: 0.8rem;
   color: #383636;
-
-  @media (max-width: 800px) {
-    display: none;
-  }
 `;
