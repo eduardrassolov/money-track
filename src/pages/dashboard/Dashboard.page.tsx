@@ -10,16 +10,18 @@ import formatNumberWithSpaces from "../../helpers/formatWithSpace.ts";
 import Diagram from "./Diagram.tsx";
 import TYPES_TRANSACTION from "../../config/typeTransactions.ts";
 import Header from "../../ui/header/Header.tsx";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEY } from "../../config/queryClientKeys.ts";
 import { loaderExpenses } from "../expenses/loader.ts";
 import { loaderIncomes } from "../income/loader.ts";
 import { loaderTransactions } from "../transactions/loader.ts";
 import calcStats from "../../helpers/calculateStats.ts";
 import Filter from "../../components/filter/Filter.tsx";
-import { FILTER_DATE_OPTIONS, FILTER_KEYS } from "../../components/filter/filterParameters.ts";
+import { FILTER_KEYS } from "../../components/filter/filterParameters.ts";
 import { useSearchParams } from "react-router-dom";
 import { SortBy } from "../transactions/TransactionArr.tsx";
+
+import { devices } from "../../styles/breakPoints.ts";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -38,8 +40,9 @@ const RowContainer = styled.div`
 `
 
 const RowContainerCards = styled(RowContainer)`
-  gap: 1rem;flex-wrap: wrap;
-  @media (max-width: 920px) {
+  gap: 1rem;
+  flex-wrap: wrap;
+  @media only screen and  ${devices.md} {
     justify-content: start;
     gap: 0.5rem;
   }
@@ -76,6 +79,7 @@ const statCardData: Array<StatsCardData> = [
 // TODO - refactor component Dashboard. Remove caclulation from component
 export default function Dashboard() {
   const [params] = useSearchParams();
+
   const filterValue = params.get(FILTER_KEYS.DATE);
   const filter = !filterValue ? null : filterValue;
   const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
@@ -95,7 +99,6 @@ export default function Dashboard() {
 
       <StyledContainer>
         <Header text="Dashboard" />
-        {/* <Filter options={FILTER_DATE_OPTIONS} filterKey={FILTER_KEYS.DATE} /> */}
 
         <RowContainerCards>
           {statCardData.map((item, index) => <StatCard key={item.name} item={item} value={stats[index]} />)}

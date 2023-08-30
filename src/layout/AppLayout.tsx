@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const StyledLayout = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100vw;
     background-color: #fff;
 `
