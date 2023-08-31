@@ -6,7 +6,6 @@ import { StyledAside } from "./Aside.style";
 import { FC } from "react";
 import { IBar } from "../../api/NavBar/NavBar";
 
-
 const icons: Array<JSX.Element> =
     [<AreaChartOutlined />,
     <ShoppingCartOutlined />,

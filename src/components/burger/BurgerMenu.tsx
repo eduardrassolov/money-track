@@ -16,6 +16,7 @@ export const StyledBurgerMenu = styled.div<{ $isOpen: boolean }>`
     position: fixed;
     top: 1rem;
     left: 1rem;
+    z-index: 30;
 
     transform: translateY(0);
 

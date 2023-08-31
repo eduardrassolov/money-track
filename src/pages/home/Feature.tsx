@@ -11,22 +11,22 @@ const FeaturesItem = styled.div<{ $side: string }>`
     text-align: center;
     max-width: 700px;
 
-
     @media only screen and ${devices.md}{
         flex-direction: ${props => props.$side === "left" ? 'row' : 'row-reverse'};
         justify-content: center;
-        gap: 4rem;
+        gap: 6rem;
     }
 `
 
 const TextContainer = styled.div`
     max-width: 500px;
-    margin: 0 auto 2rem;
+    margin: 0 auto 1rem;
 
     h2{
         letter-spacing: -0.5px;
         font-size: 2rem;
         line-height: 2rem;
+        margin: 1rem auto 0.8rem;
     }
     p{
         line-height: 1.5rem;

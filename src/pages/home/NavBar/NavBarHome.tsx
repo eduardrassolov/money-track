@@ -22,6 +22,14 @@ const NavLogo = styled.div`
     font-size: 1.5rem;
     font-weight: bold;
     margin: auto 1rem;
+
+    p{
+        &:hover{
+            color: #7286D3;
+            transition: all 300ms ease-in-out;
+            cursor: pointer;
+        }
+    }
 `
 interface INavBar {
     isOpen: boolean,
@@ -30,10 +38,12 @@ interface INavBar {
 
 export default function NavBarHome({ isOpen, onClose }: INavBar) {
 
+    const handleClick = () => document.getElementById("header")?.scrollIntoView({ behavior: "smooth" });
+
     return (
         <Nav>
             <NavLogo>
-                <p>E-Budget</p>
+                <p onClick={handleClick}>E-Budget</p>
             </NavLogo>
 
             <Overlay isShow={isOpen} onClose={onClose} />

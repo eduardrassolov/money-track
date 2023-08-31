@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { styled } from "styled-components";
 import { StatsCardData } from "../../types/statsCardData";
+import { devices } from "../../styles/breakPoints";
 
 interface IStatCardProps {
     item: StatsCardData;
@@ -11,51 +12,47 @@ const IconContainer = styled.div<{ $bgColor?: string }>`
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.8rem;
+    font-size: 2rem;
     background-color: ${(props) => props.$bgColor};
-    border-radius: 50%;
     color: #102C57;
     border: 1px solid #ccc;
     width: 50px;
     height: 50px;
+    border-radius: 50%;
     transition: all 300ms ease-in-out; 
 `
 const Description = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    font-size: 0.8rem;
-    margin: auto 1rem; 
     white-space: nowrap;
+    gap: 0.5rem;
+
+    h3{
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+    p{ 
+        margin: 0;
+        font-size: 0.8rem;
+        color: gray;
+    }
 `
 
 const StatContainer = styled.div<{ $borderColor?: string, $bgColor?: string }>`
     display: flex;
+    justify-content: start;
     align-items: center;
     border: 1px solid #fff;
     background: #fff;
     border-radius: 15px;
-    padding: 0.8rem 1rem; 
+    padding: 1rem 1.5rem ;
+    width: 100%;
+    gap: 1rem;
     transition: all 300ms ease-in-out;
-    min-width: fit-content;
-    flex-wrap: no-wrap;
-
-    h3, p{
-        margin: 0;
-        padding: 0;
-    }
-    h3{
-        font-size: 0.8rem;
-        font-weight: normal;
-
-    }
-    p{
-        font-size: 1rem;
-        font-weight: 400;
-        color: #727171;
-    }
-
-    &:hover{
+    cursor: pointer;
+    
+     &:hover{
         transform: scale(1.01) translateY(-5px);
         border: 1px solid ${(props) => props.$borderColor};
         box-shadow: 0px 6px 16px 1px rgba(0,0,0,0.2);  
@@ -66,16 +63,15 @@ const StatContainer = styled.div<{ $borderColor?: string, $bgColor?: string }>`
             transform: translateX(1px);
         }
     }
-
-    @media (max-width: 500px) {
-        width: 100%;
-        &:hover{
-        transform: scale(1.01);
+     @media only screen and ${devices.sm}{
+        width: fit-content;
+    } 
+    @media only screen and ${devices.md} {
     }
-    }
+   
+   
+    
 `
-
-
 
 const StatCard: FC<IStatCardProps> = ({ item: { iconBg, borderColor, name, icon }, value }) => {
 

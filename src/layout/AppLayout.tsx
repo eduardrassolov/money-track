@@ -7,6 +7,7 @@ import Aside from '../components/aside/Aside';
 import useBurgerMenu from '../api/NavBar/useBurger';
 import { devices } from '../styles/breakPoints.ts';
 import BurgerMenu from '../components/burger/BurgerMenu.tsx';
+import Overlay from '../components/overlay/Overlay.tsx';
 
 const StyledLayout = styled.div`
     display: flex;
@@ -33,8 +34,10 @@ export default function AppLayout() {
     return (
         <StyledLayout>
             <NavBar isBurgerOpen={isBurgerOpen} onClose={handleBurger} />
+
             <Aside isBurgerOpen={isBurgerOpen} onClose={handleBurger} />
             <BurgerMenu isOpen={isBurgerOpen} onClose={handleBurger} />
+            <Overlay isShow={isBurgerOpen} onClose={handleBurger} />
 
             <Section>
                 <Outlet />

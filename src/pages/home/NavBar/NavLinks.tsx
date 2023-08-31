@@ -22,6 +22,11 @@ const Ul = styled.ul<{ $isOpen: NavLinksProps }>`
         li{
             margin: 1rem auto 2rem 0;
             text-align: start;
+            cursor: pointer;
+            &:hover{
+                color: #7286D3;
+            }
+        
         }
 
         @media only screen and ${devices.md} {
@@ -48,10 +53,10 @@ const StyledNavLink = styled(NavLink)`
 
 
     &:hover{
-        color: #8c8a8a;
-        transition: all 200ms ;
-
+        color: #7286D3;
+        transition: all 200ms;
     }
+    
 `
 
 type NavLinksProps = {
@@ -62,18 +67,17 @@ type NavLinksProps = {
 
 export default function NavLinks({ isOpen = false, onClose }: NavLinksProps) {
     const handleClick = (id: string) => {
-        onClose();
-        document.getElementById(id).scrollIntoView({ behavior: "smooth" });
-
+        onClose?.();
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     }
     return (
         <>
             <Ul $isOpen={isOpen}>
                 <li>
-                    <span onClick={() => handleClick("header")}>Home</span>
+                    <a onClick={() => handleClick("header")}>Home</a>
                 </li >
                 <li>
-                    <span onClick={() => handleClick("feature")}>Features</span>
+                    <a onClick={() => handleClick("feature")}>Features</a>
                 </li>
                 <li>
                     <StyledNavLink to={ROUTES.ROOT}>Start</StyledNavLink>

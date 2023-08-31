@@ -30,7 +30,6 @@ const NavBar: FC<IBar> = ({ isBurgerOpen, onClose }) => {
     return (
         <Nav>
             {/* <BurgerMenu isOpen={isBurgerOpen} onClose={onClose} /> */}
-            <Overlay isShow={isBurgerOpen} onClose={onClose} />
         </Nav >
     )
 }

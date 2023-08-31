@@ -5,10 +5,8 @@ import { HiOutlineShoppingBag, HiOutlineCash, HiOutlineCalculator } from "react-
 import { AiOutlineBank } from "react-icons/ai";
 
 import { StatsCardData } from "../../types/statsCardData";
-import { ITransaction } from "../../interface/ITransactions.ts";
-import formatNumberWithSpaces from "../../helpers/formatWithSpace.ts";
 import Diagram from "./Diagram.tsx";
-import TYPES_TRANSACTION from "../../config/typeTransactions.ts";
+
 import Header from "../../ui/header/Header.tsx";
 import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEY } from "../../config/queryClientKeys.ts";
@@ -16,7 +14,6 @@ import { loaderExpenses } from "../expenses/loader.ts";
 import { loaderIncomes } from "../income/loader.ts";
 import { loaderTransactions } from "../transactions/loader.ts";
 import calcStats from "../../helpers/calculateStats.ts";
-import Filter from "../../components/filter/Filter.tsx";
 import { FILTER_KEYS } from "../../components/filter/filterParameters.ts";
 import { useSearchParams } from "react-router-dom";
 import { SortBy } from "../transactions/TransactionArr.tsx";
@@ -26,7 +23,8 @@ import { devices } from "../../styles/breakPoints.ts";
 const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: clamp(310px, 800px, 95%);
+  width: clamp(310px, 1000px, 95%);
+  
 `
 
 const RowContainer = styled.div`
@@ -42,9 +40,14 @@ const RowContainer = styled.div`
 const RowContainerCards = styled(RowContainer)`
   gap: 1rem;
   flex-wrap: wrap;
-  @media only screen and  ${devices.md} {
+
+  @media only screen and ${devices.sm} {
     justify-content: start;
-    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  @media only screen and ${devices.md}{
+    justify-content: space-between;
   }
 `
 

@@ -31,7 +31,7 @@ const Section = styled.section`
         span{
                 font-family: 'Monsterrat', sans-serif;
                 font-weight: 900;
-                color: #7286D3;
+                color: #FFD800;
                 letter-spacing: 0.2rem;
                 white-space: nowrap;
             }
@@ -74,10 +74,14 @@ const Section = styled.section`
         }
     }
 `
+const Highlight = styled.p`
+    color: #FFC436;
+`
 
 interface IHeader {
     id: string
 }
+
 
 export default function HeaderSection({ id }: IHeader) {
     return (
@@ -85,7 +89,7 @@ export default function HeaderSection({ id }: IHeader) {
             <div>
                 <p>Welcome to <span><strong>E-Budget</strong></span>,</p>
                 <p>Your Personal</p>
-                <p><strong>Finance Manager</strong></p>
+                <Highlight><strong>Finance Manager</strong></Highlight>
             </div>
             <div>
                 <img src='public/bg.avif' />
