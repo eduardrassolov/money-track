@@ -3,6 +3,9 @@ import { asideItemsName } from "../../config/configAsideItems";
 import { AreaChartOutlined, DollarOutlined, ShoppingCartOutlined, CarryOutOutlined } from "@ant-design/icons";
 import { HiOutlineHome } from "react-icons/hi2";
 import { StyledAside } from "./Aside.style";
+import { FC } from "react";
+import { IBar } from "../../api/NavBar/NavBar";
+
 
 const icons: Array<JSX.Element> =
     [<AreaChartOutlined />,
@@ -11,12 +14,15 @@ const icons: Array<JSX.Element> =
     <CarryOutOutlined />,
     <HiOutlineHome />]
 
-export default function Aside() {
+const Aside: FC<IBar> = ({ isBurgerOpen, onClose }) => {
     return (
-        <StyledAside>
-            <ul>
-                {asideItemsName.map((item, index) => <AsideItem key={item} name={item} icon={icons[index]} />)}
-            </ul>
-        </StyledAside>
+        <>
+            <StyledAside $isBurgerOpen={isBurgerOpen} >
+                <ul>
+                    {asideItemsName.map((item, index) => <AsideItem key={item} name={item} icon={icons[index]} onClose={onClose} />)}
+                </ul>
+            </StyledAside>
+        </>
     )
 }
+export default Aside;

@@ -4,47 +4,41 @@ import { ROUTES } from "../../../router"
 import { devices } from "../../../styles/breakPoints";
 
 const Ul = styled.ul<{ $isOpen: NavLinksProps }>`
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    list-style: none;
-    margin: auto 2rem;
-
-    li{
-        margin: 0 0 0 2rem;     
-        letter-spacing: 0.1rem;
-        cursor: pointer;
-        padding: 1rem 0.5rem;
-        
-        &:hover{
-            border-bottom: 1px solid #7286D3;
-            transition: all 100ms;
-            color: #7286D3;
-        }
-    }
-
-    @media only screen and ${devices.md} {
-        display: ${(props) => props.$isOpen ? 'flex' : 'none'};
+        /* display: ${(props) => props.$isOpen ? 'flex' : 'none'}; */
         position: fixed;
-        height: 100vh;
-        flex-flow: column;
-        font-size: 1.1rem;
         top: 0;
         right: 0;
         margin: 0;
-        padding: 3rem 0 0 0;
+        z-index: 25;
+        height: 100vh;
+        flex-flow: column;
+        font-size: 1.1rem;
+        padding: 4rem 2rem 0 ;
         background: #F9F5F6;
-        align-items: start;
-        width: 175px;
-        -webkit-box-shadow: -5px 0px 19px -1px rgba(0,0,0,0.35);
-        -moz-box-shadow: -5px 0px 19px -1px rgba(0,0,0,0.35);
-        box-shadow: -5px 0px 19px -1px rgba(0,0,0,0.35);
-
+        /* transform: ${props => props.$isOpen ? 'translateX(0)' : 'translateX(15rem)'}; */
+        display: ${props => props.$isOpen ? 'flex' : 'none'}; ;
+        list-style: none;
 
         li{
-            margin: 1rem auto 1rem 1rem;
+            margin: 1rem auto 2rem 0;
+            text-align: start;
         }
-    }
+
+        @media only screen and ${devices.md} {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            transform: translateX(0);
+            height: auto;
+            margin: 0;
+            padding: 0;
+            position: static;
+
+            li{
+                margin: 0 1rem 0;
+            }
+        }
 `
 
 const StyledNavLink = styled(NavLink)`
@@ -62,7 +56,7 @@ const StyledNavLink = styled(NavLink)`
 
 type NavLinksProps = {
     isOpen?: boolean;
-    onClose: () => void;
+    onClose?: () => void;
 }
 
 

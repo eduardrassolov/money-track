@@ -1,22 +1,28 @@
-import { FC, useState } from "react"
-import { styled } from "styled-components"
-import { devices } from "../../../styles/breakPoints";
+import { FC } from 'react'
+import { StyledBurger } from '../../pages/home/NavBar/Burger'
+import { styled } from 'styled-components';
+import { devices } from '../../styles/breakPoints';
 
+interface IBurgerMenu {
+    isOpen: boolean,
+    onClose: () => void
+}
 
-export const StyledBurger = styled.div<{ $isOpen: boolean }>`
+export const StyledBurgerMenu = styled.div<{ $isOpen: boolean }>`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: fixed;
-    z-index: 20;
-    right: 1rem;
-    top: 1.6rem;
+    top: 1rem;
+    left: 1rem;
+
+    transform: translateY(0);
 
     div {
         width: 2rem;
         height: 0.2rem;
-        background: ${(props) => props.$isOpen ? '#c0c0c0' : '#000'};
+        background: ${(props) => props.$isOpen ? '#605d5d' : '#000'};
         border-radius: 10px;
     }
 
@@ -34,7 +40,7 @@ export const StyledBurger = styled.div<{ $isOpen: boolean }>`
 
     div:nth-child(3) {
         opacity: ${(props) => props.$isOpen ? '0' : '1'};
-        transform: ${props => props.$isOpen ? 'translateX(3rem)' : ''};
+        transform: ${props => props.$isOpen ? 'translateX(-3rem)' : ''};
         transition: all 300ms ease-in-out;
     }
 
@@ -45,28 +51,17 @@ export const StyledBurger = styled.div<{ $isOpen: boolean }>`
     }
     
     @media only screen and ${devices.md} {
-        display: none;
+         transform: translateY(-5rem);
     }
-    
 `
 
-interface IBurger {
-    isOpen: boolean,
-    onCLose: () => void
-}
-
-const Burger: FC<IBurger> = ({ isOpen, onCLose }) => {
-
-
+const BurgerMenu: FC<IBurgerMenu> = ({ isOpen, onClose }) => {
     return (
-        <>
-            <StyledBurger $isOpen={isOpen} onClick={onCLose} >
-                <div></div>
-                <div></div>
-                <div></div>
-            </StyledBurger>
-
-        </>
+        <StyledBurgerMenu $isOpen={isOpen} onClick={onClose}>
+            <div></div>
+            <div></div>
+            <div></div>
+        </StyledBurgerMenu>
     )
 }
-export default Burger;
+export default BurgerMenu

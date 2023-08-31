@@ -1,7 +1,8 @@
 
 import { styled } from "styled-components"
-import Burger from "./Burger"
 import NavLinks from "./NavLinks"
+import Overlay from "../../../components/overlay/Overlay"
+
 
 const Nav = styled.nav`
     background: #F9F5F6;
@@ -9,6 +10,7 @@ const Nav = styled.nav`
     font-size: 1rem;
     display: flex;
     text-align: center;
+    align-items: center;
     justify-content: space-between;
     position: fixed;
     width: 100%;
@@ -19,19 +21,24 @@ const NavLogo = styled.div`
     align-items: center;
     font-size: 1.5rem;
     font-weight: bold;
-    margin: 0 2rem;
+    margin: auto 1rem;
 `
+interface INavBar {
+    isOpen: boolean,
+    onClose: () => void
+}
 
-
-
-export default function NavBarHome() {
+export default function NavBarHome({ isOpen, onClose }: INavBar) {
 
     return (
         <Nav>
             <NavLogo>
                 <p>E-Budget</p>
             </NavLogo>
-            <Burger />
+
+            <Overlay isShow={isOpen} onClose={onClose} />
+
+            <NavLinks isOpen={isOpen} onClose={onClose} />
         </Nav >
     )
 }
