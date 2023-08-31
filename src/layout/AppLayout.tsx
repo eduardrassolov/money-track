@@ -10,7 +10,6 @@ import BurgerMenu from '../components/burger/BurgerMenu.tsx';
 
 const StyledLayout = styled.div`
     display: flex;
-
     background-color: #fff;
 `
 

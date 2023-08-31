@@ -1,7 +1,7 @@
-import { useState } from "react"
+import { FC, useState } from "react"
 import { styled } from "styled-components"
-import NavLinks from "./NavLinks";
 import { devices } from "../../../styles/breakPoints";
+
 
 export const StyledBurger = styled.div<{ $isOpen: boolean }>`
     display: flex;
@@ -34,7 +34,7 @@ export const StyledBurger = styled.div<{ $isOpen: boolean }>`
 
     div:nth-child(3) {
         opacity: ${(props) => props.$isOpen ? '0' : '1'};
-        transform: ${props => props.$isOpen ? 'translateX(-3rem)' : ''};
+        transform: ${props => props.$isOpen ? 'translateX(3rem)' : ''};
         transition: all 300ms ease-in-out;
     }
 
@@ -50,20 +50,23 @@ export const StyledBurger = styled.div<{ $isOpen: boolean }>`
     
 `
 
-export default function Burger() {
-    const [isOpen, setOpen] = useState(false);
-    const handleBurger = () => setOpen((prev) => !prev);
+interface IBurger {
+    isOpen: boolean,
+    onCLose: () => void
+}
+
+const Burger: FC<IBurger> = ({ isOpen, onCLose }) => {
+
 
     return (
         <>
-            <StyledBurger $isOpen={isOpen} onClick={handleBurger} >
+            <StyledBurger $isOpen={isOpen} onClick={onCLose} >
                 <div></div>
                 <div></div>
                 <div></div>
             </StyledBurger>
 
-            <NavLinks isOpen={isOpen} onClose={setOpen} />
-
         </>
     )
 }
+export default Burger;
