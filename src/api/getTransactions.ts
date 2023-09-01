@@ -1,5 +1,4 @@
 import { ITransaction } from "../interface/ITransactions";
-import { ILoaderTransaction } from "../pages/transactions/loader";
 import supabase from "../services/supabase";
 import { GetAllTransactionsDTO } from "./dto/getTransactions.dto";
 

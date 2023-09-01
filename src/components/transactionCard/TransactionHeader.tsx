@@ -1,10 +1,8 @@
 import { FC } from "react";
 import { styled } from "styled-components";
-
-interface IProps {
+interface ITransactionHeader {
   name: string;
 }
-
 
 const H4 = styled.h4`
   font-size: 1.2rem;
@@ -14,11 +12,9 @@ const H4 = styled.h4`
 
 `;
 
-const TransactionHeader: FC<IProps> = ({ name }) => {
+const TransactionHeader: FC<ITransactionHeader> = ({ name }) => {
   return (
-
     <H4>{name}</H4>
-
   )
 }
 export default TransactionHeader;

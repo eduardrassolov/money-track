@@ -4,14 +4,14 @@ import supabase from "../services/supabase";
 import { GetAllTransactionsDTO } from "./dto/getTransactions.dto";
 import { SELECT } from "./getTransactions";
 
-export default async function getExpenses(filterByDate, sortBy): Promise<Array<ITransaction>> {
+export default async function getExpenses(filter, sortBy): Promise<Array<ITransaction>> {
   let query = supabase
     .from("transactions")
     .select(SELECT.ALL_TRANSACTIONS)
     .eq("category.type.id", TYPES_TRANSACTION.EXPENSE);
 
-  if (filterByDate) {
-    query = query.gt("completed_at", filterByDate);
+  if (filter) {
+    query = query.gt("completed_at", filter);
   }
 
   query = query.order(sortBy.field, { ascending: sortBy.direction === "asc" ? true : false });

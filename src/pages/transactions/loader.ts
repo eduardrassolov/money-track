@@ -8,7 +8,7 @@ export interface ILoaderTransaction {
   filter: Filter;
   sortBy: SortBy;
 }
-const defaultSort: SortBy = { field: "completed_at", direction: "desc" };
+export const defaultSort: SortBy = { field: "completed_at", direction: "desc" };
 
 export async function loaderTransactions({ filter = null, sortBy = { ...defaultSort } }: ILoaderTransaction) {
   const filterByDate = !filter ? null : getRangeDates(filter);

@@ -1,8 +1,5 @@
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
-import useResize from "./useResize";
-import { ITransaction } from "../../interface/ITransactions";
-import Header from "../../ui/header/Header";
-import { styled } from "styled-components";
+import useResize from "../useResize";
 
 const pieChartColors = [
     "#FF3D68",
@@ -20,9 +17,6 @@ const pieChartColors = [
     "#FFC33F",
     "#FF684B",
 ];
-const ChartCard = styled.div`
-    display: flex;
-`
 
 const createData = (arr) => {
     return arr.map((category) => {

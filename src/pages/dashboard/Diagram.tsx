@@ -3,6 +3,7 @@ import { styled } from 'styled-components'
 import { Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { ITransaction } from '../../interface/ITransactions';
 import TYPES_TRANSACTION from '../../config/typeTransactions';
+import { formatDate } from '../../helpers/formatDate';
 
 const ChartContainer = styled.div`
   width: 100%;
@@ -12,14 +13,11 @@ const ChartContainer = styled.div`
   border-radius: 15px;
   overflow: scroll;
 `
-
 interface IDiagramProps {
     data: ITransaction[];
 }
 
-function formatDate(date: Date) {
-    return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'numeric' });
-}
+
 
 const Diagram: FC<IDiagramProps> = ({ data }) => {
     const diagramData = data.map((transaction) => {

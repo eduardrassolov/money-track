@@ -1,33 +1,12 @@
 import { Outlet } from 'react-router-dom'
-import { styled } from 'styled-components'
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import NavBar from '../api/NavBar/NavBar';
-import Aside from '../components/aside/Aside';
-import useBurgerMenu from '../api/NavBar/useBurger';
-import { devices } from '../styles/breakPoints.ts';
+import NavBar from '../api/NavBar/NavBar.tsx';
 import BurgerMenu from '../components/burger/BurgerMenu.tsx';
+import Aside from '../components/aside/Aside.tsx';
 import Overlay from '../components/overlay/Overlay.tsx';
-
-const StyledLayout = styled.div`
-    display: flex;
-    background-color: #fff;
-`
-
-const Section = styled.section`
-    background-color: #f5f5f5;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: scroll;
-    padding: 5rem 0;
-
-    @media only screen and ${devices.md}{
-        padding: 1rem 0;
-    }
-`
+import useBurgerMenu from '../api/NavBar/useBurger';
+import { Section, StyledLayout } from './AppLayou.style.ts';
 
 export default function AppLayout() {
     const { isBurgerOpen, handleBurger } = useBurgerMenu();
