@@ -3,7 +3,7 @@ import TYPES_TRANSACTION from "../../config/typeTransactions";
 import { loaderExpenses } from "./loader";
 import { QUERY_KEY } from "../../config/queryClientKeys";
 import TransactionForm from "../../components/newTransaction/FormTransaction";
-import TransactionArr from "../transactions/TransactionArr";
+import TransactionArr from "../transactions/TransactionList";
 import { Container, FormDiv, ListDiv } from "../../styles/TransactionContainer";
 import Filter from "../../components/filter/Filter";
 import { FILTER_DATE_OPTIONS, FILTER_KEYS } from "../../components/filter/filterParameters";

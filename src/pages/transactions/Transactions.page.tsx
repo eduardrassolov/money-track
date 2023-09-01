@@ -1,11 +1,12 @@
 import { styled } from 'styled-components'
 import { QUERY_KEY } from '../../config/queryClientKeys'
-import TransactionArr from './TransactionArr'
+
 import { loaderTransactions } from './loader'
 import Header from '../../ui/header/Header'
 import Filter from '../../components/filter/Filter'
 import { FILTER_DATE_OPTIONS, FILTER_KEYS } from '../../components/filter/filterParameters'
 import Sort from '../../components/sort/Sort'
+import TransactionList from './TransactionList'
 
 const Div = styled.div`
     display: flex;
@@ -21,7 +22,6 @@ export const Operations = styled.div`
 `
 
 export default function Transactions() {
-
     return (
         <>
             <Div>
@@ -32,7 +32,7 @@ export default function Transactions() {
                     <Sort />
                 </Operations>
 
-                <TransactionArr listType={QUERY_KEY.TRANSACTIONS} loader={loaderTransactions} />
+                <TransactionList listType={QUERY_KEY.TRANSACTIONS} loader={loaderTransactions} />
             </Div>
         </>
     )

@@ -1,5 +1,6 @@
 import { styled } from "styled-components"
 import { devices } from "../../styles/breakPoints";
+import { FC } from "react";
 
 const StyledOverlay = styled.div<{ $isShow: boolean }>`
     position: fixed;
@@ -12,7 +13,7 @@ const StyledOverlay = styled.div<{ $isShow: boolean }>`
     z-index: 10;
 
     @media only screen and ${devices.md}{
-        display: none;
+        display: none; 
     }
 `
 
@@ -21,8 +22,9 @@ type OverlayProps = {
     onClose: () => void;
 }
 
-export default function Overlay({ isShow, onClose }: OverlayProps) {
+const Overlay: FC<OverlayProps> = ({ isShow, onClose }) => {
     return (
         <StyledOverlay $isShow={isShow} onClick={onClose}></StyledOverlay>
     )
 }
+export default Overlay;

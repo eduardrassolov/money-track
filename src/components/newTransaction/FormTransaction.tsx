@@ -1,4 +1,3 @@
-import { styled } from 'styled-components'
 import TYPES_TRANSACTION from '../../config/typeTransactions'
 import { FC, memo } from 'react'
 import Category from '../category/Category';
@@ -10,64 +9,10 @@ import { QUERY_KEY } from '../../config/queryClientKeys';
 import IInsertTransaction from '../../interface/IInsertTransaction';
 import getCategory from '../../api/getCategory';
 import { PrimaryBtn, SecondaryBtn } from '../../styles/Button';
-import { devices } from '../../styles/breakPoints';
-
-const Form = styled.form`
-    border: 1px solid #fff;
-    background: #fff;
-    border-radius: 15px;
-    padding: 1rem 2rem;
-    width: auto;
-
-    @media only screen and ${devices.md} {
-    min-width: 340px;
-    }
-`
-
-const FormGroup = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 2rem;
-
-    label{
-        margin-bottom: 0.5rem;
-    }
-    input{
-        font-size: 1rem;
-        padding: 0.5rem;
-        border-radius: 7px;
-        border: 1px solid transparent;
-        background: #f4f4f4;
-
-        &:focus{
-            outline: none;
-            border: 1px solid #0284c7;
-            background-color: #fff;
-            transition: all 0.3s ease-in-out;
-        }
-    }
-`
-const ErrorP = styled.p`
-    font-size: 0.7rem;
-    color: red;
-    margin: 0 0 0.5rem;
-`
-const FormFooter = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 1.2rem;
-    gap: 0.5rem;
-`
-
+import { ErrorP, Form, FormFooter, FormGroup } from './FormTransaction.style';
+import { Inputs } from '../../types/Inputs.type';
 interface INewTransactionProps {
     type: number;
-}
-
-export type Inputs = {
-    description: string;
-    category: number;
-    amount: number,
-    completed_at: Date,
 }
 
 const TransactionForm: FC<INewTransactionProps> = memo(function ({ type }) {
@@ -98,15 +43,11 @@ const TransactionForm: FC<INewTransactionProps> = memo(function ({ type }) {
             categoryId: category,
         })
     }
-    const onError: SubmitErrorHandler<Inputs> = (error) => {
-        console.log(error);
-    }
-
+    const onError: SubmitErrorHandler<Inputs> = (error) => console.log(error);
 
     return (
         <Form onSubmit={handleSubmit(onSubmit, onError)}>
-            {type === TYPES_TRANSACTION.INCOME ?
-                <h4>Add new income:</h4> : <h4>Add new expense:</h4>}
+            {type === TYPES_TRANSACTION.INCOME ? <h4>Add new income:</h4> : <h4>Add new expense:</h4>}
 
             <FormGroup>
                 <label htmlFor="description">Description:</label>

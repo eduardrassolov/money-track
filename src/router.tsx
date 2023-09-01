@@ -9,9 +9,12 @@ import { loaderDashboard } from "./pages/dashboard/loader.ts";
 import HomePage from "./pages/home/HomePage.tsx";
 import loadData from "./layout/loader.ts";
 import ErrorELement from "./components/error/ErrorELement.tsx";
+import Login from "./pages/login/login.page.tsx";
 
 export const ROUTES = {
     HOME: "/",
+    LOGIN: "/login",
+
     ROOT: "/app",
     TRANSACTIONS: `/app/transactions`,
     INCOMES: "/app/incomes",
@@ -23,6 +26,10 @@ const routes: RouteObject[] = [
     {
         path: ROUTES.HOME,
         element: <HomePage />,
+    },
+    {
+        path: ROUTES.LOGIN,
+        element: <Login />
     },
     {
         path: ROUTES.ROOT,

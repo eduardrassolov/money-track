@@ -80,7 +80,7 @@ export default function NavLinks({ isOpen = false, onClose }: NavLinksProps) {
                     <a onClick={() => handleClick("feature")}>Features</a>
                 </li>
                 <li>
-                    <StyledNavLink to={ROUTES.ROOT}>Start</StyledNavLink>
+                    <StyledNavLink to={ROUTES.LOGIN}>Login</StyledNavLink>
                 </li>
             </Ul>
         </>

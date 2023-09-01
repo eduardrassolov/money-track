@@ -16,9 +16,11 @@ import { loaderTransactions } from "../transactions/loader.ts";
 import calcStats from "../../helpers/calculateStats.ts";
 import { FILTER_KEYS } from "../../components/filter/filterParameters.ts";
 import { useSearchParams } from "react-router-dom";
-import { SortBy } from "../transactions/TransactionArr.tsx";
+import { SortBy } from "../transactions/TransactionList.tsx";
 
 import { devices } from "../../styles/breakPoints.ts";
+import CategoryChart from "./CategoryChart.tsx";
+import HeaderSection from "../home/HeaderSection.tsx";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -52,6 +54,32 @@ const RowContainerCards = styled(RowContainer)`
 `
 
 
+const PieBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+ 
+  @media only screen and ${devices.md}{
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+`
+const PieContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1rem;
+  margin: 0 0 1rem;
+  background: #fff;
+  border-radius: 15px;
+
+  @media only screen and ${devices.md}{
+    flex: 2;
+    flex-wrap: wrap;
+    min-width: 400px;
+  }
+`
+
 const statCardData: Array<StatsCardData> = [
   {
     name: "Expenses",
@@ -80,7 +108,7 @@ const statCardData: Array<StatsCardData> = [
 ]
 
 // TODO - refactor component Dashboard. Remove caclulation from component
-export default function Dashboard() {
+export default function Dashboard({ total }) {
   const [params] = useSearchParams();
 
   const filterValue = params.get(FILTER_KEYS.DATE);
@@ -97,9 +125,51 @@ export default function Dashboard() {
 
   const stats = calcStats({ expenses, incomes });
 
+  const summaryData = expenses.reduce((acc, cur) => {
+    if (!acc[cur.category.name]) {
+      acc[cur.category.name] = cur.amount;
+    }
+    else {
+      acc[cur.category.name] += cur.amount;
+    }
+    return acc;
+  }, {});
+
+  // const colors = ["red", "green", "purple", "orange", "gray"];
+  const ttlExp = expenses.reduce((acc, cur) => acc + cur.amount, 0);
+
+  const summary = Object.entries(summaryData).map(([name, value]) => {
+    return {
+      name: name,
+      value: value,
+      percentage: Math.round(value * 100 / ttlExp),
+    }
+  })
+
+  const summaryData2 = incomes.reduce((acc, cur) => {
+    if (!acc[cur.category.name]) {
+      acc[cur.category.name] = cur.amount;
+    }
+    else {
+      acc[cur.category.name] += cur.amount;
+    }
+    return acc;
+  }, {});
+
+
+
+  const ttlExp2 = incomes.reduce((acc, cur) => acc + cur.amount, 0);
+  const summar2 = Object.entries(summaryData2).map(([name, value]) => {
+    return {
+      name: name,
+      value: value,
+      percentage: Math.round(value * 100 / ttlExp2),
+    }
+  })
+
+
   return (
     <>
-
       <StyledContainer>
         <Header text="Dashboard" />
 
@@ -110,6 +180,18 @@ export default function Dashboard() {
         <RowContainer>
           <Diagram data={[...transactions]} />
         </RowContainer>
+
+        <PieBlock>
+          <PieContainer>
+            <Header text="Expenses by categories" />
+            <CategoryChart data={summary} />
+          </PieContainer>
+          <PieContainer>
+            <Header text="Incomes by categories" />
+            <CategoryChart data={summar2} />
+          </PieContainer>
+        </PieBlock>
+        {/* </PieContainer> */}
 
       </StyledContainer >
     </>

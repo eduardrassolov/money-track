@@ -4,7 +4,7 @@ import { QUERY_KEY } from "../../config/queryClientKeys";
 import TransactionForm from "../../components/newTransaction/FormTransaction";
 
 import { loaderIncomes } from "./loader";
-import TransactionArr from "../transactions/TransactionArr";
+import TransactionArr from "../transactions/TransactionList";
 import { Container, FormDiv, ListDiv } from "../../styles/TransactionContainer";
 import Header from "../../ui/header/Header";
 import Filter from "../../components/filter/Filter";

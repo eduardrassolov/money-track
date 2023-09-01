@@ -1,4 +1,5 @@
 import { ITransaction } from "../interface/ITransactions";
+import { ILoaderTransaction } from "../pages/transactions/loader";
 import supabase from "../services/supabase";
 import { GetAllTransactionsDTO } from "./dto/getTransactions.dto";
 
@@ -9,11 +10,11 @@ export const SELECT = {
   `,
 };
 
-export default async function getTransactions(filterByDate, sortBy): Promise<Array<ITransaction>> {
+export default async function getTransactions(filter, sortBy): Promise<Array<ITransaction>> {
   let query = supabase.from("transactions").select(SELECT.ALL_TRANSACTIONS);
 
-  if (filterByDate) {
-    query = query.gt("completed_at", filterByDate);
+  if (filter) {
+    query = query.gt("completed_at", filter);
   }
 
   query = query.order(sortBy.field, { ascending: sortBy.direction === "asc" ? true : false });
