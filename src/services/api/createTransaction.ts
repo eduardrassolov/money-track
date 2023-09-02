@@ -1,5 +1,5 @@
-import INewTransaction from "../interface/IInsertTransaction";
-import supabase from "../services/supabase";
+import INewTransaction from "../../interface/IInsertTransaction";
+import supabase from "../supabase";
 import { CreateTransactionDTO } from "./dto/createTransaction.dto";
 
 export default async function createTransaction(transaction: INewTransaction) {

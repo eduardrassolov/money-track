@@ -1,7 +1,7 @@
-import BurgerMenu from "../../components/burger/BurgerMenu";
+import BurgerMenu from "../../burger/BurgerMenu";
 import { styled } from "styled-components";
-import Overlay from "../../components/overlay/Overlay";
-import { devices } from "../../styles/breakPoints";
+import Overlay from "../../overlay/Overlay";
+import { devices } from "../../../styles/breakPoints";
 import { FC } from "react";
 
 const Nav = styled.nav`

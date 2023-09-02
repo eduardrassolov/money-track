@@ -3,7 +3,7 @@ import { styled } from 'styled-components'
 import { Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { ITransaction } from '../../interface/ITransactions';
 import TYPES_TRANSACTION from '../../config/typeTransactions';
-import { formatDate } from '../../helpers/formatDate';
+import { formatDate } from '../../utils/helpers/formatDate';
 
 const ChartContainer = styled.div`
   width: 100%;

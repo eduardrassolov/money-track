@@ -1,15 +1,15 @@
 import { RouteObject, createBrowserRouter, redirect } from "react-router-dom";
-import AppLayout from "./layout/AppLayout.tsx";
+import AppLayout from "./pages/layout/AppLayout.tsx";
 import Incomes from "./pages/income/Incomes.page.tsx";
 import Expenses from "./pages/expenses/Expenses.page.tsx";
 import Dashboard from "./pages/dashboard/Dashboard.page.tsx";
 
 import Transactions from "./pages/transactions/Transactions.page.tsx";
-import { loaderDashboard } from "./pages/dashboard/loader.ts";
 import HomePage from "./pages/home/HomePage.tsx";
-import loadData from "./layout/loader.ts";
+
 import ErrorELement from "./components/error/ErrorELement.tsx";
-import Login from "./pages/login/login.page.tsx";
+import Login from "./pages/login/Login.page.tsx";
+import ProtectedLayout from "./pages/layout/ProtectedLayout.tsx";
 
 export const ROUTES = {
     HOME: "/",
@@ -33,7 +33,7 @@ const routes: RouteObject[] = [
     },
     {
         path: ROUTES.ROOT,
-        element: <AppLayout />,
+        element: <ProtectedLayout> <AppLayout /> </ProtectedLayout>,
         errorElement: <ErrorELement />,
         children: [
             {

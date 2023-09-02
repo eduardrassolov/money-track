@@ -9,12 +9,12 @@ import { QUERY_KEY } from "../../config/queryClientKeys.ts";
 import { loaderExpenses } from "../expenses/loader.ts";
 import { loaderIncomes } from "../income/loader.ts";
 import { loaderTransactions } from "../transactions/loader.ts";
-import calcStats from "../../helpers/calculateStats.ts";
+import calcStats from "../../utils/helpers/calculateStats.ts";
 import CategoryChart from "./categoryChart/CategoryChart.tsx";
 import { SortBy } from "../../types/sortBy.type.ts";
 import { PieBlock, PieContainer, RowContainer, RowContainerCards, StyledContainer } from "./Dashboard.page.style.ts";
-import useFilter from "../../hooks/useFilter.tsx";
-import { getSummaryData } from "../../helpers/getStats.ts";
+import { getSummaryData } from "../../utils/helpers/getStats.ts";
+import useFilter from "../../utils/hooks/useFilter.tsx";
 
 const statCardData: Array<StatsCardData> = [
   {

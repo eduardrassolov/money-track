@@ -12,7 +12,7 @@ import Sort from "../../components/sort/Sort";
 import { FILTER_DATE_OPTIONS, FILTER_KEYS } from "../../components/filter/filterParameters";
 import { Operations } from "../transactions/Transactions.page";
 import { useQuery } from "@tanstack/react-query";
-import formatNumberWithSpaces from "../../helpers/formatWithSpace";
+import formatNumberWithSpaces from "../../utils/helpers/formatWithSpace";
 
 export default function Incomes() {
     const { data: transactions } = useQuery({ queryKey: [QUERY_KEY.INCOMES, null, { field: 'completed_at', direction: 'desc' }], queryFn: loaderIncomes });

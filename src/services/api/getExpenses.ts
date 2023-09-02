@@ -1,16 +1,14 @@
-import { ITransaction } from "../interface/ITransactions";
-import supabase from "../services/supabase";
+import TYPES_TRANSACTION from "../../config/typeTransactions";
+import { ITransaction } from "../../interface/ITransactions";
+import supabase from "../supabase";
 import { GetAllTransactionsDTO } from "./dto/getTransactions.dto";
+import { SELECT } from "./getTransactions";
 
-export const SELECT = {
-  ALL_TRANSACTIONS: `
-    id, amount, completed_at, description, 
-    category!inner(id, name, type:type_transaction!inner(id, name))
-  `,
-};
-
-export default async function getTransactions(filter, sortBy): Promise<Array<ITransaction>> {
-  let query = supabase.from("transactions").select(SELECT.ALL_TRANSACTIONS);
+export default async function getExpenses(filter, sortBy): Promise<Array<ITransaction>> {
+  let query = supabase
+    .from("transactions")
+    .select(SELECT.ALL_TRANSACTIONS)
+    .eq("category.type.id", TYPES_TRANSACTION.EXPENSE);
 
   if (filter) {
     query = query.gt("completed_at", filter);

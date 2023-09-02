@@ -1,5 +1,6 @@
 import { useSearchParams } from "react-router-dom";
-import { SortBy } from "../types/sortBy.type";
+import { SortBy } from "../../types/sortBy.type";
+
 
 export default function useSort(): SortBy {
     const [params] = useSearchParams();

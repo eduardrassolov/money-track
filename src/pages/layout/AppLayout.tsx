@@ -1,11 +1,11 @@
 import { Outlet } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import NavBar from '../api/NavBar/NavBar.tsx';
-import BurgerMenu from '../components/burger/BurgerMenu.tsx';
-import Aside from '../components/aside/Aside.tsx';
-import Overlay from '../components/overlay/Overlay.tsx';
-import useBurgerMenu from '../api/NavBar/useBurger';
+import NavBar from '../../components/aside/NavBar/NavBar.tsx';
+import BurgerMenu from '../../components/burger/BurgerMenu.tsx';
+import Aside from '../../components/aside/Aside.tsx';
+import Overlay from '../../components/overlay/Overlay.tsx';
+import useBurgerMenu from '../../components/aside/NavBar/useBurger.tsx';
 import { Section, StyledLayout } from './AppLayou.style.ts';
 
 export default function AppLayout() {

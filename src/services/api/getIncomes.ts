@@ -1,14 +1,14 @@
-import TYPES_TRANSACTION from "../config/typeTransactions";
-import { ITransaction } from "../interface/ITransactions";
-import supabase from "../services/supabase";
+import TYPES_TRANSACTION from "../../config/typeTransactions";
+import { ITransaction } from "../../interface/ITransactions";
+import supabase from "../supabase";
 import { GetAllTransactionsDTO } from "./dto/getTransactions.dto";
 import { SELECT } from "./getTransactions";
 
-export default async function getExpenses(filter, sortBy): Promise<Array<ITransaction>> {
+export default async function getIncomes(filter, sortBy): Promise<Array<ITransaction>> {
   let query = supabase
     .from("transactions")
     .select(SELECT.ALL_TRANSACTIONS)
-    .eq("category.type.id", TYPES_TRANSACTION.EXPENSE);
+    .eq("category.type.id", TYPES_TRANSACTION.INCOME);
 
   if (filter) {
     query = query.gt("completed_at", filter);

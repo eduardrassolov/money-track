@@ -1,4 +1,4 @@
-import getExpenses from "../../api/getExpenses";
+import getExpenses from "../../services/api/getExpenses";
 import { ITransaction } from "../../interface/ITransactions";
 import getRangeDates from "../../services/getRangeDate";
 import { ILoaderTransaction, defaultSort } from "../transactions/loader";

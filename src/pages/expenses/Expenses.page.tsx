@@ -10,7 +10,7 @@ import { FILTER_DATE_OPTIONS, FILTER_KEYS } from "../../components/filter/filter
 import Header from "../../ui/header/Header";
 import { Operations } from "../transactions/Transactions.page";
 import Sort from "../../components/sort/Sort";
-import formatNumberWithSpaces from "../../helpers/formatWithSpace";
+import formatNumberWithSpaces from "../../utils/helpers/formatWithSpace";
 import { useQuery } from "@tanstack/react-query";
 
 export default function Expenses() {

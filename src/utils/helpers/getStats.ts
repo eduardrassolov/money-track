@@ -1,4 +1,4 @@
-import { ITransaction } from "../interface/ITransactions";
+import { ITransaction } from "../../interface/ITransactions";
 
 interface ISummary {
   name: string;

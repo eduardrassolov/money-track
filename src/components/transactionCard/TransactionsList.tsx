@@ -1,5 +1,5 @@
 import TransactionCard from "./TransactionCard";
-import deleteTransaction from "../../api/deleteTransaction";
+import deleteTransaction from "../../services/api/deleteTransaction";
 import { toast } from "react-toastify";
 import { ITransaction } from "../../interface/ITransactions";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

@@ -1,6 +1,7 @@
 import { useSearchParams } from "react-router-dom";
-import { FILTER_KEYS } from "../components/filter/filterParameters";
-import { Filter } from "../types/filterBy.type";
+import { Filter } from "../../types/filterBy.type";
+import { FILTER_KEYS } from "../../components/filter/filterParameters";
+
 
 export default function useFilter() {
     const [params] = useSearchParams();

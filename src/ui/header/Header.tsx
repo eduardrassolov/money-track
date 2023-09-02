@@ -9,7 +9,7 @@ const Div = styled.div`
     margin: 0;
     padding: 1rem 1.5rem;
     background: #fff;
-    border: 1px solid #7e22ce;
+    /* border: 1px solid #7e22ce; */
     border-radius: 15px;
     margin-bottom: 1rem;
 `

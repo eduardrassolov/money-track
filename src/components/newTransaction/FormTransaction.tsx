@@ -2,12 +2,12 @@ import TYPES_TRANSACTION from '../../config/typeTransactions'
 import { FC, memo } from 'react'
 import Category from '../category/Category';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
-import createTransaction from '../../api/createTransaction';
+import createTransaction from '../../services/api/createTransaction';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { QUERY_KEY } from '../../config/queryClientKeys';
 import IInsertTransaction from '../../interface/IInsertTransaction';
-import getCategory from '../../api/getCategory';
+import getCategory from '../../services/api/getCategory';
 import { PrimaryBtn, SecondaryBtn } from '../../styles/Button';
 import { ErrorP, Form, FormFooter, FormGroup } from './FormTransaction.style';
 import { Inputs } from '../../types/Inputs.type';

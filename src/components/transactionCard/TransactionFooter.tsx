@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import FooterItem from "./FooterItem"
 import { ITransaction } from "../../interface/ITransactions";
 import { TbMoneybag, TbCalendar, TbTag } from "react-icons/tb";
-import { formatDate } from "../../helpers/formatDate";
+import { formatDate } from "../../utils/helpers/formatDate";
 interface ITransactionProps {
     item: ITransaction;
 }

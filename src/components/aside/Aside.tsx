@@ -4,7 +4,7 @@ import { AreaChartOutlined, DollarOutlined, ShoppingCartOutlined, CarryOutOutlin
 import { HiOutlineHome } from "react-icons/hi2";
 import { StyledAside } from "./Aside.style";
 import { FC } from "react";
-import { IBar } from "../../api/NavBar/NavBar";
+import { IBar } from "./NavBar/NavBar";
 
 const icons: Array<JSX.Element> =
     [<AreaChartOutlined />,

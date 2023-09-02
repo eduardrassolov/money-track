@@ -1,4 +1,4 @@
-import addTransaction from "../../api/createTransaction";
+import addTransaction from "../../services/api/createTransaction";
 import INewTransaction from "../../interface/IInsertTransaction";
 
 export default async function actionIncomes(request: Request) {

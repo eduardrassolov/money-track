@@ -1,14 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { FC } from "react";
-
-import useSort from "../../hooks/useSort.tsx";
-import useFilter from "../../hooks/useFilter.tsx";
 import TransactionCard from "../../components/transactionCard/TransactionCard.tsx";
-import deleteTransaction from "../../api/deleteTransaction.ts";
+import deleteTransaction from "../../services/api/deleteTransaction.ts";
 import { SortBy } from "../../types/sortBy.type.ts";
 import { ILoaderTransaction } from "./loader.ts";
 import { ITransaction } from "../../interface/ITransactions.ts";
+import useFilter from "../../utils/hooks/useFilter.tsx";
+import useSort from "../../utils/hooks/useSort.tsx";
 
 interface ITransactionList {
     listType: string,

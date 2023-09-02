@@ -2,6 +2,7 @@
 import { styled } from "styled-components"
 import NavLinks from "./NavLinks"
 import Overlay from "../../../components/overlay/Overlay"
+import Logo from "../../../components/logo/Logo"
 
 
 const Nav = styled.nav`
@@ -16,21 +17,7 @@ const Nav = styled.nav`
     width: 100%;
 `
 
-const NavLogo = styled.div`
-    display: flex;
-    align-items: center;
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: auto 1rem;
 
-    p{
-        &:hover{
-            color: #7286D3;
-            transition: all 300ms ease-in-out;
-            cursor: pointer;
-        }
-    }
-`
 interface INavBar {
     isOpen: boolean,
     onClose: () => void
@@ -42,9 +29,7 @@ export default function NavBarHome({ isOpen, onClose }: INavBar) {
 
     return (
         <Nav>
-            <NavLogo>
-                <p onClick={handleClick}>E-Budget</p>
-            </NavLogo>
+            <Logo />
 
             <Overlay isShow={isOpen} onClose={onClose} />
 

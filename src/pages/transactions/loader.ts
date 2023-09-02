@@ -1,4 +1,4 @@
-import getTransactions from "../../api/getTransactions";
+import getTransactions from "../../services/api/getTransactions";
 import { ITransaction } from "../../interface/ITransactions";
 import getRangeDates from "../../services/getRangeDate";
 import { Filter } from "../../types/filterBy.type";
