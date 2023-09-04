@@ -1,17 +1,20 @@
-import { RouteObject, createBrowserRouter, redirect } from "react-router-dom";
-import AppLayout from "./layout/AppLayout.tsx";
+import { RouteObject, createBrowserRouter } from "react-router-dom";
+import AppLayout from "./pages/layout/AppLayout.tsx";
 import Incomes from "./pages/income/Incomes.page.tsx";
 import Expenses from "./pages/expenses/Expenses.page.tsx";
 import Dashboard from "./pages/dashboard/Dashboard.page.tsx";
 
 import Transactions from "./pages/transactions/Transactions.page.tsx";
-import { loaderDashboard } from "./pages/dashboard/loader.ts";
 import HomePage from "./pages/home/HomePage.tsx";
-import loadData from "./layout/loader.ts";
 import ErrorELement from "./components/error/ErrorELement.tsx";
+import Login from "./pages/login/Login.page.tsx";
+import ProtectedLayout from "./pages/layout/ProtectedLayout.tsx";
+import Page404 from "./pages/errors/Page404.tsx";
 
 export const ROUTES = {
     HOME: "/",
+    LOGIN: "/login",
+
     ROOT: "/app",
     TRANSACTIONS: `/app/transactions`,
     INCOMES: "/app/incomes",
@@ -25,8 +28,12 @@ const routes: RouteObject[] = [
         element: <HomePage />,
     },
     {
+        path: ROUTES.LOGIN,
+        element: <Login />,
+    },
+    {
         path: ROUTES.ROOT,
-        element: <AppLayout />,
+        element: <ProtectedLayout> <AppLayout /> </ProtectedLayout>,
         errorElement: <ErrorELement />,
         children: [
             {
@@ -49,7 +56,7 @@ const routes: RouteObject[] = [
     },
     {
         path: "*",
-        element: <div>404</div>
+        element: <Page404 />
     }
 ]
 

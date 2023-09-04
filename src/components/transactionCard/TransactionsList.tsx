@@ -1,5 +1,5 @@
 import TransactionCard from "./TransactionCard";
-import deleteTransaction from "../../api/deleteTransaction";
+import deleteTransaction from "../../services/api/deleteTransaction";
 import { toast } from "react-toastify";
 import { ITransaction } from "../../interface/ITransactions";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -12,7 +12,6 @@ interface ITransactionList {
 const TransactionsList = ({ data, listType }: ITransactionList) => {
     const queryClient = useQueryClient();
 
-    console.log(data);
     const mutation = useMutation({
         mutationFn: deleteTransaction,
         onSuccess: () => {
@@ -39,5 +38,4 @@ const TransactionsList = ({ data, listType }: ITransactionList) => {
         </>
     )
 }
-
 export default TransactionsList;

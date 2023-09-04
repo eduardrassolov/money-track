@@ -1,6 +1,5 @@
 import { styled } from "styled-components"
 import { FadeLoader } from "react-spinners"
-import { useEffect } from "react";
 
 const Overlay = styled.div`
     position: absolute;

@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { styled } from 'styled-components'
 import { IFeatureData } from './FeaturesSection'
 import { devices } from '../../styles/breakPoints'
@@ -11,22 +11,22 @@ const FeaturesItem = styled.div<{ $side: string }>`
     text-align: center;
     max-width: 700px;
 
-
-    @media only screen and ${devices.md}{
+    @media only screen and (min-width: ${devices.md}px){
         flex-direction: ${props => props.$side === "left" ? 'row' : 'row-reverse'};
         justify-content: center;
-        gap: 4rem;
+        gap: 6rem;
     }
 `
 
 const TextContainer = styled.div`
     max-width: 500px;
-    margin: 0 auto 2rem;
+    margin: 0 auto 1rem;
 
     h2{
         letter-spacing: -0.5px;
         font-size: 2rem;
         line-height: 2rem;
+        margin: 1rem auto 0.8rem;
     }
     p{
         line-height: 1.5rem;
@@ -36,13 +36,13 @@ const TextContainer = styled.div`
         margin: 0 auto;
     }
 
-    @media only screen and ${devices.md}{
+    @media only screen and (min-width: ${devices.md}px){
         text-align: left;
     }
 `
 
 const ImageContainer = styled.div`
-    @media only screen and ${devices.md}{
+    @media only screen and (min-width: ${devices.md}px){
         display: flex;
         align-items: center;
         justify-items: center;

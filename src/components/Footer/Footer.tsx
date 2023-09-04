@@ -12,8 +12,7 @@ const StyledFooter = styled.footer`
         font-size: 0.8rem;
         letter-spacing: 0.1rem;
     }
-
-    `
+`
 
 export default function Footer() {
     return (

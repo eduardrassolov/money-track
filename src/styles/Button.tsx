@@ -27,6 +27,9 @@ const SecondaryBtn = styled(Button)`
     &:hover{
         background: #dbeafe;
     }
-
 `
-export { Button, PrimaryBtn, SecondaryBtn }
+
+const LoginBtn = styled(PrimaryBtn)`
+    padding: 1rem;
+`
+export { Button, PrimaryBtn, SecondaryBtn, LoginBtn }

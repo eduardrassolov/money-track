@@ -1,53 +1,21 @@
-import { useLoaderData } from "react-router"
-import { styled } from "styled-components";
-import StatCard from "./StatCard";
+import StatCard from "./statCard/StatCard.tsx";
 import { HiOutlineShoppingBag, HiOutlineCash, HiOutlineCalculator } from "react-icons/hi";
 import { AiOutlineBank } from "react-icons/ai";
-
 import { StatsCardData } from "../../types/statsCardData";
-import { ITransaction } from "../../interface/ITransactions.ts";
-import formatNumberWithSpaces from "../../helpers/formatWithSpace.ts";
 import Diagram from "./Diagram.tsx";
-import TYPES_TRANSACTION from "../../config/typeTransactions.ts";
 import Header from "../../ui/header/Header.tsx";
 import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEY } from "../../config/queryClientKeys.ts";
 import { loaderExpenses } from "../expenses/loader.ts";
 import { loaderIncomes } from "../income/loader.ts";
 import { loaderTransactions } from "../transactions/loader.ts";
-import calcStats from "../../helpers/calculateStats.ts";
-import Filter from "../../components/filter/Filter.tsx";
-import { FILTER_KEYS } from "../../components/filter/filterParameters.ts";
-import { useSearchParams } from "react-router-dom";
-import { SortBy } from "../transactions/TransactionArr.tsx";
-
-import { devices } from "../../styles/breakPoints.ts";
-
-const StyledContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: clamp(310px, 800px, 95%);
-`
-
-const RowContainer = styled.div`
-  display: flex;
-  justify-content: space-between; 
-  margin: 0 0 1rem;
-
-  @media (max-width: 670px) {
-    margin: 0 0 0.5rem;
-  }
-`
-
-const RowContainerCards = styled(RowContainer)`
-  gap: 1rem;
-  flex-wrap: wrap;
-  @media only screen and  ${devices.md} {
-    justify-content: start;
-    gap: 0.5rem;
-  }
-`
-
+import calcStats from "../../utils/helpers/calculateStats.ts";
+import CategoryChart from "./categoryChart/CategoryChart.tsx";
+import { SortBy } from "../../types/sortBy.type.ts";
+import { PieBlock, PieContainer, RowContainer, RowContainerCards, StyledContainer } from "./Dashboard.page.style.ts";
+import { ISummary, getSummaryData } from "../../utils/helpers/getStats.ts";
+import useFilter from "../../utils/hooks/useFilter.tsx";
+import { useUser } from "../../utils/hooks/useUser.tsx";
 
 const statCardData: Array<StatsCardData> = [
   {
@@ -78,25 +46,29 @@ const statCardData: Array<StatsCardData> = [
 
 // TODO - refactor component Dashboard. Remove caclulation from component
 export default function Dashboard() {
-  const [params] = useSearchParams();
+  const { filter } = useFilter();
+  const { user } = useUser();
 
-  const filterValue = params.get(FILTER_KEYS.DATE);
-  const filter = !filterValue ? null : filterValue;
+  if (!user) {
+    return;
+  }
+  const userId = user.id;
   const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
 
-  const { data: transactions } = useQuery({ queryKey: [QUERY_KEY.TRANSACTIONS, filter, sortBy], queryFn: () => loaderTransactions({ filter, sortBy }) });
-  const { data: expenses } = useQuery({ queryKey: [QUERY_KEY.EXPENSES, filter, sortBy], queryFn: () => loaderExpenses({ filter, sortBy }) });
-  const { data: incomes } = useQuery({ queryKey: [QUERY_KEY.INCOMES, filter, sortBy], queryFn: () => loaderIncomes({ filter, sortBy }) });
-  // TODO - change to default params
+  const { data: transactions } = useQuery({ queryKey: [QUERY_KEY.TRANSACTIONS, filter, sortBy, userId], queryFn: () => loaderTransactions({ filter, sortBy, userId }) });
+  const { data: expenses } = useQuery({ queryKey: [QUERY_KEY.EXPENSES, filter, sortBy], queryFn: () => loaderExpenses({ filter, sortBy, userId }) });
+  const { data: incomes } = useQuery({ queryKey: [QUERY_KEY.INCOMES, filter, sortBy], queryFn: () => loaderIncomes({ filter, sortBy, userId }) });
 
   if (!transactions || !incomes || !expenses)
     return null;
 
   const stats = calcStats({ expenses, incomes });
 
+  const summaryExpenses: Array<ISummary> = getSummaryData(expenses);
+  const summaryIncomes: Array<ISummary> = getSummaryData(incomes);
+
   return (
     <>
-
       <StyledContainer>
         <Header text="Dashboard" />
 
@@ -104,10 +76,28 @@ export default function Dashboard() {
           {statCardData.map((item, index) => <StatCard key={item.name} item={item} value={stats[index]} />)}
         </RowContainerCards>
 
-        <RowContainer>
-          <Diagram data={[...transactions]} />
-        </RowContainer>
+        {transactions.length ?
+          <RowContainer>
+            <Diagram data={[...transactions]} />
+          </RowContainer>
+          : ''}
 
+
+        <PieBlock>
+          {expenses.length ?
+            <PieContainer>
+              <Header text="Expenses by categories" />
+              <CategoryChart data={summaryExpenses} />
+            </PieContainer>
+            : ''}
+          {incomes.length ?
+            <PieContainer>
+              <Header text="Incomes by categories" />
+              <CategoryChart data={summaryIncomes} />
+            </PieContainer>
+            : ''}
+
+        </PieBlock>
       </StyledContainer >
     </>
   )

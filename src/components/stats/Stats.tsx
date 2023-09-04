@@ -1,6 +1,6 @@
 import { FC } from "react"
 import { styled } from "styled-components";
-import formatNumberWithSpaces from "../../helpers/formatWithSpace";
+import formatNumberWithSpaces from "../../utils/helpers/formatWithSpace";
 
 type StatsProps = {
     listType: string;

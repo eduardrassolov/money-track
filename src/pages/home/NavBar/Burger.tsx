@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC } from "react"
 import { styled } from "styled-components"
 import { devices } from "../../../styles/breakPoints";
 
@@ -44,7 +44,7 @@ export const StyledBurger = styled.div<{ $isOpen: boolean }>`
         transition: all 300ms;
     }
     
-    @media only screen and ${devices.md} {
+    @media only screen and (min-width: ${devices.md}px){
         display: none;
     }
     

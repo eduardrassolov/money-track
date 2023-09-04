@@ -22,7 +22,12 @@
 
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "plugins": [
+      {
+        "name": "@styled/typescript-styled-plugin"
+      }
+    ]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import { StyledBurger } from '../../pages/home/NavBar/Burger'
 import { styled } from 'styled-components';
 import { devices } from '../../styles/breakPoints';
 
@@ -16,6 +15,7 @@ export const StyledBurgerMenu = styled.div<{ $isOpen: boolean }>`
     position: fixed;
     top: 1rem;
     left: 1rem;
+    z-index: 30;
 
     transform: translateY(0);
 
@@ -50,8 +50,9 @@ export const StyledBurgerMenu = styled.div<{ $isOpen: boolean }>`
         transition: all 300ms;
     }
     
-    @media only screen and ${devices.md} {
-         transform: translateY(-5rem);
+
+    @media only screen and (min-width: ${devices.md}px){
+        transform: translateY(-5rem);
     }
 `
 

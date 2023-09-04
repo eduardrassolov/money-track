@@ -2,7 +2,7 @@ import { FC } from "react";
 import { UseFormRegister } from "react-hook-form";
 import { ICategory } from "../../interface/ICategory";
 import { Select } from "./Category.style";
-import { Inputs } from "../newTransaction/FormTransaction";
+import { Inputs } from "../../types/Inputs.type";
 
 //TODO refactor
 interface ICategoryComp {
