@@ -1,27 +1,27 @@
 import INewTransaction from "../../interface/IInsertTransaction";
 import supabase from "../supabase";
-import { CreateTransactionDTO } from "./dto/createTransaction.dto";
+import { ICreateTransactionDTO } from "./dto/createTransaction.dto";
 
 export default async function createTransaction(transaction: INewTransaction) {
   try {
-    const newTransactionDTO: CreateTransactionDTO = {
+    const newTransactionDTO: ICreateTransactionDTO = {
       amount: transaction.amount,
       category_id: transaction.categoryId,
       completed_at: transaction.completedAt,
       description: transaction.description,
-      user_id: 1,
+      profile_id: transaction.profileId,
     };
 
-    const { data, error } = await supabase.from("transactions").insert([newTransactionDTO]);
+    const { error } = await supabase.from("transactions").insert([newTransactionDTO]);
 
     if (error) {
       throw error;
     }
 
-    return { data, error: null };
+    return { error: {} };
   } catch (err) {
     if (err instanceof Error) {
-      return { data: null, error: err?.message || "Something went wrong" };
+      return { data: {}, error: err?.message || "Something went wrong" };
     }
   }
 }

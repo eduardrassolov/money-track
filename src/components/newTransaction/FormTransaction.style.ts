@@ -8,7 +8,7 @@ const Form = styled.form`
   padding: 1rem 2rem;
   width: auto;
 
-  @media only screen and ${devices.md} {
+  @media only screen and (min-width: ${devices.md}px) {
     min-width: 340px;
   }
 `;

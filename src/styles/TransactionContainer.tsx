@@ -1,5 +1,5 @@
 import { styled } from "styled-components"
-import { devices } from "./breakPoints"
+import { devices } from "./breakPoints.ts"
 
 const Container = styled.div`
     display: grid;
@@ -12,7 +12,7 @@ const Container = styled.div`
     flex-direction: column;
     gap: 2rem;
 
-    @media only screen and ${devices.md} {
+  @media only screen and (min-width: ${devices.md}px) {
         flex-direction: row;
     }
 `

@@ -11,11 +11,13 @@ import getCategory from '../../services/api/getCategory';
 import { PrimaryBtn, SecondaryBtn } from '../../styles/Button';
 import { ErrorP, Form, FormFooter, FormGroup } from './FormTransaction.style';
 import { Inputs } from '../../types/Inputs.type';
+import { useUser } from '../../utils/hooks/useUser';
 interface INewTransactionProps {
     type: number;
 }
 
 const TransactionForm: FC<INewTransactionProps> = memo(function ({ type }) {
+    const { user } = useUser();
     const queryClient = useQueryClient();
 
     //TODO remove fetching data for SELECT and put globally
@@ -41,6 +43,7 @@ const TransactionForm: FC<INewTransactionProps> = memo(function ({ type }) {
             amount: amount,
             completedAt: completed_at.toString(),
             categoryId: category,
+            profileId: user?.id || ''
         })
     }
     const onError: SubmitErrorHandler<Inputs> = (error) => console.log(error);

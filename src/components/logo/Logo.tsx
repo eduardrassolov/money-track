@@ -5,6 +5,7 @@ const NavLogo = styled.div`
     align-items: center;
     font-size: 1.5rem;
     font-weight: bold;
+    height: 55px;
     margin: auto 1rem;
 
     p{

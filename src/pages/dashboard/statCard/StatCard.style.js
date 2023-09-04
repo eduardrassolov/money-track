@@ -1,7 +1,6 @@
 import { styled } from "styled-components";
 import { devices } from "../../../styles/breakPoints";
-
-const IconContainer = styled.div<{ $bgColor?: string }>`
+const IconContainer = styled.div `
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,8 +13,7 @@ const IconContainer = styled.div<{ $bgColor?: string }>`
   border-radius: 50%;
   transition: all 300ms ease-in-out;
 `;
-
-const Description = styled.div`
+const Description = styled.div `
   display: flex;
   flex-direction: column;
   white-space: nowrap;
@@ -32,8 +30,7 @@ const Description = styled.div`
     color: gray;
   }
 `;
-
-const StatContainer = styled.div<{ $borderColor?: string; $bgColor?: string }>`
+const StatContainer = styled.div `
   display: flex;
   justify-content: start;
   align-items: center;
@@ -61,5 +58,4 @@ const StatContainer = styled.div<{ $borderColor?: string; $bgColor?: string }>`
     width: fit-content;
   }
 `;
-
 export { IconContainer, Description, StatContainer };

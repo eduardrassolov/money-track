@@ -3,7 +3,10 @@ import { LoginBtn } from "../../styles/Button";
 import { styled } from "styled-components";
 import { useLogin } from "./useLogin";
 import { devices } from "../../styles/breakPoints";
-import Logo from "../../components/logo/Logo";
+
+import Hints from "./Hints";
+import { NavLink } from "react-router-dom";
+
 
 const Div = styled.div`
     height: 100vh;
@@ -14,9 +17,10 @@ const Div = styled.div`
     box-sizing: border-box;
     padding: 2.5rem 1rem;
     
-    @media only screen and ${devices.sm}{
-    justify-content: center;
-    align-items: center;
+
+    @media only screen and (min-width: ${devices.sm}px){
+        justify-content: center;
+        align-items: center;
     }
 `
 
@@ -68,6 +72,13 @@ const Input = styled.input`
     border: 1px solid #E4E4E7;
     font-size: 1rem;
     padding: 0.8rem 1.2rem;
+        transition: all 300ms ease-in-out;
+
+    &:focus{
+        transition: all 300ms ease-in-out;
+        outline: none;
+        border: 1px solid #3b82f6;
+    }
 `
 
 export default function Login() {
@@ -76,10 +87,10 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleEmail = ({ target: { value } }) => setEmail(() => value);
-    const handlePassword = ({ target: { value } }) => setPassword(() => value);
+    const handleEmail = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => setEmail(() => value);
+    const handlePassword = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => setPassword(() => value);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.SyntheticEvent) => {
         e.preventDefault();
 
         if (!email.trim() || !password.trim()) {
@@ -93,7 +104,11 @@ export default function Login() {
 
         <Div>
             <H1>Login</H1>
-            <P>Welcome back. Enter your credentials to access your account</P>
+            <P>Availibale 2 accounts for test</P>
+            <GropHorizontal>
+                <Hints />
+            </GropHorizontal>
+
             <LoginForm onSubmit={handleSubmit}>
                 <Group>
                     <label htmlFor="email">Email adress:</label>
@@ -105,13 +120,9 @@ export default function Login() {
                     <Input type="password" name="password" value={password} onInput={handlePassword} placeholder="Enter password" required autoComplete="off" />
                 </Group>
 
-                <GropHorizontal>
-                    <input type="checkbox" id="remember" />
-                    <label htmlFor="remember">Keep me signed in</label>
-                </GropHorizontal>
-
                 <LoginBtn type="submit" disabled={isLoading}>{isLoading ? 'Loging...' : 'Continue'}</LoginBtn>
                 <BottomText>Don't have acount? We are very upset</BottomText>
+                <BottomText><NavLink to="/">Home page</NavLink></BottomText>
             </LoginForm>
         </Div>
     )

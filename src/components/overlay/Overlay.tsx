@@ -12,7 +12,7 @@ const StyledOverlay = styled.div<{ $isShow: boolean }>`
     background-color: rgba(0,0,0,0.5);
     z-index: 10;
 
-    @media only screen and ${devices.md}{
+    @media only screen and (min-width: ${devices.md}px){
         display: none; 
     }
 `

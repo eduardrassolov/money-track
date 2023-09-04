@@ -37,19 +37,19 @@ const Section = styled.section`
             }
         }
 
-    @media only screen and ${devices.sm}{
+        @media only screen and (min-width: ${devices.sm}px){
         img{
             max-width: 450px;
         }
     }
 
-    @media only screen and ${devices.md} {   
+    @media only screen and (min-width: ${devices.md}px){
         flex-direction: row;
         letter-spacing: 0.1rem;
         place-items: center;
 
         img{
-           max-width: 500px;
+            max-width: 500px;
         }
 
         p{
@@ -69,7 +69,7 @@ const Section = styled.section`
             }
         }
 
-        @media only screen and ${devices.md}{
+        @media only screen and (min-width: ${devices.md}px){
             grid-template-columns: minmax(auto, 600px) minmax(auto, 600px);
         }
     }

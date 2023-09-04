@@ -13,12 +13,19 @@ import { FILTER_DATE_OPTIONS, FILTER_KEYS } from "../../components/filter/filter
 import { Operations } from "../transactions/Transactions.page";
 import { useQuery } from "@tanstack/react-query";
 import formatNumberWithSpaces from "../../utils/helpers/formatWithSpace";
+import { defaultSort } from "../transactions/loader";
+import { useUser } from "../../utils/hooks/useUser";
 
 export default function Incomes() {
-    const { data: transactions } = useQuery({ queryKey: [QUERY_KEY.INCOMES, null, { field: 'completed_at', direction: 'desc' }], queryFn: loaderIncomes });
+    const { user } = useUser();
+    if (!user) {
+        return;
+    }
+
+    //TODO refactor
+    const { data: transactions } = useQuery({ queryKey: [QUERY_KEY.INCOMES, null, { field: 'completed_at', direction: 'desc' }], queryFn: () => loaderIncomes({ filter: null, sortBy: { ...defaultSort }, userId: user.id }) });
 
     const total = transactions?.reduce((acc, cur) => acc + cur.amount, 0) || 0;
-    console.log(transactions?.length);
     return (
         <>
             <Container>

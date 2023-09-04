@@ -12,7 +12,7 @@ const Div = styled.div`
     display: flex;
     flex-direction: column;
     padding: 0 0 0.7rem;
-    width: clamp(30px,500px, 95%);
+    width: clamp(30px, 600px, 95%);
 `
 export const Operations = styled.div`
     display: flex;
@@ -20,20 +20,25 @@ export const Operations = styled.div`
     margin: 0 0 1rem;
     justify-content: end;
 `
+// const Input = styled.input`
+//     padding: 1rem 2rem;
+//     margin: 0.5rem 0 1rem;
+//     border: 1rem #fff;
+//     border-radius: 15px;
+// `
 
 export default function Transactions() {
     return (
-        <>
-            <Div>
-                <Header text={`All Transactions `} />
+        <Div>
+            <Header text={`All Transactions `} />
 
-                <Operations>
-                    <Filter options={FILTER_DATE_OPTIONS} filterKey={FILTER_KEYS.DATE} />
-                    <Sort />
-                </Operations>
+            <Operations>
+                <Filter options={FILTER_DATE_OPTIONS} filterKey={FILTER_KEYS.DATE} />
+                <Sort />
+            </Operations>
 
-                <TransactionList listType={QUERY_KEY.TRANSACTIONS} loader={loaderTransactions} />
-            </Div>
-        </>
+            {/* <Input type="test" placeholder='Search' /> */}
+            <TransactionList listType={QUERY_KEY.TRANSACTIONS} loader={loaderTransactions} />
+        </Div>
     )
 }

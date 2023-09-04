@@ -1,3 +1,4 @@
+import supabase from "../../services/supabase";
 import { Span, StyledNavLink } from "./AsideItem.style";
 
 type AsideItemProps = {
@@ -6,10 +7,26 @@ type AsideItemProps = {
     onClose: () => void;
 }
 
+export const logout = async () => {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+        throw error.message;
+    }
+}
+
 export default function AsideItem({ name, icon, onClose }: AsideItemProps) {
 
     //TODO refactor magic formatting 
-    const ref = name.toLowerCase() === 'home' ? '/' : `/app/${name.toLowerCase()}`
+
+    let ref = '';
+    if (name.toLowerCase() === 'home') {
+        ref = '/';
+    }
+    else {
+        ref = name.toLowerCase() === 'home' ? '/' : `/app/${name.toLowerCase()}`
+    }
+
     return (
         <li>
             <StyledNavLink to={ref} onClick={onClose}>

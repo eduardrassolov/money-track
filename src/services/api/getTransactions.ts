@@ -1,6 +1,6 @@
 import { ITransaction } from "../../interface/ITransactions";
+import { ILoaderTransaction } from "../../pages/transactions/loader";
 import supabase from "../supabase";
-import { GetAllTransactionsDTO } from "./dto/getTransactions.dto";
 
 export const SELECT = {
   ALL_TRANSACTIONS: `
@@ -9,8 +9,12 @@ export const SELECT = {
   `,
 };
 
-export default async function getTransactions(filter, sortBy): Promise<Array<ITransaction>> {
-  let query = supabase.from("transactions").select(SELECT.ALL_TRANSACTIONS);
+export default async function getTransactions({
+  filter,
+  sortBy,
+  userId,
+}: ILoaderTransaction): Promise<Array<ITransaction>> {
+  let query = supabase.from("transactions").select(SELECT.ALL_TRANSACTIONS).eq("profile_id", userId);
 
   if (filter) {
     query = query.gt("completed_at", filter);
@@ -23,7 +27,8 @@ export default async function getTransactions(filter, sortBy): Promise<Array<ITr
     return new Array<ITransaction>();
   }
 
-  const allTransactions: Array<ITransaction> = data.map((transaction: GetAllTransactionsDTO) => {
+  //TODO remove any
+  const allTransactions: Array<ITransaction> = data.map((transaction: any) => {
     return {
       id: transaction.id,
       description: transaction.description,
@@ -31,6 +36,7 @@ export default async function getTransactions(filter, sortBy): Promise<Array<ITr
       type: { id: transaction.category.type.id, name: transaction.category.type.name },
       category: { id: transaction.category.id, name: transaction.category.name },
       completedAt: new Date(transaction.completed_at),
+      profileId: transaction.profile_id,
     };
   });
 

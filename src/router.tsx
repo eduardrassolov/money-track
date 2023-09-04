@@ -1,4 +1,4 @@
-import { RouteObject, createBrowserRouter, redirect } from "react-router-dom";
+import { RouteObject, createBrowserRouter } from "react-router-dom";
 import AppLayout from "./pages/layout/AppLayout.tsx";
 import Incomes from "./pages/income/Incomes.page.tsx";
 import Expenses from "./pages/expenses/Expenses.page.tsx";
@@ -6,10 +6,10 @@ import Dashboard from "./pages/dashboard/Dashboard.page.tsx";
 
 import Transactions from "./pages/transactions/Transactions.page.tsx";
 import HomePage from "./pages/home/HomePage.tsx";
-
 import ErrorELement from "./components/error/ErrorELement.tsx";
 import Login from "./pages/login/Login.page.tsx";
 import ProtectedLayout from "./pages/layout/ProtectedLayout.tsx";
+import Page404 from "./pages/errors/Page404.tsx";
 
 export const ROUTES = {
     HOME: "/",
@@ -29,7 +29,7 @@ const routes: RouteObject[] = [
     },
     {
         path: ROUTES.LOGIN,
-        element: <Login />
+        element: <Login />,
     },
     {
         path: ROUTES.ROOT,
@@ -56,7 +56,7 @@ const routes: RouteObject[] = [
     },
     {
         path: "*",
-        element: <div>404</div>
+        element: <Page404 />
     }
 ]
 

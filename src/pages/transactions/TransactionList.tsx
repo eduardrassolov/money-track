@@ -8,6 +8,7 @@ import { ILoaderTransaction } from "./loader.ts";
 import { ITransaction } from "../../interface/ITransactions.ts";
 import useFilter from "../../utils/hooks/useFilter.tsx";
 import useSort from "../../utils/hooks/useSort.tsx";
+import { useUser } from "../../utils/hooks/useUser.tsx";
 
 interface ITransactionList {
     listType: string,
@@ -16,11 +17,16 @@ interface ITransactionList {
 
 const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
     const { filter } = useFilter();
+    const { user } = useUser();
+    if (!user) {
+        return;
+    }
+
     const sortBy: SortBy = useSort();
     const { data: transactions, error } = useQuery(
         {
             queryKey: [listType, filter, sortBy],
-            queryFn: () => loader({ filter, sortBy })
+            queryFn: () => loader({ filter, sortBy, userId: user.id })
         });
 
     const queryClient = useQueryClient();

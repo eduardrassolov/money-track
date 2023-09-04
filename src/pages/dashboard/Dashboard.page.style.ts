@@ -21,12 +21,12 @@ const RowContainerCards = styled(RowContainer)`
   gap: 1rem;
   flex-wrap: wrap;
 
-  @media only screen and ${devices.sm} {
+  @media only screen and (min-width: ${devices.sm}px) {
     justify-content: start;
     align-items: flex-start;
   }
 
-  @media only screen and ${devices.md} {
+  @media only screen and (min-width: ${devices.md}px) {
     justify-content: space-between;
   }
 `;
@@ -36,7 +36,7 @@ const PieBlock = styled.div`
   flex-direction: column;
   gap: 1rem;
 
-  @media only screen and ${devices.md} {
+  @media only screen and (min-width: ${devices.md}px) {
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -50,7 +50,7 @@ const PieContainer = styled.div`
   background: #fff;
   border-radius: 15px;
 
-  @media only screen and ${devices.md} {
+  @media only screen and (min-width: ${devices.md}px) {
     flex: 2;
     flex-wrap: wrap;
     min-width: 400px;

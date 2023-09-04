@@ -13,8 +13,9 @@ import calcStats from "../../utils/helpers/calculateStats.ts";
 import CategoryChart from "./categoryChart/CategoryChart.tsx";
 import { SortBy } from "../../types/sortBy.type.ts";
 import { PieBlock, PieContainer, RowContainer, RowContainerCards, StyledContainer } from "./Dashboard.page.style.ts";
-import { getSummaryData } from "../../utils/helpers/getStats.ts";
+import { ISummary, getSummaryData } from "../../utils/helpers/getStats.ts";
 import useFilter from "../../utils/hooks/useFilter.tsx";
+import { useUser } from "../../utils/hooks/useUser.tsx";
 
 const statCardData: Array<StatsCardData> = [
   {
@@ -46,19 +47,25 @@ const statCardData: Array<StatsCardData> = [
 // TODO - refactor component Dashboard. Remove caclulation from component
 export default function Dashboard() {
   const { filter } = useFilter();
+  const { user } = useUser();
+
+  if (!user) {
+    return;
+  }
+  const userId = user.id;
   const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
 
-  const { data: transactions } = useQuery({ queryKey: [QUERY_KEY.TRANSACTIONS, filter, sortBy], queryFn: () => loaderTransactions({ filter, sortBy }) });
-  const { data: expenses } = useQuery({ queryKey: [QUERY_KEY.EXPENSES, filter, sortBy], queryFn: () => loaderExpenses({ filter, sortBy }) });
-  const { data: incomes } = useQuery({ queryKey: [QUERY_KEY.INCOMES, filter, sortBy], queryFn: () => loaderIncomes({ filter, sortBy }) });
+  const { data: transactions } = useQuery({ queryKey: [QUERY_KEY.TRANSACTIONS, filter, sortBy, userId], queryFn: () => loaderTransactions({ filter, sortBy, userId }) });
+  const { data: expenses } = useQuery({ queryKey: [QUERY_KEY.EXPENSES, filter, sortBy], queryFn: () => loaderExpenses({ filter, sortBy, userId }) });
+  const { data: incomes } = useQuery({ queryKey: [QUERY_KEY.INCOMES, filter, sortBy], queryFn: () => loaderIncomes({ filter, sortBy, userId }) });
 
   if (!transactions || !incomes || !expenses)
     return null;
 
   const stats = calcStats({ expenses, incomes });
 
-  const summaryExpenses = getSummaryData(expenses);
-  const summaryIncomes = getSummaryData(incomes);
+  const summaryExpenses: Array<ISummary> = getSummaryData(expenses);
+  const summaryIncomes: Array<ISummary> = getSummaryData(incomes);
 
   return (
     <>
@@ -69,20 +76,27 @@ export default function Dashboard() {
           {statCardData.map((item, index) => <StatCard key={item.name} item={item} value={stats[index]} />)}
         </RowContainerCards>
 
-        <RowContainer>
-          <Diagram data={[...transactions]} />
-        </RowContainer>
+        {transactions.length ?
+          <RowContainer>
+            <Diagram data={[...transactions]} />
+          </RowContainer>
+          : ''}
+
 
         <PieBlock>
-          <PieContainer>
-            <Header text="Expenses by categories" />
-            <CategoryChart data={summaryExpenses} />
-          </PieContainer>
+          {expenses.length ?
+            <PieContainer>
+              <Header text="Expenses by categories" />
+              <CategoryChart data={summaryExpenses} />
+            </PieContainer>
+            : ''}
+          {incomes.length ?
+            <PieContainer>
+              <Header text="Incomes by categories" />
+              <CategoryChart data={summaryIncomes} />
+            </PieContainer>
+            : ''}
 
-          <PieContainer>
-            <Header text="Incomes by categories" />
-            <CategoryChart data={summaryIncomes} />
-          </PieContainer>
         </PieBlock>
       </StyledContainer >
     </>

@@ -1,5 +1,4 @@
 import { Outlet } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import NavBar from '../../components/aside/NavBar/NavBar.tsx';
 import BurgerMenu from '../../components/burger/BurgerMenu.tsx';
@@ -22,12 +21,7 @@ export default function AppLayout() {
                 <Outlet />
             </Section>
 
-            <ToastContainer
-                position="top-center"
-                hideProgressBar={true}
-                pauseOnHover={false}
-                autoClose={2000}
-            />
+
 
         </StyledLayout>
     )

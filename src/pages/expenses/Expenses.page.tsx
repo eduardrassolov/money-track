@@ -12,9 +12,19 @@ import { Operations } from "../transactions/Transactions.page";
 import Sort from "../../components/sort/Sort";
 import formatNumberWithSpaces from "../../utils/helpers/formatWithSpace";
 import { useQuery } from "@tanstack/react-query";
+import { useUser } from "../../utils/hooks/useUser";
+import { defaultSort } from "../transactions/loader";
 
 export default function Expenses() {
-  const { data: transactions } = useQuery({ queryKey: [QUERY_KEY.EXPENSES, null, { field: 'completed_at', direction: 'desc' }], queryFn: loaderExpenses });
+  const { user } = useUser();
+  if (!user) {
+    return;
+  }
+
+  //TODO refactor 
+  const { data: transactions } = useQuery({
+    queryKey: [QUERY_KEY.EXPENSES, null, { ...defaultSort }, user?.id], queryFn: () => loaderExpenses({ filter: null, sortBy: defaultSort, userId: user?.id })
+  });
 
   const total = transactions?.reduce((acc, cur) => acc + cur.amount, 0) || 0;
   console.log(transactions?.length);

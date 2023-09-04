@@ -11,4 +11,5 @@ export interface ITransaction {
     id: number;
     name: string;
   };
+  profileId: string;
 }

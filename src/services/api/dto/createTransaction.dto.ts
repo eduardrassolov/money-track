@@ -1,7 +1,8 @@
-export type CreateTransactionDTO = {
+export interface ICreateTransactionDTO {
   amount: number;
   category_id: number;
   completed_at: string;
   description: string;
-  user_id: number;
-};
+  id?: number;
+  profile_id: string;
+}

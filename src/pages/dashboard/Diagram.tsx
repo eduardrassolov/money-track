@@ -22,7 +22,7 @@ interface IDiagramProps {
 const Diagram: FC<IDiagramProps> = ({ data }) => {
     const diagramData = data.map((transaction) => {
         return {
-            name: formatDate(new Date(transaction.completedAt)),
+            name: formatDate(transaction.completedAt.toString()),
             Expenses: transaction.type.id === TYPES_TRANSACTION.EXPENSE ? transaction.amount : 0,
             Incomes: transaction.type.id === TYPES_TRANSACTION.INCOME ? transaction.amount : 0,
         }

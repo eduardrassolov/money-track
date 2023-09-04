@@ -1,5 +1,7 @@
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import useResize from "../useResize";
+import { ISummary } from "../../../utils/helpers/getStats";
+import { FC } from "react";
 
 const pieChartColors = [
     "#FF3D68",
@@ -18,7 +20,16 @@ const pieChartColors = [
     "#FF684B",
 ];
 
-const createData = (arr) => {
+interface IChartData {
+    name: string,
+    value: number
+}
+
+interface ICategoryChart {
+    data: Array<ISummary>
+}
+
+const createData = (arr: Array<ISummary>): Array<IChartData> => {
     return arr.map((category) => {
         return {
             name: `${category.name} - ${category.percentage}%`,
@@ -27,17 +38,17 @@ const createData = (arr) => {
     })
 }
 
-export default function CategoryChart({ data }) {
+const CategoryChart: FC<ICategoryChart> = ({ data }) => {
     const { isSmallScreen } = useResize();
 
     console.log(isSmallScreen);
     const dt = createData(data);
-    console.log(dt);
     const size = 100;
+
     return (
         <>
             <ResponsiveContainer width="100%" height={350}>
-                <PieChart width="100%">
+                <PieChart>
                     <Pie
                         dataKey="value"
                         isAnimationActive={false}
@@ -49,7 +60,7 @@ export default function CategoryChart({ data }) {
                         fill="#8884d8"
                         paddingAngle={3}
                     >
-                        {data.map((entry, index) => (
+                        {data.map((_, index) => (
                             <Cell key={`cell-${index}`} fill={pieChartColors[index]} />
                         ))}
                     </Pie>
@@ -63,7 +74,9 @@ export default function CategoryChart({ data }) {
                     />
 
                 </PieChart>
-            </ResponsiveContainer>
+            </ResponsiveContainer >
         </>
     )
 }
+
+export default CategoryChart

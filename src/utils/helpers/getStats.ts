@@ -1,20 +1,23 @@
 import { ITransaction } from "../../interface/ITransactions";
 
-interface ISummary {
+export interface ISummary {
   name: string;
   value: number;
   percentage: number;
 }
 
-export function getSummaryData(transactions: Array<ITransaction>) {
+interface IFilteredCategory {
+  [key: string]: number;
+}
+
+export function getSummaryData(transactions: Array<ITransaction>): ISummary[] {
   const summaryData = filterDataByCategory(transactions);
   const totalAmount = transactions.reduce((acc: number, cur: ITransaction) => acc + cur.amount, 0);
-
   return calculateSummary(summaryData, totalAmount);
 }
 
-function filterDataByCategory(transactions) {
-  return transactions.reduce((acc, cur) => {
+function filterDataByCategory(transactions: Array<ITransaction>): IFilteredCategory {
+  return transactions.reduce((acc: IFilteredCategory, cur: ITransaction) => {
     if (!acc[cur.category.name]) {
       acc[cur.category.name] = cur.amount;
     } else {
@@ -24,11 +27,11 @@ function filterDataByCategory(transactions) {
   }, {});
 }
 
-function calculateSummary(data, totalAmount: number) {
-  return Object.entries(data).map(([name, value]) => {
+function calculateSummary(data: IFilteredCategory, totalAmount: number): ISummary[] {
+  return Object.entries(data).map(([name, value]: [string, number]) => {
     return {
-      name: name,
-      value: value,
+      name,
+      value,
       percentage: Math.round((value * 100) / totalAmount),
     };
   });

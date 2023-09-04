@@ -1,13 +1,17 @@
+import React, { FC } from "react";
 import { useUser } from "../../utils/hooks/useUser";
+import NoPermission from "../errors/NoPermission";
 
+interface IProtected {
+    children: React.ReactNode;
+}
 
-const ProtectedLayout = ({ children }) => {
-    const { user, isAuthenticated } = useUser();
-    console.log('CurrUser', user);
+const ProtectedLayout: FC<IProtected> = ({ children }) => {
+    const { isAuthenticated } = useUser();
 
-    if (isAuthenticated) {
-        return children;
+    if (!isAuthenticated) {
+        return <NoPermission />;
     }
-    return null;
+    return children;
 }
 export default ProtectedLayout;

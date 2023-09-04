@@ -1,4 +1,6 @@
 export type GetAllTransactionsDTO = {
+  id: number;
+  description: string;
   amount: number;
   category: {
     id: number;
@@ -9,7 +11,5 @@ export type GetAllTransactionsDTO = {
     };
   };
   completed_at: string;
-  description: string;
-  id: number;
-  };
+  profile_id: string;
 };

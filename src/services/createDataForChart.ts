@@ -1,13 +1,12 @@
 import { ITransaction } from "../interface/ITransactions";
 
 interface IChartData {
-  name: string;
-  Income: number;
-  Expense: number;
-  amt: number;
+  name: Date;
+  uv: number;
+  pv: number;
 }
 
-export function createDataForChart(data: Array<ITransaction>): Array<IChartData> {
+export function createDataForChart(data: Array<ITransaction>): IChartData[] {
   return data.map((transaction: ITransaction) => {
     return {
       name: transaction.completedAt,

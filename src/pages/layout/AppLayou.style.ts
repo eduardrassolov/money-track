@@ -16,7 +16,7 @@ const Section = styled.section`
   overflow: scroll;
   padding: 5rem 0;
 
-  @media only screen and ${devices.md} {
+  @media only screen and (min-width: ${devices.md}px) {
     padding: 1rem 0;
   }
 `;

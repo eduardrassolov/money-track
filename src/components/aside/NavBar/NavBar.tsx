@@ -1,8 +1,7 @@
-import BurgerMenu from "../../burger/BurgerMenu";
 import { styled } from "styled-components";
-import Overlay from "../../overlay/Overlay";
-import { devices } from "../../../styles/breakPoints";
 import { FC } from "react";
+import BurgerMenu from "../../burger/BurgerMenu";
+import { devices } from "../../../styles/breakPoints";
 
 const Nav = styled.nav`
     background: #fff;
@@ -15,7 +14,7 @@ const Nav = styled.nav`
     transition: all 300ms ease-in-out;
     transform: translateY(0);
 
-    @media only screen and ${devices.md}{
+    @media only screen and (min-width: ${devices.md}px){
         transform: translateY(-5rem);
     }
 `
@@ -29,7 +28,7 @@ export interface IBar {
 const NavBar: FC<IBar> = ({ isBurgerOpen, onClose }) => {
     return (
         <Nav>
-            {/* <BurgerMenu isOpen={isBurgerOpen} onClose={onClose} /> */}
+            <BurgerMenu isOpen={isBurgerOpen} onClose={onClose} />
         </Nav >
     )
 }
