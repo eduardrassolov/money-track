@@ -7,9 +7,9 @@ import Dashboard from "./pages/dashboard/Dashboard.page.tsx";
 import Transactions from "./pages/transactions/Transactions.page.tsx";
 import HomePage from "./pages/home/HomePage.tsx";
 import ErrorELement from "./components/error/ErrorELement.tsx";
-import Login from "./pages/login/Login.page.tsx";
 import ProtectedLayout from "./pages/layout/ProtectedLayout.tsx";
 import Page404 from "./pages/errors/Page404.tsx";
+import Login from "./pages/login/Login.page.tsx";
 
 export const ROUTES = {
     HOME: "/",
