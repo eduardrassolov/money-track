@@ -23,6 +23,9 @@ export default function AsideItem({ name, icon, onClose }: AsideItemProps) {
     if (name.toLowerCase() === 'home') {
         ref = '/';
     }
+    if (name.toLocaleLowerCase() === 'logout') {
+        ref = '/login'
+    }
     else {
         ref = name.toLowerCase() === 'home' ? '/' : `/app/${name.toLowerCase()}`
     }

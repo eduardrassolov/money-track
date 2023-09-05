@@ -10,10 +10,12 @@ import ErrorELement from "./components/error/ErrorELement.tsx";
 import ProtectedLayout from "./pages/layout/ProtectedLayout.tsx";
 import Page404 from "./pages/errors/Page404.tsx";
 import Login from "./pages/login/Login.page.tsx";
+import SignUp from "./pages/signUp/SignUp.page.tsx";
 
 export const ROUTES = {
     HOME: "/",
     LOGIN: "/login",
+    SIGN_UP: "/sign-up",
 
     ROOT: "/app",
     TRANSACTIONS: `/app/transactions`,
@@ -31,6 +33,11 @@ const routes: RouteObject[] = [
         path: ROUTES.LOGIN,
         element: <Login />,
     },
+    {
+        path: ROUTES.SIGN_UP,
+        element: <SignUp />
+    },
+
     {
         path: ROUTES.ROOT,
         element: <ProtectedLayout> <AppLayout /> </ProtectedLayout>,
