@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { LoginBtn } from "../../styles/Button";
-import { useLogin } from "./useLogin";
-import Hints from "./Hints";
+import { LoginBtn } from "../../styles/Button.tsx";
+import { useLogin } from "./useLogin.tsx";
+import Hints from "./Hints.tsx";
 import { BottomText, Div, Form, GropHorizontal, Group, H1, Input, P, StyledLink } from "./Login.style.ts";
 
 
