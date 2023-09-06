@@ -2,7 +2,7 @@ import INewTransaction from "../../interface/IInsertTransaction";
 import supabase from "../supabase";
 import { ICreateTransactionDTO } from "./dto/createTransaction.dto";
 
-export default async function createTransaction(transaction: INewTransaction) {
+export default async function apiCreateTransaction(transaction: INewTransaction) {
   try {
     const newTransactionDTO: ICreateTransactionDTO = {
       amount: transaction.amount,

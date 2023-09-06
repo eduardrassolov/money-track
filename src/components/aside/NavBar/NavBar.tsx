@@ -6,15 +6,17 @@ import { devices } from "../../../styles/breakPoints";
 const Nav = styled.nav`
     background: #fff;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 1.5rem;
     position: fixed;
     padding: 1rem;
     transition: all 300ms ease-in-out;
+    gap: 2rem;
     transform: translateY(0);
 
-    @media only screen and (min-width: ${devices.md}px){
+    @media only screen and (min-width: ${devices.md}px) {
         transform: translateY(-5rem);
     }
 `

@@ -1,49 +1,46 @@
 import TYPES_TRANSACTION from '../../config/typeTransactions'
-import { FC, memo } from 'react'
+import { FC } from 'react'
 import Category from '../category/Category';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
-import createTransaction from '../../services/api/createTransaction';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { toast } from 'react-toastify';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEY } from '../../config/queryClientKeys';
-import IInsertTransaction from '../../interface/IInsertTransaction';
 import getCategory from '../../services/api/getCategory';
 import { PrimaryBtn, SecondaryBtn } from '../../styles/Button';
 import { ErrorP, Form, FormFooter, FormGroup } from './FormTransaction.style';
 import { Inputs } from '../../types/Inputs.type';
 import { useUser } from '../../utils/hooks/useUser';
+import useCreateTransaction from './useCreateTransaction';
 interface INewTransactionProps {
     type: number;
 }
 
-const TransactionForm: FC<INewTransactionProps> = memo(function ({ type }) {
+const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
     const { user } = useUser();
     const queryClient = useQueryClient();
 
     //TODO remove fetching data for SELECT and put globally
-    const { data: optionsList } = useQuery({ queryKey: ['categories'], queryFn: () => getCategory(type) });
-
+    const { data: optionsList } = useQuery({ queryKey: [QUERY_KEY.CATEGORIES], queryFn: () => getCategory(type) });
     const { register, handleSubmit, reset, formState: { errors } } = useForm<Inputs>();
-
-    const { mutate } = useMutation({
-        mutationFn: (newTransaction: IInsertTransaction) => createTransaction(newTransaction),
-        onSuccess: () => {
-            toast.success('Added successfully');
-            queryClient.invalidateQueries({ queryKey: [type === TYPES_TRANSACTION.INCOME ? QUERY_KEY.INCOMES : QUERY_KEY.EXPENSES] });
-            reset();
-        }
-    })
+    const { createTransaction } = useCreateTransaction();
 
     const onSubmit: SubmitHandler<Inputs> = ({ description, amount, completed_at, category }) => {
         if (!description.trim() || !amount || !completed_at || !category)
             return;
 
-        mutate({
-            description: description,
-            amount: amount,
+        const key = type === TYPES_TRANSACTION.INCOME ? QUERY_KEY.INCOMES : QUERY_KEY.EXPENSES;
+
+        createTransaction({
+            description,
+            amount,
             completedAt: completed_at.toString(),
             categoryId: category,
             profileId: user?.id || ''
+        }, {
+            onSuccess: () => {
+                console.log('success');
+                queryClient.invalidateQueries({ queryKey: [key] });
+                reset();
+            }
         })
     }
     const onError: SubmitErrorHandler<Inputs> = (error) => console.log(error);
@@ -91,5 +88,5 @@ const TransactionForm: FC<INewTransactionProps> = memo(function ({ type }) {
             </FormFooter>
         </Form>
     )
-})
+}
 export default TransactionForm;

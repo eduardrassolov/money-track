@@ -18,3 +18,17 @@ export async function apiLogout() {
     throw error.message;
   }
 }
+
+export async function apiSignUp(email: string, password: string, fisrtName: string, lastName: string) {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        fisrtName,
+        lastName,
+      },
+    },
+  });
+  return { data, error };
+}

@@ -20,6 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         pauseOnHover={false}
         autoClose={2000}
       />
+
       <RouterProvider router={router} />
     </QueryClientProvider>
   </React.StrictMode>,

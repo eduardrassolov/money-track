@@ -21,8 +21,6 @@ export default function AppLayout() {
                 <Outlet />
             </Section>
 
-
-
         </StyledLayout>
     )
 }

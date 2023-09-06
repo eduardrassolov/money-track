@@ -11,7 +11,7 @@ import TransactionList from './TransactionList'
 const Div = styled.div`
     display: flex;
     flex-direction: column;
-    padding: 0 0 0.7rem;
+    padding: 2rem 0 0.7rem;
     width: clamp(30px, 600px, 95%);
 `
 export const Operations = styled.div`

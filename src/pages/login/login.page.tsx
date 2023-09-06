@@ -8,7 +8,7 @@ import Hints from "./Hints";
 import { NavLink } from "react-router-dom";
 
 
-const Div = styled.div`
+export const Div = styled.div`
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -24,11 +24,11 @@ const Div = styled.div`
     }
 `
 
-const H1 = styled.h1`
+export const H1 = styled.h1`
     margin: 0 0 0.5rem;
     padding: 0;
 `
-const P = styled.p`
+export const P = styled.p`
     margin: 0;
     font-size: 1rem;
     font-weight: 409;
@@ -38,14 +38,15 @@ const P = styled.p`
     font-weight: 400;
     width: fit-content;
 `
-const BottomText = styled(P)`
+export const BottomText = styled(P)`
     color: #8f8f8f;
     margin: 1rem auto 0;
     font-size: 0.8rem;
     width: fit-content;
+    gap: 0.5rem;
 `
 
-const LoginForm = styled.form`
+export const Form = styled.form`
     display: flex;
     flex-direction: column;     
     box-sizing: border-box;
@@ -53,20 +54,21 @@ const LoginForm = styled.form`
     max-width: 550px;
     height: auto;
     margin: 2rem 0;
+    padding: 0 0 1rem;
 `
-const GropHorizontal = styled.div`
+export const GropHorizontal = styled.div`
     display: flex;
     margin: 0 0 1.5rem;
     gap: 0.3rem;
 `
 
-const Group = styled.div`
+export const Group = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
     margin: 0 0 1.5rem;
 `
-const Input = styled.input`
+export const Input = styled.input`
     box-sizing: border-box;
     border-radius: 10px;
     border: 1px solid #E4E4E7;
@@ -78,6 +80,15 @@ const Input = styled.input`
         transition: all 300ms ease-in-out;
         outline: none;
         border: 1px solid #3b82f6;
+    }
+`
+export const StyledLink = styled(NavLink)`
+    text-decoration: none;
+    font-size: 0.8rem;
+    color: #5b617d;
+    
+    &:visited{
+        color: #5b617d;
     }
 `
 
@@ -109,7 +120,7 @@ export default function Login() {
                 <Hints />
             </GropHorizontal>
 
-            <LoginForm onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit}>
                 <Group>
                     <label htmlFor="email">Email adress:</label>
                     <Input type="email" name="email" value={email} onInput={handleEmail} placeholder="Enter email" required autoComplete="off" />
@@ -121,9 +132,10 @@ export default function Login() {
                 </Group>
 
                 <LoginBtn type="submit" disabled={isLoading}>{isLoading ? 'Loging...' : 'Continue'}</LoginBtn>
-                <BottomText>Don't have acount? We are very upset</BottomText>
-                <BottomText><NavLink to="/">Home page</NavLink></BottomText>
-            </LoginForm>
+                <BottomText>Don't have acount? <StyledLink to="/sign-up">Sign Up</StyledLink></BottomText>
+
+                <BottomText><StyledLink to="/">Home page</StyledLink></BottomText>
+            </Form>
         </Div>
     )
 }

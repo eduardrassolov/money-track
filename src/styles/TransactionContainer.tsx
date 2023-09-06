@@ -2,19 +2,19 @@ import { styled } from "styled-components"
 import { devices } from "./breakPoints.ts"
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0 1rem 1rem;
+  gap: 2rem;
+
+  @media only screen and (min-width: ${devices.md}px) {
     display: grid;
     grid-template-columns: 1fr 3fr;
     grid-template-rows: auto;
     grid-column-gap: 1.2rem;
-    margin: 0 1rem 1rem;
     max-width: 1000px;
-    display: flex;
     flex-direction: column;
-    gap: 2rem;
-
-  @media only screen and (min-width: ${devices.md}px) {
-        flex-direction: row;
-    }
+  }
 `
 
 const FormDiv = styled.div`

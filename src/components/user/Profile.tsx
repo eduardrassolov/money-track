@@ -5,23 +5,20 @@ import Avatar from './Avatar'
 
 const P = styled.p`
     overflow-wrap: break-word;
-    margin: 0;
+    margin: 0 0 1rem;
 `
 const ProfileContainer = styled.div`
     display: flex;
     flex-direction: column;
-    margin: 0 1rem 1rem; 
     text-align: center;
-    
 `
 
 export default function Profile() {
-    const { user } = useUser();
-    console.log(user);
+    const { user } = useUser()
     return (
         <ProfileContainer>
             <Avatar />
-            <P>User id: <br />{user?.id}</P>
-        </ProfileContainer>
+            <P>{user?.email}</P>
+        </ProfileContainer >
     )
 }
