@@ -1,5 +1,4 @@
 import { styled } from "styled-components";
-import { devices } from "../../styles/breakPoints";
 
 const StyledLayout = styled.div`
   display: flex;

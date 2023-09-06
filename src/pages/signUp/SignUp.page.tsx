@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 import { BottomText, Div, Form, Group, H1, Input, StyledLink } from '../login/Login.page';
 import { LoginBtn } from '../../styles/Button';
