@@ -1,5 +1,5 @@
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
-import { BottomText, Div, Form, Group, H1, Input, StyledLink } from '../login/Login.page';
+
 import { LoginBtn } from '../../styles/Button';
 import { ErrorMessage } from '@hookform/error-message';
 import { styled } from 'styled-components';
@@ -7,6 +7,7 @@ import { apiSignUp } from '../../services/api/apiUser';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../router';
 import { toast } from 'react-toastify';
+import { BottomText, Div, Form, Group, H1, Input, StyledLink } from '../login/Login.page';
 
 type Inputs = {
     email: string,
