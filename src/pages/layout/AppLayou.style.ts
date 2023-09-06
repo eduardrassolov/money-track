@@ -14,11 +14,7 @@ const Section = styled.section`
   flex-direction: column;
   align-items: center;
   overflow: scroll;
-  padding: 5rem 0;
-
-  @media only screen and (min-width: ${devices.md}px) {
-    padding: 1rem 0;
-  }
+  padding: 2rem 0;
 `;
 
 export { StyledLayout, Section };

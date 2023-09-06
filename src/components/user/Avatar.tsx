@@ -5,7 +5,7 @@ import { styled } from 'styled-components'
 const AvatarContainer = styled.div`
     color:  #3b82f6;
     border-radius: 15px;
-    font-size: 3.5rem;
+    font-size: 4rem;
     display: flex;
     justify-content: center;
     align-items: center;

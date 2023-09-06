@@ -39,8 +39,7 @@ export default function SignUp() {
     });
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        console.log(data);
-        const { error } = await apiSignUp(data.email, data.password);
+        const { error } = await apiSignUp(data.email, data.password, data.firstName, data.lastName);
 
         if (error) {
             toast.error(error.message);

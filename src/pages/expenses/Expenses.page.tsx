@@ -38,7 +38,6 @@ export default function Expenses() {
         <ListDiv>
           <Header text={`Total expenses: $${formatNumberWithSpaces(total)}`} />
 
-
           {!transactions?.length ?
             '' :
             <>

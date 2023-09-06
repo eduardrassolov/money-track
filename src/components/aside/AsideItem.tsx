@@ -13,18 +13,15 @@ export const logout = async () => {
     if (error) {
         throw error.message;
     }
+    return true;
 }
 
 export default function AsideItem({ name, icon, onClose }: AsideItemProps) {
 
     //TODO refactor magic formatting 
-
     let ref = '';
     if (name.toLowerCase() === 'home') {
         ref = '/';
-    }
-    if (name.toLocaleLowerCase() === 'logout') {
-        ref = '/login'
     }
     else {
         ref = name.toLowerCase() === 'home' ? '/' : `/app/${name.toLowerCase()}`
