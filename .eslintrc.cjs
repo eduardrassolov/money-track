@@ -1,12 +1,13 @@
 module.exports = {
   root: true,
   env: { browser: true, es2020: true },
-  // extends: [
-  //   'eslint:recommended',
-  //   'plugin:@typescript-eslint/recommended',
-  //   'plugin:react-hooks/recommended',
-  // ],
-  extends: ["airbnb", "plugin:prettier/recommended", "prettier/react"],
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended",
+    "prettier/react",
+  ],
   ignorePatterns: ["dist", ".eslintrc.cjs"],
   parser: "@typescript-eslint/parser",
   plugins: ["react-refresh"],
@@ -17,7 +18,7 @@ module.exports = {
       "warn",
       {
         code: 80,
-        tabWidth: 2,
+        tabWidth: 4,
         comments: 80,
         ignoreComments: false,
         ignoreTrailingComments: true,
