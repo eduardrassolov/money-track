@@ -7,7 +7,7 @@ import { apiSignUp } from '../../services/api/apiUser';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../router';
 import { toast } from 'react-toastify';
-import { BottomText, Div, Form, Group, H1, Input, StyledLink } from '../login/Login.page';
+import { BottomText, Div, Form, Group, H1, Input, StyledLink } from '../login/Login.style.ts';
 
 type Inputs = {
     email: string,

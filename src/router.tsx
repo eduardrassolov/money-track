@@ -13,6 +13,7 @@ import Page404 from "./pages/errors/Page404.tsx";
 import SignUp from "./pages/signUp/SignUp.page.tsx";
 import Login from "./pages/login/Login.page.tsx";
 
+
 export const ROUTES = {
     HOME: "/",
     LOGIN: "/login",
