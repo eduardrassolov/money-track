@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useUser } from "../../utils/hooks/useUser";
-import Login from "../login/Login.page.tsx";
+import Login from "../login/Login.page";
 
 
 interface IProtected {

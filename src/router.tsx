@@ -11,7 +11,7 @@ import ProtectedLayout from "./pages/layout/ProtectedLayout.tsx";
 import Page404 from "./pages/errors/Page404.tsx";
 
 import SignUp from "./pages/signUp/SignUp.page.tsx";
-import Login from "./pages/login/Login.page.tsx";
+import Login from "./pages/login/Login.page";
 
 
 export const ROUTES = {
