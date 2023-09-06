@@ -2,8 +2,6 @@ import React, { FC } from "react";
 import { useUser } from "../../utils/hooks/useUser";
 import LoginPage from "../login/LoginPage";
 
-
-
 interface IProtected {
     children: React.ReactNode;
 }
