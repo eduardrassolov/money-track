@@ -5,7 +5,7 @@ import Hints from "./Hints";
 import { BottomText, Div, Form, GropHorizontal, Group, H1, Input, P, StyledLink } from "./Login.style.ts";
 
 
-const Login = () => {
+export default function LoginPage() {
     const { login, isLoading } = useLogin();
 
     const [email, setEmail] = useState('');
@@ -52,4 +52,3 @@ const Login = () => {
         </Div>
     )
 }
-export default Login;
