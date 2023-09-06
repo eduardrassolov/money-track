@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useUser } from "../../utils/hooks/useUser";
-import Login from "../login/Login.page";
+// import Login from "../login/Login.page";
 
 
 interface IProtected {
@@ -11,7 +11,8 @@ const ProtectedLayout: FC<IProtected> = ({ children }) => {
     const { isAuthenticated } = useUser();
 
     if (!isAuthenticated) {
-        return <Login />;
+        // return <Login />;
+        return;
     }
     return children;
 }
