@@ -27,7 +27,7 @@ export default function Expenses() {
   });
 
   const total = transactions?.reduce((acc, cur) => acc + cur.amount, 0) || 0;
-  console.log(transactions?.length);
+
   return (
     <>
       <Container>
@@ -38,8 +38,7 @@ export default function Expenses() {
         <ListDiv>
           <Header text={`Total expenses: $${formatNumberWithSpaces(total)}`} />
 
-          {!transactions?.length ?
-            '' :
+          {!transactions?.length ? '' :
             <>
               <Operations>
                 <Filter options={FILTER_DATE_OPTIONS} filterKey={FILTER_KEYS.DATE} />

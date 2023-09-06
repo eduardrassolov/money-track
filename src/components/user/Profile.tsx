@@ -5,10 +5,12 @@ import Avatar from './Avatar'
 
 const P = styled.p`
     overflow-wrap: break-word;
+    margin: 0 0 1rem;
 `
 const ProfileContainer = styled.div`
     display: flex;
     flex-direction: column;
+    text-align: center;
 `
 
 export default function Profile() {
@@ -16,7 +18,7 @@ export default function Profile() {
     return (
         <ProfileContainer>
             <Avatar />
-            <div><P>User id: <br />{user?.id}</P></div>
-        </ProfileContainer>
+            <P>{user?.email}</P>
+        </ProfileContainer >
     )
 }
