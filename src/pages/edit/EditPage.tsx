@@ -1,5 +1,5 @@
 
-import { useLoaderData, useNavigate } from "react-router-dom"
+import { useLoaderData } from "react-router-dom"
 import Header from "../../ui/header/Header";
 import { styled } from "styled-components";
 import { ErrorP, Form, FormFooter, FormGroup } from "../../components/newTransaction/FormTransaction.style";
@@ -13,7 +13,6 @@ import getCategory from "../../services/api/getCategory";
 import useEdit from "./useEdit";
 import { queryClient } from "../../main";
 import usePageBack from "../../utils/hooks/usePageBack";
-
 
 const EditContainer = styled.div`
     display: flex;

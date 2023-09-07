@@ -11,7 +11,8 @@ export const StyledBurger = styled.div<{ $isOpen: boolean }>`
     position: fixed;
     z-index: 20;
     right: 1rem;
-    top: 1.6rem;
+    top: 1rem;
+
 
     div {
         width: 2rem;
