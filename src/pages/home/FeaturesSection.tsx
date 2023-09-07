@@ -31,19 +31,19 @@ const featuresData: Array<IFeatureData> = [
         id: "feature1",
         title: "Effortless Expense Tracking",
         text: "Say goodbye to the hassle of manual expense tracking. We simplifies the process by allowing you to effortlessly record and categorize your expenses in seconds.",
-        imgPath: "src/img/img1.avif"
+        imgPath: "./img1.avif"
     },
     {
         id: "feature2",
         title: "Real-Time Budget Visualization",
         text: "Visualize your budget in real time with intuitive graphs and charts. See where your money is going, identify trends, and make informed decisions to optimize your spending.",
-        imgPath: "src/img/chart.avif"
+        imgPath: "./chart.avif"
     },
     {
         id: "feature3",
         title: "Access Anytime, Anywhere",
         text: "Access your financial information on the go. E-Budget is available on web, ensuring you're always in control of your money.",
-        imgPath: "src/img/img3.avif"
+        imgPath: "./img3.avif"
     }
 ]
 

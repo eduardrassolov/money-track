@@ -91,7 +91,7 @@ export default function HeaderSection({ id }: IHeader) {
                 <Highlight><strong>Finance Manager</strong></Highlight>
             </div>
             <div>
-                <img src='src/img/bg.avif' />
+                <img src='./bg.avif' />
             </div>
         </Section>
     )
