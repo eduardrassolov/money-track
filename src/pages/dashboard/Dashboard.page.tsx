@@ -82,7 +82,6 @@ export default function Dashboard() {
           </RowContainer>
           : ''}
 
-
         <PieBlock>
           {expenses.length ?
             <PieContainer>

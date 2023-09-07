@@ -5,7 +5,7 @@ import Overlay from "../../../components/overlay/Overlay"
 import Logo from "../../../components/logo/Logo"
 
 const Nav = styled.nav`
-    background: #F9F5F6;
+    background: ${(props) => props.theme.body};
     border-bottom: 2px solid #E5E5E5;
     font-size: 1rem;
     display: flex;

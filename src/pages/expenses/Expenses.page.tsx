@@ -31,6 +31,7 @@ export default function Expenses() {
   return (
     <>
       <Container>
+
         <FormDiv>
           <TransactionForm type={TYPES_TRANSACTION.EXPENSE} />
         </FormDiv>

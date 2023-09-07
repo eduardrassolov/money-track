@@ -13,6 +13,7 @@ const Container = styled.div`
     width: 100vw;
     display: flex;
     flex-direction: column;
+    color: ${(props) => props.theme.text};
 `
 
 export default function HomePage() {
