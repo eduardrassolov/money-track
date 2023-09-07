@@ -3,7 +3,6 @@ import { ITransaction } from "../../interface/ITransactions";
 import TransactionFooter from "./TransactionFooter";
 import TransactionHeader from "./TransactionHeader";
 import { Container, InfoSection, OperationSection, StyledEdit, StyledIcon } from "./TransactionCard.style";
-import { HiOutlinePencilSquare } from "react-icons/hi2";
 
 interface ITransactionProps {
   item: ITransaction;

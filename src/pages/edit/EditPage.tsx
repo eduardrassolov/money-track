@@ -13,6 +13,7 @@ import getCategory from "../../services/api/getCategory";
 import useEdit from "./useEdit";
 import { queryClient } from "../../main";
 import usePageBack from "../../utils/hooks/usePageBack";
+import { GetAllTransactionsDTO } from "../../services/api/dto/getTransactions.dto";
 
 const EditContainer = styled.div`
     display: flex;
@@ -20,7 +21,7 @@ const EditContainer = styled.div`
 `
 
 export default function EditPage() {
-    const [data] = useLoaderData();
+    const [data] = useLoaderData() as Array<GetAllTransactionsDTO>;
     if (!data) {
         return null;
     }
@@ -73,7 +74,7 @@ export default function EditPage() {
                     ?
                     <FormGroup>
                         <label htmlFor="category">Category:</label>
-                        <Category options={optionsList} register={register} selected={data.category.id} />
+                        <Category options={optionsList} register={register} selected={data.category.id.toString()} />
                     </FormGroup>
                     : ''
                 }

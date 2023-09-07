@@ -4,7 +4,6 @@ import FooterItem from "./FooterItem"
 import { ITransaction } from "../../interface/ITransactions";
 import { TbMoneybag, TbCalendar, TbTag } from "react-icons/tb";
 import { formatDate } from "../../utils/helpers/formatDate";
-import { useUser } from "../../utils/hooks/useUser";
 interface ITransactionProps {
     item: ITransaction;
 }
@@ -17,8 +16,6 @@ const Container = styled.div`
 
 const TransactionFooter: FC<ITransactionProps> = ({ item }) => {
     const formatedDate: string = formatDate(item.completedAt.toString());
-
-    const { user } = useUser();
     return (
         <Container>
             {/* <FooterItem title={item.type.name} /> */}

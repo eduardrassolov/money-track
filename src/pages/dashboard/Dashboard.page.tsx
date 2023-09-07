@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEY } from "../../config/queryClientKeys.ts";
 import { loaderExpenses } from "../expenses/loader.ts";
 import { loaderIncomes } from "../income/loader.ts";
-import { defaultSort, loaderTransactions } from "../transactions/loader.ts";
+import { loaderTransactions } from "../transactions/loader.ts";
 import calcStats from "../../utils/helpers/calculateStats.ts";
 import CategoryChart from "./categoryChart/CategoryChart.tsx";
 import { SortBy } from "../../types/sortBy.type.ts";

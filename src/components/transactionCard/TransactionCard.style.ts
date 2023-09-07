@@ -1,4 +1,3 @@
-import { FaRegTrashAlt } from "react-icons/fa";
 import { HiOutlinePencilSquare, HiOutlineTrash } from "react-icons/hi2";
 import { styled } from "styled-components";
 

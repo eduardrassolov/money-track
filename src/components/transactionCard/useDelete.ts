@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import apiDeleteTransaction from "../../services/api/deleteTransaction";
 import { toast } from "react-toastify";
 
