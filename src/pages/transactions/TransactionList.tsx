@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import { FC } from "react";
+import { FC, useState } from "react";
 import TransactionCard from "../../components/transactionCard/TransactionCard.tsx";
 import { SortBy } from "../../types/sortBy.type.ts";
 
@@ -10,6 +10,9 @@ import useSort from "../../utils/hooks/useSort.tsx";
 import { useUser } from "../../utils/hooks/useUser.tsx";
 import { Filter } from "../../types/filterBy.type.ts";
 import apiDeleteTransaction from "../../services/api/deleteTransaction.ts";
+import EditWindow from "../../components/modal/EditWindow.tsx";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../router.tsx";
 
 interface ITransactionList {
     listType: string,
@@ -17,6 +20,7 @@ interface ITransactionList {
 }
 
 const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
+    const navigate = useNavigate();
     const { user } = useUser();
     const queryClient = useQueryClient();
     const { mutate: deleteTransaction } = useMutation({ mutationFn: apiDeleteTransaction, onSuccess: succesHandle });
@@ -41,6 +45,11 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
     }
 
     const handleDelete = (id: number) => deleteTransaction(id);
+    const handleEdit = (id: number) => {
+        navigate(`/app/${listType}/${id}`);
+        console.log('id clicked', id);
+    }
+
     function succesHandle() {
         toast.success('Successfully deleted.');
         queryClient.invalidateQueries({ queryKey: [userId, listType, filter, sortBy] });
@@ -54,8 +63,11 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
                         key={transaction.id}
                         item={transaction}
                         onDelete={() => { handleDelete(transaction.id) }}
+                        onEdit={handleEdit}
                     />)
             }
+
+            {/* <EditWindow isOpen={isOpen} onClose={handleEdit} id={id} /> */}
         </>
     )
 }

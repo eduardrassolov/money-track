@@ -30,6 +30,7 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
 
     //TODO remove fetching data for SELECT and put globally
     const { data: optionsList } = useQuery({ queryKey: [QUERY_KEY.CATEGORIES], queryFn: () => getCategory(type) });
+
     const { register, handleSubmit, reset, formState: { errors } } = useForm<Inputs>();
     const { createTransaction } = useCreateTransaction();
 
