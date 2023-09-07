@@ -31,7 +31,7 @@ const Section = styled.section`
         span{
                 font-family: 'Monsterrat', sans-serif;
                 font-weight: 900;
-                color: #FFD800;
+                color: #7286D3;
                 letter-spacing: 0.2rem;
                 white-space: nowrap;
             }
@@ -63,7 +63,6 @@ const Section = styled.section`
             span{
                 font-family: 'Monsterrat', sans-serif;
                 font-weight: 900;
-                color: #7286D3;
                 letter-spacing: 0.2rem;
                 white-space: nowrap;
             }
@@ -92,7 +91,7 @@ export default function HeaderSection({ id }: IHeader) {
                 <Highlight><strong>Finance Manager</strong></Highlight>
             </div>
             <div>
-                <img src='public/bg.avif' />
+                <img src='src/img/bg.avif' />
             </div>
         </Section>
     )
