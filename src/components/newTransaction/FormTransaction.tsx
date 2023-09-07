@@ -10,12 +10,22 @@ import { ErrorP, Form, FormFooter, FormGroup } from './FormTransaction.style';
 import { Inputs } from '../../types/Inputs.type';
 import { useUser } from '../../utils/hooks/useUser';
 import useCreateTransaction from './useCreateTransaction';
+import useFilter from '../../utils/hooks/useFilter';
+import useSort from '../../utils/hooks/useSort';
+import { SortBy } from '../../types/sortBy.type';
 interface INewTransactionProps {
     type: number;
 }
 
 const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
     const { user } = useUser();
+    if (!user) {
+        return;
+    }
+    const { id: userId } = user;
+    const { filter } = useFilter();
+    const sortBy: SortBy = useSort();
+
     const queryClient = useQueryClient();
 
     //TODO remove fetching data for SELECT and put globally
@@ -34,11 +44,11 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
             amount,
             completedAt: completed_at.toString(),
             categoryId: category,
-            profileId: user?.id || ''
+            profileId: userId
         }, {
             onSuccess: () => {
                 console.log('success');
-                queryClient.invalidateQueries({ queryKey: [key] });
+                queryClient.invalidateQueries({ queryKey: [userId, key, filter, sortBy] });
                 reset();
             }
         })

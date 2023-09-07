@@ -3,16 +3,13 @@ import AppLayout from "./pages/layout/AppLayout.tsx";
 import Incomes from "./pages/income/Incomes.page.tsx";
 import Expenses from "./pages/expenses/Expenses.page.tsx";
 import Dashboard from "./pages/dashboard/Dashboard.page.tsx";
-
 import Transactions from "./pages/transactions/Transactions.page.tsx";
 import HomePage from "./pages/home/HomePage.tsx";
 import ErrorELement from "./components/error/ErrorELement.tsx";
 import ProtectedLayout from "./pages/layout/ProtectedLayout.tsx";
 import Page404 from "./pages/errors/Page404.tsx";
-
 import SignUp from "./pages/signUp/SignUp.page.tsx";
-import Login from "./pages/login/Login.page.tsx";
-
+import Login from "./pages/login/login.page.tsx";
 
 export const ROUTES = {
     HOME: "/",

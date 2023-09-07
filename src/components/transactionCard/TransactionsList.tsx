@@ -12,7 +12,9 @@ const TransactionsList = ({ data, listType }: ITransactionList) => {
         return (<div>loading...</div>);
     }
 
-    const { deleteTransaction } = useDelete(listType);
+    const { deleteTransaction } = useDelete();
+
+    const handleDelete = (id: number) => deleteTransaction(id);
 
     return (
         <>
@@ -20,7 +22,7 @@ const TransactionsList = ({ data, listType }: ITransactionList) => {
                 <TransactionCard
                     key={transaction.id}
                     item={transaction}
-                    onDelete={() => deleteTransaction(transaction.id)}
+                    onDelete={() => handleDelete(transaction.id)}
                 />)}
         </>
     )

@@ -11,6 +11,7 @@ import { useMutation } from "@tanstack/react-query";
 import { apiLogout } from "../../services/api/apiUser";
 import { useNavigate } from "react-router-dom";
 import { HiLogout } from "react-icons/hi";
+import { ROUTES } from "../../router";
 
 const icons: Array<JSX.Element> =
     [<AreaChartOutlined />,
@@ -24,12 +25,11 @@ const Aside: FC<IBar> = ({ isBurgerOpen, onClose }) => {
 
     const { mutate: logout } = useMutation({
         mutationFn: apiLogout,
-        onSuccess: () => navigate("/login", { replace: true })
+        onSuccess: () => navigate(ROUTES.LOGIN, { replace: true })
     })
 
-    const handleLogout = () => {
-        logout();
-    }
+    const handleLogout = () => logout();
+
 
     return (
         <>
@@ -41,9 +41,7 @@ const Aside: FC<IBar> = ({ isBurgerOpen, onClose }) => {
                     </ul>
                 </div>
                 <ul>
-                    <li>
-                        <AsideItem name={"Logout"} icon={<HiLogout />} onClose={handleLogout} />
-                    </li>
+                    <AsideItem name={"Logout"} icon={<HiLogout />} onClose={handleLogout} />
                 </ul>
             </StyledAside >
         </>

@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEY } from "../../config/queryClientKeys.ts";
 import { loaderExpenses } from "../expenses/loader.ts";
 import { loaderIncomes } from "../income/loader.ts";
-import { loaderTransactions } from "../transactions/loader.ts";
+import { defaultSort, loaderTransactions } from "../transactions/loader.ts";
 import calcStats from "../../utils/helpers/calculateStats.ts";
 import CategoryChart from "./categoryChart/CategoryChart.tsx";
 import { SortBy } from "../../types/sortBy.type.ts";
@@ -55,9 +55,9 @@ export default function Dashboard() {
   const userId = user.id;
   const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
 
-  const { data: transactions } = useQuery({ queryKey: [QUERY_KEY.TRANSACTIONS, filter, sortBy, userId], queryFn: () => loaderTransactions({ filter, sortBy, userId }) });
-  const { data: expenses } = useQuery({ queryKey: [QUERY_KEY.EXPENSES, filter, sortBy], queryFn: () => loaderExpenses({ filter, sortBy, userId }) });
-  const { data: incomes } = useQuery({ queryKey: [QUERY_KEY.INCOMES, filter, sortBy], queryFn: () => loaderIncomes({ filter, sortBy, userId }) });
+  const { data: transactions } = useQuery({ queryKey: [userId, QUERY_KEY.TRANSACTIONS, filter, sortBy], queryFn: () => loaderTransactions(userId, filter, sortBy) });
+  const { data: expenses } = useQuery({ queryKey: [userId, QUERY_KEY.EXPENSES, filter, sortBy], queryFn: () => loaderExpenses(userId, filter, sortBy) });
+  const { data: incomes } = useQuery({ queryKey: [userId, QUERY_KEY.INCOMES, filter, sortBy], queryFn: () => loaderIncomes(userId, filter, sortBy) });
 
   if (!transactions || !incomes || !expenses)
     return null;

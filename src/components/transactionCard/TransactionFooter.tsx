@@ -21,11 +21,11 @@ const TransactionFooter: FC<ITransactionProps> = ({ item }) => {
     const { user } = useUser();
     return (
         <Container>
-            <FooterItem title={item.type.name} />
+            {/* <FooterItem title={item.type.name} /> */}
             <FooterItem title={`$ ${item.amount}`} icon={<TbMoneybag />} />
             <FooterItem title={formatedDate} icon={<TbCalendar />} />
             <FooterItem title={item.category.name || ''} icon={<TbTag />} />
-            <FooterItem title={user?.id || ''} />
+            {/* <FooterItem title={user?.id || ''} /> */}
         </Container >
     )
 }
