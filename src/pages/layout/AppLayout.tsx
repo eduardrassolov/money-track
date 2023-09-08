@@ -6,7 +6,6 @@ import Aside from '../../components/aside/Aside.tsx';
 import Overlay from '../../components/overlay/Overlay.tsx';
 import useBurgerMenu from '../../components/aside/NavBar/useBurger.tsx';
 import { Section, StyledLayout } from './AppLayou.style.ts';
-import Switch from '../../components/swtich/Switch.tsx';
 
 export default function AppLayout() {
     const { isBurgerOpen, handleBurger } = useBurgerMenu();

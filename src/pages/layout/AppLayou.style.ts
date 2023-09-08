@@ -6,7 +6,7 @@ const StyledLayout = styled.div`
 `;
 
 const Section = styled.section`
-  background: ${(props) => props.theme.backGround2};
+  background: ${(props) => props.theme.background2};
   width: 100%;
   height: 100vh;
   display: flex;
