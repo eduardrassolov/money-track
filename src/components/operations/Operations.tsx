@@ -8,9 +8,11 @@ import { styled } from 'styled-components'
 
 export const OperationsContainer = styled.div`
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
     margin: 0 0 1rem;
     justify-content: end;
+
 `
 
 export default function Operation() {

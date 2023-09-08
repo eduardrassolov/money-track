@@ -11,7 +11,15 @@ import { useUser } from "../../utils/hooks/useUser.tsx";
 import { Filter } from "../../types/filterBy.type.ts";
 import apiDeleteTransaction from "../../services/api/deleteTransaction.ts";
 import { useNavigate } from "react-router-dom";
+import { styled } from "styled-components";
 
+
+const List = styled.div`
+    display: flex;
+    flex-direction: column;
+    /* overflow: scroll; */
+    padding: 0 0 4rem;
+`
 interface ITransactionList {
     listType: string,
     loader: (userId: string, filter: Filter, sortBy: SortBy) => Promise<ITransaction[]>;
@@ -54,7 +62,7 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
     }
 
     return (
-        <>
+        <List>
             {
                 transactions.map((transaction: ITransaction) =>
                     <TransactionCard
@@ -66,7 +74,7 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
             }
 
             {/* <EditWindow isOpen={isOpen} onClose={handleEdit} id={id} /> */}
-        </>
+        </List>
     )
 }
 export default TransactionList;
