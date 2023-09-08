@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { StatsCardData } from "../../../types/statsCardData";
-import { Description, IconContainer, StatContainer } from "./StatCard.style";
+import { Description, IconContainer, StatContainer } from "./StatCard.style.ts";
 
 interface IStatCardProps {
     item: StatsCardData;

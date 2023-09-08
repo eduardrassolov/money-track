@@ -8,9 +8,11 @@ type HeaderProps = {
 const Div = styled.div`
     margin: 0;
     padding: 1rem 1.5rem;
-    background: #fff;
+    background: ${(props) => props.theme.background};
+    color: ${(props) => props.theme.text};
     border-radius: 15px;
     margin-bottom: 1rem;
+    transition: all 300ms;
 `
 const H1 = styled.h1`
     margin: 0;

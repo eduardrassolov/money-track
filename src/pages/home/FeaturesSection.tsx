@@ -4,10 +4,11 @@ import Feature from "./Feature"
 const Section = styled.section`
     display: flex;
     flex-direction: column ;
-    background-color: #F9F5F6;
+    background: ${(props) => props.theme.background};
+    color: ${props => props.theme.text};
     padding: 3rem 0;
-    border-bottom: 2px solid #E5E5E5;
-    
+    border-bottom: 2px solid ${props => props.theme.border};
+    transition: all 300ms;
     img{
         width: 250px;
         border-radius: 15px;

@@ -20,15 +20,14 @@ const icons: Array<JSX.Element> =
     <HiOutlineHome />,
     ]
 const Aside: FC<IBar> = ({ isBurgerOpen, onClose }) => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
-    const { mutate: logout } = useMutation({
-        mutationFn: apiLogout,
-        onSuccess: () => navigate(ROUTES.LOGIN, { replace: true })
-    })
+    // const { mutate: logout } = useMutation({
+    //     mutationFn: apiLogout,
+    //     onSuccess: () => navigate(ROUTES.LOGIN, { replace: true })
+    // })
 
-    const handleLogout = () => logout();
-
+    // const handleLogout = () => logout();
 
     return (
         <>
@@ -39,9 +38,9 @@ const Aside: FC<IBar> = ({ isBurgerOpen, onClose }) => {
                         {asideItemsName.map((item, index) => <AsideItem key={item} name={item} icon={icons[index]} onClose={onClose} />)}
                     </ul>
                 </div>
-                <ul>
+                {/* <ul>
                     <AsideItem name={"Logout"} icon={<HiLogout />} onClose={handleLogout} />
-                </ul>
+                </ul> */}
             </StyledAside >
         </>
     )

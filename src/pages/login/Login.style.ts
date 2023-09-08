@@ -5,11 +5,14 @@ import { NavLink } from "react-router-dom";
 export const Div = styled.div`
   height: 100vh;
   width: 100vw;
+  background: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.text};
   display: flex;
   align-items: start;
   flex-direction: column;
   box-sizing: border-box;
   padding: 2.5rem 1rem;
+  overflow: scroll;
 
   @media only screen and (min-width: ${devices.sm}px) {
     justify-content: center;
@@ -62,6 +65,8 @@ export const Group = styled.div`
   margin: 0 0 1.5rem;
 `;
 export const Input = styled.input`
+  background: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.text};
   box-sizing: border-box;
   border-radius: 10px;
   border: 1px solid #e4e4e7;
@@ -78,9 +83,9 @@ export const Input = styled.input`
 export const StyledLink = styled(NavLink)`
   text-decoration: none;
   font-size: 0.8rem;
-  color: #5b617d;
+  color: ${(props) => props.theme.colorLogoMain};
 
   &:visited {
-    color: #5b617d;
+    color: ${(props) => props.theme.colorLogoMain};
   }
 `;

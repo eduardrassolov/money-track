@@ -1,5 +1,4 @@
 import { styled } from "styled-components";
-import { devices } from "../../styles/breakPoints";
 
 const StyledLayout = styled.div`
   display: flex;
@@ -7,7 +6,7 @@ const StyledLayout = styled.div`
 `;
 
 const Section = styled.section`
-  background-color: #f5f5f5;
+  background: ${(props) => props.theme.backGround2};
   width: 100%;
   height: 100vh;
   display: flex;
@@ -15,10 +14,7 @@ const Section = styled.section`
   align-items: center;
   overflow: scroll;
   padding: 5rem 0;
-
-  @media only screen and (min-width: ${devices.md}px) {
-    padding: 1rem 0;
-  }
+  transition: all 300ms;
 `;
 
 export { StyledLayout, Section };

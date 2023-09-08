@@ -1,11 +1,13 @@
 
-import { styled } from 'styled-components'
+import { ThemeProvider, styled } from 'styled-components'
 import HeaderSection from './HeaderSection'
 import NavBarHome from './NavBar/NavBarHome'
 import FeaturesSection from './FeaturesSection'
 import Burger from './NavBar/Burger'
 import useBurgerMenu from '../../components/aside/NavBar/useBurger'
 import Footer from './Footer'
+import { useThemeStore } from '../../store/store'
+import useTheme from '../../utils/hooks/useTheme'
 
 const Container = styled.div`
     margin: 0;
@@ -14,20 +16,25 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     color: ${(props) => props.theme.text};
+    transition: all 300ms;
 `
 
 export default function HomePage() {
     const { isBurgerOpen, handleBurger } = useBurgerMenu();
+    const { theme } = useTheme();
+
     return (
-        <Container>
-            <NavBarHome isOpen={isBurgerOpen} onClose={handleBurger} />
-            <Burger isOpen={isBurgerOpen} onCLose={handleBurger} />
+        <ThemeProvider theme={theme}>
+            <Container>
+                <NavBarHome isOpen={isBurgerOpen} onClose={handleBurger} />
+                <Burger isOpen={isBurgerOpen} onCLose={handleBurger} />
 
-            <HeaderSection id={"header"} />
+                <HeaderSection id={"header"} />
 
-            <FeaturesSection id={"feature"} />
+                <FeaturesSection id={"feature"} />
 
-            <Footer />
-        </Container>
+                <Footer />
+            </Container>
+        </ThemeProvider>
     )
 }

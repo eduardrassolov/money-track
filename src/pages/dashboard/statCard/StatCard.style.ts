@@ -7,12 +7,12 @@ const IconContainer = styled.div<{ $bgColor?: string }>`
   justify-content: center;
   font-size: 2rem;
   background-color: ${(props) => props.$bgColor};
-  color: #102c57;
+  color: ${(props) => props.theme.text};
   border: 1px solid #ccc;
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  transition: all 300ms ease-in-out;
+  transition: all 300ms;
 `;
 
 const Description = styled.div`
@@ -33,28 +33,31 @@ const Description = styled.div`
   }
 `;
 
-const StatContainer = styled.div<{ $borderColor?: string; $bgColor?: string }>`
+const StatContainer = styled.div<{ $borderColor?: string }>`
   display: flex;
   justify-content: start;
   align-items: center;
-  border: 1px solid #fff;
-  background: #fff;
+  border: 1px solid ${(props) => props.theme.background};
+  background: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.text};
   border-radius: 15px;
   padding: 1rem 1.5rem;
   width: 100%;
   gap: 1rem;
-  transition: all 300ms ease-in-out;
+  transition: all 300ms;
   cursor: pointer;
 
   &:hover {
     transform: scale(1.01) translateY(-5px);
     border: 1px solid ${(props) => props.$borderColor};
     box-shadow: 0px 6px 16px 1px rgba(0, 0, 0, 0.2);
+    transition: all 300ms;
 
     ${IconContainer} {
       border: 1px solid ${(props) => props.$borderColor};
       box-shadow: 0px 6px 16px 1px rgba(0, 0, 0, 0.1);
       transform: translateX(1px);
+      transition: all 300ms;
     }
   }
   @media only screen and (min-width: ${devices.sm}px) {

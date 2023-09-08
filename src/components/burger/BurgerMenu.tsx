@@ -17,13 +17,15 @@ export const StyledBurgerMenu = styled.div<{ $isOpen: boolean }>`
     left: 1rem;
     z-index: 30;
 
+    transition: all 300ms;
     transform: translateY(0);
 
     div {
         width: 2rem;
         height: 0.2rem;
-        background: ${(props) => props.$isOpen ? '#605d5d' : '#000'};
+        background: ${(props) => props.theme.text};
         border-radius: 10px;
+        transition: all 300ms;
     }
 
     div:nth-child(1) {

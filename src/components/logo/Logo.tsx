@@ -7,11 +7,10 @@ const NavLogo = styled.div`
     font-weight: bold;
     height: 55px;
     margin: auto 1rem;
-
+    transition: all 300ms;
     p{
         &:hover{
             color: #7286D3;
-            transition: all 300ms ease-in-out;
             cursor: pointer;
         }
     }
