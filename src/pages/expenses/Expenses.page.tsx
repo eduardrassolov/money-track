@@ -11,6 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useUser } from "../../utils/hooks/useUser";
 import { defaultSort } from "../transactions/loader";
 import Operation from "../../components/operations/Operations";
+import { styled } from "styled-components";
 
 
 export default function Expenses() {
@@ -36,14 +37,16 @@ export default function Expenses() {
           <TransactionForm type={TYPES_TRANSACTION.EXPENSE} />
         </FormDiv>
 
+
         <ListDiv>
-          <Header text={`Total expenses: $${formatNumberWithSpaces(total)}`} />
 
           {!transactions?.length ? '' :
             <>
+              <Header text={`Total expenses: $${formatNumberWithSpaces(total)}`} />
               <Operation />
 
               <TransactionArr listType={QUERY_KEY.EXPENSES} loader={loaderExpenses} />
+
             </>}
 
         </ListDiv>

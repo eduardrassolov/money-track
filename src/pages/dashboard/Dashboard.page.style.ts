@@ -6,6 +6,8 @@ const StyledContainer = styled.div`
   flex-direction: column;
   width: clamp(310px, 1000px, 95%);
   gap: 1rem;
+  overflow: scroll;
+  margin: 5rem 0 1rem;
 `;
 
 const RowContainer = styled.div`
