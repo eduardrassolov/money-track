@@ -6,7 +6,6 @@ import FeaturesSection from './FeaturesSection'
 import Burger from './NavBar/Burger'
 import useBurgerMenu from '../../components/aside/NavBar/useBurger'
 import Footer from './Footer'
-import { useThemeStore } from '../../store/store'
 import useTheme from '../../utils/hooks/useTheme'
 
 const Container = styled.div`
