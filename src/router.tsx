@@ -3,15 +3,15 @@ import AppLayout from "./pages/layout/AppLayout.tsx";
 import Incomes from "./pages/income/Incomes.page.tsx";
 import Expenses from "./pages/expenses/Expenses.page.tsx";
 import Dashboard from "./pages/dashboard/Dashboard.page.tsx";
-
 import Transactions from "./pages/transactions/Transactions.page.tsx";
 import HomePage from "./pages/home/HomePage.tsx";
 import ErrorELement from "./components/error/ErrorELement.tsx";
 import ProtectedLayout from "./pages/layout/ProtectedLayout.tsx";
 import Page404 from "./pages/errors/Page404.tsx";
-
 import SignUp from "./pages/signUp/SignUp.page.tsx";
-import Login from "./pages/login/Login.page.tsx";
+import Login from "./pages/login/login.page.tsx";
+import EditPage from "./pages/edit/EditPage.tsx";
+import loaderTransactionById from "./pages/edit/loader.ts";
 
 export const ROUTES = {
     HOME: "/",
@@ -20,8 +20,11 @@ export const ROUTES = {
 
     ROOT: "/app",
     TRANSACTIONS: `/app/transactions`,
+    TRANSACTION_ID: "/app/transactions/:id",
     INCOMES: "/app/incomes",
+    INCOME_ID: "/app/incomes/:id",
     EXPENSES: "/app/expenses",
+    EXPENSE_ID: "/app/expenses/:id",
     DASHBOARD: "/app/dashboard",
 }
 
@@ -49,12 +52,27 @@ const routes: RouteObject[] = [
                 element: <Transactions />,
             },
             {
+                path: ROUTES.TRANSACTION_ID,
+                element: <EditPage />,
+                loader: async ({ params: { id } }) => loaderTransactionById(id)
+            },
+            {
                 path: ROUTES.INCOMES,
                 element: <Incomes />,
             },
             {
+                path: ROUTES.INCOME_ID,
+                element: <EditPage />,
+                loader: async ({ params: { id } }) => loaderTransactionById(id)
+            },
+            {
                 path: ROUTES.EXPENSES,
                 element: <Expenses />,
+            },
+            {
+                path: ROUTES.EXPENSE_ID,
+                element: <EditPage />,
+                loader: async ({ params: { id } }) => loaderTransactionById(id)
             },
             {
                 path: ROUTES.DASHBOARD,

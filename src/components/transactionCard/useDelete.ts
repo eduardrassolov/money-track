@@ -1,20 +1,18 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import apiDeleteTransaction from "../../services/api/deleteTransaction";
 import { toast } from "react-toastify";
 
-export default function useDelete(listType: string) {
-  const queryClient = useQueryClient();
-
-  const mutation = useMutation({
+export default function useDelete() {
+  const { mutate: deleteTr } = useMutation({
     mutationFn: apiDeleteTransaction,
     onSuccess: () => {
       toast.success("Successfully deleted.");
-      queryClient.invalidateQueries({ queryKey: [listType] });
+      // queryClient.invalidateQueries({ queryKey: [listType] });
     },
+    onError: () => toast.error("Something went wrong."),
   });
-  const deleteTransaction = (id: number) => {
-    mutation.mutate(id);
-  };
+
+  const deleteTransaction = (id: number) => deleteTr(id);
 
   return { deleteTransaction };
 }

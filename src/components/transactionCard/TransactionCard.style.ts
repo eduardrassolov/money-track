@@ -1,16 +1,16 @@
-import { FaRegTrashAlt } from "react-icons/fa";
+import { HiOutlinePencilSquare, HiOutlineTrash } from "react-icons/hi2";
 import { styled } from "styled-components";
 
 const Container = styled.div<{ $bg: string }>`
-  background: #fff;
+  background: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.text};
   border-radius: 15px;
-  border: 1px solid #fff;
+  border: 1px solid ${(props) => props.theme.background};
 
   display: flex;
   margin: 0 0 0.8rem;
   padding: 1.5rem 1.8rem;
   justify-content: space-between;
-
   transition: all 300ms;
 
   &:hover {
@@ -34,9 +34,10 @@ const OperationSection = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  gap: 0.5rem;
 `;
 
-const StyledIcon = styled(FaRegTrashAlt)`
+const StyledIcon = styled(HiOutlineTrash)`
   font-size: 1.3rem;
   cursor: pointer;
 
@@ -46,4 +47,14 @@ const StyledIcon = styled(FaRegTrashAlt)`
   }
 `;
 
-export { Container, InfoSection, OperationSection, StyledIcon };
+const StyledEdit = styled(HiOutlinePencilSquare)`
+  font-size: 1.3rem;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+    transition: all 0.4s ease-in-out;
+  }
+`;
+
+export { Container, InfoSection, OperationSection, StyledIcon, StyledEdit };

@@ -7,17 +7,20 @@ const Section = styled.section`
         justify-content: center;
         align-items: center ;
         height: 90vh;
-        background: #F9F5F6;
-        border-bottom: 2px solid #E5E5E5;
+        /* background: #F9F5F6; */
+        background: ${(props) => props.theme.background};
+        color: ${props => props.theme.text};
+        border-bottom: 2px solid ${props => props.theme.border};
         padding: 3rem 0 0;
         gap: 1rem;
         padding: 1rem;
+        transition: all 300ms;
     
         img {
             max-width: 300px;
             border-radius: 10px;
             margin: 1rem auto ;
-            box-shadow: 0px 6px 16px 1px rgba(0,0,0, 0.4);  
+            /* box-shadow: 0px 6px 16px 1px ${props => props.theme.shadow};   */
         }
         p{
             font-size: 2rem;
@@ -31,7 +34,7 @@ const Section = styled.section`
         span{
                 font-family: 'Monsterrat', sans-serif;
                 font-weight: 900;
-                color: #FFD800;
+                color: ${props => props.theme.colorLogoMain};
                 letter-spacing: 0.2rem;
                 white-space: nowrap;
             }
@@ -59,14 +62,6 @@ const Section = styled.section`
             line-height: 1.5;
             letter-spacing: 0.1rem;
             margin: 0;
-
-            span{
-                font-family: 'Monsterrat', sans-serif;
-                font-weight: 900;
-                color: #7286D3;
-                letter-spacing: 0.2rem;
-                white-space: nowrap;
-            }
         }
 
         @media only screen and (min-width: ${devices.md}px){
@@ -75,7 +70,7 @@ const Section = styled.section`
     }
 `
 const Highlight = styled.p`
-    color: #FFC436;
+    color: ${props => props.theme.colorLogoSecondary};
 `
 
 interface IHeader {
@@ -92,7 +87,7 @@ export default function HeaderSection({ id }: IHeader) {
                 <Highlight><strong>Finance Manager</strong></Highlight>
             </div>
             <div>
-                <img src='public/bg.avif' />
+                <img src='/bg.avif' />
             </div>
         </Section>
     )

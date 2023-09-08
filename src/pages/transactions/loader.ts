@@ -11,7 +11,7 @@ export interface ILoaderTransaction {
 }
 export const defaultSort: SortBy = { field: "completed_at", direction: "desc" };
 
-export async function loaderTransactions({ filter = null, sortBy = { ...defaultSort }, userId }: ILoaderTransaction) {
+export async function loaderTransactions(userId: string, filter: Filter = null, sortBy: SortBy = { ...defaultSort }) {
   const filterByDate = !filter ? null : getRangeDates(filter);
   const data: Array<ITransaction> = await getTransactions({ filter: filterByDate, sortBy, userId });
 

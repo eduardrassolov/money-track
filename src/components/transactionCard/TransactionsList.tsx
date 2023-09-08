@@ -1,6 +1,7 @@
 import TransactionCard from "./TransactionCard";
 import { ITransaction } from "../../interface/ITransactions";
 import useDelete from "./useDelete";
+import { useNavigate } from "react-router-dom";
 
 interface ITransactionList {
     data: Array<ITransaction>,
@@ -8,11 +9,17 @@ interface ITransactionList {
 }
 
 const TransactionsList = ({ data, listType }: ITransactionList) => {
+    const navigate = useNavigate();
+
     if (!Array.isArray(data)) {
         return (<div>loading...</div>);
     }
 
-    const { deleteTransaction } = useDelete(listType);
+    const { deleteTransaction } = useDelete();
+
+    const handleDelete = (id: number) => deleteTransaction(id);
+
+    const handleEdit = (id: number) => navigate(`/app/${listType}/${id}`)
 
     return (
         <>
@@ -20,7 +27,8 @@ const TransactionsList = ({ data, listType }: ITransactionList) => {
                 <TransactionCard
                     key={transaction.id}
                     item={transaction}
-                    onDelete={() => deleteTransaction(transaction.id)}
+                    onDelete={() => handleDelete(transaction.id)}
+                    onEdit={() => handleEdit(transaction.id)}
                 />)}
         </>
     )

@@ -7,11 +7,13 @@ import { formatDate } from '../../utils/helpers/formatDate';
 
 const ChartContainer = styled.div`
   width: 100%;
-  border: 1px solid #fff;
-  background: #fff;
+  border: 1px solid ${(props) => props.theme.background};
+  background: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.text};
   padding: 2rem 0;
   border-radius: 15px;
   overflow: scroll;
+    transition: all 300ms;
 `
 interface IDiagramProps {
     data: ITransaction[];

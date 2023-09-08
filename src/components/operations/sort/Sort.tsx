@@ -11,7 +11,7 @@ const optionsData = [
         text: "Sort by date ⬆"
     },
     {
-        value: "escription-desc",
+        value: "description-desc",
         text: "Sort by name ⬇"
     },
     {

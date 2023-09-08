@@ -1,9 +1,11 @@
 import getIncomes from "../../services/api/getIncomes";
 import { ITransaction } from "../../interface/ITransactions";
 import getRangeDates from "../../services/getRangeDate";
-import { ILoaderTransaction, defaultSort } from "../transactions/loader";
+import { defaultSort } from "../transactions/loader";
+import { Filter } from "../../types/filterBy.type";
+import { SortBy } from "../../types/sortBy.type";
 
-export async function loaderIncomes({ filter = null, sortBy = { ...defaultSort }, userId }: ILoaderTransaction) {
+export async function loaderIncomes(userId: string, filter: Filter = null, sortBy: SortBy = { ...defaultSort }) {
   const filterByDate = !filter ? null : getRangeDates(filter);
   const data: Array<ITransaction> = await getIncomes({ filter: filterByDate, sortBy, userId });
 

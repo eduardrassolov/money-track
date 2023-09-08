@@ -5,27 +5,29 @@ export const StyledNavLink = styled(NavLink)`
   display: flex;
   text-decoration: none;
   padding: 0.8rem 1rem;
-  color: #000;
+  color: ${(props) => props.theme.text};
   font-size: 1.5rem;
-  transition: all 0.3s ease-in-out;
-  border-bottom: 1px solid #ccc;
+  transition: all 300ms;
+  border-bottom: 1px solid ${(props) => props.theme.border};
   align-items: center;
-  border-right: 3px solid #fff;
+  border-right: 3px solid ${(props) => props.theme.background};
 
   &:hover {
-    background-color: #e5e5e5;
-    border-right: 3px solid #e5e5e5;
+    background-color: ${(props) => props.theme.hoverAside};
+    border-right: 3px solid ${(props) => props.theme.colorLogoMain};
+    transition: all 300ms;
   }
   &.active {
-    background-color: #e5e5e5;
-    border-right: 3px solid #7e22ce;
-    transition: 300ms ease-in-out;
-    color: #7e22ce;
+    background-color: ${(props) => props.theme.hoverAside};
+    border-right: 3px solid ${(props) => props.theme.colorLogoMain};
+    color: ${(props) => props.theme.colorLogoMain};
+
+    transition: all 300ms;
   }
 `;
 
 export const Span = styled.span`
   margin-left: 0.5rem;
   font-size: 0.8rem;
-  color: #383636;
+  color: ${(props) => props.theme.text};
 `;

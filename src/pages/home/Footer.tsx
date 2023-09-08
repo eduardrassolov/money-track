@@ -1,7 +1,7 @@
 import { styled } from "styled-components"
 
 const StyledFooter = styled.footer`
-        background: #7286D3;
+        background: ${props => props.theme.colorLogoMain};
         color: #F1F0E8;
         display: flex;
         padding: 1rem 2rem;

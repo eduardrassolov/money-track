@@ -6,14 +6,15 @@ const StyledLayout = styled.div`
 `;
 
 const Section = styled.section`
-  background-color: #f5f5f5;
+  background: ${(props) => props.theme.backGround2};
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow: scroll;
-  padding: 2rem 0;
+  padding: 5rem 0;
+  transition: all 300ms;
 `;
 
 export { StyledLayout, Section };

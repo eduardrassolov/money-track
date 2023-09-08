@@ -5,6 +5,7 @@ const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: clamp(310px, 1000px, 95%);
+  gap: 1rem;
 `;
 
 const RowContainer = styled.div`
@@ -18,7 +19,7 @@ const RowContainer = styled.div`
 `;
 
 const RowContainerCards = styled(RowContainer)`
-  gap: 1rem;
+  gap: 0.5rem;
   flex-wrap: wrap;
 
   @media only screen and (min-width: ${devices.sm}px) {
@@ -47,8 +48,9 @@ const PieContainer = styled.div`
   flex-direction: column;
   padding: 2rem 1rem;
   margin: 0 0 1rem;
-  background: #fff;
+  background: ${(props) => props.theme.background};
   border-radius: 15px;
+  transition: all 300ms;
 
   @media only screen and (min-width: ${devices.md}px) {
     flex: 2;

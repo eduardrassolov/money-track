@@ -5,25 +5,25 @@ import { QUERY_KEY } from "../../config/queryClientKeys";
 import TransactionForm from "../../components/newTransaction/FormTransaction";
 import TransactionArr from "../transactions/TransactionList";
 import { Container, FormDiv, ListDiv } from "../../styles/TransactionContainer";
-import Filter from "../../components/filter/Filter";
-import { FILTER_DATE_OPTIONS, FILTER_KEYS } from "../../components/filter/filterParameters";
 import Header from "../../ui/header/Header";
-import { Operations } from "../transactions/Transactions.page";
-import Sort from "../../components/sort/Sort";
 import formatNumberWithSpaces from "../../utils/helpers/formatWithSpace";
 import { useQuery } from "@tanstack/react-query";
 import { useUser } from "../../utils/hooks/useUser";
 import { defaultSort } from "../transactions/loader";
+import Operation from "../../components/operations/Operations";
+
 
 export default function Expenses() {
   const { user } = useUser();
   if (!user) {
     return;
   }
+  const { id: userId } = user;
 
   //TODO refactor 
   const { data: transactions } = useQuery({
-    queryKey: [QUERY_KEY.EXPENSES, null, { ...defaultSort }, user?.id], queryFn: () => loaderExpenses({ filter: null, sortBy: defaultSort, userId: user?.id })
+    queryKey: [userId, QUERY_KEY.EXPENSES, null, { ...defaultSort }],
+    queryFn: () => loaderExpenses(userId)
   });
 
   const total = transactions?.reduce((acc, cur) => acc + cur.amount, 0) || 0;
@@ -31,6 +31,7 @@ export default function Expenses() {
   return (
     <>
       <Container>
+
         <FormDiv>
           <TransactionForm type={TYPES_TRANSACTION.EXPENSE} />
         </FormDiv>
@@ -40,10 +41,7 @@ export default function Expenses() {
 
           {!transactions?.length ? '' :
             <>
-              <Operations>
-                <Filter options={FILTER_DATE_OPTIONS} filterKey={FILTER_KEYS.DATE} />
-                <Sort />
-              </Operations>
+              <Operation />
 
               <TransactionArr listType={QUERY_KEY.EXPENSES} loader={loaderExpenses} />
             </>}
