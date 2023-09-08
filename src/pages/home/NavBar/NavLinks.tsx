@@ -4,7 +4,6 @@ import { ROUTES } from "../../../router"
 import { devices } from "../../../styles/breakPoints";
 import { useUser } from "../../../utils/hooks/useUser";
 
-import useTheme from "../../../utils/hooks/useTheme";
 import Switch from "../../../components/swtich/Switch";
 
 const Ul = styled.ul<{ $isOpen: boolean }>`
@@ -74,6 +73,13 @@ type NavLinksProps = {
     onClose?: () => void;
 }
 
+const Li = styled.li`
+    display: none;
+    @media only screen and (min-width: ${devices.md}px){
+        display: flex;
+    }
+`
+
 
 export default function NavLinks({ isOpen = false, onClose }: NavLinksProps) {
     const { isAuthenticated } = useUser();
@@ -82,8 +88,6 @@ export default function NavLinks({ isOpen = false, onClose }: NavLinksProps) {
         document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     }
 
-    // const toogleTheme = useThemeStore((state) => state.toogleTheme);
-    const { changeTheme } = useTheme();
 
     return (
         <>
@@ -97,10 +101,10 @@ export default function NavLinks({ isOpen = false, onClose }: NavLinksProps) {
                 <li>
                     <StyledNavLink to={isAuthenticated ? ROUTES.DASHBOARD : ROUTES.LOGIN}>{isAuthenticated ? 'To app' : 'Login'}</StyledNavLink>
                 </li>
-                <li>
+                <Li>
                     {/* <button onClick={changeTheme}>Change</button> */}
-                    <Switch></Switch>
-                </li>
+                    <Switch />
+                </Li>
             </Ul>
         </>
     )
