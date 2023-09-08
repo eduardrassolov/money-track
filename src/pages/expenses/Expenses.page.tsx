@@ -11,8 +11,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useUser } from "../../utils/hooks/useUser";
 import { defaultSort } from "../transactions/loader";
 import Operation from "../../components/operations/Operations";
-import { styled } from "styled-components";
-
 
 export default function Expenses() {
   const { user } = useUser();
