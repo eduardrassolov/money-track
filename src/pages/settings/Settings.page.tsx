@@ -2,42 +2,30 @@ import { useUser } from "../../utils/hooks/useUser";
 import Avatar from "../../components/user/Avatar";
 import { PrimaryBtn, SecondaryBtn } from "../../styles/Button";
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
-import updateUser from "../../services/updateUser";
-import { toast } from "react-toastify";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import apiGetCurrency from "../../services/api/apiGetCurrency";
 import { Container, Input, ProfileSection, ReadOnly, Row, Select, SettingsFooter } from "./Settings.style";
+import { SubmitHandler, useForm } from "react-hook-form";
+import useSettings from "./useSettings";
+
+export type InputsSettings = {
+    firstName: string;
+    lastName: string;
+    currency: string
+}
 
 export default function Settings() {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
+
+    const { mutateUser } = useSettings();
     const { user, created, lastUpd, firstName, lastName } = useUser();
+    const { register, handleSubmit, formState: { errors } } = useForm<InputsSettings>();
 
-    const [firstNameInput, setFirstName] = useState<string>(firstName || '');
-    const [lastNameInput, setLastName] = useState<string>(lastName || '');
-    const [currencyInput, setCurrency] = useState<string>(user?.user_metadata.currency || '');
-
-    const { mutate: mutateUser } = useMutation({
-        mutationFn: () => updateUser(firstNameInput, lastNameInput, currencyInput),
-        onSuccess: () => {
-            queryClient.invalidateQueries(["user"]);
-            toast.success("User updated succesfully.");
-        },
-        onError: () => toast.error("Something went wrong, try again.")
-    })
-
-    const handleFirstName = (e: React.FormEvent<HTMLInputElement>) => setFirstName(() => e.target.value);
-    const handleLastName = (e: React.FormEvent<HTMLInputElement>) => setLastName(() => e.target.value);
-    const handleCurrency = (e: React.FormEvent<HTMLSelectElement>) => setCurrency(e.target.value)
+    const onSubmit: SubmitHandler<InputsSettings> = data =>
+        mutateUser(data, { onSuccess: () => queryClient.invalidateQueries(["user"]) });
 
     const handleBack = () => navigate(-1);
-
-
-    async function handleSubmit(e: React.SyntheticEvent) {
-        e.preventDefault();
-        mutateUser();
-    }
 
     const { data: options } = useQuery({ queryKey: ["currency"], queryFn: () => apiGetCurrency() });
     if (!options)
@@ -53,16 +41,16 @@ export default function Settings() {
                     <p>Profile Photo</p>
                     <Avatar />
                 </Row>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit(onSubmit)}>
 
                     <Row>
                         <label htmlFor="created">Created</label>
-                        <ReadOnly type="text" disabled defaultValue={created} />
+                        <ReadOnly type="text" disabled value={created} />
                     </Row>
 
                     <Row>
                         <label htmlFor="created">Last updated</label>
-                        <ReadOnly type="text" disabled defaultValue={lastUpd} />
+                        <ReadOnly type="text" disabled value={lastUpd} />
                     </Row>
 
                     <Row>
@@ -72,17 +60,17 @@ export default function Settings() {
 
                     <Row>
                         <label htmlFor="firstName">First name</label>
-                        <Input type="text" value={firstNameInput} onInput={handleFirstName} />
+                        <Input type="text" {...register("firstName")} defaultValue={firstName} />
                     </Row>
 
                     <Row>
                         <label htmlFor="lastName">Last name</label>
-                        <Input type="text" value={lastNameInput} onInput={handleLastName} />
+                        <Input type="text" {...register("lastName")} defaultValue={lastName} />
                     </Row>
 
                     <Row>
                         <label htmlFor="currency">Currency</label>
-                        <Select name="currency" onChange={handleCurrency} value={currencyInput}>
+                        <Select {...register("currency")} defaultValue={user?.user_metadata.currency}>
                             {options.map((currency) => <option key={currency.id} value={currency.id} >{currency.name}</option>)}
                         </Select>
                     </Row>
