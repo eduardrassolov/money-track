@@ -35,7 +35,6 @@ export default function Expenses() {
           <TransactionForm type={TYPES_TRANSACTION.EXPENSE} />
         </FormDiv>
 
-
         <ListDiv>
 
           {!transactions?.length ? '' :

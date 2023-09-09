@@ -12,6 +12,7 @@ import SignUp from "./pages/signUp/SignUp.page.tsx";
 import Login from "./pages/login/login.page.tsx";
 import EditPage from "./pages/edit/EditPage.tsx";
 import loaderTransactionById from "./pages/edit/loader.ts";
+import Settings from "./pages/settings/Settings.page.tsx";
 
 export const ROUTES = {
     HOME: "/",
@@ -26,6 +27,7 @@ export const ROUTES = {
     EXPENSES: "/app/expenses",
     EXPENSE_ID: "/app/expenses/:id",
     DASHBOARD: "/app/dashboard",
+    SETTINGS: "/app/settings"
 }
 
 const routes: RouteObject[] = [
@@ -77,6 +79,10 @@ const routes: RouteObject[] = [
             {
                 path: ROUTES.DASHBOARD,
                 element: <Dashboard />,
+            },
+            {
+                path: ROUTES.SETTINGS,
+                element: <Settings />
             }
         ]
     },

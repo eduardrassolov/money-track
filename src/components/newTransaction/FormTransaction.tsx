@@ -23,9 +23,9 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
         return;
     }
     const { id: userId } = user;
+    const currency = user.user_metadata.currency as string;
     const { filter } = useFilter();
     const sortBy: SortBy = useSort();
-
     const queryClient = useQueryClient();
 
     //TODO remove fetching data for SELECT and put globally
@@ -45,7 +45,8 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
             amount,
             completedAt: completed_at.toString(),
             categoryId: category,
-            profileId: userId
+            profileId: userId,
+            currencyId: currency
         }, {
             onSuccess: () => {
                 console.log('success');

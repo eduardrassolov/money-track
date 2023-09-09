@@ -10,6 +10,7 @@ export default async function apiCreateTransaction(transaction: INewTransaction)
       completed_at: transaction.completedAt,
       description: transaction.description,
       profile_id: transaction.profileId,
+      currency_id: transaction.currencyId,
     };
 
     const { error } = await supabase.from("transactions").insert([newTransactionDTO]);

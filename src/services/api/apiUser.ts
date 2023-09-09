@@ -19,14 +19,15 @@ export async function apiLogout() {
   }
 }
 
-export async function apiSignUp(email: string, password: string, fisrtName: string, lastName: string) {
+export async function apiSignUp(email: string, password: string, firstName: string, lastName: string) {
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
       data: {
-        fisrtName,
+        firstName,
         lastName,
+        currency: "usd",
       },
     },
   });

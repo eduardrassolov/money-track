@@ -18,7 +18,7 @@ export default function Profile() {
     return (
         <ProfileContainer>
             <Avatar />
-            <P>{user?.email}</P>
+            <P>{user?.user_metadata.firstName}</P>
         </ProfileContainer >
     )
 }
