@@ -32,6 +32,7 @@ export default async function getIncomes({ filter, sortBy, userId }: ILoaderTran
       category: { id: transaction.category.id, name: transaction.category.name },
       completedAt: new Date(transaction.completed_at),
       profileId: transaction.profile_id,
+      currency: transaction.currency,
     };
   });
 

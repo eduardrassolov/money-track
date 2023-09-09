@@ -13,6 +13,8 @@ import useCreateTransaction from './useCreateTransaction';
 import useFilter from '../../utils/hooks/useFilter';
 import useSort from '../../utils/hooks/useSort';
 import { SortBy } from '../../types/sortBy.type';
+import { Select } from '../../pages/settings/Settings.style';
+import apiGetCurrency from '../../services/api/apiGetCurrency';
 interface INewTransactionProps {
     type: number;
 }
@@ -23,7 +25,7 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
         return;
     }
     const { id: userId } = user;
-    const currency = user.user_metadata.currency as string;
+    const userCurrency = user.user_metadata.currency as string;
     const { filter } = useFilter();
     const sortBy: SortBy = useSort();
     const queryClient = useQueryClient();
@@ -34,8 +36,10 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm<Inputs>();
     const { createTransaction } = useCreateTransaction();
 
-    const onSubmit: SubmitHandler<Inputs> = ({ description, amount, completed_at, category }) => {
-        if (!description.trim() || !amount || !completed_at || !category)
+    const { data: optionCurrency } = useQuery({ queryKey: ["currency"], queryFn: () => apiGetCurrency() });
+
+    const onSubmit: SubmitHandler<Inputs> = ({ description, amount, completed_at, category, currency }) => {
+        if (!description.trim() || !amount || !completed_at || !category || !currency)
             return;
 
         const key = type === TYPES_TRANSACTION.INCOME ? QUERY_KEY.INCOMES : QUERY_KEY.EXPENSES;
@@ -56,6 +60,9 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
         })
     }
     const onError: SubmitErrorHandler<Inputs> = (error) => console.log(error);
+
+    if (!optionCurrency)
+        return;
 
     return (
         <Form onSubmit={handleSubmit(onSubmit, onError)}>
@@ -88,6 +95,14 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
             </FormGroup>
 
             <FormGroup>
+                <label htmlFor="amount">Currency:</label>
+                <Select {...register("currency")} defaultValue={userCurrency}>
+                    {optionCurrency.map((currency) => <option key={currency.id} value={currency.id}>{currency.name}</option>)}
+                </Select>
+            </FormGroup>
+
+
+            <FormGroup>
                 <label htmlFor="completed_at">Date:</label>
                 <input type="datetime-local" id="completed_at"  {...register("completed_at", {
                     required: '*This field is required',
@@ -98,7 +113,7 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
                 <SecondaryBtn type='reset'>Clear</SecondaryBtn>
                 <PrimaryBtn type='submit'>Confirm</PrimaryBtn>
             </FormFooter>
-        </Form>
+        </Form >
     )
 }
 export default TransactionForm;

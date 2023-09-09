@@ -3,4 +3,5 @@ export type Inputs = {
   category: number;
   amount: number;
   completed_at: Date;
+  currency: string;
 };

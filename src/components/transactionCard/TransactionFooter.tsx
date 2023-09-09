@@ -16,10 +16,11 @@ const Container = styled.div`
 
 const TransactionFooter: FC<ITransactionProps> = ({ item }) => {
     const formatedDate: string = formatDate(item.completedAt.toString());
+    console.log(item);
     return (
         <Container>
             {/* <FooterItem title={item.type.name} /> */}
-            <FooterItem title={`$ ${item.amount}`} icon={<TbMoneybag />} />
+            <FooterItem title={`${item.currency.symbol} ${item.amount}`} icon={<TbMoneybag />} />
             <FooterItem title={formatedDate} icon={<TbCalendar />} />
             <FooterItem title={item.category.name || ''} icon={<TbTag />} />
             {/* <FooterItem title={user?.id || ''} /> */}
