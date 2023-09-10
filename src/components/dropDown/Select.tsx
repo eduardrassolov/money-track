@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { styled } from "styled-components";
 import { ICategory } from "../../interface/ICategory";
+import { InputsSettings } from "../../pages/settings/Settings.page";
 
 export const StyledSelect = styled.select`
   width: 200px;
@@ -27,7 +28,7 @@ type Option = {
 }
 
 interface ISelect {
-    options: Array<Option | ICategory>,
+    options: Array<Option | ICategory | InputsSettings>,
     register: any,
     name: string,
     selectedDefault?: string

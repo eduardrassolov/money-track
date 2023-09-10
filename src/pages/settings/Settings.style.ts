@@ -1,13 +1,18 @@
 import { styled } from "styled-components";
+import { devices } from "../../styles/breakPoints";
 
 export const Container = styled.div`
-  /* background: ${(props) => props.theme.background}; */
+  background: ${(props) => props.theme.background};
   color: ${(props) => props.theme.text};
-  margin: 2rem auto auto 1rem;
   display: flex;
   flex-direction: column;
-  padding: 2rem 2rem;
-  height: fit-content;
+
+  height: 100vh;
+  width: 100%;
+  padding: 4rem 0;
+
+  @media only screen and (min-width: ${devices.md}) {
+  }
 `;
 export const ProfileSection = styled.div`
   display: flex;
@@ -46,8 +51,8 @@ export const Input = styled.input`
 `;
 
 export const ReadOnly = styled(Input)`
-  background: ${(props) => props.theme.background2};
-  border: 1px solid ${(props) => props.theme.background2};
+  background: ${(props) => props.theme.background};
+  border: 1px solid ${(props) => props.theme.background};
   padding: 0.5rem 0;
   width: calc(200px + 2rem);
   font-size: 1rem;
@@ -56,8 +61,9 @@ export const ReadOnly = styled(Input)`
 
 export const SettingsFooter = styled.div`
   display: flex;
+  justify-content: flex-end;
   gap: 0.5rem;
-  margin: 0.5rem 0 1rem auto;
+  margin: 2rem 0 1rem;
 `;
 export const Select = styled.select`
   width: 200px;

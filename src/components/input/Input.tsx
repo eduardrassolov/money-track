@@ -2,6 +2,7 @@ import { FC, HTMLInputTypeAttribute } from "react"
 import { UseFormRegister } from "react-hook-form";
 import { Inputs } from "../../types/Inputs.type";
 import { styled } from "styled-components";
+import { InputsSettings } from "../../pages/settings/Settings.page";
 
 const StyledInput = styled.input`
     font-size: 1rem;
@@ -25,12 +26,13 @@ interface IInput {
     type: HTMLInputTypeAttribute,
     id?: string,
     placeHolder?: string,
-    name: "description" | "amount" | "completed_at",
-    register: UseFormRegister<Inputs>,
-    autoFocus?: boolean
+    name: "description" | "amount" | "completed_at" | "firstName" | "lastName",
+    register: UseFormRegister<Inputs | InputsSettings>,
+    autoFocus?: boolean,
+    defaultValue?: string
 }
 
-const Input: FC<IInput> = ({ type = "text", id, placeHolder, name, register, autoFocus = false }) => {
+const Input: FC<IInput> = ({ type = "text", id, placeHolder, name, register, autoFocus = false, defaultValue }) => {
     return (
         <>
             {type === "number" ?
@@ -48,7 +50,9 @@ const Input: FC<IInput> = ({ type = "text", id, placeHolder, name, register, aut
                     id={id}
                     placeholder={placeHolder}
                     {...register(name)}
-                    autoFocus={autoFocus} />
+                    autoFocus={autoFocus}
+                    defaultValue={defaultValue} />
+
             }
         </>
     )

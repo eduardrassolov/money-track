@@ -6,7 +6,6 @@ const Container = styled.div<{ $bg: string }>`
   color: ${(props) => props.theme.text};
   border-radius: 15px;
   border: 1px solid ${(props) => props.theme.border};
-
   display: flex;
   margin: 0 0 0.8rem;
   padding: 1.5rem 1.8rem;

@@ -18,10 +18,11 @@ const Form = styled.form`
 const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 
   label {
     margin-bottom: 0.5rem;
+    transition: all 300ms;
   }
 `;
 const ErrorP = styled.p`

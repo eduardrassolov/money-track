@@ -4,15 +4,66 @@ import { PrimaryBtn, SecondaryBtn } from "../../styles/Button";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import apiGetCurrency from "../../services/api/apiGetCurrency";
-import { Container, Input, ProfileSection, ReadOnly, Row, Select, SettingsFooter } from "./Settings.style";
+import { ProfileSection, ReadOnly, Row, SettingsFooter } from "./Settings.style";
 import { SubmitHandler, useForm } from "react-hook-form";
 import useSettings from "./useSettings";
+import FormRow from "../../components/newTransaction/FormRow";
+import Input from "../../components/input/Input";
+import styled from "styled-components";
+import Select from "../../components/dropDown/Select";
+import { devices } from "../../styles/breakPoints";
 
 export type InputsSettings = {
     firstName: string;
     lastName: string;
     currency: string
 }
+
+const Form = styled.form`
+    padding: 1rem;
+    gap: 1rem;
+    background: ${(props) => props.theme.background};
+`
+const P = styled.p`
+    margin: 0.5rem 0;
+
+`
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    border-radius: 15px;
+    transition: all 300ms;
+    gap: 2rem;
+
+    hr{
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        border: none;
+        border-top: 1px solid ${props => props.theme.border};
+    }
+
+    @media only screen and (min-width: ${devices.sm}px){
+        min-width: 450px;
+    }
+`
+const InformationContainer = styled.div`    
+    span{
+        color: gray;
+    }
+`
+const Section = styled.section`
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: ${props => props.theme.background};
+    color: ${props => props.theme.text};
+    padding: 4rem 2rem;
+
+`
+
 
 export default function Settings() {
     const navigate = useNavigate();
@@ -32,56 +83,40 @@ export default function Settings() {
         return;
 
     return (
-        <Container>
-            <h1>Settings</h1>
-            <p>Profile</p>
+        <Section>
+            <Container>
+                <Avatar />
 
-            <ProfileSection>
-                <Row>
-                    <p>Profile Photo</p>
-                    <Avatar />
-                </Row>
+                <hr />
+
+                <InformationContainer>
+                    <P>Email: <span>{user?.email}</span></P>
+                    <P>Created: <span>{created}</span></P>
+                    <P>Last update: <span>{lastUpd}</span></P>
+                </InformationContainer>
+
+                <hr />
+
                 <form onSubmit={handleSubmit(onSubmit)}>
+                    <FormRow lblFor="firstName" lblText="First name">
+                        <Input type="text" register={register} name={"firstName"} defaultValue={firstName} />
+                    </FormRow>
 
-                    <Row>
-                        <label htmlFor="created">Created</label>
-                        <ReadOnly type="text" disabled value={created} />
-                    </Row>
+                    <FormRow lblFor="lastName" lblText="Last name">
+                        <Input type="text" register={register} name={"lastname"} defaultValue={firstName} />
+                    </FormRow>
 
-                    <Row>
-                        <label htmlFor="created">Last updated</label>
-                        <ReadOnly type="text" disabled value={lastUpd} />
-                    </Row>
+                    <FormRow lblFor="currency" lblText="Currency">
+                        <Select options={options} register={register} name={"currency"} selectedDefault={user?.user_metadata.currency}></Select>
+                    </FormRow>
 
-                    <Row>
-                        <label htmlFor="email" >Email</label>
-                        <ReadOnly type="email" disabled defaultValue={user?.email} />
-                    </Row>
-
-                    <Row>
-                        <label htmlFor="firstName">First name</label>
-                        <Input type="text" {...register("firstName")} defaultValue={firstName} />
-                    </Row>
-
-                    <Row>
-                        <label htmlFor="lastName">Last name</label>
-                        <Input type="text" {...register("lastName")} defaultValue={lastName} />
-                    </Row>
-
-                    <Row>
-                        <label htmlFor="currency">Currency</label>
-                        <Select {...register("currency")} defaultValue={user?.user_metadata.currency}>
-                            {options.map((currency) => <option key={currency.id} value={currency.id} >{currency.name}</option>)}
-                        </Select>
-                    </Row>
 
                     <SettingsFooter>
                         <SecondaryBtn onClick={handleBack}>Cancel</SecondaryBtn>
                         <PrimaryBtn type="submit">Save</PrimaryBtn>
                     </SettingsFooter>
                 </form>
-
-            </ProfileSection>
-        </Container>
+            </Container>
+        </Section >
     )
 }
