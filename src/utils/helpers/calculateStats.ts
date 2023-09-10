@@ -4,6 +4,7 @@ import formatNumberWithSpaces from "./formatWithSpace";
 type CalcStatsFn = {
   expenses: Array<ITransaction>;
   incomes: Array<ITransaction>;
+  defaultCurrency: string;
 };
 
 export default function calculateStats(fn: CalcStatsFn): string[] {
@@ -14,9 +15,9 @@ export default function calculateStats(fn: CalcStatsFn): string[] {
   const coefficent: number = Math.round((totalExpenses / totalIncomes) * 100);
 
   return [
-    `$ ${formatNumberWithSpaces(totalExpenses)}`,
-    `$ ${formatNumberWithSpaces(totalIncomes)}`,
-    `$ ${formatNumberWithSpaces(balance)}`,
+    `${fn.defaultCurrency} ${formatNumberWithSpaces(totalExpenses)}`,
+    `${fn.defaultCurrency} ${formatNumberWithSpaces(totalIncomes)}`,
+    `${fn.defaultCurrency} ${formatNumberWithSpaces(balance)}`,
     `${coefficent} %`,
   ];
 }

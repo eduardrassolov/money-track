@@ -14,6 +14,7 @@ const Div = styled.div`
   border: 1px solid #ccc;
   border-radius: 7px;
   padding: 0.2rem 0.5rem;
+  gap: 0.3rem;
 
   span{
     font-size: 0.8rem;

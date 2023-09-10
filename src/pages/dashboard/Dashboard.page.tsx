@@ -16,6 +16,7 @@ import { PieBlock, PieContainer, RowContainer, RowContainerCards, StyledContaine
 import { ISummary, getSummaryData } from "../../utils/helpers/getStats.ts";
 import useFilter from "../../utils/hooks/useFilter.tsx";
 import { useUser } from "../../utils/hooks/useUser.tsx";
+import useDefaultCurrency from "../../utils/hooks/useDefaultCurrency.tsx";
 
 const statCardData: Array<StatsCardData> = [
   {
@@ -48,6 +49,7 @@ const statCardData: Array<StatsCardData> = [
 export default function Dashboard() {
   const { filter } = useFilter();
   const { user } = useUser();
+  const { defaultCurrency } = useDefaultCurrency();
 
   if (!user) {
     return;
@@ -62,7 +64,7 @@ export default function Dashboard() {
   if (!transactions || !incomes || !expenses)
     return null;
 
-  const stats = calcStats({ expenses, incomes });
+  const stats = calcStats({ expenses, incomes, defaultCurrency: defaultCurrency || "$" });
 
   const summaryExpenses: Array<ISummary> = getSummaryData(expenses);
   const summaryIncomes: Array<ISummary> = getSummaryData(incomes);

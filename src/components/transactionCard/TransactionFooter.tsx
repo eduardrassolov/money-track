@@ -2,8 +2,8 @@ import { FC } from "react"
 import { styled } from "styled-components";
 import FooterItem from "./FooterItem"
 import { ITransaction } from "../../interface/ITransactions";
-import { TbMoneybag, TbCalendar, TbTag } from "react-icons/tb";
 import { formatDate } from "../../utils/helpers/formatDate";
+import { HiOutlineBanknotes, HiOutlineCalendarDays, HiOutlineTag } from "react-icons/hi2";
 interface ITransactionProps {
     item: ITransaction;
 }
@@ -11,18 +11,17 @@ interface ITransactionProps {
 const Container = styled.div`
     display: flex;
     flex-wrap: wrap;    
-    gap: 0.4rem;
+    gap: 0.5rem;
 `
 
 const TransactionFooter: FC<ITransactionProps> = ({ item }) => {
     const formatedDate: string = formatDate(item.completedAt.toString());
-    console.log(item);
     return (
         <Container>
             {/* <FooterItem title={item.type.name} /> */}
-            <FooterItem title={`${item.currency.symbol} ${item.amount}`} icon={<TbMoneybag />} />
-            <FooterItem title={formatedDate} icon={<TbCalendar />} />
-            <FooterItem title={item.category.name || ''} icon={<TbTag />} />
+            <FooterItem title={`${item.currency.symbol} ${item.amount}`} icon={<HiOutlineBanknotes />} />
+            <FooterItem title={formatedDate} icon={<HiOutlineCalendarDays />} />
+            <FooterItem title={item.category.name || ''} icon={<HiOutlineTag />} />
             {/* <FooterItem title={user?.id || ''} /> */}
         </Container >
     )

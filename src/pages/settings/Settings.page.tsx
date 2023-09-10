@@ -28,7 +28,7 @@ const P = styled.p`
     margin: 0.5rem 0;
 
 `
-const Container = styled.div`
+export const Container = styled.div`
     display: flex;
     flex-direction: column;
     min-width: 300px;
@@ -53,7 +53,7 @@ const InformationContainer = styled.div`
         color: gray;
     }
 `
-const Section = styled.section`
+export const SectionFull = styled.section`
     height: 100vh;
     width: 100%;
     display: flex;
@@ -61,9 +61,8 @@ const Section = styled.section`
     background-color: ${props => props.theme.background};
     color: ${props => props.theme.text};
     padding: 4rem 2rem;
-
+    transition: all 300ms;
 `
-
 
 export default function Settings() {
     const navigate = useNavigate();
@@ -83,7 +82,7 @@ export default function Settings() {
         return;
 
     return (
-        <Section>
+        <SectionFull>
             <Container>
                 <Avatar />
 
@@ -117,6 +116,6 @@ export default function Settings() {
                     </SettingsFooter>
                 </form>
             </Container>
-        </Section >
+        </SectionFull >
     )
 }
