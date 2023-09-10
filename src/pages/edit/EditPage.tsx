@@ -9,7 +9,7 @@ import { PrimaryBtn, SecondaryBtn } from "../../styles/Button";
 import Category from "../../components/category/Category";
 import { QUERY_KEY } from "../../config/queryClientKeys";
 import { useQuery } from "@tanstack/react-query";
-import getCategory from "../../services/api/getCategory";
+import getCategory from "../../services/api/apiGetCategory";
 import useEdit from "./useEdit";
 import { queryClient } from "../../main";
 import usePageBack from "../../utils/hooks/usePageBack";

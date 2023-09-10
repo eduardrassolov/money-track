@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import { devices } from "../../styles/breakPoints";
 
 const Form = styled.form`
-  border: 1px solid ${(props) => props.theme.background};
+  border: 1px solid ${(props) => props.theme.border};
   background: ${(props) => props.theme.background};
   color: ${(props) => props.theme.text};
   border-radius: 15px;
@@ -22,23 +22,6 @@ const FormGroup = styled.div`
 
   label {
     margin-bottom: 0.5rem;
-  }
-  input {
-    font-size: 1rem;
-    padding: 0.5rem;
-    border-radius: 7px;
-    border: 1px solid ${(props) => props.theme.text};
-    background: ${(props) => props.theme.background};
-    color: ${(props) => props.theme.text};
-    transition: all 300ms;
-
-    &:focus {
-      outline: none;
-      border: 1px solid #0284c7;
-      background: ${(props) => props.theme.background};
-      color: ${(props) => props.theme.text};
-      transition: all 0.3s ease-in-out;
-    }
   }
 `;
 const ErrorP = styled.p`
