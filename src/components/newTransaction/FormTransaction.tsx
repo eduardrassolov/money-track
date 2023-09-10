@@ -90,7 +90,7 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
             </FormRow>
 
             <FormRow lblFor={"currency"} lblText={"Currency"}>
-                <Select options={optionCurrency} register={register} name={"currency"} selectedDefault={userCurrency}></Select>
+                <Select options={optionCurrency} register={register} name={"currency"} selectedDefault={userCurrency} isDisabled={true}></Select>
             </FormRow>
 
             <FormRow lblFor={"completed_at"} lblText={"Date"}>
