@@ -23,7 +23,7 @@ interface INewTransactionProps {
     type: number;
 }
 
-const schema = yup.object().shape({
+export const schema = yup.object().shape({
     description: yup.string().required("Description is required."),
     amount: yup.number().required().positive("Amount must be positive."),
     completed_at: yup.date().required("Date is required.").max(new Date(), "Date must not be in the future"),
@@ -36,9 +36,7 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
     const { filter } = useFilter();
     const sortBy: SortBy = useSort();
     const { createTransaction } = useCreateTransaction();
-    const { register, handleSubmit, reset, formState: { errors }} = useForm<Inputs>({
-        resolver: yupResolver(schema),
-    });
+    const { register, handleSubmit, reset, formState: { errors }} = useForm<Inputs>({ resolver: yupResolver(schema)});
 
     if (!user) {
         return;

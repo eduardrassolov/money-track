@@ -7,10 +7,14 @@ import { apiSignUp } from '../../services/api/apiUser';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../router';
 import { toast } from 'react-toastify';
-import { BottomText, Div, Form, Group, H1, Input, StyledLink } from '../login/Login.style.ts';
+import { BottomText, Div, Form, Group, H1, StyledLink } from '../login/Login.style.ts';
 import useTheme from '../../utils/hooks/useTheme.tsx';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import Input from '../../components/input/Input.tsx';
+import { ErrorP } from '../../components/newTransaction/FormTransaction.style.ts';
 
-type Inputs = {
+export type SignInInputs = {
     email: string,
     password: string,
     repeatPass: string,
@@ -18,7 +22,7 @@ type Inputs = {
     lastName: string,
 }
 
-const defaultFields: Inputs = {
+const defaultFields: SignInInputs = {
     email: '',
     password: '',
     repeatPass: '',
@@ -32,16 +36,23 @@ const StyledError = styled.p`
     margin: 0.2rem 0;
     font-size: 0.8rem;
 `
+const signUpSchema = yup.object({
+    email: yup.string().email('Email is not valid').required('This field is required'),
+    password: yup.string().min(6, 'Min password length 6 characters').required('This field is required'),
+    repeatPass: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match').required('This field is required'),
+    firstName: yup.string().required('This field is required'),
+    lastName: yup.string().required('This field is required'),
+})
 
 export default function SignUp() {
     const navigate = useNavigate();
     const { theme } = useTheme();
-    const { register, handleSubmit, getValues, formState: { errors } } = useForm<Inputs>({
-        mode: "onSubmit",
-        defaultValues: defaultFields
+    const { register, handleSubmit, getValues, formState: { errors } } = useForm<SignInInputs>({
+        defaultValues: defaultFields, 
+        resolver: yupResolver(signUpSchema)
     });
 
-    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const onSubmit: SubmitHandler<SignInInputs> = async (data) => {
         const { error } = await apiSignUp(data.email, data.password, data.firstName, data.lastName);
 
         if (error) {
@@ -51,7 +62,7 @@ export default function SignUp() {
         toast.success("Welcome")
         navigate(ROUTES.DASHBOARD);
     }
-    const onError: SubmitErrorHandler<Inputs> = err => {
+    const onError: SubmitErrorHandler<SignInInputs> = err => {
         console.log(err);
     }
 
@@ -62,65 +73,32 @@ export default function SignUp() {
                 <Form onSubmit={handleSubmit(onSubmit, onError)}>
                     <Group>
                         <label htmlFor="email">Email adress:</label>
-                        <ErrorMessage errors={errors} name="email" render={({ message }) => <StyledError>{message}</StyledError>} />
-                        <Input type="text" {...register("email",
-                            {
-                                required: "This field is required",
-                                pattern:
-                                {
-                                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                                    message: 'Email is not valid.'
-                                }
-                            })} placeholder="Enter email" autoComplete="off" autoFocus />
+                        <Input type={"text"} name={"email"} placeHolder={"Enter email"} register={register} />
+                        <ErrorP>{errors.email?.message}</ErrorP>
                     </Group>
 
                     <Group>
                         <label htmlFor="password">Password:</label>
-                        <ErrorMessage errors={errors} name="password" render={({ message }) => <StyledError>{message}</StyledError>} />
-                        <Input type="password" {...register("password", {
-                            required: "This field is required",
-                            minLength: {
-                                value: 6,
-                                message: "Min password length 6 characters"
-                            }
-                        })} placeholder="Enter password" autoComplete="off" />
+                        <Input type={"password"} name={"password"} placeHolder={"Enter password"} register={register} />
+                        <ErrorP>{errors.password?.message}</ErrorP>
                     </Group>
 
                     <Group>
                         <label htmlFor="repeatPass">Repeat password:</label>
-                        <ErrorMessage errors={errors} name="repeatPass" render={({ message }) => <StyledError>{message}</StyledError>} />
-                        <Input type="password" {...register("repeatPass", {
-                            required: "This field is required",
-                            minLength: {
-                                value: 6,
-                                message: "Min password length 6 characters"
-                            },
-                            validate: (value) => value === getValues().password || "Passwords don't match. Try again."
-                        })} placeholder="Repeat password" autoComplete="off" />
+                        <Input type={"password"} name={"repeatPass"} placeHolder={"Confirm password"} register={register} />
+                        <ErrorP>{errors.repeatPass?.message}</ErrorP>
                     </Group>
 
                     <Group>
                         <label htmlFor="firstName">First name:</label>
-                        <ErrorMessage errors={errors} name="firstName" render={({ message }) => <StyledError>{message}</StyledError>} />
-                        <Input type="text" {...register("firstName", {
-                            required: "This field is required",
-                            pattern: {
-                                value: /^[A-Za-z'-]+$/,
-                                message: "First name is invalid"
-                            }
-                        }
-                        )} placeholder="Enter firstname" autoComplete="off" />
+                        <Input type={"text"} name={"firstName"} placeHolder={"Enter first name"} register={register} />
+                        <ErrorP>{errors.firstName?.message}</ErrorP>
                     </Group>
 
                     <Group>
                         <label htmlFor="lastName">Last name:</label>
-                        <ErrorMessage errors={errors} name="lastName" render={({ message }) => <StyledError>{message}</StyledError>} />
-                        <Input type="text" {...register("lastName", {
-                            required: "This field is required", pattern: {
-                                value: /^[A-Za-z'-]+$/,
-                                message: "First name is invalid"
-                            }
-                        })} placeholder="Enter lastname" autoComplete="off" />
+                        <Input type={"text"} name={"lastName"} placeHolder={"Enter last name"} register={register} />
+                        <ErrorP>{errors.lastName?.message}</ErrorP>
                     </Group>
 
 
