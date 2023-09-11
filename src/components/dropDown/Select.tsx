@@ -13,6 +13,7 @@ export const StyledSelect = styled.select`
   width: 100%;
   transition: all 300ms;
   font-size: 1rem;
+  cursor: pointer;
 
   &:focus {
     background-color: ${(props) => props.theme.background};
@@ -40,7 +41,7 @@ const Select: FC<ISelect> = ({ options, register, name, selectedDefault, isDisab
     return (
         <StyledSelect {...register(name)} value={selectedDefault} disabled={isDisabled}>
             {
-                options.map((item) => <option key={item.id} value={item.id} >{item.name}</option>)
+                options?.map((item) => <option key={item.id} value={item.id} >{item.name}</option>)
             }
         </StyledSelect>
     )
