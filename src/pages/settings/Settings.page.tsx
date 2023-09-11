@@ -4,7 +4,7 @@ import { PrimaryBtn, SecondaryBtn } from "../../styles/Button";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import apiGetCurrency from "../../services/api/apiGetCurrency";
-import { ProfileSection, ReadOnly, Row, SettingsFooter } from "./Settings.style";
+import {  SettingsFooter } from "./Settings.style";
 import { SubmitHandler, useForm } from "react-hook-form";
 import useSettings from "./useSettings";
 import FormRow from "../../components/newTransaction/FormRow";
@@ -12,6 +12,7 @@ import Input from "../../components/input/Input";
 import styled from "styled-components";
 import Select from "../../components/dropDown/Select";
 import { devices } from "../../styles/breakPoints";
+import { QUERY_KEY } from "../../config/queryClientKeys";
 
 export type InputsSettings = {
     firstName: string;
@@ -19,11 +20,6 @@ export type InputsSettings = {
     currency: string
 }
 
-const Form = styled.form`
-    padding: 1rem;
-    gap: 1rem;
-    background: ${(props) => props.theme.background};
-`
 const P = styled.p`
     margin: 0.5rem 0;
 
@@ -69,15 +65,15 @@ export default function Settings() {
     const queryClient = useQueryClient();
 
     const { mutateUser } = useSettings();
-    const { user, created, lastUpd, firstName, lastName } = useUser();
-    const { register, handleSubmit, formState: { errors } } = useForm<InputsSettings>();
+    const { user, created, lastUpd, firstName } = useUser();
+    const { register, handleSubmit } = useForm<InputsSettings>();
 
     const onSubmit: SubmitHandler<InputsSettings> = data =>
-        mutateUser(data, { onSuccess: () => queryClient.invalidateQueries(["user"]) });
+        mutateUser(data, { onSuccess: () => queryClient.invalidateQueries([QUERY_KEY.USER]) });
 
     const handleBack = () => navigate(-1);
 
-    const { data: options } = useQuery({ queryKey: ["currency"], queryFn: () => apiGetCurrency() });
+    const { data: options } = useQuery({ queryKey: [QUERY_KEY.CURRENCY], queryFn: () => apiGetCurrency() });
     if (!options)
         return;
 

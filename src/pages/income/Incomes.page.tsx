@@ -6,14 +6,13 @@ import TransactionForm from "../../components/newTransaction/FormTransaction";
 import { loaderIncomes } from "./loader";
 import TransactionArr from "../transactions/TransactionList";
 import { Container, FormDiv, ListDiv } from "../../styles/TransactionContainer";
-import Header from "../../ui/header/Header";
+
 import { useQuery } from "@tanstack/react-query";
-import formatNumberWithSpaces from "../../utils/helpers/formatWithSpace";
+
 import { defaultSort } from "../transactions/loader";
 import { useUser } from "../../utils/hooks/useUser";
 
 import Operation from "../../components/operations/Operations";
-import useDefaultCurrency from "../../utils/hooks/useDefaultCurrency";
 
 export default function Incomes() {
     const { user } = useUser();

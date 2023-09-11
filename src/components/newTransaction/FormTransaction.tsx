@@ -16,6 +16,7 @@ import Input from '../input/Input';
 import Select from '../dropDown/Select';
 import apiGetCategory from '../../services/api/apiGetCategory';
 import FormRow from './FormRow';
+import { formatDateToInput } from '../../utils/helpers/formatDateToInput';
 interface INewTransactionProps {
     type: number;
 }
@@ -65,8 +66,12 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
     if (!optionCurrency) {
         return;
     }
+    console.log(new Date().toISOString());
 
     const transactionType = type === TYPES_TRANSACTION.INCOME ? "income" : "expense:"
+    const formatedTime = formatDateToInput(new Date());
+    console.log(formatedTime);
+
 
     return (
         <Form onSubmit={handleSubmit(onSubmit, onError)}>
@@ -93,7 +98,7 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
             </FormRow>
 
             <FormRow lblFor={"completed_at"} lblText={"Date"}>
-                <Input type={"datetime-local"} name={"completed_at"} register={register} />
+                <Input type={"datetime-local"} name={"completed_at"} register={register} defaultValue={formatedTime} />
             </FormRow>
 
             <FormFooter>

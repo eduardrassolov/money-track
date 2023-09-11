@@ -4,4 +4,5 @@ export const QUERY_KEY = {
   EXPENSES: "expenses",
   CATEGORIES: "categories",
   USER: "user",
+  CURRENCY: "currency",
 };

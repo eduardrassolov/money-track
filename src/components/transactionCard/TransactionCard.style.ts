@@ -14,7 +14,8 @@ const Container = styled.div<{ $bg: string }>`
 
   &:hover {
     background: ${(props) => (props.$bg === "expenses" ? "rgba(36, 143, 233, 0.05)" : "rgba(142, 230, 20, 0.05)")};
-    border: 1px solid ${(props) => (props.$bg === "expenses" ? "rgb(36, 143, 233)" : "rgb(142, 230, 20)")};
+    /* border: 1px solid ${(props) => (props.$bg === "expenses" ? "rgb(36, 143, 233)" : "rgb(142, 230, 20)")}; */
+    border: 1px solid ${(props) => (props.$bg === "expenses" ? "#014737" : "rgb(142, 230, 20)")};
     cursor: pointer;
     transition: all 300ms;
   }

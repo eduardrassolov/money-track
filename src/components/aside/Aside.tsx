@@ -6,7 +6,6 @@ import { FC } from "react";
 import { IBar } from "./NavBar/NavBar";
 import Profile from "../user/Profile";
 import { AiOutlineTool } from "react-icons/ai";
-import { HiOutlineChartPie, HiOutlineCreditCard, HiOutlineShoppingCart } from "react-icons/hi2";
 
 const icons: Array<JSX.Element> =
     [<AreaChartOutlined />,
