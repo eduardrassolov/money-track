@@ -4,7 +4,7 @@ import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEY } from '../../config/queryClientKeys';
 import { PrimaryBtn, SecondaryBtn } from '../../styles/Button';
-import { Form, FormFooter } from './FormTransaction.style';
+import { ErrorP, Form, FormFooter } from './FormTransaction.style';
 import { Inputs } from '../../types/Inputs.type';
 import { useUser } from '../../utils/hooks/useUser';
 import useCreateTransaction from './useCreateTransaction';
@@ -17,9 +17,18 @@ import Select from '../dropDown/Select';
 import apiGetCategory from '../../services/api/apiGetCategory';
 import FormRow from './FormRow';
 import { formatDateToInput } from '../../utils/helpers/formatDateToInput';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 interface INewTransactionProps {
     type: number;
 }
+
+const schema = yup.object().shape({
+    description: yup.string().required("Description is required."),
+    amount: yup.number().required().positive("Amount must be positive."),
+    completed_at: yup.date().required("Date is required.").max(new Date(), "Date must not be in the future"),
+}).required()
+
 
 const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
     const { user } = useUser();
@@ -27,7 +36,9 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
     const { filter } = useFilter();
     const sortBy: SortBy = useSort();
     const { createTransaction } = useCreateTransaction();
-    const { register, handleSubmit, reset } = useForm<Inputs>();
+    const { register, handleSubmit, reset, formState: { errors }} = useForm<Inputs>({
+        resolver: yupResolver(schema),
+    });
 
     if (!user) {
         return;
@@ -79,6 +90,7 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
 
             <FormRow lblFor={"description"} lblText={"Description"}>
                 <Input type={"text"} id={"description"} name={"description"} placeHolder={`Enter name of ${transactionType}`} autoFocus={true} register={register} />
+                <ErrorP>{errors.description?.message}</ErrorP>
             </FormRow>
 
             {optionsList
@@ -91,6 +103,7 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
 
             <FormRow lblFor="amount" lblText={"Amount"}>
                 <Input type={"number"} name={"amount"} placeHolder={"0,00"} register={register} />
+                <ErrorP>{errors.amount?.message}</ErrorP>
             </FormRow>
 
             <FormRow lblFor={"currency"} lblText={"Currency"}>
@@ -99,6 +112,7 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
 
             <FormRow lblFor={"completed_at"} lblText={"Date"}>
                 <Input type={"datetime-local"} name={"completed_at"} register={register} defaultValue={formatedTime} />
+                <ErrorP>{errors.completed_at?.message}</ErrorP>
             </FormRow>
 
             <FormFooter>

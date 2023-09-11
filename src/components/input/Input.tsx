@@ -52,7 +52,6 @@ const Input: FC<IInput> = ({ type = "text", id, placeHolder, name, register, aut
                     {...register(name)}
                     autoFocus={autoFocus}
                     defaultValue={defaultValue} />
-
             }
         </>
     )
