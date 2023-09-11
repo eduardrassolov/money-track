@@ -14,6 +14,8 @@ import { GetAllTransactionsDTO } from "../../services/api/dto/getTransactions.dt
 import Input from "../../components/input/Input";
 import Select from "../../components/dropDown/Select";
 import { Container, SectionFull } from "../settings/Settings.page";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schema } from "../../components/newTransaction/FormTransaction";
 
 export default function EditPage() {
     const [data] = useLoaderData() as Array<GetAllTransactionsDTO>;
@@ -29,6 +31,7 @@ export default function EditPage() {
     const { data: optionsList } = useQuery({ queryKey: [QUERY_KEY.CATEGORIES], queryFn: () => getCategory(data.category.type.id) });
     
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({
+        resolver: yupResolver(schema),
         defaultValues: {
             description: data.description,
             amount: data.amount,
@@ -65,21 +68,14 @@ export default function EditPage() {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <FormGroup>
                         <label htmlFor="description">Description:</label>
-                        {errors?.description ? <ErrorP>{errors.description?.message}</ErrorP> : ''}
                         <Input register={register} type={"text"} placeholder={"Enter description"} name={"description"} />
-                            {/* <input type="text" id="description" placeholder='Enter description' autoFocus autoComplete="off"
-                        {
-                        ...register("description",
-                            {
-                                required: '*This field is required',
-                            })} defaultValue={data.description} /> */}
+                        <ErrorP>{errors?.description?.message}</ErrorP>
                     </FormGroup>
 
                     {optionsList
                         ?
                         <FormGroup>
                             <label htmlFor="category">Category:</label>
-                                {/* <Category options={optionsList} register={register} selected={data.category.id.toString()} /> */}
                             <Select options={optionsList} name={"category"} register={register} selectedDefault={data.category.id.toString()}></Select>
                         </FormGroup>
                         : ''
@@ -87,19 +83,14 @@ export default function EditPage() {
 
                     <FormGroup>
                         <label htmlFor="amount">Amount:</label>
-                        {errors?.amount ? <ErrorP>{errors.amount?.message}</ErrorP> : ''}
                         <Input type={"number"} register={register} placeholder={"0,00"} name={"amount"} />
-                            {/* <input type="number" id="amount" step={0.01} min={1} placeholder='Enter amount' autoComplete='off' {...register("amount", {
-                        required: '*This field is required',
-                    })} defaultValue={data.amount} /> */}
+                        <ErrorP>{errors?.amount?.message}</ErrorP>
                     </FormGroup>
 
                     <FormGroup>
                         <label htmlFor="completed_at">Date:</label>
                         <Input type={"datetime-local"} register={register} name={"completed_at"} />
-                            {/* <input type="datetime-local" id="completed_at"  {...register("completed_at", {
-                        required: '*This field is required',
-                    })} defaultValue={new Date(data.completed_at).toISOString().slice(0, 16)} /> */}
+                        <ErrorP>{errors?.completed_at?.message}</ErrorP>
                     </FormGroup>
 
                     <FormFooter>

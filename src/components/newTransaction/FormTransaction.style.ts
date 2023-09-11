@@ -28,7 +28,7 @@ const FormGroup = styled.div`
 const ErrorP = styled.p`
   font-size: 0.7rem;
   color: ${(props) => props.theme.error};
-  margin: 0 0 0.5rem;
+  margin: 0.5rem 0 1rem;
   transition: all 300ms;
 `;
 const FormFooter = styled.div`

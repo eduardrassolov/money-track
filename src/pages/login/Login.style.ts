@@ -62,7 +62,7 @@ export const Group = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-  margin: 0 0 1.5rem;
+  margin: 0 0 0.5rem;
 `;
 export const Input = styled.input`
   background: ${(props) => props.theme.background};

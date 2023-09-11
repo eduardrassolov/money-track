@@ -13,6 +13,10 @@ import styled from "styled-components";
 import Select from "../../components/dropDown/Select";
 import { devices } from "../../styles/breakPoints";
 import { QUERY_KEY } from "../../config/queryClientKeys";
+import * as yup from "yup";
+import { ErrorP } from "../../components/newTransaction/FormTransaction.style";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { set } from "date-fns";
 
 export type InputsSettings = {
     firstName: string;
@@ -60,13 +64,24 @@ export const SectionFull = styled.section`
     transition: all 300ms;
 `
 
+const settingsSchema = yup.object({
+    firstName: yup.string().required("First name is required").min(3, "First name must be at least 3 characters long"),
+    lastName: yup.string().required("Last name is required").min(3, "Last name must be at least 3 characters long"),
+  
+})
+
 export default function Settings() {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
     const { mutateUser } = useSettings();
-    const { user, created, lastUpd, firstName } = useUser();
-    const { register, handleSubmit } = useForm<InputsSettings>();
+    const { user, created, lastUpd, firstName, lastName } = useUser();
+    const { register, handleSubmit, formState: {errors} } = useForm<InputsSettings>({
+        resolver: yupResolver(settingsSchema),
+        defaultValues:{
+            firstName, lastName, currency: user?.user_metadata.currency
+        }
+    });
 
     const onSubmit: SubmitHandler<InputsSettings> = data =>
         mutateUser(data, { onSuccess: () => queryClient.invalidateQueries([QUERY_KEY.USER]) });
@@ -94,15 +109,17 @@ export default function Settings() {
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <FormRow lblFor="firstName" lblText="First name">
-                        <Input type="text" register={register} name={"firstName"} defaultValue={firstName} />
+                        <Input type="text" register={register} name={"firstName"}  />
+                        <ErrorP>{errors.firstName?.message}</ErrorP>
                     </FormRow>
 
                     <FormRow lblFor="lastName" lblText="Last name">
-                        <Input type="text" register={register} name={"lastname"} defaultValue={firstName} />
+                        <Input type="text" register={register} name={"lastName"} />
+                        <ErrorP>{errors.lastName?.message}</ErrorP>
                     </FormRow>
 
                     <FormRow lblFor="currency" lblText="Currency">
-                        <Select options={options} register={register} name={"currency"} selectedDefault={user?.user_metadata.currency}></Select>
+                        <Select options={options} register={register} name={"currency"} ></Select>
                     </FormRow>
 
 

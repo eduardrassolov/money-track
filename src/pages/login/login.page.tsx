@@ -1,31 +1,34 @@
-import { useState } from "react";
 import { LoginBtn } from "../../styles/Button";
 import { useLogin } from "./useLogin";
 import Hints from "./Hints";
-import { BottomText, Div, Form, GropHorizontal, Group, H1, Input, P, StyledLink } from "./Login.style.ts";
+import { BottomText, Div, Form, GropHorizontal, Group, H1, P, StyledLink } from "./Login.style.ts";
 import useTheme from "../../utils/hooks/useTheme.tsx";
 import { ThemeProvider } from "styled-components";
+import * as yup from 'yup';
+import { SubmitHandler, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import Input from "../../components/input/Input.tsx";
+import { ErrorP } from "../../components/newTransaction/FormTransaction.style.ts";
 
+const schema = yup.object({
+    email: yup.string().required('Email is required').email('Email is invalid'),
+    password: yup.string().required('Password is required'),
+})
+
+interface ILoginInputs {
+    email: string;
+    password: string;
+}
 
 const Login = () => {
     const { login, isLoading } = useLogin();
     const { theme } = useTheme();
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const {register, handleSubmit, formState: { errors } } = useForm<ILoginInputs>({
+        resolver: yupResolver(schema)
+    });
 
-    const handleEmail = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => setEmail(() => value);
-    const handlePassword = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => setPassword(() => value);
-
-    const handleSubmit = async (e: React.SyntheticEvent) => {
-        e.preventDefault();
-
-        if (!email.trim() || !password.trim()) {
-            return;
-        }
-
-        login({ email, password });
-    }
+    const onSubmit: SubmitHandler<ILoginInputs> = async (data) => login(data);
 
     return (
         <ThemeProvider theme={theme}>
@@ -36,15 +39,20 @@ const Login = () => {
                     <Hints />
                 </GropHorizontal>
 
-                <Form onSubmit={handleSubmit}>
+                <Form onSubmit={handleSubmit(onSubmit)}>
                     <Group>
                         <label htmlFor="email">Email adress:</label>
-                        <Input type="email" name="email" value={email} onInput={handleEmail} placeholder="Enter email" required autoComplete="off" />
+
+                        <Input type="email" name="email" placeHolder="Enter email" register={register} />
+                        <ErrorP>{errors.email?.message}</ErrorP>
                     </Group>
 
                     <Group>
                         <label htmlFor="password">Password:</label>
-                        <Input type="password" name="password" value={password} onInput={handlePassword} placeholder="Enter password" required autoComplete="off" />
+
+                        <Input type="password" name="password" placeHolder="Enter password" register={register} />
+                        <ErrorP>{errors.password?.message}</ErrorP>
+
                     </Group>
 
                     <LoginBtn type="submit" disabled={isLoading}>{isLoading ? 'Loging...' : 'Continue'}</LoginBtn>
