@@ -12,4 +12,10 @@ export interface ITransaction {
     name: string;
   };
   profileId: string;
+  currency: {
+    id: string;
+    name: string;
+    shortName: string;
+    symbol: string;
+  };
 }

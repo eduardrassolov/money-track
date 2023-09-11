@@ -5,7 +5,8 @@ import supabase from "../supabase";
 export const SELECT = {
   ALL_TRANSACTIONS: `
     id, amount, completed_at, description, 
-    category!inner(id, name, type:type_transaction!inner(id, name))
+    category!inner(id, name, type:type_transaction!inner(id, name)),
+    currency:Currency!inner(id, name, symbol, shortName)
   `,
 };
 
@@ -37,6 +38,7 @@ export default async function getTransactions({
       category: { id: transaction.category.id, name: transaction.category.name },
       completedAt: new Date(transaction.completed_at),
       profileId: transaction.profile_id,
+      currency: transaction.currency,
     };
   });
 

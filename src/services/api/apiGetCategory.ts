@@ -1,7 +1,7 @@
 import { ICategory } from "../../interface/ICategory";
 import supabase from "../supabase";
 
-export default async function getCategory(type: number) {
+export default async function apiGetCategory(type: number) {
   const { data } = await supabase.from("category").select().eq("type_id", type);
 
   if (!data) {

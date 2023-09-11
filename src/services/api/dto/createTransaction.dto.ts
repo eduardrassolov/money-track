@@ -5,4 +5,5 @@ export interface ICreateTransactionDTO {
   description: string;
   id?: number;
   profile_id: string;
+  currency_id: string;
 }

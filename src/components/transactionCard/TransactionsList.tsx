@@ -10,7 +10,6 @@ interface ITransactionList {
 }
 
 const Div = styled.div`
-    /* display: flex; */
     overflow: scroll;
 `
 
@@ -24,7 +23,6 @@ const TransactionsList = ({ data, listType }: ITransactionList) => {
     const { deleteTransaction } = useDelete();
 
     const handleDelete = (id: number) => deleteTransaction(id);
-
     const handleEdit = (id: number) => navigate(`/app/${listType}/${id}`)
 
     return (

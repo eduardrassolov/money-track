@@ -13,9 +13,11 @@ import { defaultSort } from "../transactions/loader";
 import { useUser } from "../../utils/hooks/useUser";
 
 import Operation from "../../components/operations/Operations";
+import useDefaultCurrency from "../../utils/hooks/useDefaultCurrency";
 
 export default function Incomes() {
     const { user } = useUser();
+    const { defaultCurrency } = useDefaultCurrency();
     if (!user) {
         return;
     }
@@ -38,7 +40,7 @@ export default function Incomes() {
                 </FormDiv>
 
                 <ListDiv>
-                    <Header text={`Total incomes: $${formatNumberWithSpaces(total)}`} />
+                    {/* <Header text={`Total incomes: ${defaultCurrency} ${formatNumberWithSpaces(total)}`} /> */}
 
                     {!transactions?.length ?
                         '' :

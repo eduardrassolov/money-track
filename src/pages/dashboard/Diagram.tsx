@@ -16,32 +16,22 @@ const ChartContainer = styled.div`
     transition: all 300ms;
 `
 interface IDiagramProps {
-    data: ITransaction[];
+    data: any[];
 }
 
-
-
 const Diagram: FC<IDiagramProps> = ({ data }) => {
-    const diagramData = data.map((transaction) => {
-        return {
-            name: formatDate(transaction.completedAt.toString()),
-            Expenses: transaction.type.id === TYPES_TRANSACTION.EXPENSE ? transaction.amount : 0,
-            Incomes: transaction.type.id === TYPES_TRANSACTION.INCOME ? transaction.amount : 0,
-        }
-    })
-
     return (
         <ChartContainer>
             <ResponsiveContainer width={1000} height={350}>
-                <LineChart data={diagramData} margin={{
+                <LineChart data={data} margin={{
                     top: 20, right: 20, bottom: 20, left: 20,
                 }}>
-                    <XAxis dataKey="name" />
+                    <XAxis dataKey="completedAt" />
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Line type="monotone" dataKey="Expenses" stroke="rgb(36, 143, 233)" />
-                    <Line type="monotone" dataKey="Incomes" stroke="rgb(142, 230, 20)" />
+                    <Line type="monotone" dataKey="Expense" stroke="rgb(36, 143, 233)" />
+                    <Line type="monotone" dataKey="Income" stroke="rgb(142, 230, 20)" />
                 </LineChart>
             </ResponsiveContainer>
         </ChartContainer >

@@ -1,5 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
-import { Select } from '../filter/DropDown.style';
+import { StyledSelect } from '../../dropDown/Select';
+
 
 const optionsData = [
     {
@@ -50,8 +51,8 @@ export default function Sort() {
     }
 
     return (
-        <Select onChange={handleChange} value={selected}>
+        <StyledSelect onChange={handleChange} value={selected}>
             {optionsData.map((option) => <option key={option.value} value={option.value}>{option.text}</option>)}
-        </Select>
+        </StyledSelect>
     )
 }

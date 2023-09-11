@@ -1,7 +1,8 @@
 import { useSearchParams } from 'react-router-dom';
-import { Select } from './DropDown.style';
+
 import { Option } from './filterParameters';
 import { memo } from 'react';
+import Select, { StyledSelect } from '../../dropDown/Select';
 
 interface IFilter {
     options: Array<Option>;
@@ -33,9 +34,9 @@ const Filter = memo(function ({ options, filterKey }: IFilter) {
     console.log(options);
 
     return (
-        <Select onChange={handleChange} value={selected} >
+        <StyledSelect onChange={handleChange} value={selected}>
             {options.map((opt) => <option key={opt.value} value={opt.value}>{opt.text}</option>)}
-        </Select >
+        </StyledSelect >
 
     )
 })

@@ -7,7 +7,8 @@ const StyledContainer = styled.div`
   width: clamp(310px, 1000px, 95%);
   gap: 1rem;
   overflow: scroll;
-  margin: 5rem 0 1rem;
+  margin: 3.5rem 0 1rem;
+  padding: 1.5rem 1rem 5rem;
 `;
 
 const RowContainer = styled.div`

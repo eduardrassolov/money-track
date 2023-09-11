@@ -4,4 +4,5 @@ export default interface IInsertTransaction {
   completedAt: string;
   categoryId: number;
   profileId: string;
+  currencyId: string;
 }

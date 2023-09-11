@@ -12,8 +12,11 @@ import { useUser } from "../../utils/hooks/useUser";
 import { defaultSort } from "../transactions/loader";
 import Operation from "../../components/operations/Operations";
 
+import useDefaultCurrency from "../../utils/hooks/useDefaultCurrency";
+
 export default function Expenses() {
   const { user } = useUser();
+  const { defaultCurrency } = useDefaultCurrency();
   if (!user) {
     return;
   }
@@ -35,12 +38,11 @@ export default function Expenses() {
           <TransactionForm type={TYPES_TRANSACTION.EXPENSE} />
         </FormDiv>
 
-
         <ListDiv>
 
           {!transactions?.length ? '' :
             <>
-              <Header text={`Total expenses: $${formatNumberWithSpaces(total)}`} />
+              {/* <Header text={`Total expenses: ${defaultCurrency} ${formatNumberWithSpaces(total)}`} /> */}
               <Operation />
 
               <TransactionArr listType={QUERY_KEY.EXPENSES} loader={loaderExpenses} />
