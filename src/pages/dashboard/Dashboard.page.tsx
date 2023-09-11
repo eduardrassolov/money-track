@@ -1,7 +1,4 @@
 import StatCard from "./statCard/StatCard.tsx";
-import { HiOutlineShoppingBag, HiOutlineCash, HiOutlineCalculator } from "react-icons/hi";
-import { AiOutlineBank } from "react-icons/ai";
-import { StatsCardData } from "../../types/statsCardData";
 import Diagram from "./Diagram.tsx";
 import Header from "../../ui/header/Header.tsx";
 import calcStats from "../../utils/helpers/calculateStats.ts";
@@ -9,61 +6,9 @@ import CategoryChart from "./categoryChart/CategoryChart.tsx";
 import { PieBlock, PieContainer, RowContainer, RowContainerCards, StyledContainer } from "./Dashboard.page.style.ts";
 import { ISummary, getSummaryData } from "../../utils/helpers/getStats.ts";
 import useDefaultCurrency from "../../utils/hooks/useDefaultCurrency.tsx";
-import { formatDateToChart } from "../../utils/helpers/formatDate.ts";
-import { ITransaction } from "../../interface/ITransactions.ts";
 import useDashboard from "./useDashboard.tsx";
-
-const statCardData: Array<StatsCardData> = [
-  {
-    name: "Expenses",
-    icon: <HiOutlineShoppingBag />,
-    iconBg: "rgba(36, 143, 233, 0.3)",
-    borderColor: "rgb(36, 143, 233)",
-  },
-  {
-    name: "Incomes",
-    icon: <HiOutlineCash />,
-    iconBg: "rgba(142, 230, 20, 0.3)",
-    borderColor: "rgb(142, 230, 20)",
-  },
-  {
-    name: "Balance",
-    icon: <AiOutlineBank />,
-    iconBg: "rgba(255, 216, 6, 0.3)",
-    borderColor: "rgb(255, 216, 6)",
-  },
-  {
-    name: "Coefficent",
-    icon: <HiOutlineCalculator />,
-    iconBg: "rgba(200, 105, 250, 0.3)",
-    borderColor: "rgb(200, 105, 250)",
-  }
-]
-
-function createDataDiagram(transactions: ITransaction[]) {
-  const dataDiagram = transactions.reduce((acc, curr) => {
-
-    const { completedAt, type, amount } = curr;
-    const dateKey = formatDateToChart(completedAt); // Extract the date part
-
-    if (!acc[dateKey]) {
-      acc[dateKey] = { completedAt: dateKey, Expense: 0, Income: 0 };
-    }
-
-    if (type.id === 1) {
-      acc[dateKey].Expense += amount;
-    } else if (type.id === 2) {
-      acc[dateKey].Income += amount;
-    }
-
-    return acc;
-
-  }, {})
-  console.log("all", dataDiagram);
-  const ddt = Object.values(dataDiagram)
-  return ddt;
-}
-
+import createDiagramData from "./createDiagramData.ts";
+import { STATS_CARD_DATA } from "../../config/statsCardsData.tsx";
 
 // TODO - refactor component Dashboard. Remove caclulation from component
 export default function Dashboard() {
@@ -75,7 +20,7 @@ export default function Dashboard() {
 
   const stats = calcStats({ expenses, incomes, defaultCurrency: defaultCurrency || "$" });
 
-  const dataDiagram = createDataDiagram(transactions);
+  const dataDiagram = createDiagramData(transactions);
 
   const summaryExpenses: Array<ISummary> = getSummaryData(expenses);
   const summaryIncomes: Array<ISummary> = getSummaryData(incomes);
@@ -83,10 +28,10 @@ export default function Dashboard() {
   return (
     <>
       <StyledContainer>
-        <Header text="Dashboard" />
+        {/* <Header text="Dashboard" /> */}
 
         <RowContainerCards>
-          {statCardData.map((item, index) => <StatCard key={item.name} item={item} value={stats[index]} />)}
+          {STATS_CARD_DATA.map((item, index) => <StatCard key={item.name} item={item} value={stats[index]} />)}
         </RowContainerCards>
 
         {dataDiagram.length ?
@@ -108,8 +53,8 @@ export default function Dashboard() {
               <CategoryChart data={summaryIncomes} />
             </PieContainer>
             : ''}
-
         </PieBlock>
+
       </StyledContainer >
     </>
   )
