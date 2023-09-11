@@ -19,7 +19,7 @@ export default function useTheme() {
         }
         else {
             toogleTheme("light");
-            localStorage.setItem("theme", "dark");
+            localStorage.setItem("theme", "light");
         }
     }
 
