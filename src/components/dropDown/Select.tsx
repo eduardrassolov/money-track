@@ -29,17 +29,18 @@ type Option = {
 
 interface ISelect {
     options: Array<Option | ICategory | InputsSettings>,
-    register: any,
+    register?: any,
     name: string,
     selectedDefault?: string,
     isDisabled?: boolean
 }
 
 const Select: FC<ISelect> = ({ options, register, name, selectedDefault, isDisabled = false }) => {
+    console.log(selectedDefault);
     return (
-        <StyledSelect {...register(name)} defaultValue={selectedDefault} disabled={isDisabled}>
+        <StyledSelect {...register(name)} value={selectedDefault} disabled={isDisabled}>
             {
-                options.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)
+                options.map((item) => <option key={item.id} value={item.id} >{item.name}</option>)
             }
         </StyledSelect>
     )

@@ -3,16 +3,14 @@ import { FC } from 'react'
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEY } from '../../config/queryClientKeys';
-
 import { PrimaryBtn, SecondaryBtn } from '../../styles/Button';
-import { ErrorP, Form, FormFooter, FormGroup } from './FormTransaction.style';
+import { Form, FormFooter } from './FormTransaction.style';
 import { Inputs } from '../../types/Inputs.type';
 import { useUser } from '../../utils/hooks/useUser';
 import useCreateTransaction from './useCreateTransaction';
 import useFilter from '../../utils/hooks/useFilter';
 import useSort from '../../utils/hooks/useSort';
 import { SortBy } from '../../types/sortBy.type';
-
 import apiGetCurrency from '../../services/api/apiGetCurrency';
 import Input from '../input/Input';
 import Select from '../dropDown/Select';
@@ -23,27 +21,28 @@ interface INewTransactionProps {
 }
 
 const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
-    const queryClient = useQueryClient();
     const { user } = useUser();
+    const queryClient = useQueryClient();
     const { filter } = useFilter();
     const sortBy: SortBy = useSort();
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<Inputs>();
+    const { createTransaction } = useCreateTransaction();
+    const { register, handleSubmit, reset } = useForm<Inputs>();
 
     if (!user) {
         return;
     }
+
     const { id: userId } = user;
     const userCurrency = user.user_metadata.currency as string;
 
     //TODO remove fetching data for SELECT and put globally
     const { data: optionsList } = useQuery({ queryKey: [QUERY_KEY.CATEGORIES], queryFn: () => apiGetCategory(type) });
-
-    const { createTransaction } = useCreateTransaction();
-
     const { data: optionCurrency } = useQuery({ queryKey: ["currency"], queryFn: () => apiGetCurrency() });
-    const onSubmit: SubmitHandler<Inputs> = ({ description, amount, completed_at, category, currency }) => {
-        if (!description.trim() || !amount || !completed_at || !category || !currency)
+
+    const onSubmit: SubmitHandler<Inputs> = ({ description, amount, completed_at, category }) => {
+        if (!description.trim() || !amount || !completed_at || !category) {
             return;
+        }
 
         const key = type === TYPES_TRANSACTION.INCOME ? QUERY_KEY.INCOMES : QUERY_KEY.EXPENSES;
 
@@ -53,10 +52,9 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
             completedAt: completed_at.toString(),
             categoryId: category,
             profileId: userId,
-            currencyId: currency
+            currencyId: userCurrency
         }, {
             onSuccess: () => {
-                console.log('success');
                 queryClient.invalidateQueries({ queryKey: [userId, key, filter, sortBy] });
                 reset();
             }
@@ -64,8 +62,9 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
     }
     const onError: SubmitErrorHandler<Inputs> = (error) => console.log(error);
 
-    if (!optionCurrency)
+    if (!optionCurrency) {
         return;
+    }
 
     const transactionType = type === TYPES_TRANSACTION.INCOME ? "income" : "expense:"
 

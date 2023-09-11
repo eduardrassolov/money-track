@@ -42,7 +42,7 @@ export default function Expenses() {
 
           {!transactions?.length ? '' :
             <>
-              <Header text={`Total expenses: ${defaultCurrency} ${formatNumberWithSpaces(total)}`} />
+              {/* <Header text={`Total expenses: ${defaultCurrency} ${formatNumberWithSpaces(total)}`} /> */}
               <Operation />
 
               <TransactionArr listType={QUERY_KEY.EXPENSES} loader={loaderExpenses} />

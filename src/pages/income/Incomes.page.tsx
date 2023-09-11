@@ -40,7 +40,7 @@ export default function Incomes() {
                 </FormDiv>
 
                 <ListDiv>
-                    <Header text={`Total incomes: ${defaultCurrency} ${formatNumberWithSpaces(total)}`} />
+                    {/* <Header text={`Total incomes: ${defaultCurrency} ${formatNumberWithSpaces(total)}`} /> */}
 
                     {!transactions?.length ?
                         '' :

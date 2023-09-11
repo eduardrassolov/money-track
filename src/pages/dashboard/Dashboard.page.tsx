@@ -4,19 +4,14 @@ import { AiOutlineBank } from "react-icons/ai";
 import { StatsCardData } from "../../types/statsCardData";
 import Diagram from "./Diagram.tsx";
 import Header from "../../ui/header/Header.tsx";
-import { useQuery } from "@tanstack/react-query";
-import { QUERY_KEY } from "../../config/queryClientKeys.ts";
-import { loaderExpenses } from "../expenses/loader.ts";
-import { loaderIncomes } from "../income/loader.ts";
-import { loaderTransactions } from "../transactions/loader.ts";
 import calcStats from "../../utils/helpers/calculateStats.ts";
 import CategoryChart from "./categoryChart/CategoryChart.tsx";
-import { SortBy } from "../../types/sortBy.type.ts";
 import { PieBlock, PieContainer, RowContainer, RowContainerCards, StyledContainer } from "./Dashboard.page.style.ts";
 import { ISummary, getSummaryData } from "../../utils/helpers/getStats.ts";
-import useFilter from "../../utils/hooks/useFilter.tsx";
-import { useUser } from "../../utils/hooks/useUser.tsx";
 import useDefaultCurrency from "../../utils/hooks/useDefaultCurrency.tsx";
+import { formatDateToChart } from "../../utils/helpers/formatDate.ts";
+import { ITransaction } from "../../interface/ITransactions.ts";
+import useDashboard from "./useDashboard.tsx";
 
 const statCardData: Array<StatsCardData> = [
   {
@@ -45,26 +40,42 @@ const statCardData: Array<StatsCardData> = [
   }
 ]
 
+function createDataDiagram(transactions: ITransaction[]) {
+  const dataDiagram = transactions.reduce((acc, curr) => {
+
+    const { completedAt, type, amount } = curr;
+    const dateKey = formatDateToChart(completedAt); // Extract the date part
+
+    if (!acc[dateKey]) {
+      acc[dateKey] = { completedAt: dateKey, Expense: 0, Income: 0 };
+    }
+
+    if (type.id === 1) {
+      acc[dateKey].Expense += amount;
+    } else if (type.id === 2) {
+      acc[dateKey].Income += amount;
+    }
+
+    return acc;
+
+  }, {})
+  console.log("all", dataDiagram);
+  const ddt = Object.values(dataDiagram)
+  return ddt;
+}
+
+
 // TODO - refactor component Dashboard. Remove caclulation from component
 export default function Dashboard() {
-  const { filter } = useFilter();
-  const { user } = useUser();
   const { defaultCurrency } = useDefaultCurrency();
-
-  if (!user) {
-    return;
-  }
-  const userId = user.id;
-  const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
-
-  const { data: transactions } = useQuery({ queryKey: [userId, QUERY_KEY.TRANSACTIONS, filter, sortBy], queryFn: () => loaderTransactions(userId, filter, sortBy) });
-  const { data: expenses } = useQuery({ queryKey: [userId, QUERY_KEY.EXPENSES, filter, sortBy], queryFn: () => loaderExpenses(userId, filter, sortBy) });
-  const { data: incomes } = useQuery({ queryKey: [userId, QUERY_KEY.INCOMES, filter, sortBy], queryFn: () => loaderIncomes(userId, filter, sortBy) });
+  const { transactions, expenses, incomes } = useDashboard();
 
   if (!transactions || !incomes || !expenses)
     return null;
 
   const stats = calcStats({ expenses, incomes, defaultCurrency: defaultCurrency || "$" });
+
+  const dataDiagram = createDataDiagram(transactions);
 
   const summaryExpenses: Array<ISummary> = getSummaryData(expenses);
   const summaryIncomes: Array<ISummary> = getSummaryData(incomes);
@@ -78,9 +89,9 @@ export default function Dashboard() {
           {statCardData.map((item, index) => <StatCard key={item.name} item={item} value={stats[index]} />)}
         </RowContainerCards>
 
-        {transactions.length ?
+        {dataDiagram.length ?
           <RowContainer>
-            <Diagram data={[...transactions]} />
+            <Diagram data={[...dataDiagram]} />
           </RowContainer>
           : ''}
 
