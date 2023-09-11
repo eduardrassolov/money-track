@@ -17,7 +17,7 @@ import useDefaultCurrency from "../../utils/hooks/useDefaultCurrency";
 
 export default function Incomes() {
     const { user } = useUser();
-    const { defaultCurrency } = useDefaultCurrency();
+    // const { defaultCurrency } = useDefaultCurrency();
     if (!user) {
         return;
     }
@@ -31,7 +31,7 @@ export default function Incomes() {
             queryFn: () => loaderIncomes(userId),
         });
 
-    const total = transactions?.reduce((acc, cur) => acc + cur.amount, 0) || 0;
+    // const total = transactions?.reduce((acc, cur) => acc + cur.amount, 0) || 0;
     return (
         <>
             <Container>

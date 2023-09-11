@@ -2,8 +2,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import { Option } from './filterParameters';
 import { memo } from 'react';
-import Select, { StyledSelect } from '../../dropDown/Select';
-
+import { StyledSelect } from '../../dropDown/Select';
 interface IFilter {
     options: Array<Option>;
     filterKey: string;
