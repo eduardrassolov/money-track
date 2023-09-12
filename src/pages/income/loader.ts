@@ -7,6 +7,7 @@ import { SortBy } from "../../types/sortBy.type";
 
 export async function loaderIncomes(userId: string, filter: Filter = null, sortBy: SortBy = { ...defaultSort }) {
   const filterByDate = !filter ? null : getRangeDates(filter);
+  console.log(filterByDate);
   const data: Array<ITransaction> = await getIncomes({ filter: filterByDate, sortBy, userId });
 
   return data;

@@ -9,6 +9,7 @@ const Form = styled.form`
   padding: 1rem 2rem;
   width: auto;
   transition: all 300ms;
+  gap: 0.5rem;
 
   @media only screen and (min-width: ${devices.md}px) {
     min-width: 340px;
@@ -18,7 +19,6 @@ const Form = styled.form`
 const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 1rem;
 
   label {
     margin-bottom: 0.5rem;

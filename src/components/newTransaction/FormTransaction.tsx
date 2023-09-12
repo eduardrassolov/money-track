@@ -31,6 +31,7 @@ export const schema = yup.object().shape({
 
 
 const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
+    console.log('render');
     const { user } = useUser();
     const queryClient = useQueryClient();
     const { filter } = useFilter();
@@ -47,7 +48,7 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
 
     //TODO remove fetching data for SELECT and put globally
     const { data: optionsList } = useQuery({ queryKey: [QUERY_KEY.CATEGORIES], queryFn: () => apiGetCategory(type) });
-    const { data: optionCurrency } = useQuery({ queryKey: ["currency"], queryFn: () => apiGetCurrency() });
+    const { data: optionCurrency } = useQuery({ queryKey: ["currency"], queryFn: apiGetCurrency });
 
     const onSubmit: SubmitHandler<Inputs> = ({ description, amount, completed_at, category }) => {
         if (!description.trim() || !amount || !completed_at || !category) {
@@ -59,8 +60,8 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
         createTransaction({
             description,
             amount,
-            completedAt: completed_at.toString(),
-            categoryId: category,
+            completedAt: completed_at,
+            categoryId: Number(category),
             profileId: userId,
             currencyId: userCurrency
         }, {
@@ -94,7 +95,8 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
             {optionsList
                 ?
                 <FormRow lblFor={"category"} lblText={"Category"}>
-                    <Select options={optionsList} register={register} name={"category"}></Select>
+                    <Select options={optionsList} register={register} name={"category"} selectedDefault={optionsList[0].id}></Select>
+                    <ErrorP></ErrorP>
                 </FormRow>
                 : ''
             }
@@ -106,6 +108,7 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
 
             <FormRow lblFor={"currency"} lblText={"Currency"}>
                 <Select options={optionCurrency} register={register} name={"currency"} selectedDefault={userCurrency} isDisabled={true}></Select>
+                <ErrorP></ErrorP>
             </FormRow>
 
             <FormRow lblFor={"completed_at"} lblText={"Date"}>

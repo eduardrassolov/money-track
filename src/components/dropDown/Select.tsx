@@ -37,7 +37,7 @@ interface ISelect {
 }
 
 const Select: FC<ISelect> = ({ options, register, name, selectedDefault, isDisabled = false }) => {
-    console.log(selectedDefault);
+
     return (
         <StyledSelect {...register(name)} value={selectedDefault} disabled={isDisabled}>
             {
