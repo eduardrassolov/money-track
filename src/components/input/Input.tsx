@@ -5,7 +5,7 @@ import { styled } from "styled-components";
 import { InputsSettings } from "../../pages/settings/Settings.page";
 import { SignInInputs } from "../../pages/signUp/SignUp.page";
 
-const StyledInput = styled.input`
+export const StyledInput = styled.input`
     font-size: 1rem;
     padding: 0.7rem 1rem;
     border-radius: 7px;
@@ -21,6 +21,12 @@ const StyledInput = styled.input`
         color: ${(props) => props.theme.text};
         transition: all 0.3s ease-in-out;
     }
+`
+export const SearchInput = styled(StyledInput)`
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
 `
 
 interface IInput {

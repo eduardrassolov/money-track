@@ -1,6 +1,7 @@
 import { WiDaySunny, WiMoonAltWaxingCrescent3 } from "react-icons/wi";
 import { styled } from "styled-components";
 import useTheme from "../../utils/hooks/useTheme";
+import { HiMiniMoon, HiOutlineMoon, HiOutlineSun } from "react-icons/hi2";
 
 export const NavIcons = styled.div`
     font-size: 1.5rem;
@@ -23,12 +24,12 @@ export const NavIcons = styled.div`
         transition: all 300ms;
     }
 `
-const DarkIcon = styled(WiMoonAltWaxingCrescent3) <{ $currentTheme: string }>`
+const DarkIcon = styled(HiMiniMoon) <{ $currentTheme: string }>`
     transform: ${(props) => props.$currentTheme === "dark" ? 'translateY(-5rem)' : 'translateY(0rem)'};
     transition: all 500ms cubic-bezier(.58,.65,.58,1.43);
     position: fixed;
 `
-const DayIcon = styled(WiDaySunny) <{ $currentTheme: string }>`
+const DayIcon = styled(HiOutlineSun) <{ $currentTheme: string }>`
     transform: ${(props) => props.$currentTheme === "light" ? 'translateY(-5rem)' : 'translateY(0)'};
     transition: all 500ms cubic-bezier(.58,.65,.58,1.43);
 `

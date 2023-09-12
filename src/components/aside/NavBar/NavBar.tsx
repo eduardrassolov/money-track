@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../router";
 import { apiLogout } from "../../../services/api/apiUser";
 import { useMutation } from "@tanstack/react-query";
+import { HiMiniArrowRightOnRectangle, HiOutlineHome } from "react-icons/hi2";
 
 const Nav = styled.nav`
     background: ${(props) => props.theme.background};
@@ -50,11 +51,11 @@ const NavBar: FC<IBar> = ({ isBurgerOpen, onClose }) => {
             <Switch />
 
             <NavIcons>
-                <AiOutlineHome onClick={handleHomePage} />
+                <HiOutlineHome onClick={handleHomePage} />
             </NavIcons>
 
             <NavIcons>
-                <FiLogOut onClick={handleLogOut} />
+                <HiMiniArrowRightOnRectangle onClick={handleLogOut} />
             </NavIcons>
         </Nav >
     )

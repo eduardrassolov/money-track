@@ -11,6 +11,7 @@ const ProfileContainer = styled.div`
     display: flex;
     flex-direction: column;
     text-align: center;
+    margin: 1rem 0;
 `
 
 export default function Profile() {

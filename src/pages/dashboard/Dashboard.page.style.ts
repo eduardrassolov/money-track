@@ -21,18 +21,11 @@ const RowContainer = styled.div`
   }
 `;
 
-const RowContainerCards = styled(RowContainer)`
-  gap: 0.5rem;
-  flex-wrap: wrap;
-
-  @media only screen and (min-width: ${devices.sm}px) {
-    justify-content: start;
-    align-items: flex-start;
-  }
-
-  @media only screen and (min-width: ${devices.md}px) {
-    justify-content: space-between;
-  }
+const RowContainerCards = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  margin: 0;
+  gap: 1rem;
 `;
 
 const PieBlock = styled.div`

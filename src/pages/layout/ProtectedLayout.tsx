@@ -12,7 +12,7 @@ const ProtectedLayout: FC<IProtected> = ({ children }) => {
     const { isAuthenticated, isLoading } = useUser();
     const { theme } = useTheme();
 
-    if(isLoading) {
+    if (isLoading) {
         return <LoadingUi />
     }
 

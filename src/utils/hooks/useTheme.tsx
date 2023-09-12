@@ -1,14 +1,16 @@
 import { useEffect } from 'react';
-import { useThemeStore } from '../../store/store';
-
+import { useCurrStore } from '../../store/store';
 
 export default function useTheme() {
-    const { theme, toogleTheme } = useThemeStore((state) => state);
+    const { theme, toogleTheme } = useCurrStore((state) => state);
 
     useEffect(() => {
         const theme = localStorage.getItem("theme");
         if (theme) {
             toogleTheme(theme);
+        }
+        else {
+            toogleTheme("light");
         }
     }, [])
 

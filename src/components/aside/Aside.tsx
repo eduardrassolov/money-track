@@ -1,19 +1,13 @@
 import AsideItem from "./AsideItem";
 import { asideItemsName } from "../../config/configAsideItems";
-import { AreaChartOutlined, DollarOutlined, ShoppingCartOutlined, CarryOutOutlined } from "@ant-design/icons";
 import { StyledAside } from "./Aside.style";
 import { FC } from "react";
 import { IBar } from "./NavBar/NavBar";
 import Profile from "../user/Profile";
-import { AiOutlineTool } from "react-icons/ai";
+import { HiMiniArrowsUpDown, HiOutlineChartPie, HiOutlineCreditCard, HiOutlineShoppingBag, HiOutlineWrenchScrewdriver } from "react-icons/hi2";
 
 const icons: Array<JSX.Element> =
-    [<AreaChartOutlined />,
-    <ShoppingCartOutlined />,
-    <DollarOutlined />,
-    <CarryOutOutlined />,
-    <AiOutlineTool />
-    ]
+    [ <HiOutlineChartPie />, <HiOutlineShoppingBag />, <HiOutlineCreditCard />, <HiMiniArrowsUpDown />, <HiOutlineWrenchScrewdriver /> ]
 
 const Aside: FC<IBar> = ({ isBurgerOpen, onClose }) => {
     return (

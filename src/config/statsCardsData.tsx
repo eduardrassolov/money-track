@@ -1,6 +1,7 @@
 import { StatsCardData } from "../types/statsCardData";
-import { HiOutlineShoppingBag, HiOutlineCash, HiOutlineCalculator } from "react-icons/hi";
+import { HiOutlineShoppingBag, HiOutlineCash, HiOutlineCalculator, HiOutlineCreditCard } from "react-icons/hi";
 import { AiOutlineBank } from "react-icons/ai";
+import { HiOutlineBuildingLibrary } from "react-icons/hi2";
 
 export const STATS_CARD_DATA: Array<StatsCardData> = [
     {
@@ -11,13 +12,13 @@ export const STATS_CARD_DATA: Array<StatsCardData> = [
     },
     {
       name: "Incomes",
-      icon: <HiOutlineCash />,
+      icon: <HiOutlineCreditCard />,
       iconBg: "rgba(142, 230, 20, 0.3)",
       borderColor: "rgb(142, 230, 20)",
     },
     {
       name: "Balance",
-      icon: <AiOutlineBank />,
+      icon: <HiOutlineBuildingLibrary />,
       iconBg: "rgba(255, 216, 6, 0.3)",
       borderColor: "rgb(255, 216, 6)",
     },
