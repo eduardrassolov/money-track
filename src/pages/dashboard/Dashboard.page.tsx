@@ -9,6 +9,8 @@ import useDefaultCurrency from "../../utils/hooks/useDefaultCurrency.tsx";
 import useDashboard from "./useDashboard.tsx";
 import createDiagramData from "./createDiagramData.ts";
 import { STATS_CARD_DATA } from "../../config/statsCardsData.tsx";
+import Filter from "../../components/operations/filter/Filter.js";
+import { FILTER_DATE_OPTIONS, FILTER_KEYS } from "../../components/operations/filter/filterParameters.js";
 
 // TODO - refactor component Dashboard. Remove caclulation from component
 export default function Dashboard() {
@@ -29,6 +31,7 @@ export default function Dashboard() {
     <>
       <StyledContainer>
         {/* <Header text="Dashboard" /> */}
+        <Filter options={FILTER_DATE_OPTIONS} filterKey={FILTER_KEYS.DATE} />
 
         <RowContainerCards>
           {STATS_CARD_DATA.map((item, index) => <StatCard key={item.name} item={item} value={stats[index]} />)}
