@@ -1,14 +1,10 @@
-
 import { ThemeProvider, styled } from 'styled-components'
 import HeaderSection from './HeaderSection'
 import NavBarHome from './NavBar/NavBarHome'
-import FeaturesSection from './FeaturesSection'
 import Burger from './NavBar/Burger'
 import useBurgerMenu from '../../components/aside/NavBar/useBurger'
 import Footer from './Footer'
 import useTheme from '../../utils/hooks/useTheme'
-
-
 
 const Container = styled.div`
     margin: 0;

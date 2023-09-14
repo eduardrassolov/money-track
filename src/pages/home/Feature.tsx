@@ -7,9 +7,9 @@ import { devices } from '../../styles/breakPoints'
 const FeaturesItem = styled.div<{ $side: string }>`
     display: flex;
     flex-direction: column;
-    margin: 0 auto 3rem;
     text-align: center;
-    max-width: 700px;
+    max-width: 800px;
+    margin: 0 auto;
 
     @media only screen and (min-width: ${devices.md}px){
         flex-direction: ${props => props.$side === "left" ? 'row' : 'row-reverse'};

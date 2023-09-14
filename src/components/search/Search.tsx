@@ -15,7 +15,6 @@ export default function Search() {
         setSearch(mask);
     }
 
-
     return (
         <SearchInput type="text" placeholder="Search..." value={mask} onInput={handleInput} />
     )

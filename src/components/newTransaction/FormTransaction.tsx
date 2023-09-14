@@ -29,7 +29,6 @@ export const schema = yup.object().shape({
     completed_at: yup.date().required("Date is required.").max(new Date(), "Date must not be in the future"),
 }).required()
 
-
 const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
     console.log('render');
     const { user } = useUser();
@@ -37,7 +36,7 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
     const { filter } = useFilter();
     const sortBy: SortBy = useSort();
     const { createTransaction } = useCreateTransaction();
-    const { register, handleSubmit, reset, formState: { errors }} = useForm<Inputs>({ resolver: yupResolver(schema)});
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<Inputs>({ resolver: yupResolver(schema) });
 
     if (!user) {
         return;
@@ -76,12 +75,9 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
     if (!optionCurrency) {
         return;
     }
-    console.log(new Date().toISOString());
 
-    const transactionType = type === TYPES_TRANSACTION.INCOME ? "income" : "expense:"
+    const transactionType = type === TYPES_TRANSACTION.INCOME ? "income" : "expense"
     const formatedTime = formatDateToInput(new Date());
-    console.log(formatedTime);
-
 
     return (
         <Form onSubmit={handleSubmit(onSubmit, onError)}>
