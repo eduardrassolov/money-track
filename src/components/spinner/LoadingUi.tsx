@@ -1,32 +1,4 @@
 import { keyframes, styled } from "styled-components"
-import { FadeLoader } from "react-spinners"
-
-const Overlay = styled.div`
-    position: absolute;
-    top: 0; 
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0,0,0,0.5);
-    opacity: 100;
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation : appear 250ms ease-in;
-    backdrop-filter: blur(2px);
-
-    @keyframes appear { 
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-    }
-`
-
-
 
 const rotation = keyframes`
     from{
@@ -65,7 +37,6 @@ const Loader = styled.span`
 export default function LoadingUi() {
     return (
         <>
-            
             <Loader></Loader>
         </>
     )

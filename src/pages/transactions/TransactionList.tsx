@@ -15,6 +15,7 @@ import { styled } from "styled-components";
 import { useCurrStore } from "../../store/store.tsx";
 import { ROUTES } from "../../router.tsx";
 import { searchTransactionsByMask } from "../../utils/helpers/searchTransactionsByMask.ts";
+import LoadingUi from "../../components/spinner/LoadingUi.tsx";
 
 const List = styled.div`
     display: flex;
@@ -22,6 +23,12 @@ const List = styled.div`
     padding: 0 0 4rem;
     margin: 1rem 0;
 `
+
+const LoaderContainer = styled.div`
+    display: flex;
+    margin: 1rem auto;
+`
+
 interface ITransactionList {
     listType: string,
     loader: (userId: string, filter: Filter, sortBy: SortBy) => Promise<ITransaction[]>;
@@ -41,7 +48,7 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
     }
 
     const { id: userId } = user;
-    const { data: filteredSortedTransactions, error } = useQuery(
+    const { data: filteredSortedTransactions, isLoading } = useQuery(
         {
             queryKey: [userId, listType, filter, sortBy],
             queryFn: () => loader(userId, filter, sortBy)
@@ -55,21 +62,23 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
         queryClient.invalidateQueries({ queryKey: [userId, listType, filter, sortBy] });
     }
 
-    if (error instanceof Error || !filteredSortedTransactions) {
-        return null;
-    }
     const transactions = searchTransactionsByMask(filteredSortedTransactions, mask);
 
     return (
         <List>
             {
-                transactions.map((transaction: ITransaction) =>
-                    <TransactionCard
-                        key={transaction.id}
-                        item={transaction}
-                        onDelete={() => { handleDelete(transaction.id) }}
-                        onEdit={handleEdit}
-                    />)
+                isLoading ?
+                    <LoaderContainer>
+                        <LoadingUi />
+                    </LoaderContainer>
+                    :
+                    transactions?.map((transaction: ITransaction) =>
+                        <TransactionCard
+                            key={transaction.id}
+                            item={transaction}
+                            onDelete={() => { handleDelete(transaction.id) }}
+                            onEdit={handleEdit}
+                        />)
             }
         </List>
     )
