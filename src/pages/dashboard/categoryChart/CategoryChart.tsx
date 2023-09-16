@@ -44,6 +44,7 @@ const CategoryChart: FC<ICategoryChart> = ({ data }) => {
     console.log(isSmallScreen);
     const dt = createData(data);
     const size = 100;
+    const defaultPading = data.length === 1 ? 0 : 3
 
     return (
         <>
@@ -58,7 +59,7 @@ const CategoryChart: FC<ICategoryChart> = ({ data }) => {
                         outerRadius={size}
                         innerRadius={size / 2}
                         fill="#8884d8"
-                        paddingAngle={3}
+                        paddingAngle={defaultPading}
                     >
                         {data.map((_, index) => (
                             <Cell key={`cell-${index}`} fill={pieChartColors[index]} />

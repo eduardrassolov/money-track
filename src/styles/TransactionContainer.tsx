@@ -4,7 +4,7 @@ import { devices } from "./breakPoints.ts"
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 5rem 1rem 1rem;
+  margin: 3.5rem 1rem 0;
   padding: 0;
   height: 100vh;
   overflow: scroll;
@@ -21,13 +21,13 @@ const Container = styled.div`
 
 const FormDiv = styled.div`
   grid-area: 2 / 1 / 3 / 2;
-  margin: 0 0 2rem ;
+  margin: 2rem 1rem ;
 `
 const ListDiv = styled.div`
   grid-area: 2 / 2 / 3 / 3;  
   border-radius: 15px;
   height: 90vh;
-  padding: 0 1rem;
+  padding: 2rem 1rem;
 `
 
 export { Container, FormDiv, ListDiv }

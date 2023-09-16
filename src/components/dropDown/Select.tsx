@@ -37,9 +37,8 @@ interface ISelect {
 }
 
 const Select: FC<ISelect> = ({ options, register, name, selectedDefault, isDisabled = false }) => {
-
     return (
-        <StyledSelect {...register(name)} value={selectedDefault} disabled={isDisabled}>
+        <StyledSelect {...register(name)} defaultValue={selectedDefault} disabled={isDisabled}>
             {
                 options?.map((item) => <option key={item.id} value={item.id} >{item.name}</option>)
             }

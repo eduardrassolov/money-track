@@ -19,17 +19,15 @@ import { schema } from "../../components/newTransaction/FormTransaction";
 
 export default function EditPage() {
     const [data] = useLoaderData() as Array<GetAllTransactionsDTO>;
-
+    const { updateTransaction } = useEdit();
     if (!data) {
         return null;
     }
-    const {id} = data;
-
-    const { updateTransaction } = useEdit();
+    const { id } = data;
     const { goBack } = usePageBack();
 
     const { data: optionsList } = useQuery({ queryKey: [QUERY_KEY.CATEGORIES], queryFn: () => getCategory(data.category.type.id) });
-    
+
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({
         resolver: yupResolver(schema),
         defaultValues: {
@@ -40,27 +38,16 @@ export default function EditPage() {
         }
     });
 
-    const onSubmit: SubmitHandler<Inputs> = ({ description, amount, completed_at, category }) => {
+    const onSubmit: SubmitHandler<Inputs> = async ({ description, amount, completed_at, category }) => {
         if (!description.trim() || !amount || !completed_at || !category)
             return;
 
-        updateTransaction(
-            {
-                description,
-                amount: Number(amount),
-                completed_at,
-                category: Number(category),
-                id
-            },
-            {
-                onSuccess: () => {
-                    queryClient.invalidateQueries({ queryKey: [id, data.category.type.id] });
-                    goBack();
-                }
-            })
+        const dataToUpd = { description, amount, completed_at, category, id };
+
+        updateTransaction({ ...dataToUpd }, { onSuccess: () => queryClient.invalidateQueries({ queryKey: [id, data.category.type.id] }) })
     }
 
-    return(
+    return (
         <SectionFull>
             <Container>
                 <Header text="Edit transaction" />
@@ -77,6 +64,7 @@ export default function EditPage() {
                         <FormGroup>
                             <label htmlFor="category">Category:</label>
                             <Select options={optionsList} name={"category"} register={register} selectedDefault={data.category.id.toString()}></Select>
+                            <ErrorP></ErrorP>
                         </FormGroup>
                         : ''
                     }
