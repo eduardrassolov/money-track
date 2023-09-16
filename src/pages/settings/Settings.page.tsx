@@ -4,7 +4,7 @@ import { PrimaryBtn, SecondaryBtn } from "../../styles/Button";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import apiGetCurrency from "../../services/api/apiGetCurrency";
-import {  SettingsFooter } from "./Settings.style";
+import { SettingsFooter } from "./Settings.style";
 import { SubmitHandler, useForm } from "react-hook-form";
 import useSettings from "./useSettings";
 import FormRow from "../../components/newTransaction/FormRow";
@@ -19,9 +19,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { set } from "date-fns";
 
 export type InputsSettings = {
+    id?: number;
     firstName: string;
     lastName: string;
     currency: string
+    name?: string
 }
 
 const P = styled.p`
@@ -67,7 +69,7 @@ export const SectionFull = styled.section`
 const settingsSchema = yup.object({
     firstName: yup.string().required("First name is required").min(3, "First name must be at least 3 characters long"),
     lastName: yup.string().required("Last name is required").min(3, "Last name must be at least 3 characters long"),
-  
+
 })
 
 export default function Settings() {
@@ -76,9 +78,9 @@ export default function Settings() {
 
     const { mutateUser } = useSettings();
     const { user, created, lastUpd, firstName, lastName } = useUser();
-    const { register, handleSubmit, formState: {errors} } = useForm<InputsSettings>({
+    const { register, handleSubmit, formState: { errors } } = useForm<InputsSettings>({
         resolver: yupResolver(settingsSchema),
-        defaultValues:{
+        defaultValues: {
             firstName, lastName, currency: user?.user_metadata.currency
         }
     });
@@ -109,7 +111,7 @@ export default function Settings() {
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <FormRow lblFor="firstName" lblText="First name">
-                        <Input type="text" register={register} name={"firstName"}  />
+                        <Input type="text" register={register} name={"firstName"} />
                         <ErrorP>{errors.firstName?.message}</ErrorP>
                     </FormRow>
 

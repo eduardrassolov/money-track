@@ -9,20 +9,14 @@ import { useQuery } from "@tanstack/react-query";
 import { useUser } from "../../utils/hooks/useUser";
 import { defaultSort } from "../transactions/loader";
 import Operation from "../../components/operations/Operations";
+import LoadingUi from "../../components/spinner/LoadingUi";
 
 export default function Expenses() {
-  const { user } = useUser();
   // const { defaultCurrency } = useDefaultCurrency();
-  if (!user) {
-    return;
-  }
-  const { id: userId } = user;
+
 
   //TODO refactor 
-  const { data: transactions } = useQuery({
-    queryKey: [userId, QUERY_KEY.EXPENSES, null, { ...defaultSort }],
-    queryFn: () => loaderExpenses(userId)
-  });
+
 
   // const total = transactions?.reduce((acc, cur) => acc + cur.amount, 0) || 0;
 
@@ -36,14 +30,12 @@ export default function Expenses() {
 
         <ListDiv>
 
-          {!transactions?.length ? '' :
-            <>
-              {/* <Header text={`Total expenses: ${defaultCurrency} ${formatNumberWithSpaces(total)}`} /> */}
-              <Operation />
+          <>
+            {/* <Header text={`Total expenses: ${defaultCurrency} ${formatNumberWithSpaces(total)}`} /> */}
+            <Operation />
 
-              <TransactionArr listType={QUERY_KEY.EXPENSES} loader={loaderExpenses} />
-
-            </>}
+            <TransactionArr listType={QUERY_KEY.EXPENSES} loader={loaderExpenses} />
+          </>
 
         </ListDiv>
 

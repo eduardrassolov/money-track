@@ -9,12 +9,8 @@ interface IProtected {
 }
 
 const ProtectedLayout: FC<IProtected> = ({ children }) => {
-    const { isAuthenticated, isLoading } = useUser();
+    const { isAuthenticated } = useUser();
     const { theme } = useTheme();
-
-    if (isLoading) {
-        return <LoadingUi />
-    }
 
     if (!isAuthenticated) {
         return <Login />;

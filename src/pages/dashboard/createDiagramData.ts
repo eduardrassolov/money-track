@@ -12,17 +12,20 @@ interface IDiagramData {
   [key: string]: DiagramData;
 }
 
-export default function createDiagramData(transactions: ITransaction[]): DiagramData[] {
+export default function createDiagramData(transactions: ITransaction[]): DiagramData[] | [] {
+  if (!transactions) {
+    return [];
+  }
+
   const dataDiagram = transactions.reduce((acc: IDiagramData, { completedAt, type, amount }) => {
     const dateKey = formatDateToChart(completedAt);
 
     if (!acc[dateKey]) {
       acc[dateKey] = { completedAt: dateKey, Expense: 0, Income: 0 };
     }
-    
+
     if (type.id === TYPES_TRANSACTION.EXPENSE) {
       acc[dateKey].Expense += amount;
-
     } else if (type.id === TYPES_TRANSACTION.INCOME) {
       acc[dateKey].Income += amount;
     }

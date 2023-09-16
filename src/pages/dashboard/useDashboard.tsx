@@ -9,13 +9,14 @@ import { loaderIncomes } from '../income/loader';
 
 export default function useDashboard() {
     const { user } = useUser();
-    const { filter } = useFilter();
-    const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
     const userId = user?.id;
 
-    const { data: transactions } = useQuery({ queryKey: [userId, QUERY_KEY.TRANSACTIONS, filter, sortBy], queryFn: () => loaderTransactions(userId, filter, sortBy) });
-    const { data: expenses } = useQuery({ queryKey: [userId, QUERY_KEY.EXPENSES, filter, sortBy], queryFn: () => loaderExpenses(userId, filter, sortBy) });
-    const { data: incomes } = useQuery({ queryKey: [userId, QUERY_KEY.INCOMES, filter, sortBy], queryFn: () => loaderIncomes(userId, filter, sortBy) });
+    const { filter } = useFilter();
+    const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
 
-    return { transactions, expenses, incomes }
+    const { data: transactions, isLoading: isTransactionLoading } = useQuery({ queryKey: [userId, QUERY_KEY.TRANSACTIONS, filter, sortBy], queryFn: () => loaderTransactions(userId, filter, sortBy) });
+    const { data: expenses, isLoading: isExpenseLoading } = useQuery({ queryKey: [userId, QUERY_KEY.EXPENSES, filter, sortBy], queryFn: () => loaderExpenses(userId, filter, sortBy) });
+    const { data: incomes, isLoading: isIncomeLoading } = useQuery({ queryKey: [userId, QUERY_KEY.INCOMES, filter, sortBy], queryFn: () => loaderIncomes(userId, filter, sortBy) });
+
+    return { transactions, expenses, incomes, isTransactionLoading, isExpenseLoading, isIncomeLoading }
 }

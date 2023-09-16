@@ -30,7 +30,6 @@ const Filter = memo(function ({ options, filterKey }: IFilter) {
             })
         }
     }
-    console.log(options);
 
     return (
         <StyledSelect onChange={handleChange} value={selected}>

@@ -2,13 +2,13 @@ import { ITransaction } from "../../interface/ITransactions";
 import formatNumberWithSpaces from "./formatWithSpace";
 
 type CalcStatsFn = {
-  expenses: Array<ITransaction>;
-  incomes: Array<ITransaction>;
+  expenses: Array<ITransaction> | undefined;
+  incomes: Array<ITransaction> | undefined;
 };
 
-export default function calculateStats(fn: CalcStatsFn): number[] {
-  const totalExpenses: number = fn.expenses.reduce((acc: number, item: ITransaction) => acc + item.amount, 0);
-  const totalIncomes: number = fn.incomes.reduce((acc: number, item: ITransaction) => acc + item.amount, 0);
+export default function calculateStats(fn: CalcStatsFn) {
+  const totalExpenses: number = fn.expenses?.reduce((acc: number, item: ITransaction) => acc + item.amount, 0);
+  const totalIncomes: number = fn.incomes?.reduce((acc: number, item: ITransaction) => acc + item.amount, 0);
 
   const balance: number = totalIncomes - totalExpenses;
   const coefficent: number = Math.round((totalExpenses / totalIncomes) * 100);

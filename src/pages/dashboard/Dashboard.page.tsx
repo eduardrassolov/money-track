@@ -9,7 +9,7 @@ export default function Dashboard() {
   return (
     <>
       <StyledContainer>
-        {/* <Filter options={FILTER_DASHBOARD} filterKey={FILTER_KEYS.DATE} /> */}
+        <Filter options={FILTER_DASHBOARD} filterKey={FILTER_KEYS.DATE} />
 
         <Statictisc />
       </StyledContainer >

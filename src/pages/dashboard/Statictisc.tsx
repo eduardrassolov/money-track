@@ -9,12 +9,12 @@ import Diagram from './Diagram'
 import Header from '../../ui/header/Header'
 import CategoryChart from './categoryChart/CategoryChart'
 import calculateStats from '../../utils/helpers/calculateStats'
+import { is } from 'date-fns/locale'
+import LoadingUi from '../../components/spinner/LoadingUi'
+
 
 export default function Statictisc() {
-    const { transactions, expenses, incomes } = useDashboard();
-
-    if (!transactions || !incomes || !expenses)
-        return null;
+    const { transactions, expenses, incomes, isExpenseLoading, isIncomeLoading, isTransactionLoading } = useDashboard();
 
     const stats = calculateStats({ expenses, incomes });
 
@@ -23,30 +23,38 @@ export default function Statictisc() {
     const summaryIncomes: Array<ISummary> = getSummaryData(incomes);
 
     return <>
-        <RowContainerCards>
-            {STATS_CARD_DATA.map((item, index) => <StatCard key={item.name} item={item} value={stats[index]} />)}
-        </RowContainerCards>
+        {isTransactionLoading || isExpenseLoading || isIncomeLoading ?
+            <center>
+                <LoadingUi />
+            </center>
+            :
+            <>
+                <RowContainerCards>
+                    {STATS_CARD_DATA.map((item, index) => <StatCard key={item.name} item={item} value={stats[index]} />)}
+                </RowContainerCards>
 
-        {dataDiagram.length ?
-            <RowContainer>
-                <Diagram data={dataDiagram} />
-            </RowContainer>
-            : ''}
+                {dataDiagram.length ?
+                    <RowContainer>
+                        <Diagram data={dataDiagram} />
+                    </RowContainer>
+                    : ''}
 
-        <PieBlock>
-            {expenses.length ?
-                <PieContainer>
-                    <Header text="Expenses by categories" />
-                    <CategoryChart data={summaryExpenses} />
-                </PieContainer>
-                : ''}
+                <PieBlock>
+                    {expenses?.length ?
+                        <PieContainer>
+                            <Header text="Expenses by categories" />
+                            <CategoryChart data={summaryExpenses} />
+                        </PieContainer>
+                        : ''}
 
-            {incomes.length ?
-                <PieContainer>
-                    <Header text="Incomes by categories" />
-                    <CategoryChart data={summaryIncomes} />
-                </PieContainer>
-                : ''}
-        </PieBlock>
+                    {incomes?.length ?
+                        <PieContainer>
+                            <Header text="Incomes by categories" />
+                            <CategoryChart data={summaryIncomes} />
+                        </PieContainer>
+                        : ''}
+                </PieBlock>
+            </>
+        }
     </>
 }

@@ -24,7 +24,7 @@ const Login = () => {
     const { login, isLoading } = useLogin();
     const { theme } = useTheme();
 
-    const {register, handleSubmit, formState: { errors } } = useForm<ILoginInputs>({
+    const { register, handleSubmit, formState: { errors } } = useForm<ILoginInputs>({
         resolver: yupResolver(schema)
     });
 

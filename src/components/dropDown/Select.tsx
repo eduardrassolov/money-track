@@ -33,7 +33,7 @@ interface ISelect {
     register?: any,
     name: string,
     selectedDefault?: string,
-    isDisabled?: boolean
+    isDisabled?: boolean,
 }
 
 const Select: FC<ISelect> = ({ options, register, name, selectedDefault, isDisabled = false }) => {

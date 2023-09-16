@@ -31,5 +31,11 @@ const SecondaryBtn = styled(Button)`
 
 const LoginBtn = styled(PrimaryBtn)`
     padding: 1rem;
+    transition: all 300ms;
+    &:disabled{
+        background: #e2e8f0;
+        border: #e2e8f0;
+        color: #000;
+    }
 `
 export { Button, PrimaryBtn, SecondaryBtn, LoginBtn }
