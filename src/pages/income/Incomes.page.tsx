@@ -7,8 +7,10 @@ import { loaderIncomes } from "./loader";
 import TransactionArr from "../transactions/TransactionList";
 import { Container, FormDiv, ListDiv } from "../../styles/TransactionContainer";
 import Operation from "../../components/operations/Operations";
+import usePagination from "../../utils/hooks/usePagination";
 
 export default function Incomes() {
+    // const { transactions, defaultCurrency }
 
     // const total = transactions?.reduce((acc, cur) => acc + cur.amount, 0) || 0;
     return (

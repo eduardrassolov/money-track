@@ -16,7 +16,7 @@ const Aside: FC<IBar> = ({ isBurgerOpen, onClose }) => {
                 <div>
                     <Profile />
                     <ul>
-                        {asideItemsName.map((item, index) => <AsideItem key={item} name={item} icon={icons[index]} onClose={onClose} />)}
+                        {asideItemsName.map((item, index) => <AsideItem key={item.name} name={item.name} path={item.path} icon={icons[index]} onClose={onClose} />)}
                     </ul>
                 </div>
             </StyledAside >

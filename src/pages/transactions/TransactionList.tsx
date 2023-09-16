@@ -10,12 +10,15 @@ import useSort from "../../utils/hooks/useSort.tsx";
 import { useUser } from "../../utils/hooks/useUser.tsx";
 import { Filter } from "../../types/filterBy.type.ts";
 import apiDeleteTransaction from "../../services/api/deleteTransaction.ts";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { styled } from "styled-components";
 import { useCurrStore } from "../../store/store.tsx";
 import { ROUTES } from "../../router.tsx";
 import { searchTransactionsByMask } from "../../utils/helpers/searchTransactionsByMask.ts";
 import LoadingUi from "../../components/spinner/LoadingUi.tsx";
+import Pagination from "../../components/pagination/Pagination.tsx";
+import usePagination from "../../utils/hooks/usePagination.tsx";
+import { ITEMS_PER_PAGE } from "../../config/paginationItems.ts";
 
 const List = styled.div`
     display: flex;
@@ -43,9 +46,12 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
     const sortBy: SortBy = useSort();
     const { user } = useUser();
 
+    const { currPage } = usePagination();
+
     if (!user) {
         return;
     }
+    console.log(currPage);
 
     const { id: userId } = user;
     const { data: filteredSortedTransactions, isLoading } = useQuery(
@@ -63,6 +69,7 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
     }
 
     const transactions = searchTransactionsByMask(filteredSortedTransactions, mask);
+    const data = transactions?.slice((currPage - 1) * ITEMS_PER_PAGE, currPage * ITEMS_PER_PAGE);
 
     return (
         <List>
@@ -72,7 +79,7 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
                         <LoadingUi />
                     </LoaderContainer>
                     :
-                    transactions?.map((transaction: ITransaction) =>
+                    data?.map((transaction: ITransaction) =>
                         <TransactionCard
                             key={transaction.id}
                             item={transaction}
@@ -80,6 +87,9 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
                             onEdit={handleEdit}
                         />)
             }
+
+
+            <Pagination transactions={transactions} />
         </List>
     )
 }

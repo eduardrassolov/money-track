@@ -1,7 +1,6 @@
 import { PieBlock, PieContainer, RowContainer, RowContainerCards } from './Dashboard.page.style'
 import { STATS_CARD_DATA } from '../../config/statsCardsData'
 import StatCard from './statCard/StatCard'
-import useDefaultCurrency from '../../utils/hooks/useDefaultCurrency'
 import useDashboard from './useDashboard'
 import createDiagramData from './createDiagramData'
 import { ISummary, getSummaryData } from '../../utils/helpers/getStats'
@@ -9,7 +8,6 @@ import Diagram from './Diagram'
 import Header from '../../ui/header/Header'
 import CategoryChart from './categoryChart/CategoryChart'
 import calculateStats from '../../utils/helpers/calculateStats'
-import { is } from 'date-fns/locale'
 import LoadingUi from '../../components/spinner/LoadingUi'
 
 
