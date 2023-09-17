@@ -1,11 +1,7 @@
 import { FC, HTMLInputTypeAttribute } from "react"
-import { UseFormRegister } from "react-hook-form";
-import { Inputs } from "../../types/Inputs.type";
 import { styled } from "styled-components";
-import { InputsSettings } from "../../pages/settings/Settings.page";
-import { SignInInputs } from "../../pages/signUp/SignUp.page";
 
-const StyledInput = styled.input`
+export const StyledInput = styled.input`
     font-size: 1rem;
     padding: 0.7rem 1rem;
     border-radius: 7px;
@@ -22,13 +18,20 @@ const StyledInput = styled.input`
         transition: all 0.3s ease-in-out;
     }
 `
+export const SearchInput = styled(StyledInput)`
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+`
 
 interface IInput {
     type: HTMLInputTypeAttribute,
     id?: string,
     placeHolder?: string,
     name: "description" | "amount" | "completed_at" | "firstName" | "lastName" | "email" | "password" | "repeatPass",
-    register: UseFormRegister<Inputs | InputsSettings | SignInInputs>,
+    // register: UseFormRegister<Inputs> | UseFormRegister<SignInInputs> | UseFormRegister<InputsSettings> | UseFormRegister<ILoginInputs>,
+    register: any,
     autoFocus?: boolean,
     defaultValue?: string
 }

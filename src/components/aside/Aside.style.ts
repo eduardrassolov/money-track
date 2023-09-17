@@ -2,11 +2,9 @@ import { styled } from "styled-components";
 import { devices } from "../../styles/breakPoints";
 
 export const StyledAside = styled.div<{ $isBurgerOpen: boolean }>`
-  /* background: #fff; */
   background: ${(props) => props.theme.background};
   color: ${(props) => props.theme.text};
   font-size: 1rem;
-  /* padding: 3rem 0; */
   position: fixed;
   z-index: 20;
   width: 150px;
@@ -16,7 +14,7 @@ export const StyledAside = styled.div<{ $isBurgerOpen: boolean }>`
 
   @media only screen and (min-width: ${devices.md}px) {
     transform: translateX(0);
-    /* padding: 1rem 0; */
+    padding: 0;
     display: flex;
     position: initial;
     flex-direction: column;

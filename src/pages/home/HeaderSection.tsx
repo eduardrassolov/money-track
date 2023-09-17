@@ -8,8 +8,15 @@ const Section = styled.section`
         align-items: center ;
         height: 90vh;
         /* background: #F9F5F6; */
-        background: ${(props) => props.theme.background};
-        color: ${props => props.theme.text};
+        /* background: ${(props) => props.theme.background}; */
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 1)), url("/main.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+
+
+        /* color: ${props => props.theme.text}; */
+        color: #fafafa;
         border-bottom: 2px solid ${props => props.theme.border};
         padding: 3rem 0 0;
         gap: 1rem;
@@ -72,6 +79,10 @@ const Section = styled.section`
 const Highlight = styled.p`
     color: ${props => props.theme.colorLogoSecondary};
 `
+const TextContainer = styled.div`
+    align-items: center;
+`
+
 
 interface IHeader {
     id: string
@@ -81,14 +92,11 @@ interface IHeader {
 export default function HeaderSection({ id }: IHeader) {
     return (
         <Section id={id}>
-            <div>
+            <TextContainer>
                 <p>Welcome to <span><strong>E-Budget</strong></span>,</p>
                 <p>Your Personal</p>
                 <Highlight><strong>Finance Manager</strong></Highlight>
-            </div>
-            <div>
-                <img src='/bg.avif' />
-            </div>
-        </Section>
+            </TextContainer >
+        </Section >
     )
 }

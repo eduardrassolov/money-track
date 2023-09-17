@@ -3,6 +3,7 @@ import supabase from "../supabase";
 import { ICreateTransactionDTO } from "./dto/createTransaction.dto";
 
 export default async function apiCreateTransaction(transaction: INewTransaction) {
+ 
   try {
     const newTransactionDTO: ICreateTransactionDTO = {
       amount: transaction.amount,
@@ -12,7 +13,7 @@ export default async function apiCreateTransaction(transaction: INewTransaction)
       profile_id: transaction.profileId,
       currency_id: transaction.currencyId,
     };
-
+    console.log("data", newTransactionDTO);
     const { error } = await supabase.from("transactions").insert([newTransactionDTO]);
 
     if (error) {

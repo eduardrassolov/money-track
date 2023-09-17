@@ -15,7 +15,7 @@ const schema = yup.object({
     password: yup.string().required('Password is required'),
 })
 
-interface ILoginInputs {
+export interface ILoginInputs {
     email: string;
     password: string;
 }
@@ -24,7 +24,7 @@ const Login = () => {
     const { login, isLoading } = useLogin();
     const { theme } = useTheme();
 
-    const {register, handleSubmit, formState: { errors } } = useForm<ILoginInputs>({
+    const { register, handleSubmit, formState: { errors } } = useForm<ILoginInputs>({
         resolver: yupResolver(schema)
     });
 

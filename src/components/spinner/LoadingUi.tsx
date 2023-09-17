@@ -1,45 +1,71 @@
-import { styled } from "styled-components"
-import { FadeLoader } from "react-spinners"
+import { ThemeProvider, keyframes, styled } from "styled-components"
+import { useCurrStore } from "../../store/store"
 
-const Overlay = styled.div`
-    position: absolute;
-    top: 0; 
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0,0,0,0.5);
-    opacity: 100;
-    z-index: 10;
+
+const rotation = keyframes`
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+`
+
+const Loader = styled.span<{$size: number}>`
+    width: ${props => props.$size}px;
+    height:  ${props => props.$size}px;
+    border-radius: 50%;
+    display: inline-block;
+    border-top: 4px solid ${props => props.theme.colorLogoMain};
+    border-right: 4px solid transparent;
+    box-sizing: border-box;
+    animation: ${rotation} 1s linear infinite;
+
+    &::after {
+        content: '';  
+        box-sizing: border-box;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width:  ${props => props.$size}px;
+        height:  ${props => props.$size}px;
+        border-radius: 50%;
+        border-bottom: 4px solid ${props => props.theme.colorLogoSecondary};
+        border-left: 4px solid transparent;
+    }
+`
+const Container = styled.div`
     display: flex;
+    height: 100vh;
+    width: 100vw;
     justify-content: center;
     align-items: center;
-    animation : appear 250ms ease-in;
-    backdrop-filter: blur(2px);
-
-    @keyframes appear { 
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-    }
-`
-const Spinner = styled.div`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 11;
+    background: ${props => props.theme.background};
+    font-size: 5rem;
 `
 
-export default function LoadingUi() {
+type Size = {
+    size?: "sm" | "lg";
+};
+
+const sizes = {
+    sm: 48,
+    lg: 100
+}
+
+export default function LoadingUi({size = "sm"}: Size) {
+    const theme = useCurrStore((state) => state.theme);
+
     return (
-        <>
-            <Overlay />
-            <Spinner>
-                <FadeLoader color="white" />
-            </Spinner>
-        </>
+        <ThemeProvider theme={theme}>
+            {
+                size === "sm" ? 
+                <center> <Loader $size={sizes[size]} /> </center>
+                :  
+                <Container>
+                    <Loader $size={sizes[size]}></Loader> 
+                </Container>
+            }
+        </ThemeProvider>
     )
 }

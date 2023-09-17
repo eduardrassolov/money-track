@@ -10,7 +10,11 @@ interface IFilteredCategory {
   [key: string]: number;
 }
 
-export function getSummaryData(transactions: Array<ITransaction>): ISummary[] {
+export function getSummaryData(transactions: Array<ITransaction> | undefined): ISummary[] | [] {
+  if (!transactions) {
+    return [];
+  }
+
   const summaryData = filterDataByCategory(transactions);
   const totalAmount = transactions.reduce((acc: number, cur: ITransaction) => acc + cur.amount, 0);
   return calculateSummary(summaryData, totalAmount);

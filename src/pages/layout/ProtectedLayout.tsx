@@ -14,6 +14,7 @@ const ProtectedLayout: FC<IProtected> = ({ children }) => {
     if (!isAuthenticated) {
         return <Login />;
     }
+
     return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 }
 export default ProtectedLayout;

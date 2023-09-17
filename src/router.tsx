@@ -1,18 +1,24 @@
 import { RouteObject, createBrowserRouter } from "react-router-dom";
 import AppLayout from "./pages/layout/AppLayout.tsx";
+
 import Incomes from "./pages/income/Incomes.page.tsx";
 import Expenses from "./pages/expenses/Expenses.page.tsx";
 import Dashboard from "./pages/dashboard/Dashboard.page.tsx";
-import Transactions from "./pages/transactions/Transactions.page.tsx";
+// import Transactions from "./pages/transactions/Transactions.page.tsx";
 import HomePage from "./pages/home/HomePage.tsx";
 import ErrorELement from "./components/error/ErrorELement.tsx";
 import ProtectedLayout from "./pages/layout/ProtectedLayout.tsx";
 import Page404 from "./pages/errors/Page404.tsx";
-import SignUp from "./pages/signUp/SignUp.page.tsx";
+// import SignUp from "./pages/signUp/SignUp.page.tsx";
 import Login from "./pages/login/login.page.tsx";
 import EditPage from "./pages/edit/EditPage.tsx";
 import loaderTransactionById from "./pages/edit/loader.ts";
 import Settings from "./pages/settings/Settings.page.tsx";
+import Transactions from "./pages/transactions/Transactions.page.tsx";
+import {Suspense, lazy} from "react";
+import LoadingUi from "./components/spinner/LoadingUi.tsx";
+
+const SingUp = lazy(() => import("./pages/signUp/SignUp.page.tsx"));
 
 export const ROUTES = {
     HOME: "/",
@@ -41,7 +47,8 @@ const routes: RouteObject[] = [
     },
     {
         path: ROUTES.SIGN_UP,
-        element: <SignUp />
+        element: <Suspense fallback={<LoadingUi size={"lg"}/>}><SingUp /></Suspense>
+    
     },
 
     {
@@ -52,6 +59,7 @@ const routes: RouteObject[] = [
             {
                 path: ROUTES.TRANSACTIONS,
                 element: <Transactions />,
+
             },
             {
                 path: ROUTES.TRANSACTION_ID,

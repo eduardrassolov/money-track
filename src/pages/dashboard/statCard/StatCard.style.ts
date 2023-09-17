@@ -42,9 +42,9 @@ const StatContainer = styled.div<{ $borderColor?: string }>`
   color: ${(props) => props.theme.text};
   border-radius: 15px;
   padding: 1rem 1.5rem;
-  width: 100%;
   gap: 1rem;
   transition: all 300ms;
+  margin: 0;
   cursor: pointer;
 
   &:hover {
@@ -61,7 +61,7 @@ const StatContainer = styled.div<{ $borderColor?: string }>`
     }
   }
   @media only screen and (min-width: ${devices.sm}px) {
-    width: fit-content;
+    min-width: fit-content;
   }
 `;
 

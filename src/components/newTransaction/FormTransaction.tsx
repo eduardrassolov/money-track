@@ -19,16 +19,22 @@ import FormRow from './FormRow';
 import { formatDateToInput } from '../../utils/helpers/formatDateToInput';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import LoadingUi from '../spinner/LoadingUi';
 interface INewTransactionProps {
     type: number;
 }
 
-export const schema = yup.object().shape({
+interface IValidation {
+    description: string;
+    amount: number;
+    completed_at: Date;
+}
+
+export const schema: yup.ObjectSchema<IValidation> = yup.object().shape({
     description: yup.string().required("Description is required."),
     amount: yup.number().required().positive("Amount must be positive."),
     completed_at: yup.date().required("Date is required.").max(new Date(), "Date must not be in the future"),
 }).required()
-
 
 const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
     const { user } = useUser();
@@ -36,7 +42,7 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
     const { filter } = useFilter();
     const sortBy: SortBy = useSort();
     const { createTransaction } = useCreateTransaction();
-    const { register, handleSubmit, reset, formState: { errors }} = useForm<Inputs>({ resolver: yupResolver(schema)});
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
 
     if (!user) {
         return;
@@ -46,10 +52,17 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
     const userCurrency = user.user_metadata.currency as string;
 
     //TODO remove fetching data for SELECT and put globally
-    const { data: optionsList } = useQuery({ queryKey: [QUERY_KEY.CATEGORIES], queryFn: () => apiGetCategory(type) });
-    const { data: optionCurrency } = useQuery({ queryKey: ["currency"], queryFn: () => apiGetCurrency() });
+    const { data: optionsList, isLoading: isOptionsLoading } = useQuery(
+        {
+            queryKey: [QUERY_KEY.CATEGORIES, type === TYPES_TRANSACTION.EXPENSE ? QUERY_KEY.EXPENSES : QUERY_KEY.INCOMES],
+            queryFn: () => apiGetCategory(type)
+        });
 
-    const onSubmit: SubmitHandler<Inputs> = ({ description, amount, completed_at, category }) => {
+    const { data: optionCurrency, isLoading: isCurrencyLoading } = useQuery({ queryKey: ["currency"], queryFn: apiGetCurrency });
+
+    //TODO fix any
+    const onSubmit: SubmitHandler<any> = ({ description, amount, completed_at, category }) => {
+
         if (!description.trim() || !amount || !completed_at || !category) {
             return;
         }
@@ -59,8 +72,8 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
         createTransaction({
             description,
             amount,
-            completedAt: completed_at.toString(),
-            categoryId: category,
+            completedAt: completed_at,
+            categoryId: Number(category),
             profileId: userId,
             currencyId: userCurrency
         }, {
@@ -72,52 +85,54 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
     }
     const onError: SubmitErrorHandler<Inputs> = (error) => console.log(error);
 
-    if (!optionCurrency) {
-        return;
-    }
-    console.log(new Date().toISOString());
 
-    const transactionType = type === TYPES_TRANSACTION.INCOME ? "income" : "expense:"
+    const transactionType = type === TYPES_TRANSACTION.INCOME ? "income" : "expense"
     const formatedTime = formatDateToInput(new Date());
-    console.log(formatedTime);
-
+    console.log(optionsList);
 
     return (
-        <Form onSubmit={handleSubmit(onSubmit, onError)}>
-            <h3>Add new {transactionType}</h3>
+        <>
+            {isOptionsLoading && isCurrencyLoading ? <LoadingUi /> :
+                <Form onSubmit={handleSubmit(onSubmit, onError)}>
+                    <h3>Add new {transactionType}</h3>
 
-            <FormRow lblFor={"description"} lblText={"Description"}>
-                <Input type={"text"} id={"description"} name={"description"} placeHolder={`Enter name of ${transactionType}`} autoFocus={true} register={register} />
-                <ErrorP>{errors.description?.message}</ErrorP>
-            </FormRow>
+                    <FormRow lblFor={"description"} lblText={"Description"}>
+                        <Input type={"text"} id={"description"} name={"description"} placeHolder={`Enter name of ${transactionType}`} autoFocus={true} register={register} />
+                        <ErrorP>{errors.description?.message}</ErrorP>
+                    </FormRow>
 
-            {optionsList
-                ?
-                <FormRow lblFor={"category"} lblText={"Category"}>
-                    <Select options={optionsList} register={register} name={"category"}></Select>
-                </FormRow>
-                : ''
+                    {optionsList
+                        ?
+                        <FormRow lblFor={"category"} lblText={"Category"}>
+                            <Select options={optionsList} register={register} name={"category"} selectedDefault={optionsList[0]?.id.toString()}></Select>
+                            <ErrorP></ErrorP>
+                        </FormRow>
+                        : ''
+                    }
+
+                    <FormRow lblFor="amount" lblText={"Amount"}>
+                        <Input type={"number"} name={"amount"} placeHolder={"0,00"} register={register} />
+                        <ErrorP>{errors.amount?.message}</ErrorP>
+                    </FormRow>
+
+                    <FormRow lblFor={"currency"} lblText={"Currency"}>
+                        <Select options={optionCurrency} register={register} name={"currency"} selectedDefault={userCurrency} isDisabled={true}></Select>
+                        <ErrorP></ErrorP>
+                    </FormRow>
+
+                    <FormRow lblFor={"completed_at"} lblText={"Date"}>
+                        <Input type={"datetime-local"} name={"completed_at"} register={register} defaultValue={formatedTime} />
+                        <ErrorP>{errors.completed_at?.message}</ErrorP>
+                    </FormRow>
+
+                    <FormFooter>
+                        <SecondaryBtn type="reset">Clear</SecondaryBtn>
+                        <PrimaryBtn type="submit">Confirm</PrimaryBtn>
+                    </FormFooter>
+                </Form >
             }
 
-            <FormRow lblFor="amount" lblText={"Amount"}>
-                <Input type={"number"} name={"amount"} placeHolder={"0,00"} register={register} />
-                <ErrorP>{errors.amount?.message}</ErrorP>
-            </FormRow>
-
-            <FormRow lblFor={"currency"} lblText={"Currency"}>
-                <Select options={optionCurrency} register={register} name={"currency"} selectedDefault={userCurrency} isDisabled={true}></Select>
-            </FormRow>
-
-            <FormRow lblFor={"completed_at"} lblText={"Date"}>
-                <Input type={"datetime-local"} name={"completed_at"} register={register} defaultValue={formatedTime} />
-                <ErrorP>{errors.completed_at?.message}</ErrorP>
-            </FormRow>
-
-            <FormFooter>
-                <SecondaryBtn type="reset">Clear</SecondaryBtn>
-                <PrimaryBtn type="submit">Confirm</PrimaryBtn>
-            </FormFooter>
-        </Form >
+        </>
     )
 }
 export default TransactionForm;

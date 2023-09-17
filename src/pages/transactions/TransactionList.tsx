@@ -12,14 +12,26 @@ import { Filter } from "../../types/filterBy.type.ts";
 import apiDeleteTransaction from "../../services/api/deleteTransaction.ts";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
-
+import { useCurrStore } from "../../store/store.tsx";
+import { ROUTES } from "../../router.tsx";
+import { searchTransactionsByMask } from "../../utils/helpers/searchTransactionsByMask.ts";
+import LoadingUi from "../../components/spinner/LoadingUi.tsx";
+import Pagination from "../../components/pagination/Pagination.tsx";
+import usePagination from "../../utils/hooks/usePagination.tsx";
+import { ITEMS_PER_PAGE } from "../../config/paginationItems.ts";
 
 const List = styled.div`
     display: flex;
     flex-direction: column;
-    /* overflow: scroll; */
     padding: 0 0 4rem;
+    margin: 1rem 0;
 `
+
+const LoaderContainer = styled.div`
+    display: flex;
+    margin: 1rem auto;
+`
+
 interface ITransactionList {
     listType: string,
     loader: (userId: string, filter: Filter, sortBy: SortBy) => Promise<ITransaction[]>;
@@ -27,53 +39,57 @@ interface ITransactionList {
 
 const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
     const navigate = useNavigate();
-    const { user } = useUser();
     const queryClient = useQueryClient();
     const { mutate: deleteTransaction } = useMutation({ mutationFn: apiDeleteTransaction, onSuccess: succesHandle });
-
+    const mask = useCurrStore((state) => state.search);
     const { filter } = useFilter();
     const sortBy: SortBy = useSort();
+    const { user } = useUser();
+
+    const { currPage } = usePagination();
 
     if (!user) {
         return;
     }
+    console.log(currPage);
 
     const { id: userId } = user;
-
-    const { data: transactions, error } = useQuery(
+    const { data: filteredSortedTransactions, isLoading } = useQuery(
         {
             queryKey: [userId, listType, filter, sortBy],
             queryFn: () => loader(userId, filter, sortBy)
         });
 
-    if (error instanceof Error || !transactions) {
-        return;
-    }
+    const handleEdit = (id: number) => navigate(`${ROUTES.ROOT}/${listType}/${id}`);
 
     const handleDelete = (id: number) => deleteTransaction(id);
-    const handleEdit = (id: number) => {
-        navigate(`/app/${listType}/${id}`);
-        console.log('id clicked', id);
-    }
-
     function succesHandle() {
         toast.success('Successfully deleted.');
         queryClient.invalidateQueries({ queryKey: [userId, listType, filter, sortBy] });
     }
 
+    const transactions = searchTransactionsByMask(filteredSortedTransactions, mask);
+    const data = transactions?.slice((currPage - 1) * ITEMS_PER_PAGE, currPage * ITEMS_PER_PAGE);
+
     return (
         <List>
             {
-                transactions.map((transaction: ITransaction) =>
-                    <TransactionCard
-                        key={transaction.id}
-                        item={transaction}
-                        onDelete={() => { handleDelete(transaction.id) }}
-                        onEdit={handleEdit}
-                    />)
+                isLoading ?
+                    <LoaderContainer>
+                        <LoadingUi />
+                    </LoaderContainer>
+                    :
+                    data?.map((transaction: ITransaction) =>
+                        <TransactionCard
+                            key={transaction.id}
+                            item={transaction}
+                            onDelete={() => { handleDelete(transaction.id) }}
+                            onEdit={handleEdit}
+                        />)
             }
 
-            {/* <EditWindow isOpen={isOpen} onClose={handleEdit} id={id} /> */}
+
+            <Pagination maxLength={transactions?.length} />
         </List>
     )
 }

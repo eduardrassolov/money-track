@@ -3,6 +3,7 @@ import { Span, StyledNavLink } from "./AsideItem.style";
 
 type AsideItemProps = {
     name: string;
+    path: string;
     icon: JSX.Element;
     onClose: () => void;
 }
@@ -16,20 +17,10 @@ export const logout = async () => {
     return true;
 }
 
-export default function AsideItem({ name, icon, onClose }: AsideItemProps) {
-
-    //TODO refactor magic formatting 
-    let ref = '';
-    if (name.toLowerCase() === 'home') {
-        ref = '/';
-    }
-    else {
-        ref = name.toLowerCase() === 'home' ? '/' : `/app/${name.toLowerCase()}`
-    }
-
+export default function AsideItem({ name, path, icon, onClose }: AsideItemProps) {
     return (
         <li>
-            <StyledNavLink to={ref} onClick={onClose}>
+            <StyledNavLink to={path} onClick={onClose}>
                 {icon} <Span>{name}</Span>
             </StyledNavLink>
         </li>
