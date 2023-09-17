@@ -1,6 +1,5 @@
 import { styled } from 'styled-components'
 import { QUERY_KEY } from '../../config/queryClientKeys'
-
 import { loaderTransactions } from './loader'
 import Header from '../../ui/header/Header'
 import TransactionList from './TransactionList'

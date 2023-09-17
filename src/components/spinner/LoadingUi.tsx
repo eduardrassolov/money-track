@@ -1,4 +1,6 @@
-import { keyframes, styled } from "styled-components"
+import { ThemeProvider, keyframes, styled } from "styled-components"
+import { useCurrStore } from "../../store/store"
+
 
 const rotation = keyframes`
     from{
@@ -9,9 +11,9 @@ const rotation = keyframes`
     }
 `
 
-const Loader = styled.span`
-    width: 48px;
-    height: 48px;
+const Loader = styled.span<{$size: number}>`
+    width: ${props => props.$size}px;
+    height:  ${props => props.$size}px;
     border-radius: 50%;
     display: inline-block;
     border-top: 4px solid ${props => props.theme.colorLogoMain};
@@ -25,19 +27,45 @@ const Loader = styled.span`
         position: absolute;
         left: 0;
         top: 0;
-        width: 48px;
-        height: 48px;
+        width:  ${props => props.$size}px;
+        height:  ${props => props.$size}px;
         border-radius: 50%;
         border-bottom: 4px solid ${props => props.theme.colorLogoSecondary};
         border-left: 4px solid transparent;
     }
 `
+const Container = styled.div`
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    background: ${props => props.theme.background};
+    font-size: 5rem;
+`
 
+type Size = {
+    size?: "sm" | "lg";
+};
 
-export default function LoadingUi() {
+const sizes = {
+    sm: 48,
+    lg: 100
+}
+
+export default function LoadingUi({size = "sm"}: Size) {
+    const theme = useCurrStore((state) => state.theme);
+
     return (
-        <>
-            <Loader></Loader>
-        </>
+        <ThemeProvider theme={theme}>
+            {
+                size === "sm" ? 
+                <center> <Loader $size={sizes[size]} /> </center>
+                :  
+                <Container>
+                    <Loader $size={sizes[size]}></Loader> 
+                </Container>
+            }
+        </ThemeProvider>
     )
 }

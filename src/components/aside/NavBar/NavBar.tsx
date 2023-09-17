@@ -3,8 +3,6 @@ import { FC } from "react";
 import BurgerMenu from "../../burger/BurgerMenu";
 import { devices } from "../../../styles/breakPoints";
 import Switch, { NavIcons } from "../../swtich/Switch";
-import { FiLogOut } from "react-icons/fi";
-import { AiOutlineHome } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../router";
 import { apiLogout } from "../../../services/api/apiUser";

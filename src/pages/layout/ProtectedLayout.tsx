@@ -3,7 +3,6 @@ import { useUser } from "../../utils/hooks/useUser";
 import Login from "../login/login.page";
 import { ThemeProvider } from "styled-components";
 import useTheme from "../../utils/hooks/useTheme";
-import LoadingUi from "../../components/spinner/LoadingUi";
 interface IProtected {
     children: React.ReactNode;
 }

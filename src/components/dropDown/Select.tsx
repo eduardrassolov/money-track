@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { styled } from "styled-components";
-import { ICategory } from "../../interface/ICategory";
-import { InputsSettings } from "../../pages/settings/Settings.page";
+// import { ICategory } from "../../interface/ICategory";
+// import { InputsSettings } from "../../pages/settings/Settings.page";
 
 export const StyledSelect = styled.select`
   width: 200px;
@@ -23,13 +23,14 @@ export const StyledSelect = styled.select`
   }
 `;
 
-type Option = {
-    id: string,
-    name: string
-}
+// type Option = {
+//     id: string,
+//     name: string
+// }
 
+//TODO fix any
 interface ISelect {
-    options: Array<Option | ICategory | InputsSettings>,
+    options: any,
     register?: any,
     name: string,
     selectedDefault?: string,
@@ -40,7 +41,7 @@ const Select: FC<ISelect> = ({ options, register, name, selectedDefault, isDisab
     return (
         <StyledSelect {...register(name)} defaultValue={selectedDefault} disabled={isDisabled}>
             {
-                options?.map((item) => <option key={item.id} value={item.id} >{item.name}</option>)
+                options?.map((item:any) => <option key={item.id} value={item.id} >{item.name}</option>)
             }
         </StyledSelect>
     )

@@ -1,8 +1,7 @@
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 
 import { LoginBtn } from '../../styles/Button';
-import { ErrorMessage } from '@hookform/error-message';
-import { ThemeProvider, styled } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import { apiSignUp } from '../../services/api/apiUser';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../router';
@@ -30,16 +29,10 @@ const defaultFields: SignInInputs = {
     lastName: ''
 }
 
-const StyledError = styled.p`
-    /* color: #b91c1c; */
-    color: ${props => props.theme.error};
-    margin: 0.2rem 0;
-    font-size: 0.8rem;
-`
 const signUpSchema = yup.object({
     email: yup.string().email('Email is not valid').required('This field is required'),
     password: yup.string().min(6, 'Min password length 6 characters').required('This field is required'),
-    repeatPass: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match').required('This field is required'),
+    repeatPass: yup.string().oneOf([yup.ref('password')], 'Passwords must match').required('This field is required'),
     firstName: yup.string().required('This field is required'),
     lastName: yup.string().required('This field is required'),
 })
@@ -47,7 +40,7 @@ const signUpSchema = yup.object({
 export default function SignUp() {
     const navigate = useNavigate();
     const { theme } = useTheme();
-    const { register, handleSubmit, getValues, formState: { errors } } = useForm<SignInInputs>({
+    const { register, handleSubmit, formState: { errors } } = useForm<SignInInputs>({
         defaultValues: defaultFields, 
         resolver: yupResolver(signUpSchema)
     });

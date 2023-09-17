@@ -8,15 +8,11 @@ interface IUpdateProps {
   id: number;
 }
 
-interface IUpdateData {
-  dataToUpd: IUpdateProps;
-}
-
 export default async function apiUpdateTransaction({ description, amount, completed_at, category, id }: IUpdateProps) {
   try {
     const { data, error } = await supabase
       .from("transactions")
-      .update({ description, amount, category_id: category, completed_at: completed_at })
+      .update({ description, amount, category_id: category, completed_at: completed_at.toString() })
       .eq("id", id)
       .select();
 

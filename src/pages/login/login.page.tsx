@@ -15,7 +15,7 @@ const schema = yup.object({
     password: yup.string().required('Password is required'),
 })
 
-interface ILoginInputs {
+export interface ILoginInputs {
     email: string;
     password: string;
 }

@@ -1,9 +1,5 @@
 import { FC, HTMLInputTypeAttribute } from "react"
-import { UseFormRegister } from "react-hook-form";
-import { Inputs } from "../../types/Inputs.type";
 import { styled } from "styled-components";
-import { InputsSettings } from "../../pages/settings/Settings.page";
-import { SignInInputs } from "../../pages/signUp/SignUp.page";
 
 export const StyledInput = styled.input`
     font-size: 1rem;
@@ -34,7 +30,8 @@ interface IInput {
     id?: string,
     placeHolder?: string,
     name: "description" | "amount" | "completed_at" | "firstName" | "lastName" | "email" | "password" | "repeatPass",
-    register: UseFormRegister<Inputs | InputsSettings | SignInInputs>,
+    // register: UseFormRegister<Inputs> | UseFormRegister<SignInInputs> | UseFormRegister<InputsSettings> | UseFormRegister<ILoginInputs>,
+    register: any,
     autoFocus?: boolean,
     defaultValue?: string
 }

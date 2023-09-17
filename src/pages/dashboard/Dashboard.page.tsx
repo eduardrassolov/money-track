@@ -5,7 +5,6 @@ import Statictisc from "./Statictisc.tsx";
 
 // TODO - refactor component Dashboard. Remove caclulation from component
 export default function Dashboard() {
-
   return (
     <>
       <StyledContainer>

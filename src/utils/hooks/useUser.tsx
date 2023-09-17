@@ -9,11 +9,11 @@ export function useUser() {
         queryFn: getUser,
     });
 
-    const created = formatDate(user?.created_at as string, { year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
+    const created = formatDate(user?.created_at as string);
     const [lastUpd, setLastUpd] = useState<string>('');
 
     useEffect(() => {
-        const updateDate = () => setLastUpd(() => formatDate(user?.updated_at as string, { year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }));
+        const updateDate = () => setLastUpd(() => formatDate(user?.updated_at as string));
         updateDate();
     }, [user?.updated_at])
 

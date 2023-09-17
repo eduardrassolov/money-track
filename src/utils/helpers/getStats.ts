@@ -10,7 +10,7 @@ interface IFilteredCategory {
   [key: string]: number;
 }
 
-export function getSummaryData(transactions: Array<ITransaction>): ISummary[] | [] {
+export function getSummaryData(transactions: Array<ITransaction> | undefined): ISummary[] | [] {
   if (!transactions) {
     return [];
   }

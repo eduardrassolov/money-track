@@ -13,7 +13,6 @@ import LoadingUi from '../../components/spinner/LoadingUi'
 
 export default function Statictisc() {
     const { transactions, expenses, incomes, isExpenseLoading, isIncomeLoading, isTransactionLoading } = useDashboard();
-
     const stats = calculateStats({ expenses, incomes });
 
     const dataDiagram = createDiagramData(transactions);

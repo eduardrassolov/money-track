@@ -24,7 +24,13 @@ interface INewTransactionProps {
     type: number;
 }
 
-export const schema = yup.object().shape({
+interface IValidation {
+    description: string;
+    amount: number;
+    completed_at: Date;
+}
+
+export const schema: yup.ObjectSchema<IValidation> = yup.object().shape({
     description: yup.string().required("Description is required."),
     amount: yup.number().required().positive("Amount must be positive."),
     completed_at: yup.date().required("Date is required.").max(new Date(), "Date must not be in the future"),
@@ -36,7 +42,7 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
     const { filter } = useFilter();
     const sortBy: SortBy = useSort();
     const { createTransaction } = useCreateTransaction();
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<Inputs>({ resolver: yupResolver(schema) });
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
 
     if (!user) {
         return;
@@ -54,7 +60,8 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
 
     const { data: optionCurrency, isLoading: isCurrencyLoading } = useQuery({ queryKey: ["currency"], queryFn: apiGetCurrency });
 
-    const onSubmit: SubmitHandler<Inputs> = ({ description, amount, completed_at, category }) => {
+    //TODO fix any
+    const onSubmit: SubmitHandler<any> = ({ description, amount, completed_at, category }) => {
 
         if (!description.trim() || !amount || !completed_at || !category) {
             return;
@@ -97,7 +104,7 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
                     {optionsList
                         ?
                         <FormRow lblFor={"category"} lblText={"Category"}>
-                            <Select options={optionsList} register={register} name={"category"} selectedDefault={optionsList[0]?.id}></Select>
+                            <Select options={optionsList} register={register} name={"category"} selectedDefault={optionsList[0]?.id.toString()}></Select>
                             <ErrorP></ErrorP>
                         </FormRow>
                         : ''

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { ITransaction } from "../../interface/ITransactions";
 import usePagination from "../../utils/hooks/usePagination";
 import { HiOutlineArrowSmallLeft, HiOutlineArrowSmallRight } from "react-icons/hi2";
 import { ITEMS_PER_PAGE } from "../../config/paginationItems";
@@ -46,11 +45,17 @@ const PaginationButton = styled.button`
         
         }
 `
+interface IPagination {
+    maxLength: number | undefined;
+}
 
-export default function Pagination({ transactions }: ITransaction[]) {
+export default function Pagination({ maxLength }: IPagination) {
     const { currPage, moveToPage } = usePagination();
 
-    const lastPage = transactions?.length <= ITEMS_PER_PAGE ? 1 : Math.floor(transactions?.length / onePageItems);
+    if(!maxLength)
+        return null;
+    
+    const lastPage = maxLength <= ITEMS_PER_PAGE ? 1 : Math.floor(maxLength / onePageItems);
     const handlePrev = () => { 
 
         if (currPage > 1)
@@ -62,7 +67,7 @@ export default function Pagination({ transactions }: ITransaction[]) {
         }
     }
 
-    console.log(currPage, lastPage, transactions?.length);
+    console.log(currPage, lastPage, maxLength);
 
 
     return (

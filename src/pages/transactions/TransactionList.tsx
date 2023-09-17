@@ -10,7 +10,7 @@ import useSort from "../../utils/hooks/useSort.tsx";
 import { useUser } from "../../utils/hooks/useUser.tsx";
 import { Filter } from "../../types/filterBy.type.ts";
 import apiDeleteTransaction from "../../services/api/deleteTransaction.ts";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import { useCurrStore } from "../../store/store.tsx";
 import { ROUTES } from "../../router.tsx";
@@ -89,7 +89,7 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
             }
 
 
-            <Pagination transactions={transactions} />
+            <Pagination maxLength={transactions?.length} />
         </List>
     )
 }

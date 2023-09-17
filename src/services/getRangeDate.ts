@@ -1,4 +1,4 @@
-import { format, subDays, subHours, subMonths, subYears } from "date-fns";
+import { format, subDays } from "date-fns";
 
 export default function getRangeDates(range: string) {
   const now = new Date();

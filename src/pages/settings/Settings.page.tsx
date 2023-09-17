@@ -16,7 +16,6 @@ import { QUERY_KEY } from "../../config/queryClientKeys";
 import * as yup from "yup";
 import { ErrorP } from "../../components/newTransaction/FormTransaction.style";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { set } from "date-fns";
 
 export type InputsSettings = {
     id?: number;
@@ -66,10 +65,16 @@ export const SectionFull = styled.section`
     transition: all 300ms;
 `
 
-const settingsSchema = yup.object({
+interface IValidation{
+    firstName: string;
+    lastName: string;
+    currency: string;
+}
+
+const settingsSchema: yup.ObjectSchema<IValidation> = yup.object().shape({
     firstName: yup.string().required("First name is required").min(3, "First name must be at least 3 characters long"),
     lastName: yup.string().required("Last name is required").min(3, "Last name must be at least 3 characters long"),
-
+    currency: yup.string().required("Currency is required"),
 })
 
 export default function Settings() {

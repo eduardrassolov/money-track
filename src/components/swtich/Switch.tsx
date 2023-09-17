@@ -1,7 +1,7 @@
-import { WiDaySunny, WiMoonAltWaxingCrescent3 } from "react-icons/wi";
+
 import { styled } from "styled-components";
 import useTheme from "../../utils/hooks/useTheme";
-import { HiMiniMoon, HiOutlineMoon, HiOutlineSun } from "react-icons/hi2";
+import { HiMiniMoon, HiOutlineSun } from "react-icons/hi2";
 
 export const NavIcons = styled.div`
     font-size: 1.5rem;
