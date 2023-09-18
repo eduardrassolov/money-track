@@ -85,14 +85,14 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
     }
     const onError: SubmitErrorHandler<Inputs> = (error) => console.log(error);
 
-
     const transactionType = type === TYPES_TRANSACTION.INCOME ? "income" : "expense"
     const formatedTime = formatDateToInput(new Date());
-    console.log(optionsList);
 
     return (
         <>
-            {isOptionsLoading && isCurrencyLoading ? <LoadingUi /> :
+            {isOptionsLoading && isCurrencyLoading ? 
+                <LoadingUi /> 
+                :
                 <Form onSubmit={handleSubmit(onSubmit, onError)}>
                     <h3>Add new {transactionType}</h3>
 

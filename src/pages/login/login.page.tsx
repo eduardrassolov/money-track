@@ -20,7 +20,7 @@ export interface ILoginInputs {
     password: string;
 }
 
-const Login = () => {
+const LoginPage = () => {
     const { login, isLoading } = useLogin();
     const { theme } = useTheme();
 
@@ -64,4 +64,4 @@ const Login = () => {
         </ThemeProvider>
     )
 }
-export default Login;
+export default LoginPage;
