@@ -17,24 +17,12 @@ import Select from '../dropDown/Select';
 import apiGetCategory from '../../services/api/apiGetCategory';
 import FormRow from './FormRow';
 import { formatDateToInput } from '../../utils/helpers/formatDateToInput';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import LoadingUi from '../spinner/LoadingUi';
+import { newTransactionSchema } from './newTrasactionValidation';
 interface INewTransactionProps {
     type: number;
 }
-
-interface IValidation {
-    description: string;
-    amount: number;
-    completed_at: Date;
-}
-
-export const schema: yup.ObjectSchema<IValidation> = yup.object().shape({
-    description: yup.string().required("Description is required."),
-    amount: yup.number().required().positive("Amount must be positive."),
-    completed_at: yup.date().required("Date is required.").max(new Date(), "Date must not be in the future"),
-}).required()
 
 const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
     const { user } = useUser();
@@ -42,7 +30,7 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
     const { filter } = useFilter();
     const sortBy: SortBy = useSort();
     const { createTransaction } = useCreateTransaction();
-    const { register, handleSubmit, reset, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({ resolver: yupResolver(newTransactionSchema) });
 
     if (!user) {
         return;
