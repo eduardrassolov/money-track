@@ -4,7 +4,7 @@ import getMaxDate from '../../utils/helpers/getMaxDate';
 interface IValidation {
     description: string;
     amount: number;
-    completed_at: Date;
+    completed_at: Date | string;
 }
 
 export const newTransactionSchema: yup.ObjectSchema<IValidation> = yup.object().shape({
