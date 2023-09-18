@@ -3,7 +3,7 @@ import supabase from "../supabase";
 interface IUpdateProps {
   description: string;
   amount: number;
-  completed_at: Date;
+  completed_at: string;
   category: number;
   id: number;
 }
@@ -12,7 +12,7 @@ export default async function apiUpdateTransaction({ description, amount, comple
   try {
     const { data, error } = await supabase
       .from("transactions")
-      .update({ description, amount, category_id: category, completed_at: completed_at.toString() })
+      .update({ description, amount, category_id: category, completed_at: completed_at })
       .eq("id", id)
       .select();
 

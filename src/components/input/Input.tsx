@@ -47,7 +47,7 @@ const Input: FC<IInput> = ({ type = "text", id, placeHolder, name, register, aut
                     {...register(name)}
                     autoFocus={autoFocus}
                     min={type === "number" ? "1" : ""}
-                    step={type === "number" ? '0.01' : ""} />
+                    step={type === "number" ? '1' : ""} />
                 :
                 <StyledInput
                     type={type}

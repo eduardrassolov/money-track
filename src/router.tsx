@@ -1,24 +1,21 @@
 import { RouteObject, createBrowserRouter } from "react-router-dom";
-import AppLayout from "./pages/layout/AppLayout.tsx";
-
-import Incomes from "./pages/income/Incomes.page.tsx";
-import Expenses from "./pages/expenses/Expenses.page.tsx";
-import Dashboard from "./pages/dashboard/Dashboard.page.tsx";
-// import Transactions from "./pages/transactions/Transactions.page.tsx";
 import HomePage from "./pages/home/HomePage.tsx";
 import ErrorELement from "./components/error/ErrorELement.tsx";
 import ProtectedLayout from "./pages/layout/ProtectedLayout.tsx";
 import Page404 from "./pages/errors/Page404.tsx";
-// import SignUp from "./pages/signUp/SignUp.page.tsx";
-import Login from "./pages/login/login.page.tsx";
 import EditPage from "./pages/edit/EditPage.tsx";
 import loaderTransactionById from "./pages/edit/loader.ts";
 import Settings from "./pages/settings/Settings.page.tsx";
-import Transactions from "./pages/transactions/Transactions.page.tsx";
 import {Suspense, lazy} from "react";
 import LoadingUi from "./components/spinner/LoadingUi.tsx";
+import LoginPage from "./pages/login/login.page.tsx";
 
-const SingUp = lazy(() => import("./pages/signUp/SignUp.page.tsx"));
+const SingUpPage = lazy(() => import("./pages/signUp/SignUp.page.tsx"));
+const AppLayout = lazy(() => import("./pages/layout/AppLayout.tsx"));
+const Transactions = lazy(() => import("./pages/transactions/Transactions.page.tsx"));
+const Dashboard = lazy(() => import("./pages/dashboard/Dashboard.page.tsx"));
+const Incomes = lazy(() => import("./pages/income/Incomes.page.tsx"));
+const Expenses = lazy(() => import("./pages/expenses/Expenses.page.tsx"));
 
 export const ROUTES = {
     HOME: "/",
@@ -26,13 +23,18 @@ export const ROUTES = {
     SIGN_UP: "/sign-up",
 
     ROOT: "/app",
+    
     TRANSACTIONS: `/app/transactions`,
     TRANSACTION_ID: "/app/transactions/:id",
+
     INCOMES: "/app/incomes",
     INCOME_ID: "/app/incomes/:id",
+
     EXPENSES: "/app/expenses",
     EXPENSE_ID: "/app/expenses/:id",
+
     DASHBOARD: "/app/dashboard",
+
     SETTINGS: "/app/settings"
 }
 
@@ -43,14 +45,13 @@ const routes: RouteObject[] = [
     },
     {
         path: ROUTES.LOGIN,
-        element: <Login />,
+        element: <LoginPage />
     },
     {
         path: ROUTES.SIGN_UP,
-        element: <Suspense fallback={<LoadingUi size={"lg"}/>}><SingUp /></Suspense>
+        element: <Suspense fallback={<LoadingUi size={"lg"}/>}><SingUpPage /></Suspense>
     
     },
-
     {
         path: ROUTES.ROOT,
         element: <ProtectedLayout> <AppLayout /> </ProtectedLayout>,
@@ -58,17 +59,17 @@ const routes: RouteObject[] = [
         children: [
             {
                 path: ROUTES.TRANSACTIONS,
-                element: <Transactions />,
+                element: <Suspense fallback={<LoadingUi/>}><Transactions /></Suspense>,
 
             },
             {
                 path: ROUTES.TRANSACTION_ID,
-                element: <EditPage />,
+                element: <Suspense fallback={<LoadingUi/>}><EditPage /></Suspense>,
                 loader: async ({ params: { id } }) => loaderTransactionById(id)
             },
             {
                 path: ROUTES.INCOMES,
-                element: <Incomes />,
+                element: <Suspense fallback={<LoadingUi/>}><Incomes /></Suspense>
             },
             {
                 path: ROUTES.INCOME_ID,
@@ -86,7 +87,7 @@ const routes: RouteObject[] = [
             },
             {
                 path: ROUTES.DASHBOARD,
-                element: <Dashboard />,
+                element: <Suspense fallback={<LoadingUi/>}><Dashboard /></Suspense>
             },
             {
                 path: ROUTES.SETTINGS,

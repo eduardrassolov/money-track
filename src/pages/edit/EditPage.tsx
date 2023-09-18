@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom"
+import { useLoaderData, useNavigate } from "react-router-dom"
 import Header from "../../ui/header/Header";
 import { ErrorP, FormFooter, FormGroup } from "../../components/newTransaction/FormTransaction.style";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -15,7 +15,7 @@ import Input from "../../components/input/Input";
 import Select from "../../components/dropDown/Select";
 import { Container, SectionFull } from "../settings/Settings.page";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schema } from "../../components/newTransaction/FormTransaction";
+import { newTransactionSchema } from "../../components/newTransaction/newTrasactionValidation";
 
 export default function EditPage() {
     const [data] = useLoaderData() as Array<GetAllTransactionsDTO>;
@@ -24,17 +24,17 @@ export default function EditPage() {
         return null;
     }
     const { id } = data;
-    const { goBack } = usePageBack();
+    const navigate = useNavigate();
 
     const { data: optionsList } = useQuery({ queryKey: [QUERY_KEY.CATEGORIES], queryFn: () => getCategory(data.category.type.id) });
 
     const { register, handleSubmit, formState: { errors } } = useForm(
         {
-            resolver: yupResolver(schema),
+            resolver: yupResolver(newTransactionSchema),
             defaultValues: {
                 description: data.description,
                 amount: data.amount,
-                completed_at: new Date(data.completed_at),
+                completed_at: data.completed_at,
             }
         });
     
@@ -45,9 +45,10 @@ export default function EditPage() {
 
 
         updateTransaction({
-            description, amount, completed_at: new Date(completed_at), category, id
+            description, amount, completed_at: completed_at, category, id
         }, { onSuccess: () => queryClient.invalidateQueries({ queryKey: [id, data.category.type.id] }) })
     }
+    const handleCancel = () => navigate(-1);
 
     return (
         <SectionFull>
@@ -84,7 +85,7 @@ export default function EditPage() {
                     </FormGroup>
 
                     <FormFooter>
-                        <SecondaryBtn onClick={goBack}>Cancel</SecondaryBtn>
+                        <SecondaryBtn type="button" onClick={handleCancel}>Cancel</SecondaryBtn>
                         <PrimaryBtn type='submit'>Save</PrimaryBtn>
                     </FormFooter>
                 </form>

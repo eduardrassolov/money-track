@@ -37,7 +37,7 @@ const signUpSchema = yup.object({
     lastName: yup.string().required('This field is required'),
 })
 
-export default function SignUp() {
+export default function SignUpPage() {
     const navigate = useNavigate();
     const { theme } = useTheme();
     const { register, handleSubmit, formState: { errors } } = useForm<SignInInputs>({
