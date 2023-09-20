@@ -9,6 +9,7 @@ import Settings from "./pages/settings/Settings.page.tsx";
 import {Suspense, lazy} from "react";
 import LoadingUi from "./components/spinner/LoadingUi.tsx";
 import LoginPage from "./pages/login/login.page.tsx";
+import { API_CURRENCY_URL } from "./config/apiUrl.ts";
 
 const SingUpPage = lazy(() => import("./pages/signUp/SignUp.page.tsx"));
 const AppLayout = lazy(() => import("./pages/layout/AppLayout.tsx"));
@@ -87,7 +88,7 @@ const routes: RouteObject[] = [
             },
             {
                 path: ROUTES.DASHBOARD,
-                element: <Suspense fallback={<LoadingUi/>}><Dashboard /></Suspense>
+                element: <Suspense fallback={<LoadingUi/>}><Dashboard /></Suspense>,
             },
             {
                 path: ROUTES.SETTINGS,

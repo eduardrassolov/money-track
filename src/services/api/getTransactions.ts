@@ -6,7 +6,7 @@ export const SELECT = {
   ALL_TRANSACTIONS: `
     id, amount, completed_at, description, 
     category!inner(id, name, type:type_transaction!inner(id, name)),
-    currency:Currency!inner(id, name, symbol, shortName)
+    currency:Currency!inner(id, name, symbol, shortName, code)
   `,
 };
 

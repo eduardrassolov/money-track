@@ -9,15 +9,25 @@ import Header from '../../ui/header/Header'
 import CategoryChart from './categoryChart/CategoryChart'
 import calculateStats from '../../utils/helpers/calculateStats'
 import LoadingUi from '../../components/spinner/LoadingUi'
-
+import { useUser } from '../../utils/hooks/useUser'
+import convertToOneCurrency from '../../services/createData'
+import useCurrency from '../../utils/hooks/useCurrency'
 
 export default function Statictisc() {
     const { transactions, expenses, incomes, isExpenseLoading, isIncomeLoading, isTransactionLoading } = useDashboard();
-    const stats = calculateStats({ expenses, incomes });
+    
+    const {currency} = useUser();
+    const {defaultCurrency} = useCurrency(currency);
 
-    const dataDiagram = createDiagramData(transactions);
-    const summaryExpenses: Array<ISummary> = getSummaryData(expenses);
-    const summaryIncomes: Array<ISummary> = getSummaryData(incomes);
+    const convertedExpenses = convertToOneCurrency(expenses, defaultCurrency);
+    const convertedIncomes = convertToOneCurrency(incomes, defaultCurrency);
+    const convertedTransactions = convertToOneCurrency(transactions, defaultCurrency);
+
+    const stats = calculateStats({ expenses: convertedExpenses, incomes: convertedIncomes });
+
+    const dataDiagram = createDiagramData(convertedTransactions);
+    const summaryExpenses: Array<ISummary> = getSummaryData(convertedExpenses);
+    const summaryIncomes: Array<ISummary> = getSummaryData(convertedIncomes);
 
     return <>
         {isTransactionLoading || isExpenseLoading || isIncomeLoading ?

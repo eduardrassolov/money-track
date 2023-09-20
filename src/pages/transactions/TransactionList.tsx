@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 import { FC } from "react";
 import TransactionCard from "../../components/transactionCard/TransactionCard.tsx";
 import { SortBy } from "../../types/sortBy.type.ts";
-
 import { ITransaction } from "../../interface/ITransactions.ts";
 import useFilter from "../../utils/hooks/useFilter.tsx";
 import useSort from "../../utils/hooks/useSort.tsx";
@@ -51,7 +50,6 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
     if (!user) {
         return;
     }
-    console.log(currPage);
 
     const { id: userId } = user;
     const { data: filteredSortedTransactions, isLoading } = useQuery(
