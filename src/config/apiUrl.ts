@@ -1,0 +1,1 @@
+export const API_CURRENCY_URL = "https://api.monobank.ua/bank/currency";

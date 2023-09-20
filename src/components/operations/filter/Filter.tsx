@@ -25,7 +25,7 @@ const Filter = memo(function ({ options, filterKey }: IFilter) {
         }
         else {
             setSearchParams((params) => {
-                params.set('page', "1");
+                // params.set('page', "1");
                 params.set(filterKey, value);
                 return params;
             })

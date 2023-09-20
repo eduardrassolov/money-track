@@ -33,5 +33,6 @@ export default function createDiagramData(transactions: ITransaction[] | undefin
     return acc;
   }, {});
 
+  console.log("ttttt", dataDiagram);
   return Object.values(dataDiagram);
 }

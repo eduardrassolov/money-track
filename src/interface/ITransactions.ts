@@ -17,5 +17,6 @@ export interface ITransaction {
     name: string;
     shortName: string;
     symbol: string;
+    code: number;
   };
 }

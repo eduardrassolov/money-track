@@ -34,6 +34,7 @@ export interface Database {
           name: string;
           shortName: string | null;
           symbol: string | null;
+          code?: number | null;
         };
         Insert: {
           id?: string;

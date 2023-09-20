@@ -2,14 +2,12 @@ import { useLoaderData, useNavigate } from "react-router-dom"
 import Header from "../../ui/header/Header";
 import { ErrorP, FormFooter, FormGroup } from "../../components/newTransaction/FormTransaction.style";
 import { SubmitHandler, useForm } from "react-hook-form";
-// import { Inputs } from "../../types/Inputs.type";
 import { PrimaryBtn, SecondaryBtn } from "../../styles/Button";
 import { QUERY_KEY } from "../../config/queryClientKeys";
 import { useQuery } from "@tanstack/react-query";
 import getCategory from "../../services/api/apiGetCategory";
 import useEdit from "./useEdit";
 import { queryClient } from "../../main";
-import usePageBack from "../../utils/hooks/usePageBack";
 import { GetAllTransactionsDTO } from "../../services/api/dto/getTransactions.dto";
 import Input from "../../components/input/Input";
 import Select from "../../components/dropDown/Select";
@@ -42,7 +40,6 @@ export default function EditPage() {
     const onSubmit: SubmitHandler<any> = async ({ description, amount, completed_at, category }) => {
         if (!description.trim() || !amount || !completed_at || !category)
             return;
-
 
         updateTransaction({
             description, amount, completed_at: completed_at, category, id
