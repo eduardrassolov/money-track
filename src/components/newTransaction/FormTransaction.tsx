@@ -49,9 +49,9 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
     const { data: optionCurrency, isLoading: isCurrencyLoading } = useQuery({ queryKey: ["currency"], queryFn: apiGetCurrency });
 
     //TODO fix any
-    const onSubmit: SubmitHandler<any> = ({ description, amount, completed_at, category }) => {
+    const onSubmit: SubmitHandler<any> = ({ description, amount, completed_at, category, currency }) => {
 
-        if (!description.trim() || !amount || !completed_at || !category) {
+        if (!description.trim() || !amount || !completed_at || !category || !currency) {
             return;
         }
 
@@ -63,7 +63,7 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
             completedAt: completed_at,
             categoryId: Number(category),
             profileId: userId,
-            currencyId: userCurrency
+            currencyId: currency
         }, {
             onSuccess: () => {
                 queryClient.invalidateQueries({ queryKey: [userId, key, filter, sortBy] });
@@ -104,7 +104,7 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
                     </FormRow>
 
                     <FormRow lblFor={"currency"} lblText={"Currency"}>
-                        <Select options={optionCurrency} register={register} name={"currency"} selectedDefault={userCurrency} isDisabled={true}></Select>
+                        <Select options={optionCurrency} register={register} name={"currency"} selectedDefault={userCurrency}></Select>
                         <ErrorP></ErrorP>
                     </FormRow>
 
