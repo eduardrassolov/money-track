@@ -1,7 +1,8 @@
 import { FC } from 'react'
 import { styled } from 'styled-components'
 import { Area, AreaChart, Legend, Tooltip, XAxis, YAxis } from "recharts";
-import { DiagramData } from './createDiagramData';
+import { DiagramData } from '../createDiagramData';
+import { CustomTooltip } from './CustomTooltip';
 
 const ChartContainer = styled.div`
   width: 100%;
@@ -35,7 +36,7 @@ const Diagram: FC<IDiagramProps> = ({ data }) => {
                 </defs>
                 <XAxis dataKey="completedAt" /><YAxis />
 
-                <Tooltip />
+                <Tooltip content={<CustomTooltip />} />
                 
                 <Area type="monotone" dataKey="Expense" stroke="rgb(36, 143, 233)" fillOpacity={1} fill="url(#colorExpense)" />
                 <Area type="monotone" dataKey="Income" stroke="rgb(142, 230, 20)" fillOpacity={1} fill="url(#colorIncome)" />
@@ -45,3 +46,4 @@ const Diagram: FC<IDiagramProps> = ({ data }) => {
     )
 }
 export default Diagram;
+
