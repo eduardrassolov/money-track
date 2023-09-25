@@ -15,8 +15,8 @@ export interface ITransaction {
   currency: {
     id: string;
     name: string;
-    shortName: string;
-    symbol: string;
-    code: number;
+    shortName: string | null;
+    symbol: string | null;
+    code?: number | null | undefined;
   };
 }
