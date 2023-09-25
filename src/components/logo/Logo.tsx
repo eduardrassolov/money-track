@@ -21,15 +21,15 @@ const NavLogo = styled.div`
             cursor: pointer;
         }
         font-family: 'Montserrat', sans-serif;
-        font-weight: 700;
+        font-weight: 800;
         font-size: 1.5rem;
 
         @media only screen and (max-width: ${devices.md}px){
             display: none;
         }
-    
+    }
 `
-
+    
 export default function Logo() {
     return (
         <NavLogo>

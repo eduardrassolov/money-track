@@ -1,8 +1,11 @@
-import { FC } from 'react'
+import { FC, useEffect, useRef } from 'react'
 import { styled } from 'styled-components'
 import { IFeatureData } from './FeaturesSection'
-import { devices } from '../../styles/breakPoints'
-
+import { devices } from '../../styles/breakPoints';
+import { useAnimation, useInView } from 'framer-motion'
+import AnimatedContainer from '../../components/animation/AnimatedContainer';
+import {motion} from 'framer-motion';
+import { slideUp } from './HeaderSection';
 
 const FeaturesItem = styled.div<{ $side: string }>`
     display: flex;
@@ -56,19 +59,21 @@ interface IFeature {
     side: FeatureSide;
 }
 
-
 const Feature: FC<IFeature> = ({ data: { title, text, imgPath }, side }) => {
-    console.log(side);
+
     return (
-        <FeaturesItem $side={side}>
-            <TextContainer>
-                <h2>{title}</h2>
-                <p>{text}</p>
-            </TextContainer>
-            <ImageContainer>
-                <img src={imgPath} alt={`${title} image`} />
-            </ImageContainer>
-        </FeaturesItem>
+        <AnimatedContainer direction={slideUp}>
+            <FeaturesItem $side={side} >
+                    <TextContainer>
+                        <h2>{title}</h2>
+                        <p>{text}</p>
+                    </TextContainer>
+
+                    <ImageContainer>
+                        <img src={imgPath} alt={`${title} image`} />
+                    </ImageContainer>
+            </FeaturesItem> 
+        </AnimatedContainer>
     )
 }
 export default Feature;

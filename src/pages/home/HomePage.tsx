@@ -6,6 +6,9 @@ import useBurgerMenu from '../../components/aside/NavBar/useBurger'
 import Footer from './Footer'
 import useTheme from '../../utils/hooks/useTheme'
 import FeaturesSection from './FeaturesSection'
+import { motion } from 'framer-motion'
+
+
 
 const Container = styled.div`
     margin: 0;
@@ -26,7 +29,7 @@ export default function HomePage() {
             <Container>
                 <NavBarHome isOpen={isBurgerOpen} onClose={handleBurger} />
                 <Burger isOpen={isBurgerOpen} onCLose={handleBurger} />
-
+                
                 <HeaderSection id={"header"} />
 
                 <FeaturesSection id={"feature"} />
