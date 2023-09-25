@@ -17,7 +17,7 @@ const StyledFooter = styled.footer`
 export default function Footer() {
     return (
         <StyledFooter>
-            <p>&#169; E-Budget 2023</p>
+            <p>&#169; Budget Control 2023 - Created by Eduard Rassolov.</p>
         </StyledFooter>
     )
 }

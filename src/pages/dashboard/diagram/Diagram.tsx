@@ -21,7 +21,7 @@ interface IDiagramProps {
 const Diagram: FC<IDiagramProps> = ({ data }) => {
     return (
         <ChartContainer>
-            <AreaChart width={1000} height={350} data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+            <AreaChart width={1200} height={550} data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <Legend />
                 <defs>
                     <linearGradient id="colorExpense" x1="0" y1="0" x2="0" y2="1">
@@ -38,7 +38,7 @@ const Diagram: FC<IDiagramProps> = ({ data }) => {
 
                 <Tooltip content={<CustomTooltip />} />
                 
-                <Area type="monotone" dataKey="Expense" stroke="rgb(36, 143, 233)" fillOpacity={1} fill="url(#colorExpense)" />
+                <Area type="monotone" dataKey="Expense" stroke="rgb(36, 143, 233)" fillOpacity={1} fill="url(#colorExpense)"/>
                 <Area type="monotone" dataKey="Income" stroke="rgb(142, 230, 20)" fillOpacity={1} fill="url(#colorIncome)" />
             </AreaChart>
         </ChartContainer>
