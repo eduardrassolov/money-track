@@ -2,18 +2,21 @@ import styled from "styled-components";
 import { useUser } from "../../../utils/hooks/useUser";
 import useCurrency from "../../../utils/hooks/useCurrency";
 
-const StyledTooltip = styled.div`
+export const StyledTooltip = styled.div`
     padding: 0.5rem 1rem;
     background: ${(props) => props.theme.background};
     border: 1px solid ${(props) => props.theme.border};
     border-radius: 7px;
+    color: ${(props) => props.theme.text};
+    justify-content: center;
+    align-items: center;
 
     p{
         margin: 0 0 0.3rem;
         font-size: 0.8rem;
     }
 `
-const Title = styled.h4`
+export const Title = styled.h4`
     font-size: 1rem;
     margin: 0.5rem 0 1rem;
 `

@@ -2,6 +2,7 @@ import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recha
 import useResize from "../useResize";
 import { ISummary } from "../../../utils/helpers/getStats";
 import { FC } from "react";
+import styled from "styled-components";
 
 const pieChartColors = [
     "#FF3D68",
@@ -38,6 +39,35 @@ const createData = (arr: Array<ISummary>): Array<IChartData> => {
     })
 }
 
+const StyledDiv = styled.div`
+    background: ${props => props.theme.background};
+    color: ${props => props.theme.text};
+    padding: 0.5rem 1rem;
+    border-radius: 7px;
+    border: 1px solid ${props => props.theme.border};
+`
+
+interface CustomTooltipProps {
+    active?: boolean;
+    payload?: payloadType[];
+    label?: number;
+    }
+    
+    type payloadType = {
+    value: string | number;
+    name: string;
+};
+
+export const CustomTooltip: React.FC<CustomTooltipProps> = ({active, payload, label}) => {
+
+    if (active && payload && payload.length > 0) {
+        return <StyledDiv>
+            <p>{`${payload[0].name} : ${payload[0]?.value}`}</p>
+        </StyledDiv>;
+    }
+    return null;
+};
+
 const CategoryChart: FC<ICategoryChart> = ({ data }) => {
     const { isSmallScreen } = useResize();
 
@@ -65,7 +95,7 @@ const CategoryChart: FC<ICategoryChart> = ({ data }) => {
                             <Cell key={`cell-${index}`} fill={pieChartColors[index]} />
                         ))}
                     </Pie>
-                    <Tooltip />
+                    <Tooltip content={<CustomTooltip />} />
                     <Legend
                         align={isSmallScreen ? 'center' : 'right'}
                         verticalAlign={isSmallScreen ? 'bottom' : 'middle'}
