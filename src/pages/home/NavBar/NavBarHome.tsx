@@ -25,7 +25,6 @@ const SwitchContainer = styled.div`
     @media only screen and (min-width: ${devices.md}px){
         display: none;
     }
-    
 `
 interface INavBar {
     isOpen: boolean,

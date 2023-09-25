@@ -6,7 +6,7 @@ const Section = styled.section`
         flex-direction: column;
         justify-content: center;
         align-items: center ;
-        height: 90vh;
+        height: 100vh;
         /* background: #F9F5F6; */
         /* background: ${(props) => props.theme.background}; */
         background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 1)), url("/main.jpg");
@@ -82,12 +82,9 @@ const Highlight = styled.p`
 const TextContainer = styled.div`
     align-items: center;
 `
-
-
 interface IHeader {
     id: string
 }
-
 
 export default function HeaderSection({ id }: IHeader) {
     return (

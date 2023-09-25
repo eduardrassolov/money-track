@@ -60,6 +60,7 @@ interface CustomTooltipProps {
 
 export const CustomTooltip: React.FC<CustomTooltipProps> = ({active, payload, label}) => {
 
+    console.log("Label", label);
     if (active && payload && payload.length > 0) {
         return <StyledDiv>
             <p>{`${payload[0].name} : ${payload[0]?.value}`}</p>
