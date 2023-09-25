@@ -19,11 +19,14 @@ export default function Statictisc() {
     const {currency} = useUser();
     const {defaultCurrency} = useCurrency(currency);
 
+    if(!defaultCurrency || !expenses || !incomes || !transactions)
+        return null;
+
     const convertedExpenses = convertToOneCurrency(expenses, defaultCurrency);
     const convertedIncomes = convertToOneCurrency(incomes, defaultCurrency);
     const convertedTransactions = convertToOneCurrency(transactions, defaultCurrency);
 
-    const stats = calculateStats({ expenses: convertedExpenses, incomes: convertedIncomes });
+    const stats = calculateStats(convertedExpenses, convertedIncomes);
 
     const dataDiagram = createDiagramData(convertedTransactions);
     const summaryExpenses: Array<ISummary> = getSummaryData(convertedExpenses);
