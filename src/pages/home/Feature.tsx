@@ -1,10 +1,8 @@
-import { FC, useEffect, useRef } from 'react'
+import { FC } from 'react'
 import { styled } from 'styled-components'
 import { IFeatureData } from './FeaturesSection'
 import { devices } from '../../styles/breakPoints';
-import { useAnimation, useInView } from 'framer-motion'
 import AnimatedContainer from '../../components/animation/AnimatedContainer';
-import {motion} from 'framer-motion';
 import { slideUp } from './HeaderSection';
 
 const FeaturesItem = styled.div<{ $side: string }>`

@@ -6,9 +6,6 @@ import useBurgerMenu from '../../components/aside/NavBar/useBurger'
 import Footer from './Footer'
 import useTheme from '../../utils/hooks/useTheme'
 import FeaturesSection from './FeaturesSection'
-import { motion } from 'framer-motion'
-
-
 
 const Container = styled.div`
     margin: 0;

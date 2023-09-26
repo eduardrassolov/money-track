@@ -1,8 +1,5 @@
 import { styled } from "styled-components"
 import { devices } from "../../styles/breakPoints"
-import { useEffect, useRef } from "react"
-import { useAnimation, useInView } from "framer-motion"
-import {motion} from 'framer-motion';
 import AnimatedContainer from "../../components/animation/AnimatedContainer";
 
 const Section = styled.section`

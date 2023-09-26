@@ -1,8 +1,16 @@
-import { motion, useAnimation, useAnimationControls } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface IAnimate {
     children: React.ReactNode;
-    direction?: number;
+    direction?: IDirection;
+    duration?: number;
+    delay?: number;
+    animateOnStart?: boolean;
+}
+
+interface IDirection {
+    hidden: { x?: number, y?: number };
+    visible: { x?: number, y?: number };
 }
 
 const defaultDirection = {
@@ -11,7 +19,7 @@ const defaultDirection = {
 
 }
 
-export default function AnimatedContainer({children, direction = defaultDirection, duration = 0.8}: IAnimate) {
+export default function AnimatedContainer({children, direction = defaultDirection, duration = 0.8, delay = 0.2, animateOnStart = false}: IAnimate) {
 
     return (
         <motion.div
@@ -19,11 +27,11 @@ export default function AnimatedContainer({children, direction = defaultDirectio
                     hidden: { opacity: 0, ...direction.hidden },
                     visible: { opacity: 1, ...direction.visible  }
                 }}
-
                 initial="hidden"
                 whileInView={"visible"}
+                animate={animateOnStart ? "visible" : ""}
                 viewport={{once: true}}
-                transition={{ duration, delay: 0.2}}
+                transition={{ duration, delay}}
         >
                 {children}
         </motion.div>

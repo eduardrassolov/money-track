@@ -57,14 +57,18 @@ export default function Pagination({ maxLength }: IPagination) {
     
     const lastPage = maxLength <= ITEMS_PER_PAGE ? 1 : Math.floor(maxLength / onePageItems);
     const handlePrev = () => { 
-
+        scrollToTop();
         if (currPage > 1)
             moveToPage(currPage - 1);
     }
     const handleNext = () => {
+        scrollToTop();
         if (currPage < lastPage) {
             moveToPage(currPage + 1);
         }
+    }
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     console.log(currPage, lastPage, maxLength);
