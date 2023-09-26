@@ -1,5 +1,5 @@
 Application for tracking your budget.
-Test version (test branch) - [budget-tracker](https://master--budget-track-test.netlify.app/)
+Test version (test branch) - [budget-tracker](https://ebudget-control.netlify.app/)
 
 Tech stack: `React`, `Typescript`, `Supabase`, `Tanstack Query`, `React Router Dom`, `Styled Components`.
 
