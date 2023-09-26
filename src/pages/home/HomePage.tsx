@@ -26,7 +26,7 @@ export default function HomePage() {
             <Container>
                 <NavBarHome isOpen={isBurgerOpen} onClose={handleBurger} />
                 <Burger isOpen={isBurgerOpen} onCLose={handleBurger} />
-
+                
                 <HeaderSection id={"header"} />
 
                 <FeaturesSection id={"feature"} />

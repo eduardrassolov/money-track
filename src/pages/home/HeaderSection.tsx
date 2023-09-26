@@ -1,5 +1,6 @@
 import { styled } from "styled-components"
 import { devices } from "../../styles/breakPoints"
+import AnimatedContainer from "../../components/animation/AnimatedContainer";
 
 const Section = styled.section`
         display: flex;
@@ -86,13 +87,36 @@ interface IHeader {
     id: string
 }
 
+const slideRight = {
+    hidden: { x: -300 },
+    visible: { x: 0 }
+}
+
+const slideLeft = {
+    hidden: { x: 300 },
+    visible: { x: 0 }
+}
+export const slideUp = {
+    hidden: { y: 200 },
+    visible: { y: 0 }
+}
+
+
 export default function HeaderSection({ id }: IHeader) {
     return (
         <Section id={id}>
             <TextContainer>
-                <p>Welcome to <span><strong>E-Budget</strong></span>,</p>
-                <p>Your Personal</p>
-                <Highlight><strong>Finance Manager</strong></Highlight>
+                <AnimatedContainer direction={slideRight}>
+                    <p>Welcome to <span><strong>E-Budget</strong></span>,</p>
+                </AnimatedContainer>
+
+                <AnimatedContainer direction={slideLeft}>
+                    <p>Your Personal</p>
+                </AnimatedContainer>
+
+                <AnimatedContainer direction={slideRight}>
+                    <Highlight><strong>Finance Manager</strong></Highlight>
+                </AnimatedContainer>
             </TextContainer >
         </Section >
     )

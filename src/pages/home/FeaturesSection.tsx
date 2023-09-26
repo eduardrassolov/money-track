@@ -58,9 +58,10 @@ const featuresData: Array<IFeatureData> = [
 ]
 
 export default function FeaturesSection({ id }: IHeader) {
+ 
     return (
         <Section id={id}>
-            {featuresData.map((feature, index) => <Feature key={feature.id} data={feature} side={index % 2 ? "right" : "left"} />)}
+                {featuresData.map((feature, index) => <Feature key={feature.id} data={feature} side={index % 2 ? "right" : "left"} />)}
         </Section>
     )
 }
