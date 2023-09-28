@@ -13,7 +13,7 @@ console.log(now, filter);
     .from("transactions")
     .select(SELECT.ALL_TRANSACTIONS)
     .eq("profile_id", userId)
-    .eq("category.type.id", TYPES_TRANSACTION.INCOME);
+    .eq("Category.type.id", TYPES_TRANSACTION.INCOME);
 
   if (filter) {
     query = query.lte("completed_at", new Date().toLocaleDateString()).gte("completed_at", filter);
@@ -32,8 +32,8 @@ console.log(now, filter);
       id: transaction.id,
       description: transaction.description,
       amount: transaction.amount,
-      type: { id: transaction.category.type.id, name: transaction.category.type.name },
-      category: { id: transaction.category.id, name: transaction.category.name },
+      type: { id: transaction.Category.type.id, name: transaction.Category.type.name },
+      category: { id: transaction.Category.id, name: transaction.Category.name },
       completedAt: new Date(transaction.completed_at),
       profileId: transaction.profile_id,
       currency: transaction.currency,

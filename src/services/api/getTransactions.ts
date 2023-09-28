@@ -5,7 +5,7 @@ import supabase from "../supabase";
 export const SELECT = {
   ALL_TRANSACTIONS: `
     id, amount, completed_at, description, 
-    category!inner(id, name, type:type_transaction!inner(id, name)),
+    Category!inner(id, name, type:type_transaction!inner(id, name)),
     currency:Currency!inner(id, name, symbol, shortName, code)
   `,
 };
@@ -24,18 +24,20 @@ export default async function getTransactions({
   query = query.order(sortBy.field, { ascending: sortBy.direction === "asc" ? true : false });
   const { data } = await query;
 
+
   if (!data) {
     return new Array<ITransaction>();
   }
 
   //TODO remove any
   const allTransactions: Array<ITransaction> = data.map((transaction: any) => {
+    console.log("11", transaction);
     return {
       id: transaction.id,
       description: transaction.description,
       amount: transaction.amount,
-      type: { id: transaction.category.type.id, name: transaction.category.type.name },
-      category: { id: transaction.category.id, name: transaction.category.name },
+      type: { id: transaction.Category.type.id, name: transaction.Category.type.name },
+      category: { id: transaction.Category.id, name: transaction.Category.name },
       completedAt: new Date(transaction.completed_at),
       profileId: transaction.profile_id,
       currency: transaction.currency,

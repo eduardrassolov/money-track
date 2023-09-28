@@ -8,15 +8,11 @@ const Section = styled.section`
         justify-content: center;
         align-items: center ;
         height: 100vh;
-        /* background: #F9F5F6; */
-        /* background: ${(props) => props.theme.background}; */
         background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 1)), url("/main.jpg");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
 
-
-        /* color: ${props => props.theme.text}; */
         color: #fafafa;
         border-bottom: 2px solid ${props => props.theme.border};
         padding: 3rem 0 0;
@@ -28,7 +24,6 @@ const Section = styled.section`
             max-width: 300px;
             border-radius: 10px;
             margin: 1rem auto ;
-            /* box-shadow: 0px 6px 16px 1px ${props => props.theme.shadow};   */
         }
         p{
             font-size: 2rem;

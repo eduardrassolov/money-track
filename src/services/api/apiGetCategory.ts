@@ -1,12 +1,32 @@
-import { ICategory } from "../../interface/ICategory";
+import { TABLE } from "../../config/dbTablesNames";
+import { ITransactionCategory } from "../../interface/ITransactionCategory";
 import supabase from "../supabase";
 
-export default async function apiGetCategory(type: number) {
-  const { data } = await supabase.from("category").select().eq("type_id", type).order("name", { ascending: true });
-
+export async function apiGetCategories(type: number) {
+  const { data } = await supabase.from(TABLE.CATEGORY)
+    .select()
+    .eq("isDefault", true)
+    .eq("type_id", type)
+    .order("name", { ascending: true });
+ 
   if (!data) {
     return null;
   }
 
-  return data as Array<ICategory>;
+  return data as Array<ITransactionCategory>;
+}
+
+
+export async function apiGetUserCategory(type: number, userId: string) {
+  const { data } = await supabase.from(TABLE.CATEGORY)
+    .select()
+    .eq("user_id", userId)
+    .eq("type_id", type)
+    .order("name", { ascending: true });
+ 
+  if (!data) {
+    return null;
+  }
+
+  return data as Array<ITransactionCategory>;
 }

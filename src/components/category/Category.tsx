@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { UseFormRegister } from "react-hook-form";
-import { ICategory } from "../../interface/ICategory";
+import { ICategory } from "../../interface/ITransactionCategory";
 import { Select } from "./Category.style";
 import { Inputs } from "../../types/Inputs.type";
 
