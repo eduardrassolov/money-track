@@ -22,12 +22,15 @@ import LoadingUi from '../spinner/LoadingUi';
 import { newTransactionSchema } from './newTrasactionValidation';
 import DropDown from '../dropDown/DropDown';
 import {apiGetCategories, apiGetUserCategory} from '../../services/api/apiGetCategory';
+import { useLocation } from 'react-router-dom';
+import { ROUTES } from '../../router';
 interface INewTransactionProps {
     type: number;
 }
 
 const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
     const { user } = useUser();
+    const {pathName} = useLocation();
     const queryClient = useQueryClient();
     const { filter } = useFilter();
     const sortBy: SortBy = useSort();
@@ -63,7 +66,6 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
             console.log("Empty fields");
             return;
         }
-
         const key = type === TYPES_TRANSACTION.INCOME ? QUERY_KEY.INCOMES : QUERY_KEY.EXPENSES;
 
         createTransaction({
@@ -76,6 +78,7 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
         }, {
             onSuccess: () => {
                 queryClient.invalidateQueries({ queryKey: [userId, key, filter, sortBy] });
+                setCategory("");
                 reset();
             }
         })
@@ -84,8 +87,7 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
 
     const transactionType = type === TYPES_TRANSACTION.INCOME ? "income" : "expense"
     const formatedTime = formatDateToInput(new Date());
-
-    console.log("Options", optionsList);
+    const currentType = pathName === ROUTES.EXPENSES ? TYPES_TRANSACTION.EXPENSE : TYPES_TRANSACTION.INCOME;
 
     return (
         <>
@@ -104,7 +106,7 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
                         ?
                         <FormRow lblFor={"category"} lblText={"Category"}>
                             {/* <Select options={optionsList} register={register} name={"category"} selectedDefault={optionsList[0]?.id.toString()}></Select> */}
-                            <DropDown defaultOption={optionsList} customOption={userCategory} selected={category} onSelect={setCategory}/>
+                            <DropDown defaultOption={optionsList} customOption={userCategory} selected={category} onSelect={setCategory} currentTypeTransaction={currentType}/>
                             <ErrorP></ErrorP>
                         </FormRow>
                         : ''

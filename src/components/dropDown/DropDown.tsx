@@ -1,56 +1,65 @@
 import * as Select from '@radix-ui/react-select';
-import React from "react";
-import { ChevronDownIcon, ChevronUpIcon, TrashIcon, ResetIcon, CheckIcon } from '@radix-ui/react-icons';
+import React, { forwardRef } from "react";
+import { ChevronDownIcon, ChevronUpIcon, ResetIcon, CheckIcon } from '@radix-ui/react-icons';
 import { useQueryClient } from '@tanstack/react-query';
 import { useUser } from '../../utils/hooks/useUser';
 import { QUERY_KEY } from '../../config/queryClientKeys';
 import useCategorySelect from './useCategorySelect';
 import { StyledInput } from '../input/Input';
 import { PrimaryBtn } from '../../styles/Button';
-import { ButtonIcon, CreateContainer, CustomOption, Group, Label, Option, ScrollDown, ScrollUp, SelectMenu, SelectTrigger, Separator, ViewPort } from './DropDown.style';
+import { ButtonIcon, Container, CreateContainer, CustomOption, Group, Label, Option, ScrollDown, ScrollUp, SelectMenu, SelectTrigger, Separator, StyledDiv, ViewPort } from './DropDown.style';
+import { toast } from 'react-toastify';
+import { HiOutlineTrash } from 'react-icons/hi2';
+import { useLocation, useNavigation, useParams } from 'react-router-dom';
+import TYPES_TRANSACTION from '../../config/typeTransactions';
 
 interface IDropDown {
     defaultOption: any;
     customOption?: any;
     selected?: string;
-    onSelect?: any
+    onSelect?: any;
+    currentTypeTransaction: number;
+}
+interface SelectItemProps {
+    children: React.ReactNode;
+    value?: string
 }
 
-const SelectItem = React.forwardRef(({ children, className, ...props }, forwardedRef) => {
-    return (
-        <Option {...props} ref={forwardedRef}>
-            <Select.ItemText>{children}</Select.ItemText>
-        </Option>
-    );
-});
+const SelectItem = forwardRef<HTMLDivElement, SelectItemProps>(
+    ({ children, ...props }, forwardedRef) => {
+        return (
+            <Option {...props} ref={forwardedRef}>
+                <Select.ItemText>{children}</Select.ItemText>
+            </Option>
+        );
+    }
+);
 
-export default function DropDown({defaultOption, customOption = [], selected, onSelect}: IDropDown) {
+export default function DropDown({defaultOption, customOption = [], selected, onSelect, currentTypeTransaction}: IDropDown) {
     const queryClient = useQueryClient();
     const {isCreateMode, categoryName, changeCategoryName, openCloseCreateMode, addCategory, deleteCategory, clear} = useCategorySelect();
-   
 
     const {user} = useUser();
 
-    const handleCategoryName = (e) => changeCategoryName(e.target.value);
     const handleOpen = () => openCloseCreateMode();
     const handleCancel = () => clear();
-
-    function handleCreate(e){
+    const handleCategoryName = (e: React.ChangeEvent<HTMLInputElement>) => changeCategoryName(e.target.value);
+    function handleCreate(e: React.MouseEvent<HTMLButtonElement>){
         e.preventDefault();
-        addCategory({user_id: user?.id, name: categoryName, type_id:1}, {
+        addCategory({user_id: user?.id, name: categoryName, type_id: currentTypeTransaction}, {
             onSuccess: () => queryClient.invalidateQueries([QUERY_KEY.USER_CATEGORIES])
         });
     }
-    function handleDelete(e, id: string){
+    function handleDelete(e: React.MouseEvent<HTMLButtonElement>, id: string){
         e.preventDefault();
 
         deleteCategory(id, {
-            onSuccess: () => queryClient.invalidateQueries([QUERY_KEY.USER_CATEGORIES])
+            onSuccess: () => queryClient.invalidateQueries([QUERY_KEY.USER_CATEGORIES]),
+            onError: (error: unknown) => toast.error(error?.message || "Something went wrong")
         })
     }
-    function handleChange(value){
-        onSelect(() => value);
-    }
+    const handleChange = (value: string) => onSelect(() => value);
+
 
     return (
     <Select.Root onValueChange={handleChange} value={selected}>
@@ -74,17 +83,21 @@ export default function DropDown({defaultOption, customOption = [], selected, on
                             )}
                     </Group>
 
+                    <Group> 
+                                                
+                    </Group>
+
                     {customOption?.length ? 
                         <>
-                        <Separator />   
+                        <Separator />  
                             <Group>
                                 <Label>User categories</Label>
                                     {customOption.map((option: any) =>
                                         <CustomOption key={option.id}>
                                             <SelectItem value={option.id}>{option.name}</SelectItem>
-
                                             <ButtonIcon onClick={(e) => handleDelete(e, option.id.toString())}>
-                                                <TrashIcon />
+                                                {/* <TrashIcon /> */}
+                                                <HiOutlineTrash />
                                             </ButtonIcon>
                                         </CustomOption>
                                     )}
@@ -92,23 +105,21 @@ export default function DropDown({defaultOption, customOption = [], selected, on
                         </>
                     : ""
                     }
+                    <Separator />  
+                    <CreateContainer>
+                                    {isCreateMode ? 
+                                        <StyledDiv>
+                                            <StyledInput placeholder="Enter new category" value={categoryName} onInput={handleCategoryName} autoFocus/>
+                                            <ButtonIcon onClick={handleCreate}><CheckIcon /></ButtonIcon>
+                                            <ButtonIcon onClick={handleCancel}><ResetIcon /></ButtonIcon>
+                                        </StyledDiv>
+                                        : 
+                                        <Container>
+                                            <PrimaryBtn onClick={handleOpen}>New category</PrimaryBtn>
+                                        </Container>
+                                    }
+                    </CreateContainer>
                     
-                    <Separator />
-                    
-                    <Group>
-                        <CreateContainer>
-                        {isCreateMode ? 
-                            <>
-                                <StyledInput placeholder="Enter new category" value={categoryName} onInput={handleCategoryName} autoFocus/>
-                                <ButtonIcon onClick={handleCreate}><CheckIcon /></ButtonIcon>
-                                <ButtonIcon onClick={handleCancel}><ResetIcon /></ButtonIcon>
-                            </>
-                            
-                            : <PrimaryBtn onClick={handleOpen}>New category</PrimaryBtn>
-                        }
-                        </CreateContainer>
-                        
-                    </Group>
                 </ViewPort>
 
             <ScrollDown >

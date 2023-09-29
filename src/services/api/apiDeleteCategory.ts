@@ -2,6 +2,19 @@ import { TABLE } from "../../config/dbTablesNames";
 import supabase from "../supabase";
 
 export default async function apiDeleteCategory(id: string){
-    const {data} = await supabase.from(TABLE.CATEGORY).delete().eq("id", id)
-    return data;
+    try{
+        const {data, error} = await supabase.from(TABLE.CATEGORY).delete().eq("id", id);
+        if(error){
+            throw error;
+        }
+        return data;
+    }
+    catch(error){
+            switch (error?.code){
+                case "23503":
+                    throw new Error("This category is used in a transaction, please delete the transaction first");
+                default: 
+                    throw new Error(error.message);
+            }
+    }
 }

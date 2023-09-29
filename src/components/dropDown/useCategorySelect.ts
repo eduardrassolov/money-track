@@ -7,7 +7,7 @@ function useCategorySelect() {
     const [isCreateMode, setCreateMode] = useState(false);
     const [categoryName, setCategoryName] = useState("");
 
-    const changeCategoryName = (value) => setCategoryName(value);
+    const changeCategoryName = (value: string) => setCategoryName(value);
     const openCloseCreateMode = () => setCreateMode(prev => !prev);
 
     function clear(){
