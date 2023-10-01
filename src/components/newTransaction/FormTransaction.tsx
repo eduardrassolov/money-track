@@ -1,7 +1,14 @@
-import TYPES_TRANSACTION from '../../config/typeTransactions'
-import { FC } from 'react'
+import { FC, useState } from 'react';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import Select from '../dropDown/Select';
+import Input from '../input/Input';
+import FormRow from './FormRow';
+
+import TYPES_TRANSACTION from '../../config/typeTransactions'
+
 import { QUERY_KEY } from '../../config/queryClientKeys';
 import { PrimaryBtn, SecondaryBtn } from '../../styles/Button';
 import { ErrorP, Form, FormFooter } from './FormTransaction.style';
@@ -12,14 +19,12 @@ import useFilter from '../../utils/hooks/useFilter';
 import useSort from '../../utils/hooks/useSort';
 import { SortBy } from '../../types/sortBy.type';
 import apiGetCurrency from '../../services/api/apiGetCurrency';
-import Input from '../input/Input';
-import Select from '../dropDown/Select';
-import apiGetCategory from '../../services/api/apiGetCategory';
-import FormRow from './FormRow';
+
 import { formatDateToInput } from '../../utils/helpers/formatDateToInput';
-import { yupResolver } from '@hookform/resolvers/yup';
 import LoadingUi from '../spinner/LoadingUi';
 import { newTransactionSchema } from './newTrasactionValidation';
+import DropDown from '../dropDown/DropDown';
+import { apiGetCategories, apiGetUserCategory } from '../../services/api/apiGetCategory';
 interface INewTransactionProps {
     type: number;
 }
@@ -31,9 +36,10 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
     const sortBy: SortBy = useSort();
     const { createTransaction } = useCreateTransaction();
     const { register, handleSubmit, reset, formState: { errors } } = useForm({ resolver: yupResolver(newTransactionSchema) });
+    const [category, setCategory] = useState("");
 
     if (!user) {
-        return;
+        return null;
     }
 
     const { id: userId } = user;
@@ -43,30 +49,36 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
     const { data: optionsList, isLoading: isOptionsLoading } = useQuery(
         {
             queryKey: [QUERY_KEY.CATEGORIES, type === TYPES_TRANSACTION.EXPENSE ? QUERY_KEY.EXPENSES : QUERY_KEY.INCOMES],
-            queryFn: () => apiGetCategory(type)
+            queryFn: () => apiGetCategories(type)
+        });
+    const { data: userCategory } = useQuery(
+        {
+            queryKey: [QUERY_KEY.USER_CATEGORIES, type === TYPES_TRANSACTION.EXPENSE ? QUERY_KEY.EXPENSES : QUERY_KEY.INCOMES],
+            queryFn: () => apiGetUserCategory(type, userId)
         });
 
     const { data: optionCurrency, isLoading: isCurrencyLoading } = useQuery({ queryKey: ["currency"], queryFn: apiGetCurrency });
 
     //TODO fix any
-    const onSubmit: SubmitHandler<any> = ({ description, amount, completed_at, category, currency }) => {
+    const onSubmit: SubmitHandler<any> = ({ description, amount, completed_at, currency }) => {
 
         if (!description.trim() || !amount || !completed_at || !category || !currency) {
+            console.log("Empty fields");
             return;
         }
-
         const key = type === TYPES_TRANSACTION.INCOME ? QUERY_KEY.INCOMES : QUERY_KEY.EXPENSES;
 
         createTransaction({
             description,
             amount,
             completedAt: completed_at,
-            categoryId: Number(category),
+            categoryId: category,
             profileId: userId,
             currencyId: currency
         }, {
             onSuccess: () => {
                 queryClient.invalidateQueries({ queryKey: [userId, key, filter, sortBy] });
+                setCategory("");
                 reset();
             }
         })
@@ -78,8 +90,8 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
 
     return (
         <>
-            {isOptionsLoading && isCurrencyLoading ? 
-                <LoadingUi /> 
+            {isOptionsLoading && isCurrencyLoading ?
+                <LoadingUi />
                 :
                 <Form onSubmit={handleSubmit(onSubmit, onError)}>
                     <h3>Add new {transactionType}</h3>
@@ -92,7 +104,13 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
                     {optionsList
                         ?
                         <FormRow lblFor={"category"} lblText={"Category"}>
-                            <Select options={optionsList} register={register} name={"category"} selectedDefault={optionsList[0]?.id.toString()}></Select>
+                            {/* <Select options={optionsList} register={register} name={"category"} selectedDefault={optionsList[0]?.id.toString()}></Select> */}
+                            <DropDown
+                                defaultOption={optionsList}
+                                customOption={userCategory}
+                                selected={category}
+                                onSelect={setCategory}
+                                currentTypeTransaction={type} />
                             <ErrorP></ErrorP>
                         </FormRow>
                         : ''

@@ -13,7 +13,7 @@ export default async function getExpenses({
     .from("transactions")
     .select(SELECT.ALL_TRANSACTIONS)
     .eq("profile_id", userId)
-    .eq("category.type.id", TYPES_TRANSACTION.EXPENSE);
+    .eq("Category.type.id", TYPES_TRANSACTION.EXPENSE);
 
   if (filter) {
     query = query.gt("completed_at", filter);
@@ -22,6 +22,7 @@ export default async function getExpenses({
   query = query.order(sortBy.field, { ascending: sortBy.direction === "asc" ? true : false });
   const { data } = await query;
 
+  console.log(data);
   if (!data) {
     return new Array<ITransaction>();
   }
@@ -32,8 +33,8 @@ export default async function getExpenses({
       id: transaction.id,
       description: transaction.description,
       amount: transaction.amount,
-      type: { id: transaction.category.type.id, name: transaction.category.type.name },
-      category: { id: transaction.category.id, name: transaction.category.name },
+      type: { id: transaction.Category.type.id, name: transaction.Category.type.name },
+      category: { id: transaction.Category.id, name: transaction.Category.name },
       completedAt: new Date(transaction.completed_at),
       profileId: transaction.profile_id,
       currency: transaction.currency,

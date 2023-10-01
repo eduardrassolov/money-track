@@ -1,12 +1,12 @@
 import { FC } from "react";
 import { UseFormRegister } from "react-hook-form";
-import { ICategory } from "../../interface/ICategory";
+import { ITransactionCategory } from "../../interface/ITransactionCategory";
 import { Select } from "./Category.style";
 import { Inputs } from "../../types/Inputs.type";
 
 //TODO refactor
 interface ICategoryComp {
-    options: Array<ICategory>,
+    options: Array<ITransactionCategory>,
     register: UseFormRegister<Inputs>;
     selected?: string
 }

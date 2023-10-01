@@ -2,7 +2,7 @@ export default interface IInsertTransaction {
   description: string;
   amount: number;
   completedAt: string;
-  categoryId: number;
+  categoryId: string;
   profileId: string;
   currencyId: string;
 }

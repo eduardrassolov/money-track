@@ -2,8 +2,8 @@ import { FC } from "react"
 import { styled } from "styled-components";
 import FooterItem from "./FooterItem"
 import { ITransaction } from "../../interface/ITransactions";
-import { formatDate } from "../../utils/helpers/formatDate";
 import { HiOutlineBanknotes, HiOutlineCalendarDays, HiOutlineTag } from "react-icons/hi2";
+import { format } from "date-fns";
 interface ITransactionProps {
     item: ITransaction;
 }
@@ -15,14 +15,13 @@ const Container = styled.div`
 `
 
 const TransactionFooter: FC<ITransactionProps> = ({ item }) => {
-    const formatedDate: string = formatDate(item.completedAt.toString());
+    console.log("Card time:", item.completedAt);
+    const formatedDate: string = format(item.completedAt, "dd-MMM-yyyy HH:mm")
     return (
         <Container>
-            {/* <FooterItem title={item.type.name} /> */}
             <FooterItem title={`${item.currency.symbol} ${item.amount}`} icon={<HiOutlineBanknotes />} />
-            <FooterItem title={formatedDate} icon={<HiOutlineCalendarDays />} />
             <FooterItem title={item.category.name || ''} icon={<HiOutlineTag />} />
-            {/* <FooterItem title={user?.id || ''} /> */}
+            <FooterItem title={formatedDate} icon={<HiOutlineCalendarDays />} />
         </Container >
     )
 }

@@ -77,12 +77,13 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
                         <LoadingUi />
                     </LoaderContainer>
                     :
-                    data?.map((transaction: ITransaction) =>
+                    data?.map((transaction: ITransaction, index: number) =>
                         <TransactionCard
                             key={transaction.id}
                             item={transaction}
                             onDelete={() => { handleDelete(transaction.id) }}
                             onEdit={handleEdit}
+                            index={index}
                         />)
             }
 

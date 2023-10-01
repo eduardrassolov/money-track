@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { PrimaryBtn, SecondaryBtn } from "../../styles/Button";
 import { QUERY_KEY } from "../../config/queryClientKeys";
 import { useQuery } from "@tanstack/react-query";
-import getCategory from "../../services/api/apiGetCategory";
+import {apiGetCategories} from "../../services/api/apiGetCategory";
 import useEdit from "./useEdit";
 import { queryClient } from "../../main";
 import { GetAllTransactionsDTO } from "../../services/api/dto/getTransactions.dto";
@@ -24,7 +24,7 @@ export default function EditPage() {
     const { id } = data;
     const navigate = useNavigate();
 
-    const { data: optionsList } = useQuery({ queryKey: [QUERY_KEY.CATEGORIES], queryFn: () => getCategory(data.category.type.id) });
+    const { data: optionsList } = useQuery({ queryKey: [QUERY_KEY.CATEGORIES], queryFn: () => apiGetCategories(data.category.type.id) });
 
     const { register, handleSubmit, formState: { errors } } = useForm(
         {
