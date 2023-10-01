@@ -19,7 +19,7 @@ export default function OptionItems({ optionList, labelText, isDefaultCategory =
         <CustomOption key={option.id}>
           <SelectItem value={option.id}>{option.name}</SelectItem>
 
-          {!isDefaultCategory
+          {!isDefaultCategory && onDelete
             ?
             <ButtonIcon onClick={(e) => onDelete(e, option.id.toString())} >
               <HiOutlineTrash />

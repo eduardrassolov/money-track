@@ -4,7 +4,7 @@ interface IUpdateProps {
   description: string;
   amount: number;
   completed_at: string;
-  category: number;
+  category: string;
   id: number;
 }
 

@@ -4,30 +4,28 @@ import apiCreateCategory from "../../services/api/apiCreateCategory";
 import apiDeleteCategory from "../../services/api/apiDeleteCategory";
 
 function useCategorySelect() {
-    const [isCreateMode, setCreateMode] = useState(false);
-    const [categoryName, setCategoryName] = useState("");
+  const [isCreateMode, setCreateMode] = useState(false);
+  const [categoryName, setCategoryName] = useState("");
 
-    const changeCategoryName = (value: string) => setCategoryName(value);
-    const openCloseCreateMode = () => setCreateMode(prev => !prev);
+  const changeCategoryName = (value: string) => setCategoryName(value);
+  const openCloseCreateMode = () => setCreateMode((prev) => !prev);
 
-    function clear(){
-        setCreateMode(false);
-        setCategoryName("");    
-    }
+  function clear() {
+    setCreateMode(false);
+    setCategoryName("");
+  }
 
-    const {mutate: addCategory} = useMutation({
-        mutationFn: apiCreateCategory,
-        onSuccess: () => clear(),
-        onError: () => console.log("Error")
-    
-    })
+  const { mutate: addCategory } = useMutation({
+    mutationFn: apiCreateCategory,
+    onSuccess: () => clear(),
+    onError: () => console.log("Error"),
+  });
 
-    const {mutate: deleteCategory} = useMutation({
-        mutationFn: apiDeleteCategory,
-    })
+  const { mutate: deleteCategory } = useMutation({
+    mutationFn: apiDeleteCategory,
+  });
 
-
-    return {clear, isCreateMode, categoryName, changeCategoryName, openCloseCreateMode, addCategory, deleteCategory}
+  return { clear, isCreateMode, categoryName, changeCategoryName, openCloseCreateMode, addCategory, deleteCategory };
 }
 
-export default useCategorySelect
+export default useCategorySelect;

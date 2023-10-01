@@ -64,7 +64,7 @@ export const Separator = styled(Select.Separator)`
   margin: 1.5rem 0;
 `;
 export const Label = styled(Select.Label)`
-  margin: auto auto 1rem;
+  margin: auto auto 0.5rem 0;
   font-size: 1rem;
   color: gray;
   font-weight: 500;

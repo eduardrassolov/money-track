@@ -15,7 +15,6 @@ const Container = styled.div`
 `
 
 const TransactionFooter: FC<ITransactionProps> = ({ item }) => {
-    // const formatedDate: string = formatDate(item.completedAt.toString());
     console.log("Card time:", item.completedAt);
     const formatedDate: string = format(item.completedAt, "dd-MMM-yyyy HH:mm")
     return (
