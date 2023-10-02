@@ -11,19 +11,16 @@ function useCategorySelect() {
   const openCloseCreateMode = () => setCreateMode((prev) => !prev);
 
   function clear() {
-    setCreateMode(false);
     setCategoryName("");
+    setCreateMode(false);
   }
 
   const { mutate: addCategory } = useMutation({
     mutationFn: apiCreateCategory,
     onSuccess: () => clear(),
-    onError: () => console.log("Error"),
   });
 
-  const { mutate: deleteCategory } = useMutation({
-    mutationFn: apiDeleteCategory,
-  });
+  const { mutate: deleteCategory } = useMutation({ mutationFn: apiDeleteCategory });
 
   return { clear, isCreateMode, categoryName, changeCategoryName, openCloseCreateMode, addCategory, deleteCategory };
 }
