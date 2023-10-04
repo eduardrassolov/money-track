@@ -42,19 +42,28 @@ export interface ITheme {
 interface IStore {
   search: string,
   theme: ITheme,
+  categoryFilter: string[],
   toogleTheme: (nextTheme: string) => void,
   setSearch: (value: string) => void,
+  setCategoryFilter: (category: string) => void,
+  clearCategoryFilter: () => void,
 
 }
 
 export const useCurrStore = create<IStore>()((set) => ({
   search: "",
   theme: { ...light },
+  categoryFilter: [],
 
   setSearch: (value: string) => set(() => ({ search: value })),
-  toogleTheme: (nextTheme: string) => set(() => {
-    return nextTheme === "dark" ? ({ theme: { ...dark } }) : ({ theme: { ...light } })
-  })
+  toogleTheme: (nextTheme: string) => set(() => { return nextTheme === "dark" ? ({ theme: { ...dark } }) : ({ theme: { ...light } }) }),
+  setCategoryFilter: (category: string) => set((state) => (state.categoryFilter.includes(category) ?
+    { categoryFilter: state.categoryFilter.filter(item => item !== category) }
+    :
+    { categoryFilter: [...state.categoryFilter, category] })
+  ),
+  clearCategoryFilter: () => set(() => ({ categoryFilter: [] })),
+
 }))
 
 

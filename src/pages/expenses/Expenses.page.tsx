@@ -6,6 +6,7 @@ import TransactionForm from "../../components/newTransaction/FormTransaction";
 import TransactionArr from "../transactions/TransactionList";
 import { Container, FormDiv, ListDiv } from "../../styles/TransactionContainer";
 import Operation from "../../components/operations/Operations";
+import CategoryBadgesList from "../../components/badges/CategoryBadges";
 
 export default function Expenses() {
   // const { defaultCurrency } = useDefaultCurrency();
@@ -29,6 +30,7 @@ export default function Expenses() {
           <>
             {/* <Header text={`Total expenses: ${defaultCurrency} ${formatNumberWithSpaces(total)}`} /> */}
             <Operation />
+            {/* <CategoryBadgesList transactionType={TYPES_TRANSACTION.EXPENSE} /> */}
 
             <TransactionArr listType={QUERY_KEY.EXPENSES} loader={loaderExpenses} />
           </>
