@@ -14,7 +14,10 @@ export const useLogin = () => {
 
     const { mutate: login, isLoading } = useMutation({
         mutationFn: ({ email, password }: ILogin) => loginApi({ email, password }),
-        onSuccess: () => navigate(ROUTES.DASHBOARD),
+        onSuccess: () => {
+            toast.success("Welcome");
+            navigate(ROUTES.DASHBOARD)
+        },
         onError: () => toast.error("Wrong email or password!")
     })
 
