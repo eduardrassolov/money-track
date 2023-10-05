@@ -13,6 +13,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import Input from '../../components/input/Input.tsx';
 import { ErrorP } from '../../components/newTransaction/FormTransaction.style.ts';
 import { ToastContainer, toast } from 'react-toastify';
+import { useRef } from 'react';
 
 export type SignInInputs = {
     email: string,
@@ -96,7 +97,10 @@ export default function SignUpPage() {
                     </Group>
 
                     <LoginBtn type="submit">Create</LoginBtn>
-                    <BottomText><StyledLink to="/">Home page</StyledLink></BottomText>
+                    <BottomText>
+                        <StyledLink to="/">Home page</StyledLink>
+                        <StyledLink to="/login">Log in</StyledLink>
+                    </BottomText>
                 </Form>
             </Div>
         </ThemeProvider>
