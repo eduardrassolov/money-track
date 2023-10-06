@@ -2,9 +2,9 @@ import styled from "styled-components";
 import usePagination from "../../utils/hooks/usePagination";
 import { HiOutlineArrowSmallLeft, HiOutlineArrowSmallRight } from "react-icons/hi2";
 import { ITEMS_PER_PAGE } from "../../config/paginationItems";
+import { max } from "date-fns";
 
-
-const onePageItems = 5;
+const onePageItems = 10;
 
 const PaginationContainer = styled.div`
     display: flex;
@@ -31,7 +31,6 @@ const PaginationButton = styled.button`
         cursor: pointer;
         transition: all 0.2s;
 
-
         &:hover{
             background: ${props => props.theme.colorLogoMain};
             color: #fff;
@@ -51,28 +50,24 @@ interface IPagination {
 
 export default function Pagination({ maxLength }: IPagination) {
     const { currPage, moveToPage } = usePagination();
+    console.log("Total elements", maxLength);
 
-    if(!maxLength)
+    if (!maxLength)
         return null;
-    
-    const lastPage = maxLength <= ITEMS_PER_PAGE ? 1 : Math.floor(maxLength / onePageItems);
-    const handlePrev = () => { 
-        scrollToTop();
+
+    // const lastPage = maxLength <= ITEMS_PER_PAGE ? 1 : Math.round(maxLength / onePageItems);
+    const lastPage = Math.ceil(maxLength / onePageItems);
+    console.log("Last page", lastPage);
+
+    const handlePrev = () => {
         if (currPage > 1)
             moveToPage(currPage - 1);
     }
     const handleNext = () => {
-        scrollToTop();
         if (currPage < lastPage) {
             moveToPage(currPage + 1);
         }
     }
-    function scrollToTop() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    console.log(currPage, lastPage, maxLength);
-
 
     return (
         <PaginationContainer>

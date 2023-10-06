@@ -13,7 +13,6 @@ interface ITransactionProps {
 }
 
 const TransactionCard: FC<ITransactionProps> = ({ item, onDelete, onEdit, index = 1 }) => {
-
   return (
     <AnimatedContainer duration={0.9} delay={0.1 * index} animateOnStart={true}>
       <Container $bg={item.type.name}>
@@ -30,4 +29,5 @@ const TransactionCard: FC<ITransactionProps> = ({ item, onDelete, onEdit, index 
     </AnimatedContainer>
   )
 }
+
 export default TransactionCard;
