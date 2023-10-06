@@ -37,8 +37,7 @@ export default function DropDown({ defaultOption, customOption = [], selected, o
             }
         })
     }
-    const handleChange = (value: string) => onSelect(() => value);
-
+    const handleChange = (value: string) => onSelect(value);
     return (
         <Select.Root onValueChange={handleChange} value={selected}>
             <Trigger defaultValue={"Select category"} />
