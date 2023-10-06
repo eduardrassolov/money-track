@@ -12,17 +12,18 @@ import { GetAllTransactionsDTO } from "../../services/api/dto/getTransactions.dt
 import Input from "../../components/input/Input";
 import { Container, SectionFull } from "../settings/Settings.page";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { newTransactionSchema } from "../../components/newTransaction/newTrasactionValidation";
 import DropDown from "../../components/dropDown/DropDown";
 import { useUser } from "../../utils/hooks/useUser";
 import { useState } from "react";
 import { format } from "date-fns";
-import Select from "../../components/dropDown/Select";
+import Select, { StyledSelect } from "../../components/dropDown/Select";
 import apiGetCurrency from "../../services/api/apiGetCurrency";
+import { newTransactionSchema } from "../../components/newTransaction/newTrasactionValidation";
 
 export default function EditPage() {
     const [data] = useLoaderData() as Array<GetAllTransactionsDTO>;
     const { updateTransaction } = useEdit();
+
     if (!data) {
         return null;
     }
@@ -33,29 +34,31 @@ export default function EditPage() {
         return null;
     }
 
-    console.log(data);
-    const userCurrency = user.user_metadata.currency as string;
     const { data: defaultCategory } = useQuery({ queryKey: [QUERY_KEY.CATEGORIES, data.Category.type.id], queryFn: () => apiGetCategories(data.Category.type.id) });
     const { data: userCategories } = useQuery({ queryKey: [QUERY_KEY.CATEGORIES, data.Category.type.id, user.id], queryFn: () => apiGetUserCategory(data.Category.type.id, user.id) });
-    const { data: optionCurrency, isLoading: isCurrencyLoading } = useQuery({ queryKey: ["currency"], queryFn: apiGetCurrency });
+    const { data: optionCurrency } = useQuery({ queryKey: [QUERY_KEY.CURRENCY], queryFn: apiGetCurrency });
 
     const [updatedCategory, setCategory] = useState(data.Category.id);
     const changeTempCategory = (categoryId: string) => setCategory(() => categoryId);
 
+    const [updatedCurrency, setCurrency] = useState(data.currency.id);
+
     const { register, handleSubmit, formState: { errors } } = useForm(
         {
-            resolver: yupResolver(2),
+            resolver: yupResolver(newTransactionSchema),
             defaultValues: {
                 description: data.description,
                 amount: data.amount,
                 completed_at: format(new Date(data.completed_at), "yyyy-MM-dd HH:mm"),
-                currency: data.currency_id
             }
         });
 
     //TODO fix any
-    const onSubmit: SubmitHandler<any> = async ({ description, amount, completed_at, currrency }) => {
-        if (!description.trim() || !amount || !completed_at || currrency)
+    const onSubmit: SubmitHandler<any> = async ({ description, amount, completed_at, currency }) => {
+
+        console.log(currency);
+        console.log("curr", updatedCurrency);
+        if (!description.trim() || !amount || !completed_at || !updatedCurrency)
             return;
 
         updateTransaction({
@@ -64,10 +67,14 @@ export default function EditPage() {
             completed_at: completed_at,
             category: updatedCategory,
             id,
-            currrency_id: currrency
+            currency_id: updatedCurrency
         }, { onSuccess: () => queryClient.invalidateQueries({ queryKey: [id, data.Category.type.id] }) })
     }
     const handleCancel = () => navigate(-1);
+
+    function handleSelect(e) {
+        setCurrency(e.target.value)
+    }
 
 
 
@@ -106,7 +113,13 @@ export default function EditPage() {
                     </FormGroup>
 
                     <FormGroup>
-                        <Select options={optionCurrency} register={register} name={"currency"} selectedDefault={userCurrency}></Select>
+                        <label htmlFor="currency">Currency:</label>
+                        <StyledSelect value={updatedCurrency} onChange={handleSelect}>
+                            {optionCurrency?.map(currency => (
+                                <option key={currency.id} value={currency.id}>{currency.name}</option>
+                            ))}
+                        </StyledSelect>
+
                         <ErrorP></ErrorP>
                     </FormGroup>
 

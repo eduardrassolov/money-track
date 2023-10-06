@@ -1,5 +1,3 @@
-
-
 import { FILTER_DATE_OPTIONS, FILTER_KEYS } from './filter/filterParameters'
 import Filter from './filter/Filter'
 import Sort from './sort/Sort'
@@ -9,27 +7,47 @@ import Search from '../search/Search'
 
 
 export const OperationsContainer = styled.div`
-    display: flex;
-    gap: 0.5rem;
-    margin: 0 0 2rem;
-    justify-content: end;
+    display: flex;;
     flex-direction: column;
-
-    @media only screen and (min-width: ${devices.sm}px){
-        display: flex;
-        flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    
+    @media only screen and (min-width: ${devices.sm}px) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
     }
-    `
+`
+
+const Container = styled.div`
+    width: 100%;
+`
+const FirstContainer = styled(Container)`
+    grid-area: 1/1/2/2; 
+`
+const SecondContainer = styled(Container)`
+    grid-area: 1/2/2/3; 
+`
+const ThirdContainer = styled(Container)`
+    grid-area: 2/1/3/3; 
+`
 
 export default function Operation() {
     return (
         <>
             <OperationsContainer>
-                <Filter options={FILTER_DATE_OPTIONS} filterKey={FILTER_KEYS.DATE} />
+                <FirstContainer>
+                    <Filter options={FILTER_DATE_OPTIONS} filterKey={FILTER_KEYS.DATE} />
+                </FirstContainer>
 
-                <Sort />
+                <SecondContainer>
+                    <Sort />
+                </SecondContainer>
 
-                <Search />
+                <ThirdContainer>
+                    <Search />
+                </ThirdContainer>
 
             </OperationsContainer>
         </>

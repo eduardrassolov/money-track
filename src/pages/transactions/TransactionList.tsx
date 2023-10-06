@@ -46,6 +46,8 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
     const { user } = useUser();
 
     const { currPage } = usePagination();
+    const categoryFilter = useCurrStore((state) => state.categoryFilter);
+    console.log(categoryFilter);
 
     if (!user) {
         return null;
@@ -69,7 +71,6 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
 
     const transactions = searchTransactionsByMask(filteredSortedTransactions, mask);
     const data = transactions?.slice((currPage - 1) * ITEMS_PER_PAGE, currPage * ITEMS_PER_PAGE);
-    console.log("Data", transactions);
 
     return (
         <List>

@@ -12,5 +12,7 @@ export type GetAllTransactionsDTO = {
   };
   completed_at: string;
   profile_id: string;
-  currency_id: string;
+  currency: {
+    id: string;
+  };
 };

@@ -47,7 +47,6 @@ interface IStore {
   setSearch: (value: string) => void,
   setCategoryFilter: (category: string) => void,
   clearCategoryFilter: () => void,
-
 }
 
 export const useCurrStore = create<IStore>()((set) => ({
@@ -57,6 +56,7 @@ export const useCurrStore = create<IStore>()((set) => ({
 
   setSearch: (value: string) => set(() => ({ search: value })),
   toogleTheme: (nextTheme: string) => set(() => { return nextTheme === "dark" ? ({ theme: { ...dark } }) : ({ theme: { ...light } }) }),
+
   setCategoryFilter: (category: string) => set((state) => (state.categoryFilter.includes(category) ?
     { categoryFilter: state.categoryFilter.filter(item => item !== category) }
     :

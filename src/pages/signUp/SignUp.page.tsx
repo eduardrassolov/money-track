@@ -12,8 +12,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Input from '../../components/input/Input.tsx';
 import { ErrorP } from '../../components/newTransaction/FormTransaction.style.ts';
-import { ToastContainer, toast } from 'react-toastify';
-import { useRef } from 'react';
+import { toast } from 'react-toastify';
 
 export type SignInInputs = {
     email: string,

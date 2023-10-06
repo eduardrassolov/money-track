@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import usePagination from "../../utils/hooks/usePagination";
 import { HiOutlineArrowSmallLeft, HiOutlineArrowSmallRight } from "react-icons/hi2";
-import { ITEMS_PER_PAGE } from "../../config/paginationItems";
-import { max } from "date-fns";
 
 const onePageItems = 10;
 

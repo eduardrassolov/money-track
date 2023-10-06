@@ -7,7 +7,7 @@ import { loaderIncomes } from "./loader";
 import TransactionList from "../transactions/TransactionList";
 import { Container, FormDiv, ListDiv } from "../../styles/TransactionContainer";
 import Operation from "../../components/operations/Operations";
-import CategoryBadgesList from "../../components/badges/CategoryBadges";
+// import CategoryBadgesList from "../../components/badges/CategoryBadges";
 
 export default function Incomes() {
     // const { transactions, defaultCurrency }
@@ -24,7 +24,9 @@ export default function Incomes() {
                     {/* <Header text={`Total incomes: ${defaultCurrency} ${formatNumberWithSpaces(total)}`} /> */}
 
                     <Operation />
+
                     {/* <CategoryBadgesList transactionType={TYPES_TRANSACTION.INCOME} /> */}
+
                     <TransactionList listType={QUERY_KEY.INCOMES} loader={loaderIncomes} />
 
                 </ListDiv>

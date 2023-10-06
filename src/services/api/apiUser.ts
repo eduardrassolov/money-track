@@ -20,7 +20,7 @@ export async function apiLogout() {
 }
 
 export async function apiSignUp(email: string, password: string, firstName: string, lastName: string) {
-  const { data, error } = await supabase.auth.signUp({
+  const { error } = await supabase.auth.signUp({
     email,
     password,
     options: {
