@@ -4,9 +4,10 @@ import { QUERY_KEY } from "../../config/queryClientKeys";
 import TransactionForm from "../../components/newTransaction/FormTransaction";
 
 import { loaderIncomes } from "./loader";
-import TransactionArr from "../transactions/TransactionList";
+import TransactionList from "../transactions/TransactionList";
 import { Container, FormDiv, ListDiv } from "../../styles/TransactionContainer";
 import Operation from "../../components/operations/Operations";
+// import CategoryBadgesList from "../../components/badges/CategoryBadges";
 
 export default function Incomes() {
     // const { transactions, defaultCurrency }
@@ -24,7 +25,9 @@ export default function Incomes() {
 
                     <Operation />
 
-                    <TransactionArr listType={QUERY_KEY.INCOMES} loader={loaderIncomes} />
+                    {/* <CategoryBadgesList transactionType={TYPES_TRANSACTION.INCOME} /> */}
+
+                    <TransactionList listType={QUERY_KEY.INCOMES} loader={loaderIncomes} />
 
                 </ListDiv>
             </Container>

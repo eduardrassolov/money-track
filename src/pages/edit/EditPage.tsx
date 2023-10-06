@@ -5,26 +5,43 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { PrimaryBtn, SecondaryBtn } from "../../styles/Button";
 import { QUERY_KEY } from "../../config/queryClientKeys";
 import { useQuery } from "@tanstack/react-query";
-import {apiGetCategories} from "../../services/api/apiGetCategory";
+import { apiGetCategories, apiGetUserCategory } from "../../services/api/apiGetCategory";
 import useEdit from "./useEdit";
 import { queryClient } from "../../main";
 import { GetAllTransactionsDTO } from "../../services/api/dto/getTransactions.dto";
 import Input from "../../components/input/Input";
-import Select from "../../components/dropDown/Select";
 import { Container, SectionFull } from "../settings/Settings.page";
 import { yupResolver } from "@hookform/resolvers/yup";
+import DropDown from "../../components/dropDown/DropDown";
+import { useUser } from "../../utils/hooks/useUser";
+import React, { useState } from "react";
+import { format } from "date-fns";
+import { StyledSelect } from "../../components/dropDown/Select";
+import apiGetCurrency from "../../services/api/apiGetCurrency";
 import { newTransactionSchema } from "../../components/newTransaction/newTrasactionValidation";
 
 export default function EditPage() {
     const [data] = useLoaderData() as Array<GetAllTransactionsDTO>;
     const { updateTransaction } = useEdit();
+
     if (!data) {
         return null;
     }
     const { id } = data;
     const navigate = useNavigate();
+    const { user } = useUser();
+    if (!user) {
+        return null;
+    }
 
-    const { data: optionsList } = useQuery({ queryKey: [QUERY_KEY.CATEGORIES], queryFn: () => apiGetCategories(data.category.type.id) });
+    const { data: defaultCategory } = useQuery({ queryKey: [QUERY_KEY.CATEGORIES, data.Category.type.id], queryFn: () => apiGetCategories(data.Category.type.id) });
+    const { data: userCategories } = useQuery({ queryKey: [QUERY_KEY.CATEGORIES, data.Category.type.id, user.id], queryFn: () => apiGetUserCategory(data.Category.type.id, user.id) });
+    const { data: optionCurrency } = useQuery({ queryKey: [QUERY_KEY.CURRENCY], queryFn: apiGetCurrency });
+
+    const [updatedCategory, setCategory] = useState(data.Category.id);
+    const changeTempCategory = (categoryId: string) => setCategory(() => categoryId);
+
+    const [updatedCurrency, setCurrency] = useState(data.currency.id);
 
     const { register, handleSubmit, formState: { errors } } = useForm(
         {
@@ -32,20 +49,30 @@ export default function EditPage() {
             defaultValues: {
                 description: data.description,
                 amount: data.amount,
-                completed_at: data.completed_at,
+                completed_at: format(new Date(data.completed_at), "yyyy-MM-dd HH:mm"),
             }
         });
-    
+
     //TODO fix any
-    const onSubmit: SubmitHandler<any> = async ({ description, amount, completed_at, category }) => {
-        if (!description.trim() || !amount || !completed_at || !category)
+    const onSubmit: SubmitHandler<any> = async ({ description, amount, completed_at, currency }) => {
+
+        console.log(currency);
+        console.log("curr", updatedCurrency);
+        if (!description.trim() || !amount || !completed_at || !updatedCurrency)
             return;
 
         updateTransaction({
-            description, amount, completed_at: completed_at, category, id
-        }, { onSuccess: () => queryClient.invalidateQueries({ queryKey: [id, data.category.type.id] }) })
+            description,
+            amount,
+            completed_at: completed_at,
+            category: updatedCategory,
+            id,
+            currency_id: updatedCurrency
+        }, { onSuccess: () => queryClient.invalidateQueries({ queryKey: [id, data.Category.type.id] }) })
     }
     const handleCancel = () => navigate(-1);
+
+    const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => setCurrency(e.target.value);
 
     return (
         <SectionFull>
@@ -59,11 +86,11 @@ export default function EditPage() {
                         <ErrorP>{errors?.description?.message}</ErrorP>
                     </FormGroup>
 
-                    {optionsList
+                    {defaultCategory
                         ?
                         <FormGroup>
                             <label htmlFor="category">Category:</label>
-                            <Select options={optionsList} name={"category"} register={register} selectedDefault={data.category.id.toString()}></Select>
+                            <DropDown defaultOption={defaultCategory} customOption={userCategories} selected={updatedCategory} onSelect={changeTempCategory} currentTypeTransaction={1} />
                             <ErrorP></ErrorP>
                         </FormGroup>
                         : ''
@@ -81,12 +108,23 @@ export default function EditPage() {
                         <ErrorP>{errors?.completed_at?.message}</ErrorP>
                     </FormGroup>
 
+                    <FormGroup>
+                        <label htmlFor="currency">Currency:</label>
+                        <StyledSelect value={updatedCurrency} onChange={handleSelect}>
+                            {optionCurrency?.map(currency => (
+                                <option key={currency.id} value={currency.id}>{currency.name}</option>
+                            ))}
+                        </StyledSelect>
+
+                        <ErrorP></ErrorP>
+                    </FormGroup>
+
                     <FormFooter>
                         <SecondaryBtn type="button" onClick={handleCancel}>Cancel</SecondaryBtn>
                         <PrimaryBtn type='submit'>Save</PrimaryBtn>
                     </FormFooter>
                 </form>
             </Container>
-        </SectionFull>
+        </SectionFull >
     )
 }

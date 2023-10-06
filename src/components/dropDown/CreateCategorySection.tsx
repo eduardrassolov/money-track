@@ -9,6 +9,7 @@ import { useUser } from '../../utils/hooks/useUser.tsx';
 import { ButtonIcon, Container, CreateContainer, StyledDiv } from './DropDown.style.ts';
 import useCategorySelect from './useCategorySelect.ts'
 import { QUERY_KEY } from '../../config/queryClientKeys.ts';
+import { toast } from 'react-toastify';
 
 export default function CreateCategorySection({ type_id }: { type_id: number }) {
     const { isCreateMode, addCategory, clear, openCloseCreateMode } = useCategorySelect();
@@ -25,7 +26,11 @@ export default function CreateCategorySection({ type_id }: { type_id: number }) 
     function handleCreate(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
         addCategory({ user_id: userId, name: categoryName, type_id }, {
-            onSuccess: () => queryClient.invalidateQueries([QUERY_KEY.USER_CATEGORIES])
+            onSuccess: () => queryClient.invalidateQueries([QUERY_KEY.USER_CATEGORIES]),
+            onError: (err: unknown) => {
+                if (err instanceof Error)
+                    return toast.error(err.message)
+            }
         });
     }
     function handleCancel(e: React.MouseEvent<HTMLButtonElement>) {

@@ -23,11 +23,6 @@ export const StyledSelect = styled.select`
   }
 `;
 
-// type Option = {
-//     id: string,
-//     name: string
-// }
-
 //TODO fix any
 interface ISelect {
     options: any,
@@ -41,7 +36,7 @@ const Select: FC<ISelect> = ({ options, register, name, selectedDefault, isDisab
     return (
         <StyledSelect {...register(name)} defaultValue={selectedDefault} disabled={isDisabled}>
             {
-                options?.map((item:any) => <option key={item.id} value={item.id} >{item.name}</option>)
+                options?.map((item: any) => <option key={item.id} value={item.id} >{item.name}</option>)
             }
         </StyledSelect>
     )

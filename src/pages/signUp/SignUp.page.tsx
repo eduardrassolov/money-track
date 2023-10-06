@@ -5,13 +5,14 @@ import { ThemeProvider } from 'styled-components';
 import { apiSignUp } from '../../services/api/apiUser';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../router';
-import { toast } from 'react-toastify';
+
 import { BottomText, Div, Form, Group, H1, StyledLink } from '../login/Login.style.ts';
 import useTheme from '../../utils/hooks/useTheme.tsx';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Input from '../../components/input/Input.tsx';
 import { ErrorP } from '../../components/newTransaction/FormTransaction.style.ts';
+import { toast } from 'react-toastify';
 
 export type SignInInputs = {
     email: string,
@@ -41,19 +42,19 @@ export default function SignUpPage() {
     const navigate = useNavigate();
     const { theme } = useTheme();
     const { register, handleSubmit, formState: { errors } } = useForm<SignInInputs>({
-        defaultValues: defaultFields, 
+        defaultValues: defaultFields,
         resolver: yupResolver(signUpSchema)
     });
 
     const onSubmit: SubmitHandler<SignInInputs> = async (data) => {
         const { error } = await apiSignUp(data.email, data.password, data.firstName, data.lastName);
 
+        console.log(data);
         if (error) {
             toast.error(error.message);
-            return;
+            return null;
         }
-        toast.success("Welcome")
-        navigate(ROUTES.DASHBOARD);
+        navigate(ROUTES.LOGIN);
     }
     const onError: SubmitErrorHandler<SignInInputs> = err => {
         console.log(err);
@@ -94,12 +95,13 @@ export default function SignUpPage() {
                         <ErrorP>{errors.lastName?.message}</ErrorP>
                     </Group>
 
-
-
                     <LoginBtn type="submit">Create</LoginBtn>
-                    <BottomText><StyledLink to="/">Home page</StyledLink></BottomText>
+                    <BottomText>
+                        <StyledLink to="/">Home page</StyledLink>
+                        <StyledLink to="/login">Log in</StyledLink>
+                    </BottomText>
                 </Form>
-            </Div >
+            </Div>
         </ThemeProvider>
     )
 }

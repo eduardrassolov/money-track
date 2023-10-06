@@ -8,6 +8,7 @@ const StyledFooter = styled.footer`
         display: flex;
         justify-content: center;
         align-items: center;
+        text-align: center;
     p{
         font-size: 0.8rem;
         letter-spacing: 0.1rem;

@@ -46,9 +46,11 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
     const { user } = useUser();
 
     const { currPage } = usePagination();
+    const categoryFilter = useCurrStore((state) => state.categoryFilter);
+    console.log(categoryFilter);
 
     if (!user) {
-        return;
+        return null;
     }
 
     const { id: userId } = user;
@@ -61,6 +63,7 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
     const handleEdit = (id: number) => navigate(`${ROUTES.ROOT}/${listType}/${id}`);
 
     const handleDelete = (id: number) => deleteTransaction(id);
+
     function succesHandle() {
         toast.success('Successfully deleted.');
         queryClient.invalidateQueries({ queryKey: [userId, listType, filter, sortBy] });
@@ -86,7 +89,6 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
                             index={index}
                         />)
             }
-
 
             <Pagination maxLength={transactions?.length} />
         </List>
