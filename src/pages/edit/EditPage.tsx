@@ -14,9 +14,9 @@ import { Container, SectionFull } from "../settings/Settings.page";
 import { yupResolver } from "@hookform/resolvers/yup";
 import DropDown from "../../components/dropDown/DropDown";
 import { useUser } from "../../utils/hooks/useUser";
-import { useState } from "react";
+import React, { useState } from "react";
 import { format } from "date-fns";
-import Select, { StyledSelect } from "../../components/dropDown/Select";
+import { StyledSelect } from "../../components/dropDown/Select";
 import apiGetCurrency from "../../services/api/apiGetCurrency";
 import { newTransactionSchema } from "../../components/newTransaction/newTrasactionValidation";
 
@@ -72,11 +72,7 @@ export default function EditPage() {
     }
     const handleCancel = () => navigate(-1);
 
-    function handleSelect(e) {
-        setCurrency(e.target.value)
-    }
-
-
+    const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => setCurrency(e.target.value);
 
     return (
         <SectionFull>
