@@ -33,11 +33,11 @@ const PieBlock = styled.div`
   flex-direction: column;
   gap: 1rem;
 
-  @media only screen and (min-width: ${devices.md}px) {
+  /* @media only screen and (min-width: ${devices.md}px) {
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
-  }
+  } */
 `;
 const PieContainer = styled.div`
   display: flex;

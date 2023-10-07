@@ -3,6 +3,7 @@ import useResize from "../useResize";
 import { ISummary } from "../../../utils/helpers/getStats";
 import { FC } from "react";
 import styled from "styled-components";
+import CustomLegend from "./CustomLegend";
 
 const pieChartColors = [
     "#FF3D68",
@@ -51,14 +52,14 @@ interface CustomTooltipProps {
     active?: boolean;
     payload?: payloadType[];
     label?: number;
-    }
-    
-    type payloadType = {
+}
+
+type payloadType = {
     value: string | number;
     name: string;
 };
 
-export const CustomTooltip: React.FC<CustomTooltipProps> = ({active, payload, label}) => {
+export const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload, label }) => {
 
     console.log("Label", label);
     if (active && payload && payload.length > 0) {
@@ -87,7 +88,7 @@ const CategoryChart: FC<ICategoryChart> = ({ data }) => {
                         data={dt}
                         cx="50%"
                         cy="50%"
-                        outerRadius={size}
+
                         innerRadius={size / 2}
                         fill="#8884d8"
                         paddingAngle={defaultPading}
@@ -101,8 +102,9 @@ const CategoryChart: FC<ICategoryChart> = ({ data }) => {
                         align={isSmallScreen ? 'center' : 'right'}
                         verticalAlign={isSmallScreen ? 'bottom' : 'middle'}
                         layout="vertical"
-                        iconSize={15}
+                        iconSize={25}
                         iconType="circle"
+                        content={<CustomLegend />}
                     />
 
                 </PieChart>
