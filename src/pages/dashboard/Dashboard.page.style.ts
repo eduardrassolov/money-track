@@ -42,16 +42,18 @@ const PieBlock = styled.div`
 const PieContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 2rem 1rem;
+  padding: 1.5rem 0;
   margin: 0 0 1rem;
   background: ${(props) => props.theme.background};
   border-radius: 15px;
   transition: all 300ms;
+  justify-content: center;
+  align-items: center;
 
   @media only screen and (min-width: ${devices.md}px) {
     flex: 2;
     flex-wrap: wrap;
-    min-width: 400px;
+    /* min-width: 400px; */
   }
 `;
 export { StyledContainer, RowContainer, RowContainerCards, PieBlock, PieContainer };
