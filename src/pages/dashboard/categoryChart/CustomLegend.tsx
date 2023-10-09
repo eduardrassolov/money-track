@@ -1,12 +1,16 @@
-import { useState } from 'react';
 import styled from 'styled-components'
-import { useUser } from '../../../utils/hooks/useUser';
-import useCurrency from '../../../utils/hooks/useCurrency';
+
+import { devices } from '../../../styles/breakPoints';
 
 const StyledLegend = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.1rem;
+
+    @media only screen and (min-width: ${devices.sm}px){
+        margin:  auto auto auto 2rem;
+        width: 300px;
+    }
 `
 const LegendItem = styled.div<{ $bgColor: string, $textColor: string, $isSelected: boolean }>`
     display: flex;
@@ -26,16 +30,15 @@ const LegendItem = styled.div<{ $bgColor: string, $textColor: string, $isSelecte
     }
 `
 
-export default function CustomLegend({ payload, data, selected, onSelect }) {
+export default function CustomLegend({ data, selected, onSelect }) {
     const sortedData = data.sort((a, b) => b.percentage - a.percentage);
-    const { currency } = useUser();
-    const { defaultCurrency } = useCurrency(currency);
+
 
     return (
         <StyledLegend>{
-            sortedData.map((entry, index) => {
+            sortedData.map((entry) => {
                 return (
-                    <LegendItem key={entry.id} id={entry.id} $bgColor={entry.color.text} $textColor={entry.color.fill} $isSelected={entry.id === selected} onClick={() => onSelect(entry.id)}>
+                    <LegendItem key={entry.id} id={entry.id} $bgColor={entry.color.text} $textColor={entry.color.fill} $isSelected={entry.id === selected} onClick={() => onSelect(entry.id)} >
                         <span>
                             {entry.name}
                         </span>

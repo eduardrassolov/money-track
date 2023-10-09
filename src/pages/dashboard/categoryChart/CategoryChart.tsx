@@ -1,4 +1,4 @@
-import { Cell, LabelList, Legend, Pie, PieChart, ResponsiveContainer, Sector, Tooltip } from "recharts";
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import useResize from "../useResize";
 import { ISummary } from "../../../utils/helpers/getStats";
 import { FC, useState } from "react";
@@ -6,7 +6,8 @@ import styled from "styled-components";
 
 import CustomLegend from "./CustomLegend";
 import { useCurrStore } from "../../../store/store";
-import { HiArrowLongDown, HiArrowUp } from "react-icons/hi2";
+
+import useDefaultCurrency from "../../../utils/hooks/useDefaultCurrency";
 
 const colors = [
     {
@@ -71,15 +72,6 @@ const StyledDiv = styled.div`
     border-radius: 7px;
     border: 1px solid ${props => props.theme.border};
 `
-
-const CharContainer = styled.div<{ $pieBgColor: string }>`
-    
-    /* background: green; */
-    /* background: radial-gradient(circle, rgba(2,0,36,1) 0%, ${props => props.theme.background} 37%); */
-    /* background: radial-gradient(circle at 66% 50%,
-        ${props => props.$pieBgColor},
-        ${props => props.theme.background} 38%); */
-`
 interface CustomTooltipProps {
     active?: boolean;
     payload?: payloadType[];
@@ -117,17 +109,20 @@ const createData = (arr: Array<ISummary>): Array<IChartData> => {
 const CategoryChart: FC<ICategoryChart> = ({ data }) => {
     const { isSmallScreen } = useResize();
     const dt = createData(data);
-    const size = 125;
+
+    const size = isSmallScreen ? 125 : 175;
     const defaultPading = data.length === 1 ? 0 : 3;
+    const defaultHeight = isSmallScreen ? 50 : 20;
 
     const [selected, setSelect] = useState<string>("");
     const handleSelect = (id: string) => setSelect(prev => prev === id ? "" : id);
 
     const theme = useCurrStore((state) => state.theme);
 
+    const { defaultCurrency } = useDefaultCurrency();
+
     return (
-        // <CharContainer $pieBgColor={dt.find(item => item.id === selected)?.color.fill}>
-        <ResponsiveContainer width="100%" height={250 + (50 * dt.length)}>
+        <ResponsiveContainer width="100%" height={350 + (defaultHeight * dt.length)}>
             <PieChart>
                 <Pie
                     dataKey="value"
@@ -138,18 +133,15 @@ const CategoryChart: FC<ICategoryChart> = ({ data }) => {
                     outerRadius={size}
                     innerRadius={size / 2}
                     paddingAngle={defaultPading}
-                    label
-                // activeIndex={dt.indexOf(dt.find(item => item.id === selected)!)}
-                // activeShape={renderActiveShape}
+                    label={({ value }) => `${defaultCurrency} ${value}`}
                 >
-
 
                     {dt.map((item, index) => {
                         return <Cell
-                            key={`cell-${index}`}
-                            fill={item.id === selected ? item.color.fill : theme.background2}
+                            key={`cell - ${index} `}
+                            fill={item.id === selected ? item.color.fill : theme.background}
                             stroke={theme.border}
-                            strokeWidth={1}
+                            strokeWidth={2}
                         />
                     }
                     )}
@@ -158,19 +150,15 @@ const CategoryChart: FC<ICategoryChart> = ({ data }) => {
                 <Tooltip content={<CustomTooltip />} />
 
                 <Legend
-                    verticalAlign="bottom"
+                    verticalAlign={isSmallScreen ? "bottom" : "top"}
                     align="left"
-                    layout="horizontal"
-                    // layout={isSmallScreen ? "horizontal" : "vertical"}
+                    layout={isSmallScreen ? "horizontal" : "vertical"}
                     content={<CustomLegend data={dt} selected={selected} onSelect={handleSelect} />}
                 />
                 {/* <Legend content={<CustomLegend />} /> */}
 
             </PieChart>
         </ResponsiveContainer >
-
-        // </CharContainer>
-
     )
 }
 

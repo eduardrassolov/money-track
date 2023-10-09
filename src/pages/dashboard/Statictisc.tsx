@@ -1,4 +1,4 @@
-import { PieBlock, PieContainer, RowContainer, RowContainerCards } from './Dashboard.page.style'
+import { PieContainer, RowContainer, RowContainerCards } from './Dashboard.page.style'
 import { STATS_CARD_DATA } from '../../config/statsCardsData'
 import StatCard from './statCard/StatCard'
 import useDashboard from './useDashboard'
