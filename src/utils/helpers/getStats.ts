@@ -32,11 +32,13 @@ function filterDataByCategory(transactions: Array<ITransaction>): IFilteredCateg
 }
 
 function calculateSummary(data: IFilteredCategory, totalAmount: number): ISummary[] {
-  return Object.entries(data).map(([name, value]: [string, number]) => {
+  const summaryData = Object.entries(data).map(([name, value]: [string, number]) => {
     return {
       name,
       value,
-      percentage: Math.round((value * 100) / totalAmount),
+      percentage: (value * 100) / totalAmount,
     };
   });
+  const sortedSummary = [...summaryData].sort((a, b) => b.value - a.value);
+  return sortedSummary;
 }

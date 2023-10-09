@@ -1,42 +1,83 @@
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import useResize from "../useResize";
 import { ISummary } from "../../../utils/helpers/getStats";
-import { FC } from "react";
+import { FC, useState } from "react";
 import styled from "styled-components";
 
-const pieChartColors = [
-    "#FF3D68",
-    "#FFC658",
-    "#D63AFF",
-    "#FF9F33",
-    "#8A3FFC",
-    "#3F8CFC",
-    "#3FFCB0",
-    "#3FB2FC",
-    "#5BFF6A",
-    "#FFEB3F",
-    "#A3FF3F",
-    "#E6FF3F",
-    "#FFC33F",
-    "#FF684B",
-];
+import CustomLegend from "./CustomLegend";
+import { useCurrStore } from "../../../store/store";
 
-interface IChartData {
+import useDefaultCurrency from "../../../utils/hooks/useDefaultCurrency";
+
+const colors = [
+    {
+        fill: "rgb(190, 80, 80)",
+        text: "rgba(190, 80, 80, 0.1)",
+        selected: "rgba(190, 80, 80, 0.3)"
+    },
+
+    {
+        fill: "rgb(169, 169, 248)",
+        text: "rgba(169, 169, 248, 0.1)",
+        selected: "rgba(169, 169, 248, 0.3)"
+    },
+    {
+        fill: "rgb(230, 130, 85)",
+        text: "rgba(230, 130, 85, 0.1)",
+        selected: "rgba(230, 130, 85, 0.3)"
+    },
+    {
+        fill: "rgb(245, 157, 245)",
+        text: "rgba(245, 157, 245, 0.1)",
+        selected: "rgba(245, 157, 245, 0.3)"
+    },
+    {
+        fill: "rgb(118, 188, 188)",
+        text: "rgba(118, 188, 188, 0.1)",
+        selected: "rgba(118, 188, 188, 0.3)"
+    },
+    {
+        fill: "rgb(216, 173, 133)",
+        text: "rgba(216, 173, 133, 0.1)",
+        selected: "rgba(216, 173, 133, 0.3)"
+    },
+    {
+        fill: "rgb(148, 112, 220)",
+        text: "rgba(148, 112, 220, 0.1)",
+        selected: "rgba(148, 112, 220, 0.3)"
+    },
+    {
+        fill: "rgb(62, 111, 210)",
+        text: "rgba(62, 111, 210, 0.1)",
+        selected: "rgba(62, 111, 210, 0.3)"
+    },
+    {
+        fill: "rgb(204, 204, 255)",
+        text: "rgba(204, 204, 255, 0.1)",
+        selected: "rgba(204, 204, 255, 0.3)"
+    },
+    {
+        fill: "rgb(255, 165, 79)",
+        text: "rgba(255, 165, 79, 0.1)",
+        selected: "rgba(255, 165, 79, 0.3)"
+    },
+]
+
+export interface IChartData {
+    id: string,
     name: string,
-    value: number
+    value: number,
+    percentage: number,
+    color: {
+        fill: string,
+        text: string,
+        selected: string
+
+    }
 }
 
 interface ICategoryChart {
     data: Array<ISummary>
-}
-
-const createData = (arr: Array<ISummary>): Array<IChartData> => {
-    return arr.map((category) => {
-        return {
-            name: `${category.name} - ${category.percentage}%`,
-            value: category.value
-        }
-    })
 }
 
 const StyledDiv = styled.div`
@@ -46,19 +87,18 @@ const StyledDiv = styled.div`
     border-radius: 7px;
     border: 1px solid ${props => props.theme.border};
 `
-
 interface CustomTooltipProps {
     active?: boolean;
     payload?: payloadType[];
     label?: number;
-    }
-    
-    type payloadType = {
+}
+
+type payloadType = {
     value: string | number;
     name: string;
 };
 
-export const CustomTooltip: React.FC<CustomTooltipProps> = ({active, payload, label}) => {
+export const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload, label }) => {
 
     console.log("Label", label);
     if (active && payload && payload.length > 0) {
@@ -69,45 +109,71 @@ export const CustomTooltip: React.FC<CustomTooltipProps> = ({active, payload, la
     return null;
 };
 
+const createData = (arr: Array<ISummary>): Array<IChartData> => {
+    return arr.map((category, index) => {
+        return {
+            id: `summarry-pie-${category.name}-${index}`,
+            name: category.name,
+            percentage: category.percentage,
+            value: category.value,
+            color: colors[index]
+        }
+    })
+}
+
 const CategoryChart: FC<ICategoryChart> = ({ data }) => {
     const { isSmallScreen } = useResize();
+    const dt: IChartData[] = createData(data);
 
-    console.log(isSmallScreen);
-    const dt = createData(data);
-    const size = 100;
-    const defaultPading = data.length === 1 ? 0 : 3
+    const size = isSmallScreen ? 125 : 175;
+    const defaultPading = data.length === 1 ? 0 : 3;
+    const defaultHeight = isSmallScreen ? 50 : 20;
+
+    const [selected, setSelect] = useState<string>("");
+    const handleSelect = (id: string) => setSelect(prev => prev === id ? "" : id);
+
+    const theme = useCurrStore((state) => state.theme);
+
+    const { defaultCurrency } = useDefaultCurrency();
 
     return (
-        <>
-            <ResponsiveContainer width="100%" height={350}>
-                <PieChart>
-                    <Pie
-                        dataKey="value"
-                        isAnimationActive={false}
-                        data={dt}
-                        cx="50%"
-                        cy="50%"
-                        outerRadius={size}
-                        innerRadius={size / 2}
-                        fill="#8884d8"
-                        paddingAngle={defaultPading}
-                    >
-                        {data.map((_, index) => (
-                            <Cell key={`cell-${index}`} fill={pieChartColors[index]} />
-                        ))}
-                    </Pie>
-                    <Tooltip content={<CustomTooltip />} />
-                    <Legend
-                        align={isSmallScreen ? 'center' : 'right'}
-                        verticalAlign={isSmallScreen ? 'bottom' : 'middle'}
-                        layout="vertical"
-                        iconSize={15}
-                        iconType="circle"
-                    />
+        <ResponsiveContainer width="100%" height={350 + (defaultHeight * dt.length)}>
+            <PieChart>
+                <Pie
+                    dataKey="value"
+                    isAnimationActive={false}
+                    data={dt}
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={size}
+                    innerRadius={size / 2}
+                    paddingAngle={defaultPading}
+                    label={({ value }) => `${defaultCurrency} ${value}`}
+                >
 
-                </PieChart>
-            </ResponsiveContainer >
-        </>
+                    {dt.map((item, index) => {
+                        return <Cell
+                            key={`cell - ${index} `}
+                            fill={item.id === selected ? item.color.fill : theme.background}
+                            stroke={theme.border}
+                            strokeWidth={2}
+                        />
+                    }
+                    )}
+                </Pie>
+
+                <Tooltip content={<CustomTooltip />} />
+
+                <Legend
+                    verticalAlign={isSmallScreen ? "bottom" : "top"}
+                    align="left"
+                    layout={isSmallScreen ? "horizontal" : "vertical"}
+                    content={<CustomLegend data={dt} selected={selected} onSelect={handleSelect} />}
+                />
+                {/* <Legend content={<CustomLegend />} /> */}
+
+            </PieChart>
+        </ResponsiveContainer >
     )
 }
 
