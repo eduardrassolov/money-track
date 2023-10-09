@@ -11,8 +11,8 @@ import useCategorySelect from './useCategorySelect.ts'
 import { QUERY_KEY } from '../../config/queryClientKeys.ts';
 import { toast } from 'react-toastify';
 
-export default function CreateCategorySection({ type_id }: { type_id: number }) {
-    const { isCreateMode, addCategory, clear, openCloseCreateMode } = useCategorySelect();
+export default function CreateCategorySection({ type_id, isCreateMode, changeState }: { type_id: number, isCreateMode: boolean, changeState: () => void }) {
+    const { addCategory, clear } = useCategorySelect();
     const queryClient = useQueryClient();
     const { user } = useUser();
 
@@ -26,7 +26,10 @@ export default function CreateCategorySection({ type_id }: { type_id: number }) 
     function handleCreate(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
         addCategory({ user_id: userId, name: categoryName, type_id }, {
-            onSuccess: () => queryClient.invalidateQueries([QUERY_KEY.USER_CATEGORIES]),
+            onSuccess: () => {
+                queryClient.invalidateQueries([QUERY_KEY.USER_CATEGORIES]);
+                changeState();
+            },
             onError: (err: unknown) => {
                 if (err instanceof Error)
                     return toast.error(err.message)
@@ -36,11 +39,15 @@ export default function CreateCategorySection({ type_id }: { type_id: number }) 
     function handleCancel(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
         clear();
+        changeState();
     }
     function handleOpen() {
-        openCloseCreateMode();
+        changeState();
     }
-    const handleCategoryName = (e: React.ChangeEvent<HTMLInputElement>) => setCategoryName(() => e.target.value);
+    const handleCategoryName = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(e.target.value);
+        setCategoryName(e.target.value);
+    }
 
     return (
         <CreateContainer>

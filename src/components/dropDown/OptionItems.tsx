@@ -8,16 +8,17 @@ interface IOptionsItems {
   labelText: string;
   isDefaultCategory?: boolean;
   onDelete?: (e: React.MouseEvent<HTMLButtonElement>, id: string) => void;
+  isDisabled?: boolean;
 }
 
-export default function OptionItems({ optionList, labelText, isDefaultCategory = true, onDelete }: IOptionsItems) {
+export default function OptionItems({ optionList, labelText, isDefaultCategory = true, onDelete, isDisabled = false }: IOptionsItems) {
   return (
     <Group>
       <Label>{labelText}</Label>
 
       {optionList.map((option: any) =>
         <CustomOption key={option.id}>
-          <SelectItem value={option.id}>{option.name}</SelectItem>
+          <SelectItem value={option.id} disabled={isDisabled}>{`${option.name}`}</SelectItem>
 
           {!isDefaultCategory && onDelete
             ?
