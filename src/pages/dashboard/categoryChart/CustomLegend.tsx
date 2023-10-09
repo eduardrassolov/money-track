@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 import { devices } from '../../../styles/breakPoints';
+import { IChartData } from './CategoryChart';
 
 const StyledLegend = styled.div`
     display: flex;
@@ -30,9 +31,14 @@ const LegendItem = styled.div<{ $bgColor: string, $textColor: string, $isSelecte
     }
 `
 
-export default function CustomLegend({ data, selected, onSelect }) {
-    const sortedData = data.sort((a, b) => b.percentage - a.percentage);
+interface ICustomLegend {
+    data: IChartData[],
+    selected: string,
+    onSelect: (id: string) => void,
+}
 
+export default function CustomLegend({ data, selected, onSelect }: ICustomLegend) {
+    const sortedData = data.sort((a, b) => b.percentage - a.percentage);
 
     return (
         <StyledLegend>{
@@ -44,7 +50,7 @@ export default function CustomLegend({ data, selected, onSelect }) {
                         </span>
                         <span>
                             {/* {defaultCurrency?.symbol} {entry.value} ({Number.parseFloat(entry.percentage).toFixed(2)}%) */}
-                            {Number.parseFloat(entry.percentage).toFixed(2)}%
+                            {entry.percentage.toFixed(2)}%
                         </span>
                     </LegendItem>
                 )

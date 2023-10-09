@@ -28,37 +28,52 @@ const colors = [
     },
     {
         fill: "rgb(245, 157, 245)",
-        text: "rgba(245, 157, 245, 0.1)"
+        text: "rgba(245, 157, 245, 0.1)",
+        selected: "rgba(245, 157, 245, 0.3)"
     },
     {
         fill: "rgb(118, 188, 188)",
-        text: "rgba(118, 188, 188, 0.1)"
+        text: "rgba(118, 188, 188, 0.1)",
+        selected: "rgba(118, 188, 188, 0.3)"
     },
     {
         fill: "rgb(216, 173, 133)",
-        text: "rgba(216, 173, 133, 0.1)"
+        text: "rgba(216, 173, 133, 0.1)",
+        selected: "rgba(216, 173, 133, 0.3)"
     },
     {
         fill: "rgb(148, 112, 220)",
-        text: "rgba(148, 112, 220, 0.1)"
+        text: "rgba(148, 112, 220, 0.1)",
+        selected: "rgba(148, 112, 220, 0.3)"
     },
     {
         fill: "rgb(62, 111, 210)",
-        text: "rgba(62, 111, 210, 0.1)"
+        text: "rgba(62, 111, 210, 0.1)",
+        selected: "rgba(62, 111, 210, 0.3)"
     },
     {
         fill: "rgb(204, 204, 255)",
-        text: "rgba(204, 204, 255, 0.1)"
+        text: "rgba(204, 204, 255, 0.1)",
+        selected: "rgba(204, 204, 255, 0.3)"
     },
     {
         fill: "rgb(255, 165, 79)",
-        text: "rgba(255, 165, 79, 0.1)"
+        text: "rgba(255, 165, 79, 0.1)",
+        selected: "rgba(255, 165, 79, 0.3)"
     },
 ]
 
-interface IChartData {
+export interface IChartData {
+    id: string,
     name: string,
-    value: number
+    value: number,
+    percentage: number,
+    color: {
+        fill: string,
+        text: string,
+        selected: string
+
+    }
 }
 
 interface ICategoryChart {
@@ -108,7 +123,7 @@ const createData = (arr: Array<ISummary>): Array<IChartData> => {
 
 const CategoryChart: FC<ICategoryChart> = ({ data }) => {
     const { isSmallScreen } = useResize();
-    const dt = createData(data);
+    const dt: IChartData[] = createData(data);
 
     const size = isSmallScreen ? 125 : 175;
     const defaultPading = data.length === 1 ? 0 : 3;
