@@ -23,7 +23,7 @@ interface IDropDown {
 
 export default function DropDown({ defaultOption, customOption = [], selected, onSelect, currentTypeTransaction }: IDropDown) {
     const queryClient = useQueryClient();
-    const { deleteCategory } = useCategorySelect();
+    const { deleteCategory, isCreateMode, openCloseCreateMode: changeState } = useCategorySelect();
 
     function handleDelete(e: React.MouseEvent<HTMLButtonElement>, id: string) {
         e.preventDefault();
@@ -38,26 +38,28 @@ export default function DropDown({ defaultOption, customOption = [], selected, o
         })
     }
     const handleChange = (value: string) => onSelect(value);
+    console.log("isCreateMode", isCreateMode);
+
     return (
-        <Select.Root onValueChange={handleChange} value={selected}>
+        <Select.Root onValueChange={handleChange} value={selected} >
             <Trigger defaultValue={"Select category"} />
 
-            <SelectMenu position="popper">
+            <SelectMenu position="popper" >
 
                 <Scrolls direction={"up"} />
 
                 <ViewPort>
-                    <OptionItems optionList={defaultOption} labelText={"Default category:"} />
+                    <OptionItems optionList={defaultOption} labelText={"Default category:"} isDisabled={isCreateMode} />
                     {customOption?.length
                         ?
                         <>
                             <Separator />
-                            <OptionItems optionList={customOption} labelText={"Custom category:"} isDefaultCategory={false} onDelete={handleDelete} />
+                            <OptionItems optionList={customOption} labelText={"Custom category:"} isDefaultCategory={false} onDelete={handleDelete} isDisabled={isCreateMode} />
                         </>
                         : ""
                     }
                     <Separator />
-                    <CreateCategorySection type_id={currentTypeTransaction} />
+                    <CreateCategorySection type_id={currentTypeTransaction} isCreateMode={isCreateMode} changeState={changeState} />
                 </ViewPort>
 
                 <Scrolls direction={"down"} />
