@@ -135,6 +135,10 @@ const CategoryChart: FC<ICategoryChart> = ({ data }) => {
     const theme = useCurrStore((state) => state.theme);
 
     const { defaultCurrency } = useDefaultCurrency();
+    function handleClick(id: string) {
+        console.log("clicked", id);
+        setSelect(id);
+    }
 
     return (
         <ResponsiveContainer width="100%" height={350 + (defaultHeight * dt.length)}>
@@ -157,6 +161,8 @@ const CategoryChart: FC<ICategoryChart> = ({ data }) => {
                             fill={item.id === selected ? item.color.fill : theme.background}
                             stroke={theme.border}
                             strokeWidth={2}
+                            onClick={() => handleClick(item.id)}
+                            style={{ cursor: "pointer" }}
                         />
                     }
                     )}
