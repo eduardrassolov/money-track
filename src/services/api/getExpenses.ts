@@ -22,7 +22,6 @@ export default async function getExpenses({
   query = query.order(sortBy.field, { ascending: sortBy.direction === "asc" ? true : false });
   const { data } = await query;
 
-  console.log(data);
   if (!data) {
     return new Array<ITransaction>();
   }

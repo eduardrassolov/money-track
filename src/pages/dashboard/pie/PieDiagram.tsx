@@ -1,4 +1,3 @@
-import React from 'react'
 import { ISummary } from '../../../utils/helpers/getStats';
 import Header from '../../../ui/header/Header';
 import CategoryChart from '../categoryChart/CategoryChart';
@@ -12,7 +11,6 @@ interface IPieDiagram {
 }
 
 const StyledContainer = styled.div`
-    /* background: ${props => props.theme.backgound} ; */
    background: ${prev => prev.theme.background};
    border-radius: 12px;
    padding: 2rem 1rem;

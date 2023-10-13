@@ -16,6 +16,7 @@ export default function useDashboard() {
     }
 
     const { filter } = useFilter();
+    console.log("Filt", filter);
     const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
 
     const { data: transactions, isLoading: isTransactionLoading } = useQuery(

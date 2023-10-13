@@ -11,7 +11,6 @@ import useCurrency from '../../../utils/hooks/useCurrency'
 import styled from 'styled-components'
 import StatsCardList from './StatsCardList'
 import PieDiagram from '../pie/PieDiagram'
-import AnimatedContainer from '../../../components/animation/AnimatedContainer'
 
 const StyledStatsContainer = styled.div`
    display: flex;
@@ -52,7 +51,6 @@ export default function StatsList() {
             :
 
             <StyledStatsContainer>
-
                 <StatsCardList statsData={stats} />
 
                 <Diagram label={"Diagram:"} data={dataDiagram} />

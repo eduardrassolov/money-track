@@ -43,26 +43,23 @@ export default function CustomLegend({ data, selected, onSelect }: ICustomLegend
     const sortedData = data.sort((a, b) => b.percentage - a.percentage);
 
     return (
-        <StyledLegend>{
-            sortedData.map((entry, index) => {
-                return (
-
-                    <AnimatedContainer delay={0.05 * index} direction={slideUp}>
+        <AnimatedContainer direction={slideUp}>
+            <StyledLegend>{
+                sortedData.map((entry) => {
+                    return (
                         <LegendItem key={entry.id} id={entry.id} $bgColor={entry.color.text} $textColor={entry.color.fill} $isSelected={entry.id === selected} onClick={() => onSelect(entry.id)} >
                             <span>
                                 {entry.name}
                             </span>
                             <span>
-                                {/* {defaultCurrency?.symbol} {entry.value} ({Number.parseFloat(entry.percentage).toFixed(2)}%) */}
                                 {entry.percentage.toFixed(2)}%
                             </span>
                         </LegendItem>
+                    )
 
-                    </AnimatedContainer>
-                )
-
-            })
-        }
-        </StyledLegend >
+                })
+            }
+            </StyledLegend >
+        </AnimatedContainer>
     )
 }

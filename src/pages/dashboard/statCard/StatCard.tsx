@@ -19,7 +19,6 @@ const StatCard: FC<IStatCardProps> = ({ item: { iconBg, borderColor, name, icon 
     }
 
     const { defaultCurrencyName } = useDefaultCurrency();
-    console.log(defaultCurrencyName);
     const formatedValue = formatNumberWithSpaces(value, defaultCurrencyName?.shortName);
 
     return (

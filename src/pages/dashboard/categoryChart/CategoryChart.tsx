@@ -177,7 +177,6 @@ const CategoryChart: FC<ICategoryChart> = ({ data }) => {
                     layout={isSmallScreen ? "horizontal" : "vertical"}
                     content={<CustomLegend data={dt} selected={selected} onSelect={handleSelect} />}
                 />
-                {/* <Legend content={<CustomLegend />} /> */}
 
             </PieChart>
         </ResponsiveContainer >

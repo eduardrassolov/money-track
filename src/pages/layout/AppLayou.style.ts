@@ -3,19 +3,17 @@ import { styled } from "styled-components";
 const StyledLayout = styled.div`
   display: flex;
   background-color: #fff;
-  height: 100vh;
+  height: 100dvh;
 `;
 
 const Section = styled.section`
   background: ${(props) => props.theme.background2};
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* overflow: scroll; */
-  overflow: hidden;
-  /* padding: 5rem 0 1rem; */
+  overflow: scroll;
   transition: all 300ms;
 `;
 
