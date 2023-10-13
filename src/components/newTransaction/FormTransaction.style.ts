@@ -2,11 +2,11 @@ import { styled } from "styled-components";
 import { devices } from "../../styles/breakPoints";
 
 const Form = styled.form`
-  border: 1px solid ${(props) => props.theme.border};
-  background: ${(props) => props.theme.background};
-  color: ${(props) => props.theme.text};
-  border-radius: 15px;
-  padding: 1rem 2rem;
+  /* border: 1px solid ${(props) => props.theme.border}; */
+  /* background: ${(props) => props.theme.background}; */
+  /* color: ${(props) => props.theme.text}; */
+  /* border-radius: 15px; */
+  padding: 1rem 0;
   width: auto;
   transition: all 300ms;
   gap: 0.5rem;

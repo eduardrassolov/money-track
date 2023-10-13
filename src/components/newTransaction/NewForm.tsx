@@ -25,11 +25,9 @@ import LoadingUi from '../spinner/LoadingUi';
 import { newTransactionSchema } from './newTrasactionValidation';
 import DropDown from '../dropDown/DropDown';
 import { apiGetCategories, apiGetUserCategory } from '../../services/api/apiGetCategory';
-interface INewTransactionProps {
-    type: number;
-}
+import { INewTransactionProps } from './CreateNewTransaction';
 
-const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
+export default function NewForm({ type }: INewTransactionProps) {
     const { user } = useUser();
     const queryClient = useQueryClient();
     const { filter } = useFilter();
@@ -94,8 +92,6 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
                 <LoadingUi />
                 :
                 <Form onSubmit={handleSubmit(onSubmit, onError)}>
-                    <h3>Add new {transactionType}</h3>
-
                     <FormRow lblFor={"description"} lblText={"Description"}>
                         <Input type={"text"} id={"description"} name={"description"} placeHolder={`Enter name of ${transactionType}`} autoFocus={true} register={register} />
                         <ErrorP>{errors.description?.message}</ErrorP>
@@ -140,4 +136,3 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
         </>
     )
 }
-export default TransactionForm;
