@@ -38,7 +38,6 @@ export default function DropDown({ defaultOption, customOption = [], selected, o
         })
     }
     const handleChange = (value: string) => onSelect(value);
-    console.log("isCreateMode", isCreateMode);
 
     return (
         <Select.Root onValueChange={handleChange} value={selected} >
