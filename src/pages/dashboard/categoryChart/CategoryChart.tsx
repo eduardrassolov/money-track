@@ -1,5 +1,5 @@
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
-import useResize from "../useResize";
+import useResize from "../pie/useResize";
 import { ISummary } from "../../../utils/helpers/getStats";
 import { FC, useState } from "react";
 import styled from "styled-components";
@@ -8,6 +8,7 @@ import CustomLegend from "./CustomLegend";
 import { useCurrStore } from "../../../store/store";
 
 import useDefaultCurrency from "../../../utils/hooks/useDefaultCurrency";
+import AnimatedContainer from "../../../components/animation/AnimatedContainer";
 
 const colors = [
     {

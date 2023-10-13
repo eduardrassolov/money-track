@@ -1,17 +1,17 @@
-import { StyledContainer } from "./Dashboard.page.style.ts";
+import { DashboardSection } from "./Dashboard.page.style.ts";
 import Filter from "../../components/operations/filter/Filter.js";
 import { FILTER_DASHBOARD, FILTER_KEYS } from "../../components/operations/filter/filterParameters.js";
-import Statictisc from "./Statictisc.tsx";
+import StatsList from "./statCard/StatsList.tsx";
 
 // TODO - refactor component Dashboard. Remove caclulation from component
 export default function Dashboard() {
   return (
     <>
-      <StyledContainer>
+      <DashboardSection>
         <Filter options={FILTER_DASHBOARD} filterKey={FILTER_KEYS.DATE} />
 
-        <Statictisc />
-      </StyledContainer >
+        <StatsList />
+      </DashboardSection>
     </>
   )
 }

@@ -7,6 +7,7 @@ export default function useDefaultCurrency() {
 
     const { data: currencies } = useQuery({ queryKey: ["currency"], queryFn: () => apiGetCurrency() });
     const currency = currencies?.find((currency) => currency.id === user?.user_metadata.currency)?.symbol;
+    const defaultCurrencyName = currencies?.find((currency) => currency.id === user?.user_metadata.currency)
 
-    return { defaultCurrency: currency }
+    return { defaultCurrency: currency, defaultCurrencyName }
 }

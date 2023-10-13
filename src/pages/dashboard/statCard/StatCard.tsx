@@ -1,40 +1,46 @@
 import { FC } from "react";
 import { StatsCardData } from "../../../types/statsCardData";
-import { Description, IconContainer, StatContainer } from "./StatCard.style.ts";
+import { Description, IconContainer, StatsContainer } from "./StatCard.style.ts";
 import useDefaultCurrency from "../../../utils/hooks/useDefaultCurrency.tsx";
 import formatNumberWithSpaces from "../../../utils/helpers/formatWithSpace.ts";
+import AnimatedContainer from "../../../components/animation/AnimatedContainer.tsx";
 
 interface IStatCardProps {
     item: StatsCardData;
     value: number;
+    index: number;
 }
 
-const StatCard: FC<IStatCardProps> = ({ item: { iconBg, borderColor, name, icon }, value }) => {
-    if (value === Number.POSITIVE_INFINITY || value === Number.NEGATIVE_INFINITY || value === Number.NaN) {
+const StatCard: FC<IStatCardProps> = ({ item: { iconBg, borderColor, name, icon }, value, index }) => {
+    if (value === Number.POSITIVE_INFINITY ||
+        value === Number.NEGATIVE_INFINITY ||
+        value === Number.NaN) {
         return null;
     }
 
-    const { defaultCurrency } = useDefaultCurrency();
-    const formatedValue = formatNumberWithSpaces(value);
+    const { defaultCurrencyName } = useDefaultCurrency();
+    console.log(defaultCurrencyName);
+    const formatedValue = formatNumberWithSpaces(value, defaultCurrencyName?.shortName);
 
     return (
-        <>
-            <StatContainer $borderColor={borderColor}>
+
+        <AnimatedContainer delay={0.2 * index} duration={1}>
+            <StatsContainer $borderColor={borderColor}>
                 <IconContainer $bgColor={iconBg}>
                     {icon}
                 </IconContainer>
 
                 <Description>
-                    <h3>{name}</h3>
+                    <h3>{name}:</h3>
 
                     {name === "Coefficent" ?
                         <p>{value} %</p>
                         :
-                        <p>{defaultCurrency} {formatedValue}</p>
+                        <p>{formatedValue}</p>
                     }
                 </Description>
-            </StatContainer>
-        </>
+            </StatsContainer>
+        </AnimatedContainer>
     )
 }
 export default StatCard
