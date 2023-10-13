@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { styled } from 'styled-components'
-import { Area, AreaChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from "recharts";
+import { Area, AreaChart, Legend, Tooltip, XAxis, YAxis } from "recharts";
 import { DiagramData } from '../createDiagramData';
 import { CustomTooltip } from './CustomTooltip';
 import Header from '../../../ui/header/Header';
