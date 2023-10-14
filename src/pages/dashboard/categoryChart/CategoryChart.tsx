@@ -1,5 +1,5 @@
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
-import useResize from "../useResize";
+import useResize from "../pie/useResize";
 import { ISummary } from "../../../utils/helpers/getStats";
 import { FC, useState } from "react";
 import styled from "styled-components";
@@ -135,6 +135,10 @@ const CategoryChart: FC<ICategoryChart> = ({ data }) => {
     const theme = useCurrStore((state) => state.theme);
 
     const { defaultCurrency } = useDefaultCurrency();
+    function handleClick(id: string) {
+        console.log("clicked", id);
+        setSelect(id);
+    }
 
     return (
         <ResponsiveContainer width="100%" height={350 + (defaultHeight * dt.length)}>
@@ -157,6 +161,8 @@ const CategoryChart: FC<ICategoryChart> = ({ data }) => {
                             fill={item.id === selected ? item.color.fill : theme.background}
                             stroke={theme.border}
                             strokeWidth={2}
+                            onClick={() => handleClick(item.id)}
+                            style={{ cursor: "pointer" }}
                         />
                     }
                     )}
@@ -170,7 +176,6 @@ const CategoryChart: FC<ICategoryChart> = ({ data }) => {
                     layout={isSmallScreen ? "horizontal" : "vertical"}
                     content={<CustomLegend data={dt} selected={selected} onSelect={handleSelect} />}
                 />
-                {/* <Legend content={<CustomLegend />} /> */}
 
             </PieChart>
         </ResponsiveContainer >

@@ -1,12 +1,12 @@
 import TYPES_TRANSACTION from "../../config/typeTransactions";
 
 import { QUERY_KEY } from "../../config/queryClientKeys";
-import TransactionForm from "../../components/newTransaction/FormTransaction";
 
 import { loaderIncomes } from "./loader";
 import TransactionList from "../transactions/TransactionList";
 import { Container, FormDiv, ListDiv } from "../../styles/TransactionContainer";
 import Operation from "../../components/operations/Operations";
+import CreateNewTransactionForm from "../../components/newTransaction/CreateNewTransaction";
 // import CategoryBadgesList from "../../components/badges/CategoryBadges";
 
 export default function Incomes() {
@@ -17,7 +17,7 @@ export default function Incomes() {
         <>
             <Container>
                 <FormDiv>
-                    <TransactionForm type={TYPES_TRANSACTION.INCOME} />
+                    <CreateNewTransactionForm type={TYPES_TRANSACTION.INCOME} />
                 </FormDiv>
 
                 <ListDiv>

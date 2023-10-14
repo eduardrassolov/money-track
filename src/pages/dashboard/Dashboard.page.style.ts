@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import { devices } from "../../styles/breakPoints";
 
-const StyledContainer = styled.div`
+const DashboardSection = styled.div`
   display: flex;
   flex-direction: column;
   width: clamp(310px, 1000px, 95%);
@@ -56,4 +56,4 @@ const PieContainer = styled.div`
     /* min-width: 400px; */
   }
 `;
-export { StyledContainer, RowContainer, RowContainerCards, PieBlock, PieContainer };
+export { DashboardSection, RowContainer, RowContainerCards, PieBlock, PieContainer };

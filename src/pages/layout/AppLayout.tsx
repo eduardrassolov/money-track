@@ -11,7 +11,6 @@ export default function AppLayout() {
     const { isBurgerOpen, handleBurger } = useBurgerMenu();
     return (
         <StyledLayout>
-
             <NavBar isBurgerOpen={isBurgerOpen} onClose={handleBurger} />
 
             <Aside isBurgerOpen={isBurgerOpen} onClose={handleBurger} />
@@ -21,7 +20,6 @@ export default function AppLayout() {
             <Section>
                 <Outlet />
             </Section>
-
         </StyledLayout>
     )
 }

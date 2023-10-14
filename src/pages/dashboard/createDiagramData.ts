@@ -1,6 +1,6 @@
+import { format } from "date-fns";
 import TYPES_TRANSACTION from "../../config/typeTransactions";
 import { ITransaction } from "../../interface/ITransactions";
-import { formatDateToChart } from "../../utils/helpers/formatDate";
 
 export type DiagramData = {
   completedAt: string;
@@ -18,7 +18,7 @@ export default function createDiagramData(transactions: ITransaction[] | undefin
   }
 
   const dataDiagram = transactions.reduce((acc: IDiagramData, { completedAt, type, amount }) => {
-    const dateKey = formatDateToChart(completedAt);
+    const dateKey = format(completedAt, "dd-MMM");
 
     if (!acc[dateKey]) {
       acc[dateKey] = { completedAt: dateKey, Expense: 0, Income: 0 };
@@ -33,6 +33,5 @@ export default function createDiagramData(transactions: ITransaction[] | undefin
     return acc;
   }, {});
 
-  console.log("ttttt", dataDiagram);
   return Object.values(dataDiagram);
 }

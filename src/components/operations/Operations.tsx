@@ -11,9 +11,11 @@ export const OperationsContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.1rem;
+    margin: auto 0 0.5rem;
+
     
-    @media only screen and (min-width: ${devices.sm}px) {
+    @media only screen and (min-width: ${devices.xs}px) {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(2, 1fr);

@@ -2,6 +2,8 @@ import styled from 'styled-components'
 
 import { devices } from '../../../styles/breakPoints';
 import { IChartData } from './CategoryChart';
+import AnimatedContainer from '../../../components/animation/AnimatedContainer';
+import { slideUp } from '../statCard/StatsList';
 
 const StyledLegend = styled.div`
     display: flex;
@@ -41,21 +43,23 @@ export default function CustomLegend({ data, selected, onSelect }: ICustomLegend
     const sortedData = data.sort((a, b) => b.percentage - a.percentage);
 
     return (
-        <StyledLegend>{
-            sortedData.map((entry) => {
-                return (
-                    <LegendItem key={entry.id} id={entry.id} $bgColor={entry.color.text} $textColor={entry.color.fill} $isSelected={entry.id === selected} onClick={() => onSelect(entry.id)} >
-                        <span>
-                            {entry.name}
-                        </span>
-                        <span>
-                            {/* {defaultCurrency?.symbol} {entry.value} ({Number.parseFloat(entry.percentage).toFixed(2)}%) */}
-                            {entry.percentage.toFixed(2)}%
-                        </span>
-                    </LegendItem>
-                )
+        <AnimatedContainer direction={slideUp}>
+            <StyledLegend>{
+                sortedData.map((entry) => {
+                    return (
+                        <LegendItem key={entry.id} id={entry.id} $bgColor={entry.color.text} $textColor={entry.color.fill} $isSelected={entry.id === selected} onClick={() => onSelect(entry.id)} >
+                            <span>
+                                {entry.name}
+                            </span>
+                            <span>
+                                {entry.percentage.toFixed(2)}%
+                            </span>
+                        </LegendItem>
+                    )
 
-            })
-        }</StyledLegend >
+                })
+            }
+            </StyledLegend >
+        </AnimatedContainer>
     )
 }

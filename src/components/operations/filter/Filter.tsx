@@ -1,18 +1,19 @@
 import { useSearchParams } from 'react-router-dom';
 
 import { Option } from './filterParameters';
-import { memo } from 'react';
 import { StyledSelect } from '../../dropDown/Select';
 interface IFilter {
     options: Array<Option>;
     filterKey: string;
 }
 
-const Filter = memo(function ({ options, filterKey }: IFilter) {
+export default function Filter({ options, filterKey }: IFilter) {
     const [defaultValue] = options;
 
     const [searchParams, setSearchParams] = useSearchParams();
     const selected = searchParams.get(filterKey) || '';
+
+    console.log("1", selected);
 
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const { target: { value } } = event;
@@ -38,6 +39,4 @@ const Filter = memo(function ({ options, filterKey }: IFilter) {
         </StyledSelect >
 
     )
-})
-
-export default Filter
+}

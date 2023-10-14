@@ -23,7 +23,6 @@ const List = styled.div`
     display: flex;
     flex-direction: column;
     padding: 0 0 4rem;
-    margin: 1rem 0;
 `
 
 const LoaderContainer = styled.div`

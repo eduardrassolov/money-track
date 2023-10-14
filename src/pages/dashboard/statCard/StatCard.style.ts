@@ -5,7 +5,7 @@ const IconContainer = styled.div<{ $bgColor?: string }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
+  font-size: 1.8rem;
   background-color: ${(props) => props.$bgColor};
   color: ${(props) => props.theme.text};
   border: 1px solid #ccc;
@@ -33,7 +33,7 @@ const Description = styled.div`
   }
 `;
 
-const StatContainer = styled.div<{ $borderColor?: string }>`
+const StatsContainer = styled.div<{ $borderColor?: string }>`
   display: flex;
   justify-content: start;
   align-items: center;
@@ -65,4 +65,4 @@ const StatContainer = styled.div<{ $borderColor?: string }>`
   }
 `;
 
-export { IconContainer, Description, StatContainer };
+export { IconContainer, Description, StatsContainer };
