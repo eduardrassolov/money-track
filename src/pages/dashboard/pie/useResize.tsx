@@ -7,7 +7,7 @@ export default function useResize() {
         setSmallScreen(() => window.innerWidth <= 750);
     }
     useEffect(() => {
-        window.addEventListener('resize', handleResize)
+        window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize)
     })
 

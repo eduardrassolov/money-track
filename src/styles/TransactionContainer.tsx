@@ -24,6 +24,7 @@ const ListDiv = styled.div`
   grid-area: 2 / 2 / 3 / 3;  
   border-radius: 7px;
   height: 90dvh;
+
 `
 
 export { Container, FormDiv, ListDiv }

@@ -12,6 +12,7 @@ export const OperationsContainer = styled.div`
     align-items: center;
     justify-content: center;
     gap: 0.1rem;
+    margin: auto 0 0.5rem;
 
     
     @media only screen and (min-width: ${devices.xs}px) {

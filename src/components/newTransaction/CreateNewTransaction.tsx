@@ -4,18 +4,20 @@ import TitleTrigger from './TitleTrigger';
 import { FC, useState } from 'react';
 import NewForm from './NewForm';
 import TYPES_TRANSACTION from '../../config/typeTransactions';
+import useResize from '../../pages/dashboard/pie/useResize';
 
 
 export interface INewTransactionProps {
     type: number;
 }
 
-const StyledNewTransactionFrom = styled.div`
+const StyledNewTransactionFrom = styled.div<{ $isOpen: boolean }>`
     border: 1px solid ${(props) => props.theme.border};
     background: ${(props) => props.theme.background};
     color: ${(props) => props.theme.text};
+    padding: ${props => props.$isOpen ? "1.5rem 1.5rem 1rem" : "0.2rem 1rem"};
+    
     border-radius: 7px;
-    padding: 0.3rem 1rem;
     width: auto;
     transition: all 300ms;
     margin: auto auto 1rem;
@@ -26,13 +28,15 @@ const StyledNewTransactionFrom = styled.div`
 `
 
 const CreateNewTransactionForm: FC<INewTransactionProps> = ({ type }) => {
-    const [isOpen, setOpen] = useState<boolean>(false);
+    const { isSmallScreen } = useResize();
+    const [isOpen, setOpen] = useState<boolean>(!isSmallScreen);
+
     const handleOpenClose = () => setOpen(prev => !prev);
 
     const textForTitle: string = type === TYPES_TRANSACTION.INCOME ? "Add new income" : "Add new expense";
 
     return (
-        <StyledNewTransactionFrom>
+        <StyledNewTransactionFrom $isOpen={isOpen}>
             <TitleTrigger isOpen={isOpen} onOpenClose={handleOpenClose} text={textForTitle} />
 
             {isOpen ?
