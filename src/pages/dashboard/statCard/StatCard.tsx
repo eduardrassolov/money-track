@@ -19,7 +19,7 @@ const StatCard: FC<IStatCardProps> = ({ item: { iconBg, borderColor, name, icon 
     }
 
     const { defaultCurrencyName } = useDefaultCurrency();
-    const formatedValue = formatNumberWithSpaces(value, defaultCurrencyName?.shortName);
+    const formatedValue = formatNumberWithSpaces(value, defaultCurrencyName?.shortName || "USD");
 
     return (
 

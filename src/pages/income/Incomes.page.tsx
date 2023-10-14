@@ -1,7 +1,6 @@
 import TYPES_TRANSACTION from "../../config/typeTransactions";
 
 import { QUERY_KEY } from "../../config/queryClientKeys";
-import TransactionForm from "../../components/newTransaction/FormTransaction";
 
 import { loaderIncomes } from "./loader";
 import TransactionList from "../transactions/TransactionList";

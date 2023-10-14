@@ -1,7 +1,6 @@
 import { format } from "date-fns";
 import TYPES_TRANSACTION from "../../config/typeTransactions";
 import { ITransaction } from "../../interface/ITransactions";
-import { formatDateToChart } from "../../utils/helpers/formatDate";
 
 export type DiagramData = {
   completedAt: string;

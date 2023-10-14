@@ -1,7 +1,6 @@
 import { ITransaction } from "../interface/ITransactions";
 import * as currencyData from "../_data/currency.json";
 import { ICurrency } from "../utils/hooks/useCurrency";
-import apiGetCurrencyRate from "./api/apiGetCurrencyRate";
 
 interface IRate {
   [key: string]: number;

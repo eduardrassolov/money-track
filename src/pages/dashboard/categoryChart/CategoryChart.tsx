@@ -8,7 +8,6 @@ import CustomLegend from "./CustomLegend";
 import { useCurrStore } from "../../../store/store";
 
 import useDefaultCurrency from "../../../utils/hooks/useDefaultCurrency";
-import AnimatedContainer from "../../../components/animation/AnimatedContainer";
 
 const colors = [
     {
