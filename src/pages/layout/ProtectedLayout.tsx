@@ -3,8 +3,7 @@ import { useUser } from "../../utils/hooks/useUser";
 import { ThemeProvider } from "styled-components";
 import useTheme from "../../utils/hooks/useTheme";
 import LoadingUi from "../../components/spinner/LoadingUi";
-import LogIn from "../authorization/LogIn";
-import { redirect, useLocation } from "react-router-dom";
+import AuthorizationLayout from "../authorization/Authorization";
 interface IProtected {
     children: React.ReactNode;
 }
@@ -18,7 +17,7 @@ const ProtectedLayout: FC<IProtected> = ({ children }) => {
             <Suspense fallback={<LoadingUi size={"lg"} />}>
                 <ThemeProvider theme={theme}>{children}</ThemeProvider>
             </Suspense>
-            : <LogIn />
+            : <AuthorizationLayout />
         }
 
     </>

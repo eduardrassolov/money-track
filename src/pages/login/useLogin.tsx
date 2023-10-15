@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { login as loginApi } from "../../services/api/apiUser";
 import { ROUTES } from "../../router";
 import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import supabase from "../../services/supabase";
 
 export interface ILogin {
@@ -27,7 +27,7 @@ export const useLogin = () => {
 
     const { mutate: login, isLoading } = useMutation({
         mutationFn: ({ email, password }: ILogin) => loginApi({ email, password }),
-        onSuccess: () => navigate(ROUTES.EXPENSES),
+        onSuccess: () => navigate(`${ROUTES.EXPENSES}?page=1`),
         onError: () => toast.error("Wrong email or password!")
     })
 
