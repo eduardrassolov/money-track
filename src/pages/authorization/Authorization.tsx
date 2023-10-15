@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import useTheme from "../../utils/hooks/useTheme.tsx";
 import { devices } from '../../styles/breakPoints.ts';
+import useLogin from './useLogin.ts';
 
 
 const StyledAuthorization = styled.div`
@@ -51,8 +52,7 @@ export default function AuthorizationLayout() {
                 <StyledContainer>
                     <Outlet />
                 </StyledContainer>
-
             </StyledAuthorization>
-        </ThemeProvider>
+        </ThemeProvider >
     )
 }

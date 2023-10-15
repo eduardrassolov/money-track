@@ -16,7 +16,6 @@ export default function AppLayout() {
             <Aside isBurgerOpen={isBurgerOpen} onClose={handleBurger} />
             <BurgerMenu isOpen={isBurgerOpen} onClose={handleBurger} />
             <Overlay isShow={isBurgerOpen} onClose={handleBurger} />
-
             <Section>
                 <Outlet />
             </Section>

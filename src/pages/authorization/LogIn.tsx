@@ -9,7 +9,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useLogin } from '../login/useLogin';
 import { ROUTES } from '../../router';
 import AnimatedContainer from '../../components/animation/AnimatedContainer';
-import { slideLeft, slideRight } from '../home/HeaderSection';
+import { slideRight } from '../home/HeaderSection';
+import { useEffect, useLayoutEffect } from 'react';
+import supabase from '../../services/supabase';
+import { useNavigate } from 'react-router-dom';
 
 const schema = yup.object({
     email: yup.string().required('Email is required').email('Email is invalid'),
@@ -28,6 +31,7 @@ export default function LogIn() {
     });
 
     const onSubmit: SubmitHandler<ILoginInputs> = async (data) => login(data);
+
     return (
         <AnimatedContainer delay={0} duration={0.5} direction={slideRight}>
             <H1>Login</H1>

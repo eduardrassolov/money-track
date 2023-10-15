@@ -31,5 +31,6 @@ export async function apiSignUp(email: string, password: string, firstName: stri
       },
     },
   });
+
   return { error };
 }

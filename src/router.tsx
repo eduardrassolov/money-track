@@ -48,21 +48,6 @@ const routes: RouteObject[] = [
         element: <HomePage />,
     },
     {
-        path: ROUTES.AUTH,
-        element: <AuthorizationLayout />,
-        children: [
-            {
-                path: ROUTES.LOGIN,
-                element: <LogIn />
-            },
-            {
-                path: ROUTES.SIGN_UP,
-                element: <SignUp />
-            }
-        ]
-    },
-
-    {
         path: ROUTES.ROOT,
         element: <ProtectedLayout> <AppLayout /> </ProtectedLayout>,
         errorElement: <ErrorELement />,
@@ -70,7 +55,6 @@ const routes: RouteObject[] = [
             {
                 path: ROUTES.TRANSACTIONS,
                 element: <Suspense fallback={<LoadingUi />}><Transactions /></Suspense>,
-
             },
             {
                 path: ROUTES.TRANSACTION_ID,
@@ -89,6 +73,7 @@ const routes: RouteObject[] = [
             {
                 path: ROUTES.EXPENSES,
                 element: <Expenses />,
+                index: true
             },
             {
                 path: ROUTES.EXPENSE_ID,
@@ -102,6 +87,20 @@ const routes: RouteObject[] = [
             {
                 path: ROUTES.SETTINGS,
                 element: <Settings />
+            }
+        ]
+    },
+    {
+        path: ROUTES.AUTH,
+        element: <AuthorizationLayout />,
+        children: [
+            {
+                path: ROUTES.LOGIN,
+                element: <LogIn />
+            },
+            {
+                path: ROUTES.SIGN_UP,
+                element: <SignUp />
             }
         ]
     },
