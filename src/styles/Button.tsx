@@ -30,7 +30,7 @@ const SecondaryBtn = styled(Button)`
 `
 
 const LoginBtn = styled(PrimaryBtn)`
-    padding: 1rem;
+    padding: 1rem 2rem;
     transition: all 300ms;
     &:disabled{
         background: #e2e8f0;

@@ -82,12 +82,12 @@ interface IHeader {
     id: string
 }
 
-const slideRight = {
+export const slideRight = {
     hidden: { x: -300 },
     visible: { x: 0 }
 }
 
-const slideLeft = {
+export const slideLeft = {
     hidden: { x: 300 },
     visible: { x: 0 }
 }

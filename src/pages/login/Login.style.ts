@@ -46,8 +46,8 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  width: 100%;
-  max-width: 550px;
+  /* width: 100%; */
+  /* max-width: 400px; */
   height: auto;
   margin: 2rem 0;
   padding: 0 0 1rem;
