@@ -1,20 +1,18 @@
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 
 import { LoginBtn } from '../../styles/Button.tsx';
-import { ThemeProvider } from 'styled-components';
 import { apiSignUp } from '../../services/api/apiUser.ts';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../router.tsx';
 
-import { BottomText, Div, Form, Group, H1, StyledLink } from '../login/Login.style.ts';
-import useTheme from '../../utils/hooks/useTheme.tsx';
+import { BottomText, Form, Group, H1, StyledLink } from '../login/Login.style.ts';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Input from '../../components/input/Input.tsx';
 import { ErrorP } from '../../components/newTransaction/FormTransaction.style.ts';
 import { toast } from 'react-toastify';
 import AnimatedContainer from '../../components/animation/AnimatedContainer.tsx';
-import { slideLeft, slideUp } from '../home/HeaderSection.tsx';
+import { slideLeft } from '../home/HeaderSection.tsx';
 
 export type SignInInputs = {
     email: string,

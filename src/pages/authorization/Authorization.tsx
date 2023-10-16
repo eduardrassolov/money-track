@@ -2,8 +2,6 @@ import { Outlet } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import useTheme from "../../utils/hooks/useTheme.tsx";
 import { devices } from '../../styles/breakPoints.ts';
-import useLogin from './useLogin.ts';
-
 
 const StyledAuthorization = styled.div`
     background: ${props => props.theme.background};

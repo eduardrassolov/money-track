@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import { BottomText, Form, Group, H1, StyledLink } from '../login/Login.style';
 import Input from '../../components/input/Input';
 import { ErrorP } from '../../components/newTransaction/FormTransaction.style';

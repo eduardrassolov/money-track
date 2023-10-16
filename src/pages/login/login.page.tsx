@@ -1,6 +1,6 @@
 import { LoginBtn } from "../../styles/Button";
 import { useLogin } from "./useLogin";
-import { BottomText, Form, Group, H1, P, StyledLink } from "./Login.style.ts";
+import { BottomText, Form, Group, H1, StyledLink } from "./Login.style.ts";
 import useTheme from "../../utils/hooks/useTheme.tsx";
 import styled, { ThemeProvider } from "styled-components";
 import * as yup from 'yup';
@@ -33,8 +33,6 @@ const ImageContainer = styled.div`
     justify-content: center;
     align-items: center;
     background: white;
-    /* background: radial-gradient(#9198e5, ${props => props.theme.background}); */
-    /* background: radial-gradient(circle at 1%, ${props => props.theme.colorLogoMain} 5%, ${props => props.theme.background} 80%); */
     img{
         width: 100%;
         max-width: 700px;
@@ -93,37 +91,6 @@ const LoginPage = () => {
                     </Form>
                 </LoginSection>
             </StyledLogin>
-            {/* <Div>
-                <H1>Login</H1>
-                <P>Availibale 2 accounts for test</P>
-                <GropHorizontal>
-                    <Hints />
-                </GropHorizontal>
-
-                <Form onSubmit={handleSubmit(onSubmit)}>
-                    <Group>
-                        <label htmlFor="email">Email adress:</label>
-
-                        <Input type="email" name="email" placeHolder="Enter email" register={register} />
-                        <ErrorP>{errors.email?.message}</ErrorP>
-                    </Group>
-
-                    <Group>
-                        <label htmlFor="password">Password:</label>
-
-                        <Input type="password" name="password" placeHolder="Enter password" register={register} />
-                        <ErrorP>{errors.password?.message}</ErrorP>
-
-                    </Group>
-
-                    <LoginBtn type="submit" disabled={isLoading}>{isLoading ? 'Loging...' : 'Continue'}</LoginBtn>
-                    <BottomText>Don't have acount? <StyledLink to="/sign-up">Sign Up</StyledLink></BottomText>
-
-                    <BottomText><StyledLink to="/">Home page</StyledLink></BottomText>
-                </Form>
-            </Div> */}
-
-
         </ThemeProvider>
     )
 }
