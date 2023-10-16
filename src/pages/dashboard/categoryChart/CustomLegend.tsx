@@ -47,20 +47,23 @@ export default function CustomLegend({ data, selected, onSelect }: ICustomLegend
             {sortedData.length ?
                 <AnimatedContainer direction={slideUp}>
                     <StyledLegend> {
-                        sortedData.map((entry) => {
-                            console.log(entry);
-                            return (
-                                <LegendItem key={entry.id} id={entry.id} $bgColor={entry.color?.text} $textColor={entry.color?.fill} $isSelected={entry.id === selected} onClick={() => onSelect(entry.id)} >
-                                    <span>
-                                        {entry.name}
-                                    </span>
-                                    <span>
-                                        {entry.percentage.toFixed(2)}%
-                                    </span>
-                                </LegendItem>
-                            )
+                        sortedData.map((entry) =>
+                            <LegendItem
+                                key={entry.id}
+                                id={entry.id}
+                                $bgColor={entry?.color.text || "rgb(190, 80, 80)"}
+                                $textColor={entry?.color.fill || "rgba(190, 80, 80, 0.1)"}
+                                $isSelected={entry.id === selected}
+                                onClick={() => onSelect(entry.id)} >
 
-                        })
+                                <span>
+                                    {entry.name}
+                                </span>
+                                <span>
+                                    {entry.percentage.toFixed(2)}%
+                                </span>
+                            </LegendItem>
+                        )
                     }
                     </StyledLegend >
                 </AnimatedContainer >

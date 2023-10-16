@@ -9,6 +9,7 @@ const icons: Array<JSX.Element> =
 export default function AsideList({ onClose }: { onClose: () => void }) {
     const { isDemo } = useUser();
     console.log("isdemo", isDemo);
+
     return (
         <ul>
             {asideItemsName.map((item, index) => {
