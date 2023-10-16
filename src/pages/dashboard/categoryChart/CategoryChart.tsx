@@ -61,6 +61,22 @@ const colors = [
         text: "rgba(255, 165, 79, 0.1)",
         selected: "rgba(255, 165, 79, 0.3)"
     },
+    {
+        fill: "rgb(190, 165, 79)",
+        text: "rgba(190, 165, 79, 0.1)",
+        selected: "rgba(190, 165, 79, 0.3)"
+    },
+    {
+        fill: "rgb(190, 100, 79)",
+        text: "rgba(190, 100, 79, 0.1)",
+        selected: "rgba(190, 100, 79, 0.3)"
+    },
+    {
+        fill: "rgb(100, 200, 79)",
+        text: "rgba(100, 200, 79, 0.1)",
+        selected: "rgba(100, 200, 79, 0.3)"
+    },
+
 ]
 
 export interface IChartData {
