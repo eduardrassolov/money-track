@@ -18,12 +18,16 @@ const StyledContainer = styled.div`
 
 export default function PieDiagram({ label, data }: IPieDiagram) {
     return (
-        <AnimatedContainer direction={slideUp}>
-            <StyledContainer>
-                <Header text={label} />
-                <CategoryChart data={data} />
-            </StyledContainer>
-        </AnimatedContainer>
-
+        <>
+            {data?.length ?
+                <AnimatedContainer direction={slideUp}>
+                    <StyledContainer>
+                        <Header text={label} />
+                        <CategoryChart data={data} />
+                    </StyledContainer>
+                </AnimatedContainer>
+                : ""
+            }
+        </>
     )
 }

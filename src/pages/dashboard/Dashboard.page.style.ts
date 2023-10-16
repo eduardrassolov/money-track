@@ -6,7 +6,6 @@ const DashboardSection = styled.div`
   flex-direction: column;
   width: clamp(310px, 1000px, 95%);
   gap: 1rem;
-  overflow: scroll;
   margin: 3.5rem 0 1rem;
   padding: 1.5rem 1rem 5rem;
 `;
@@ -32,13 +31,8 @@ const PieBlock = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-
-  /* @media only screen and (min-width: ${devices.md}px) {
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  } */
 `;
+
 const PieContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -53,7 +47,6 @@ const PieContainer = styled.div`
   @media only screen and (min-width: ${devices.md}px) {
     flex: 2;
     flex-wrap: wrap;
-    /* min-width: 400px; */
   }
 `;
 export { DashboardSection, RowContainer, RowContainerCards, PieBlock, PieContainer };
