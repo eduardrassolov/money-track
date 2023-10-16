@@ -14,7 +14,7 @@ interface IStatCardProps {
 const StatCard: FC<IStatCardProps> = ({ item: { iconBg, borderColor, name, icon }, value, index }) => {
     if (value === Number.POSITIVE_INFINITY ||
         value === Number.NEGATIVE_INFINITY ||
-        value === Number.NaN) {
+        isNaN(value)) {
         return null;
     }
 
