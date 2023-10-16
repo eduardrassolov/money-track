@@ -12,7 +12,7 @@ export const OperationsContainer = styled.div`
     align-items: center;
     justify-content: center;
     gap: 0.1rem;
-    margin: auto 0 0.5rem;
+    margin: 0 0 0.5rem;
 
     
     @media only screen and (min-width: ${devices.xs}px) {
@@ -37,22 +37,19 @@ const ThirdContainer = styled(Container)`
 
 export default function Operation() {
     return (
-        <>
-            <OperationsContainer>
-                <FirstContainer>
-                    <Filter options={FILTER_DATE_OPTIONS} filterKey={FILTER_KEYS.DATE} />
-                </FirstContainer>
+        <OperationsContainer>
+            <FirstContainer>
+                <Filter options={FILTER_DATE_OPTIONS} filterKey={FILTER_KEYS.DATE} />
+            </FirstContainer>
 
-                <SecondContainer>
-                    <Sort />
-                </SecondContainer>
+            <SecondContainer>
+                <Sort />
+            </SecondContainer>
 
-                <ThirdContainer>
-                    <Search />
-                </ThirdContainer>
+            <ThirdContainer>
+                <Search />
+            </ThirdContainer>
 
-            </OperationsContainer>
-        </>
-
+        </OperationsContainer>
     )
 }

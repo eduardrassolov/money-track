@@ -10,9 +10,6 @@ import { useLogin } from '../login/useLogin';
 import { ROUTES } from '../../router';
 import AnimatedContainer from '../../components/animation/AnimatedContainer';
 import { slideRight } from '../home/HeaderSection';
-import { useEffect, useLayoutEffect } from 'react';
-import supabase from '../../services/supabase';
-import { useNavigate } from 'react-router-dom';
 
 const schema = yup.object({
     email: yup.string().required('Email is required').email('Email is invalid'),
@@ -30,7 +27,16 @@ export default function LogIn() {
         resolver: yupResolver(schema)
     });
 
-    const onSubmit: SubmitHandler<ILoginInputs> = async (data) => login(data);
+    const onSubmit: SubmitHandler<ILoginInputs> = (data) => login(data);
+    function demoHandle() {
+        const demoAccount: ILoginInputs = {
+            email: import.meta.env.VITE_DEMO_LOGIN,
+            password: import.meta.env.VITE_DEMO_PASS
+        };
+        console.log(demoAccount);
+        login(demoAccount);
+    }
+
 
     return (
         <AnimatedContainer delay={0} duration={0.5} direction={slideRight}>
@@ -57,7 +63,7 @@ export default function LogIn() {
                     <span>Don't have acount? </span>
                     <StyledLink to={ROUTES.SIGN_UP}>Sign Up</StyledLink>
                     <span>or</span>
-                    <StyledLink to={ROUTES.SIGN_UP}>Demo</StyledLink>
+                    <StyledLink to={""} onClick={demoHandle}>Demo</StyledLink>
                 </BottomText>
 
                 <BottomText><StyledLink to="/">Home page</StyledLink></BottomText>

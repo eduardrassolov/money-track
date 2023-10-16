@@ -12,7 +12,6 @@ export default async function getIncomes({ filter, sortBy, userId }: ILoaderTran
     .eq("Category.type.id", TYPES_TRANSACTION.INCOME);
 
   if (filter) {
-    // query = query.lte("completed_at", new Date().toLocaleDateString()).gte("completed_at", filter);
     query = query.gt("completed_at", filter);
   }
 
