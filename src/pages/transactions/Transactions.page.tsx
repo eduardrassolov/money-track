@@ -3,7 +3,6 @@ import { QUERY_KEY } from '../../config/queryClientKeys'
 import { loaderTransactions } from './loader'
 import TransactionList from './TransactionList'
 import Operation from '../../components/operations/Operations'
-import { useRef } from 'react'
 
 const Div = styled.div`
     display: flex;

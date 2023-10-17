@@ -1,4 +1,6 @@
+import { Suspense, lazy } from "react";
 import { RouteObject, createBrowserRouter } from "react-router-dom";
+
 import HomePage from "./pages/home/HomePage.tsx";
 import ErrorELement from "./components/error/ErrorELement.tsx";
 import ProtectedLayout from "./pages/layout/ProtectedLayout.tsx";
@@ -6,7 +8,6 @@ import Page404 from "./pages/errors/Page404.tsx";
 import EditPage from "./pages/edit/EditPage.tsx";
 import loaderTransactionById from "./pages/edit/loader.ts";
 import Settings from "./pages/settings/Settings.page.tsx";
-import { Suspense, lazy } from "react";
 import LoadingUi from "./components/spinner/LoadingUi.tsx";
 import AuthorizationLayout from "./pages/authorization/Authorization.tsx";
 import LogIn from "./pages/authorization/LogIn.tsx";
