@@ -44,6 +44,7 @@ const PaginationButton = styled.button`
 `
 interface IPagination {
     maxLength: number | undefined;
+    scrollToTop: () => void;
 }
 
 export default function Pagination({ maxLength, scrollToTop }: IPagination) {

@@ -16,7 +16,7 @@ const Div = styled.div`
 `
 
 export default function Transactions() {
-    const divRef = useRef(null);
+    const divRef = useRef<HTMLDivElement>(null);
     const moveToTop = () => divRef?.current?.scrollTo({ top: 0, behavior: 'smooth' });
     return (
         <Div ref={divRef}>

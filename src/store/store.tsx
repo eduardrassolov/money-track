@@ -1,6 +1,4 @@
-// import { create } from "zustand";
 
-import { useRef } from "react";
 import { create } from "zustand";
 
 export const dark: ITheme = {

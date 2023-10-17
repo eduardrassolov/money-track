@@ -12,8 +12,8 @@ import { useRef } from "react";
 export default function Expenses() {
   // const { defaultCurrency } = useDefaultCurrency();
   // const total = transactions?.reduce((acc, cur) => acc + cur.amount, 0) || 0;
-  const divRef = useRef(null);
-  const moveToTop = () => divRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+  const divRef = useRef<HTMLDivElement>(null);
+  const moveToTop = () => divRef?.current?.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
     <>

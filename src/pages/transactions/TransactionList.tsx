@@ -33,6 +33,7 @@ const LoaderContainer = styled.div`
 interface ITransactionList {
     listType: string,
     loader: (userId: string, filter: Filter, sortBy: SortBy) => Promise<ITransaction[]>;
+    scrollToTop: () => void
 }
 
 const TransactionList: FC<ITransactionList> = ({ listType, loader, scrollToTop }) => {
