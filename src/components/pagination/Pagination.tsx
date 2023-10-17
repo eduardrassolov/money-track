@@ -46,7 +46,7 @@ interface IPagination {
     maxLength: number | undefined;
 }
 
-export default function Pagination({ maxLength }: IPagination) {
+export default function Pagination({ maxLength, scrollToTop }: IPagination) {
     const { currPage, moveToPage } = usePagination();
     console.log("Total elements", maxLength);
 
@@ -58,12 +58,16 @@ export default function Pagination({ maxLength }: IPagination) {
     console.log("Last page", lastPage);
 
     const handlePrev = () => {
-        if (currPage > 1)
+        if (currPage > 1) {
             moveToPage(currPage - 1);
+            scrollToTop();
+        }
+
     }
     const handleNext = () => {
         if (currPage < lastPage) {
             moveToPage(currPage + 1);
+            scrollToTop();
         }
     }
 

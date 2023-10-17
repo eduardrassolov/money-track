@@ -3,6 +3,7 @@ import { QUERY_KEY } from '../../config/queryClientKeys'
 import { loaderTransactions } from './loader'
 import TransactionList from './TransactionList'
 import Operation from '../../components/operations/Operations'
+import { useRef } from 'react'
 
 const Div = styled.div`
     display: flex;
@@ -15,11 +16,13 @@ const Div = styled.div`
 `
 
 export default function Transactions() {
+    const divRef = useRef(null);
+    const moveToTop = () => divRef?.current?.scrollTo({ top: 0, behavior: 'smooth' });
     return (
-        <Div>
+        <Div ref={divRef}>
             <Operation />
 
-            <TransactionList listType={QUERY_KEY.TRANSACTIONS} loader={loaderTransactions} />
+            <TransactionList listType={QUERY_KEY.TRANSACTIONS} loader={loaderTransactions} scrollToTop={moveToTop} />
         </Div>
     )
 }

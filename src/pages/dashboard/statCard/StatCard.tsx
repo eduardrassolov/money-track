@@ -22,7 +22,6 @@ const StatCard: FC<IStatCardProps> = ({ item: { iconBg, borderColor, name, icon 
     const formatedValue = formatNumberWithSpaces(value, defaultCurrencyName?.shortName || "USD");
 
     return (
-
         <AnimatedContainer delay={0.2 * index} duration={1}>
             <StatsContainer $borderColor={borderColor}>
                 <IconContainer $bgColor={iconBg}>

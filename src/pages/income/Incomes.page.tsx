@@ -21,14 +21,8 @@ export default function Incomes() {
                 </FormDiv>
 
                 <ListDiv>
-                    {/* <Header text={`Total incomes: ${defaultCurrency} ${formatNumberWithSpaces(total)}`} /> */}
-
                     <Operation />
-
-                    {/* <CategoryBadgesList transactionType={TYPES_TRANSACTION.INCOME} /> */}
-
                     <TransactionList listType={QUERY_KEY.INCOMES} loader={loaderIncomes} />
-
                 </ListDiv>
             </Container>
         </>

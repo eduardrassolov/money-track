@@ -35,7 +35,7 @@ interface ITransactionList {
     loader: (userId: string, filter: Filter, sortBy: SortBy) => Promise<ITransaction[]>;
 }
 
-const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
+const TransactionList: FC<ITransactionList> = ({ listType, loader, scrollToTop }) => {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const { mutate: deleteTransaction } = useMutation({ mutationFn: apiDeleteTransaction, onSuccess: succesHandle });
@@ -89,7 +89,7 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
                         />)
             }
 
-            <Pagination maxLength={transactions?.length} />
+            <Pagination maxLength={transactions?.length} scrollToTop={scrollToTop} />
         </List>
     )
 }

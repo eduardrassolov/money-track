@@ -37,7 +37,7 @@ const StatsContainer = styled.div<{ $borderColor?: string }>`
   display: flex;
   justify-content: start;
   align-items: center;
-  border: 1px solid ${(props) => props.theme.background};
+  border: 1px solid ${(props) => props.theme.border};
   background: ${(props) => props.theme.background};
   color: ${(props) => props.theme.text};
   border-radius: 15px;

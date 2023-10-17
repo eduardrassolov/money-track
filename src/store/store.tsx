@@ -1,5 +1,6 @@
 // import { create } from "zustand";
 
+import { useRef } from "react";
 import { create } from "zustand";
 
 export const dark: ITheme = {
@@ -54,6 +55,7 @@ export const useCurrStore = create<IStore>()((set) => ({
   theme: { ...light },
   categoryFilter: [],
 
+
   setSearch: (value: string) => set(() => ({ search: value })),
   toogleTheme: (nextTheme: string) => set(() => { return nextTheme === "dark" ? ({ theme: { ...dark } }) : ({ theme: { ...light } }) }),
 
@@ -63,6 +65,7 @@ export const useCurrStore = create<IStore>()((set) => ({
     { categoryFilter: [...state.categoryFilter, category] })
   ),
   clearCategoryFilter: () => set(() => ({ categoryFilter: [] })),
+
 
 }))
 

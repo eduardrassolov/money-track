@@ -23,7 +23,8 @@ const FormDiv = styled.div`
 const ListDiv = styled.div`
   grid-area: 2 / 2 / 3 / 3;  
   border-radius: 7px;
-  height: 90dvh;
+  height: 100dvh;
+  overflow: scroll;
 
 `
 

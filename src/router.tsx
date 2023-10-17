@@ -12,7 +12,6 @@ import AuthorizationLayout from "./pages/authorization/Authorization.tsx";
 import LogIn from "./pages/authorization/LogIn.tsx";
 import SignUp from "./pages/authorization/SignUp.tsx";
 
-// const SingUp = lazy(() => import("./pages/authorization/SignUp.tsx"));
 const AppLayout = lazy(() => import("./pages/layout/AppLayout.tsx"));
 const Transactions = lazy(() => import("./pages/transactions/Transactions.page.tsx"));
 const Dashboard = lazy(() => import("./pages/dashboard/Dashboard.page.tsx"));

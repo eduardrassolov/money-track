@@ -13,7 +13,8 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: scroll;
+  /* overflow: scroll; */
+  overflow: hidden;
   transition: all 300ms;
 `;
 
