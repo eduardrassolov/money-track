@@ -33,10 +33,9 @@ const LoaderContainer = styled.div`
 interface ITransactionList {
     listType: string,
     loader: (userId: string, filter: Filter, sortBy: SortBy) => Promise<ITransaction[]>;
-    scrollToTop: () => void
 }
 
-const TransactionList: FC<ITransactionList> = ({ listType, loader, scrollToTop }) => {
+const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const { mutate: deleteTransaction } = useMutation({ mutationFn: apiDeleteTransaction, onSuccess: succesHandle });
@@ -90,7 +89,7 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader, scrollToTop }
                         />)
             }
 
-            <Pagination maxLength={transactions?.length} scrollToTop={scrollToTop} />
+            <Pagination maxLength={transactions?.length} />
         </List>
     )
 }

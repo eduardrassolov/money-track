@@ -10,19 +10,16 @@ const Div = styled.div`
     flex-direction: column;
     margin: 4rem 0 0;
     max-width: 650px;
-    height: 100vh;
-    overflow: scroll;
+    height: 90vh;
     padding: 0 0.5rem;
 `
 
 export default function Transactions() {
-    const divRef = useRef<HTMLDivElement>(null);
-    const moveToTop = () => divRef?.current?.scrollTo({ top: 0, behavior: 'smooth' });
     return (
-        <Div ref={divRef}>
+        <Div>
             <Operation />
 
-            <TransactionList listType={QUERY_KEY.TRANSACTIONS} loader={loaderTransactions} scrollToTop={moveToTop} />
+            <TransactionList listType={QUERY_KEY.TRANSACTIONS} loader={loaderTransactions} />
         </Div>
     )
 }

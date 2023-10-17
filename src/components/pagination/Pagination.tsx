@@ -44,10 +44,9 @@ const PaginationButton = styled.button`
 `
 interface IPagination {
     maxLength: number | undefined;
-    scrollToTop: () => void;
 }
 
-export default function Pagination({ maxLength, scrollToTop }: IPagination) {
+export default function Pagination({ maxLength }: IPagination) {
     const { currPage, moveToPage } = usePagination();
     console.log("Total elements", maxLength);
 
@@ -61,14 +60,12 @@ export default function Pagination({ maxLength, scrollToTop }: IPagination) {
     const handlePrev = () => {
         if (currPage > 1) {
             moveToPage(currPage - 1);
-            scrollToTop();
         }
 
     }
     const handleNext = () => {
         if (currPage < lastPage) {
             moveToPage(currPage + 1);
-            scrollToTop();
         }
     }
 
