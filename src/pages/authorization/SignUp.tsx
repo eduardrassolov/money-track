@@ -3,7 +3,6 @@ import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 import { LoginBtn } from '../../styles/Button.tsx';
 import { apiSignUp } from '../../services/api/apiUser.ts';
 import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '../../router.tsx';
 
 import { BottomText, Form, Group, H1, StyledLink } from '../login/Login.style.ts';
 import * as yup from 'yup';
@@ -13,6 +12,7 @@ import { ErrorP } from '../../components/newTransaction/FormTransaction.style.ts
 import { toast } from 'react-toastify';
 import AnimatedContainer from '../../components/animation/AnimatedContainer.tsx';
 import { slideLeft } from '../home/HeaderSection.tsx';
+import { ROUTES } from '../../config/routes.ts';
 
 export type SignInInputs = {
     email: string,

@@ -11,14 +11,14 @@ interface IPieDiagram {
 }
 
 const StyledContainer = styled.div`
-   background: ${prev => prev.theme.background};
-   border-radius: 12px;
-   padding: 2rem 1rem;
-
-   border: 1px solid ${props => props.theme.border};
+    background: ${prev => prev.theme.background};
+    border-radius: 12px;
+    padding: 2rem 1rem;
+    border: 1px solid ${props => props.theme.border};
 `
 
 export default function PieDiagram({ label, data }: IPieDiagram) {
+    console.log(data);
     return (
         <>
             {data?.length ?

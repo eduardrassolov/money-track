@@ -1,10 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom"
 import { login as loginApi } from "../../services/api/apiUser";
-import { ROUTES } from "../../router";
+
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import supabase from "../../services/supabase";
+import { ROUTES } from "../../config/routes";
 
 export interface ILogin {
     email: string,

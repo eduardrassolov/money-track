@@ -11,12 +11,13 @@ export default function useDashboard() {
     const { user } = useUser();
     const userId = user?.id;
 
+    console.log(user);
     if (!userId) {
         throw new Error('User not found');
     }
 
     const { filter } = useFilter();
-    console.log("Filt", filter);
+
     const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
 
     const { data: transactions, isLoading: isTransactionLoading } = useQuery(

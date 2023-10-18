@@ -1,10 +1,10 @@
 import { styled } from "styled-components"
 import { NavLink } from "react-router-dom";
-import { ROUTES } from "../../../router"
 import { devices } from "../../../styles/breakPoints";
 import { useUser } from "../../../utils/hooks/useUser";
 
 import Switch from "../../../components/swtich/Switch";
+import { ROUTES } from "../../../config/routes";
 
 const Ul = styled.ul<{ $isOpen: boolean }>`
         position: fixed;

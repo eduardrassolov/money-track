@@ -1,5 +1,4 @@
 import { styled } from "styled-components";
-import { devices } from "../../styles/breakPoints";
 
 const StyledLayout = styled.div`
   display: flex;
@@ -15,7 +14,6 @@ const Section = styled.section`
   flex-direction: column;
   align-items: center;
   overflow: scroll;
-  /* overflow: hidden; */
   transition: all 300ms;
 `;
 

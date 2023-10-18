@@ -1,6 +1,6 @@
-import { StatsCardData } from "../types/statsCardData";
 import { HiOutlineShoppingBag, HiOutlineCalculator, HiOutlineCreditCard } from "react-icons/hi";
 import { HiOutlineBuildingLibrary } from "react-icons/hi2";
+import { StatsCardData } from "../types/statsCardData";
 
 export const STATS_CARD_DATA: Array<StatsCardData> = [
   {

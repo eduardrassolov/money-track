@@ -1,13 +1,13 @@
 
 import styled from 'styled-components';
-import { STATS_CARD_DATA } from '../../../config/statsCardsData'
+import { STATS_CARD_DATA } from '../../../config/statsCardView'
 import StatCard from './StatCard'
 
 const RowContainerCards = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  margin: 0;
-  gap: 0.3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    margin: 0;
+    gap: 0.3rem;
 `;
 
 interface IStatsCardList {

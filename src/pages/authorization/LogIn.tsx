@@ -6,9 +6,9 @@ import * as yup from 'yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useLogin } from '../login/useLogin';
-import { ROUTES } from '../../router';
 import AnimatedContainer from '../../components/animation/AnimatedContainer';
 import { slideRight } from '../home/HeaderSection';
+import { ROUTES } from '../../config/routes';
 
 const schema = yup.object({
     email: yup.string().required('Email is required').email('Email is invalid'),

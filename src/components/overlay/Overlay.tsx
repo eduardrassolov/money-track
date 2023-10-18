@@ -1,6 +1,7 @@
 import { styled } from "styled-components"
 import { devices } from "../../styles/breakPoints";
 import { FC } from "react";
+import AnimatedContainer from "../animation/AnimatedContainer";
 
 const StyledOverlay = styled.div<{ $isShow: boolean }>`
     position: fixed;
@@ -24,7 +25,9 @@ type OverlayProps = {
 
 const Overlay: FC<OverlayProps> = ({ isShow, onClose }) => {
     return (
-        <StyledOverlay $isShow={isShow} onClick={onClose}></StyledOverlay>
+        <AnimatedContainer duration={0.5} delay={0.5}>
+            <StyledOverlay $isShow={isShow} onClick={onClose}></StyledOverlay>
+        </AnimatedContainer>
     )
 }
 export default Overlay;

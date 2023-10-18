@@ -174,7 +174,7 @@ const CategoryChart: FC<ICategoryChart> = ({ data }) => {
                     {dt.map((item, index) => {
                         return <Cell
                             key={`cell - ${index} `}
-                            fill={item.id === selected ? item.color.fill : theme.background}
+                            fill={item.id === selected ? item?.color?.fill || "rgb(62, 111, 210)" : theme.background}
                             stroke={theme.border}
                             strokeWidth={2}
                             onClick={() => handleClick(item.id)}

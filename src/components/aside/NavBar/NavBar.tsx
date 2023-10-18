@@ -4,10 +4,10 @@ import BurgerMenu from "../../burger/BurgerMenu";
 import { devices } from "../../../styles/breakPoints";
 import Switch, { NavIcons } from "../../swtich/Switch";
 import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../../../router";
 import { apiLogout } from "../../../services/api/apiUser";
 import { useMutation } from "@tanstack/react-query";
 import { HiMiniArrowRightOnRectangle, HiOutlineHome } from "react-icons/hi2";
+import { ROUTES } from "../../../config/routes";
 
 const Nav = styled.nav`
     background: ${(props) => props.theme.background};

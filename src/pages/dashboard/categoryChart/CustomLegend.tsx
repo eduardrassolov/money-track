@@ -44,21 +44,22 @@ export default function CustomLegend({ data, selected, onSelect }: ICustomLegend
 
     return (
         <>
-            {sortedData.length ?
+            {sortedData?.length ?
                 <AnimatedContainer direction={slideUp}>
                     <StyledLegend> {
-                        sortedData.map((entry) =>
+                        sortedData?.map((entry) =>
                             <LegendItem
                                 key={entry.id}
                                 id={entry.id}
-                                $bgColor={entry?.color.text || "rgb(190, 80, 80)"}
-                                $textColor={entry?.color.fill || "rgba(190, 80, 80, 0.1)"}
+                                $bgColor={entry?.color?.text || "rgba(62, 111, 210, 0.3)"}
+                                $textColor={entry?.color?.fill || "rgb(62, 111, 210)"}
                                 $isSelected={entry.id === selected}
                                 onClick={() => onSelect(entry.id)} >
 
                                 <span>
                                     {entry.name}
                                 </span>
+
                                 <span>
                                     {entry.percentage.toFixed(2)}%
                                 </span>
