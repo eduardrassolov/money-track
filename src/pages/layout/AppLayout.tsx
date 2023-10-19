@@ -9,6 +9,9 @@ import { Section, StyledLayout } from './AppLayou.style.ts';
 
 export default function AppLayout() {
     const { isBurgerOpen, handleBurger } = useBurgerMenu();
+
+
+    console.log("Im rendered");
     return (
         <StyledLayout>
             <NavBar isBurgerOpen={isBurgerOpen} onClose={handleBurger} />

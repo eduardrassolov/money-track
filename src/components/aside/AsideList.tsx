@@ -1,4 +1,4 @@
-import { asideItemsName } from '../../config/configAsideItems'
+import { asideMenuList } from '../../config/asideMenuList'
 import { useUser } from '../../utils/hooks/useUser'
 import AsideItem from './AsideItem'
 import { HiMiniArrowsUpDown, HiOutlineChartPie, HiOutlineCreditCard, HiOutlineShoppingBag, HiOutlineWrenchScrewdriver } from 'react-icons/hi2'
@@ -12,7 +12,7 @@ export default function AsideList({ onClose }: { onClose: () => void }) {
 
     return (
         <ul>
-            {asideItemsName.map((item, index) => {
+            {asideMenuList.map((item, index) => {
                 return <AsideItem key={item.name} name={item.name} path={item.path} icon={icons[index]} onClose={onClose} />
             })}
         </ul>

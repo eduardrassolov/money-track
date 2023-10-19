@@ -1,5 +1,5 @@
 import { TABLE } from "../../config/dbTablesNames";
-import { SUPABASE_ERROR_CODE } from "../../config/errorCode";
+import { SUPABASE_ERROR_CODE } from "../../config/sbErrorCodes";
 import supabase from "../supabase";
 
 interface IApiCreateCategory {

@@ -9,7 +9,7 @@ import { slideUp } from '../statCard/StatsList';
 
 const ChartContainer = styled.div`
   width: 100%;
-  border: 1px solid ${(props) => props.theme.background};
+  border: 1px solid ${(props) => props.theme.border};
   background: ${(props) => props.theme.background};
   color: ${(props) => props.theme.text};
   padding: 2rem 0;

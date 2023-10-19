@@ -13,16 +13,15 @@ import StatsCardList from './StatsCardList'
 import PieDiagram from '../pie/PieDiagram'
 
 const StyledStatsContainer = styled.div`
-   display: flex;
-   flex-direction: column;
-   gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 `
 
 export const slideUp = {
     hidden: { y: 100 },
     visible: { y: 0 }
 }
-
 
 export default function StatsList() {
     const { transactions, expenses, incomes, isExpenseLoading, isIncomeLoading, isTransactionLoading } = useDashboard();

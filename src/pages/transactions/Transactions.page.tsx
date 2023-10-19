@@ -9,8 +9,7 @@ const Div = styled.div`
     flex-direction: column;
     margin: 4rem 0 0;
     max-width: 650px;
-    height: 100vh;
-    overflow: scroll;
+    height: 90vh;
     padding: 0 0.5rem;
 `
 

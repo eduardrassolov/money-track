@@ -10,9 +10,7 @@ import CreateNewTransactionForm from "../../components/newTransaction/CreateNewT
 // import CategoryBadgesList from "../../components/badges/CategoryBadges";
 
 export default function Incomes() {
-    // const { transactions, defaultCurrency }
 
-    // const total = transactions?.reduce((acc, cur) => acc + cur.amount, 0) || 0;
     return (
         <>
             <Container>
@@ -21,14 +19,8 @@ export default function Incomes() {
                 </FormDiv>
 
                 <ListDiv>
-                    {/* <Header text={`Total incomes: ${defaultCurrency} ${formatNumberWithSpaces(total)}`} /> */}
-
                     <Operation />
-
-                    {/* <CategoryBadgesList transactionType={TYPES_TRANSACTION.INCOME} /> */}
-
                     <TransactionList listType={QUERY_KEY.INCOMES} loader={loaderIncomes} />
-
                 </ListDiv>
             </Container>
         </>

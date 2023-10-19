@@ -12,12 +12,13 @@ import apiDeleteTransaction from "../../services/api/deleteTransaction.ts";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import { useCurrStore } from "../../store/store.tsx";
-import { ROUTES } from "../../router.tsx";
+
 import { searchTransactionsByMask } from "../../utils/helpers/searchTransactionsByMask.ts";
 import LoadingUi from "../../components/spinner/LoadingUi.tsx";
 import Pagination from "../../components/pagination/Pagination.tsx";
 import usePagination from "../../utils/hooks/usePagination.tsx";
 import { ITEMS_PER_PAGE } from "../../config/paginationItems.ts";
+import { ROUTES } from "../../config/routes.ts";
 
 const List = styled.div`
     display: flex;
