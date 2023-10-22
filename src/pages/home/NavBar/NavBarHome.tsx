@@ -7,9 +7,10 @@ import Switch from "../../../components/swtich/Switch"
 import { devices } from "../../../styles/breakPoints"
 
 const Nav = styled.nav`
-    background: ${(props) => props.theme.background};
-    border-bottom: 2px solid ${props => props.theme.border};
-    font-size: 1rem;
+    backdrop-filter: blur(9px) saturate(180%);
+    -webkit-backdrop-filter: blur(9px) saturate(180%);
+    background: rgba(255, 255, 255, 0.3);
+    font-size: 1rem; 
     display: flex;
     text-align: center;
     align-items: center;
@@ -17,6 +18,7 @@ const Nav = styled.nav`
     position: fixed;
     width: 100%;
     transition: all 300ms;
+    back
 `
 
 const SwitchContainer = styled.div`
