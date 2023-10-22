@@ -11,7 +11,7 @@ export default function useDashboard() {
     const { user } = useUser();
     const userId = user?.id;
 
-    console.log(user);
+
     if (!userId) {
         throw new Error('User not found');
     }

@@ -3,7 +3,7 @@ import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import Select from '../dropDown/Select';
+import Select from "../dropDown/Select"
 import Input from '../input/Input';
 import FormRow from './FormRow';
 
