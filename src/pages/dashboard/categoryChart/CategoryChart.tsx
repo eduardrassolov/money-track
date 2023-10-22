@@ -64,8 +64,8 @@ const createData = (arr: Array<ISummary>): Array<IChartData> => {
             value: category.value,
             color: pieChartColors[index]
         }
-    })
-}
+    });
+};
 
 const CategoryChart: FC<ICategoryChart> = ({ data }) => {
     const { isSmallScreen } = useResize();
