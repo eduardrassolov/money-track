@@ -1,15 +1,11 @@
 import { asideMenuList } from '../../config/asideMenuList'
-import { useUser } from '../../utils/hooks/useUser'
 import AsideItem from './AsideItem'
-import { HiMiniArrowsUpDown, HiOutlineChartPie, HiOutlineCreditCard, HiOutlineShoppingBag, HiOutlineWrenchScrewdriver } from 'react-icons/hi2'
+import { HiMiniArrowsUpDown, HiOutlineChartPie, HiOutlineCreditCard, HiOutlineShoppingBag } from 'react-icons/hi2'
 
 const icons: Array<JSX.Element> =
-    [<HiOutlineChartPie />, <HiOutlineShoppingBag />, <HiOutlineCreditCard />, <HiMiniArrowsUpDown />, <HiOutlineWrenchScrewdriver />]
+    [<HiOutlineChartPie />, <HiOutlineShoppingBag />, <HiOutlineCreditCard />, <HiMiniArrowsUpDown />]
 
 export default function AsideList({ onClose }: { onClose: () => void }) {
-    const { isDemo } = useUser();
-    console.log("isdemo", isDemo);
-
     return (
         <ul>
             {asideMenuList.map((item, index) => {

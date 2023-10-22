@@ -6,7 +6,6 @@ import NewForm from './NewForm';
 import TYPES_TRANSACTION from '../../config/typeTransactions';
 import useResize from '../../pages/dashboard/pie/useResize';
 
-
 export interface INewTransactionProps {
     type: number;
 }
