@@ -24,8 +24,4 @@ export const asideMenuList: Array<IAsideItem> = [
     name: "Transactions",
     path: `${ROUTES.TRANSACTIONS}?${defaultPage}`,
   },
-  {
-    name: "Settings",
-    path: ROUTES.SETTINGS,
-  },
 ];

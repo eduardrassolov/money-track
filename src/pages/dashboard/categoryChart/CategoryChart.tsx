@@ -44,7 +44,7 @@ type payloadType = {
     name: string;
 };
 
-export const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload, label }) => {
+export const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload }) => {
 
 
     if (active && payload && payload.length > 0) {
