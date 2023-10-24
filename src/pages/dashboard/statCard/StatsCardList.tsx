@@ -15,6 +15,7 @@ interface IStatsCardList {
 }
 
 export default function StatsCardList({ statsData }: IStatsCardList) {
+    console.log("Stat rend", statsData);
     return (
         <RowContainerCards>
             {STATS_CARD_DATA.map((item, index) => <StatCard key={item.name} item={item} value={statsData[index]} index={index} />)}

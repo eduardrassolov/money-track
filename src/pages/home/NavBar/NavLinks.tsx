@@ -17,7 +17,6 @@ const Ul = styled.ul<{ $isOpen: boolean }>`
         font-size: 1.1rem;
         padding: 5rem 2rem 0 ;
         background: ${props => props.theme.background};
-        color: ${props => props.theme.text};
         display: ${props => props.$isOpen ? 'flex' : 'none'}; ;
         list-style: none;
         transition: all 300ms;
@@ -34,6 +33,7 @@ const Ul = styled.ul<{ $isOpen: boolean }>`
         }
 
         @media only screen and (min-width: ${devices.md}px){
+            background: transparent;
             display: flex;
             flex-direction: row;
             justify-content: center;

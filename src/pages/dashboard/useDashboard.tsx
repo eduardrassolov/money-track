@@ -9,32 +9,37 @@ import { loaderIncomes } from '../income/loader';
 
 export default function useDashboard() {
     const { user } = useUser();
+
     const userId = user?.id;
 
 
     if (!userId) {
         throw new Error('User not found');
-    }
+    };
 
-    const { filter } = useFilter();
+    const { filter, from, to } = useFilter();
+    console.log(from, to);
 
     const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
 
     const { data: transactions, isLoading: isTransactionLoading } = useQuery(
         {
-            queryKey: [userId, QUERY_KEY.TRANSACTIONS, filter, sortBy],
-            queryFn: () => loaderTransactions(userId, filter, sortBy)
+            queryKey: [userId, QUERY_KEY.TRANSACTIONS, from, to, sortBy],
+            queryFn: () => loaderTransactions(userId, filter, sortBy, from, to)
         });
     const { data: expenses, isLoading: isExpenseLoading } = useQuery(
         {
-            queryKey: [userId, QUERY_KEY.EXPENSES, filter, sortBy],
-            queryFn: () => loaderExpenses(userId, filter, sortBy)
+            queryKey: [userId, QUERY_KEY.EXPENSES, from, to, sortBy],
+            // queryFn: () => loaderExpenses(userId, filter, sortBy)
+            queryFn: () => loaderExpenses(userId, filter, sortBy, from, to),
+            retryOnMount: true
         });
     const { data: incomes, isLoading: isIncomeLoading } = useQuery(
         {
-            queryKey: [userId, QUERY_KEY.INCOMES, filter, sortBy],
-            queryFn: () => loaderIncomes(userId, filter, sortBy)
+            queryKey: [userId, QUERY_KEY.INCOMES, from, to, sortBy],
+            queryFn: () => loaderIncomes(userId, filter, sortBy, from, to),
         });
+    console.log("new", expenses);
 
     return { transactions, expenses, incomes, isTransactionLoading, isExpenseLoading, isIncomeLoading }
 }

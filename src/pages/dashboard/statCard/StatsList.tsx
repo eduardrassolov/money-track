@@ -1,16 +1,16 @@
-import useDashboard from '../useDashboard'
-import createDiagramData from '../createDiagramData'
-import { ISummary, getSummaryData } from '../../../utils/helpers/getStats'
-import Diagram from '../diagram/Diagram'
+import useDashboard from '../useDashboard';
+import createDiagramData from '../createDiagramData';
+import { ISummary, getSummaryData } from '../../../utils/helpers/getStats';
+import Diagram from '../diagram/Diagram';
 
-import calculateStats from '../../../utils/helpers/calculateStats'
-import LoadingUi from '../../../components/spinner/LoadingUi'
-import { useUser } from '../../../utils/hooks/useUser'
-import convertToOneCurrency from '../../../services/createData'
-import useCurrency from '../../../utils/hooks/useCurrency'
-import styled from 'styled-components'
-import StatsCardList from './StatsCardList'
-import PieDiagram from '../pie/PieDiagram'
+import calculateStats from '../../../utils/helpers/calculateStats';
+import LoadingUi from '../../../components/spinner/LoadingUi';
+import { useUser } from '../../../utils/hooks/useUser';
+import convertToOneCurrency from '../../../services/createData';
+import useCurrency from '../../../utils/hooks/useCurrency';
+import styled from 'styled-components';
+import StatsCardList from './StatsCardList';
+import PieDiagram from '../pie/PieDiagram';
 
 const StyledStatsContainer = styled.div`
     display: flex;
@@ -24,12 +24,14 @@ export const slideUp = {
 }
 
 export default function StatsList() {
+    console.log("statsrender");
     const { transactions, expenses, incomes, isExpenseLoading, isIncomeLoading, isTransactionLoading } = useDashboard();
     const { currency } = useUser();
     const { defaultCurrency } = useCurrency(currency);
 
     if (!defaultCurrency || !expenses || !incomes || !transactions)
         return null;
+
 
     const convertedExpenses = convertToOneCurrency(expenses, defaultCurrency);
     const convertedIncomes = convertToOneCurrency(incomes, defaultCurrency);

@@ -15,13 +15,13 @@ export default function getRangeDates(range: string) {
       date = new Date(`${now.getFullYear()}-${now.getMonth() + 1}-01`);
       break;
     case "year":
-      date = new Date(`${now.getFullYear() -1 }-01-01`);
-      break; 
+      date = new Date(`${now.getFullYear() - 1}-01-01`);
+      break;
     case "all":
     default:
       return null;
   }
   const res = format(date, "yyyy-MM-dd");
-  console.log(res);
+  console.log("Res", res);
   return res;
 }

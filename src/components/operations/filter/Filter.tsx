@@ -13,7 +13,6 @@ export default function Filter({ options, filterKey }: IFilter) {
     const [searchParams, setSearchParams] = useSearchParams();
     const selected = searchParams.get(filterKey) || '';
 
-    console.log("1", selected);
 
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const { target: { value } } = event;

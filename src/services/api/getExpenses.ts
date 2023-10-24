@@ -4,20 +4,20 @@ import { ILoaderTransaction } from "../../pages/transactions/loader";
 import supabase from "../supabase";
 import { SELECT } from "./getTransactions";
 
-export default async function getExpenses({
-  filter,
-  sortBy,
-  userId,
-}: ILoaderTransaction): Promise<Array<ITransaction>> {
+export default async function getExpenses({ sortBy, userId }: ILoaderTransaction): Promise<Array<ITransaction>> {
   let query = supabase
     .from("transactions")
     .select(SELECT.ALL_TRANSACTIONS)
     .eq("profile_id", userId)
     .eq("Category.type.id", TYPES_TRANSACTION.EXPENSE);
 
-  if (filter) {
-    query = query.gt("completed_at", filter);
-  }
+  // if (filter) {
+  //   query = query.lt("completed_at", filter);
+  // }
+  // const toDate = new Date(to);
+  // console.log("Darte", toDate);
+  // query = query.lte("completed_at", to).gte("completed_at", from);
+  // console.log("filt", from, to);
 
   query = query.order(sortBy.field, { ascending: sortBy.direction === "asc" ? true : false });
   const { data } = await query;

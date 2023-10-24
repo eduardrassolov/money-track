@@ -18,7 +18,7 @@ const Nav = styled.nav`
     position: fixed;
     width: 100%;
     transition: all 300ms;
-    back
+    
 `
 
 const SwitchContainer = styled.div`

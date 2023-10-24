@@ -4,16 +4,12 @@ import { ILoaderTransaction } from "../../pages/transactions/loader";
 import supabase from "../supabase";
 import { SELECT } from "./getTransactions";
 
-export default async function getIncomes({ filter, sortBy, userId }: ILoaderTransaction): Promise<Array<ITransaction>> {
+export default async function getIncomes({ sortBy, userId }: ILoaderTransaction): Promise<Array<ITransaction>> {
   let query = supabase
     .from("transactions")
     .select(SELECT.ALL_TRANSACTIONS)
     .eq("profile_id", userId)
     .eq("Category.type.id", TYPES_TRANSACTION.INCOME);
-
-  if (filter) {
-    query = query.gt("completed_at", filter);
-  }
 
   query = query.order(sortBy.field, { ascending: sortBy.direction === "asc" ? true : false });
   const { data } = await query;
