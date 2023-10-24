@@ -33,7 +33,7 @@ const LoaderContainer = styled.div`
 
 interface ITransactionList {
     listType: string,
-    loader: (userId: string, filter: Filter, sortBy: SortBy) => Promise<ITransaction[]>;
+    loader: (userId: string, filter: Filter, sortBy: SortBy, from: string, to: string) => Promise<ITransaction[]>;
 }
 
 const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
@@ -54,10 +54,11 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
     }
 
     const { id: userId } = user;
+    const { from, to } = useCurrStore((state) => state.filterRange);
     const { data: filteredSortedTransactions, isLoading } = useQuery(
         {
-            queryKey: [userId, listType, filter, sortBy],
-            queryFn: () => loader(userId, filter, sortBy)
+            queryKey: [userId, listType, from, to, sortBy],
+            queryFn: () => loader(userId, filter, sortBy, from, to)
         });
 
     const handleEdit = (id: number) => navigate(`${ROUTES.ROOT}/${listType}/${id}`);

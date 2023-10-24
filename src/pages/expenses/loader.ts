@@ -19,11 +19,11 @@ export async function loaderExpenses(
   const filterByDate = !filter ? null : getRangeDates(filter);
   const data: Array<ITransaction> = await getExpenses({ filter: filterByDate, sortBy, userId });
 
+  //TODO remove from here
   if (from && to) {
     const filteredData = data.filter((transaction) => {
       const date = dayjs(transaction.completedAt).format("YYYY-MM-DD");
       if (dayjs(date).isBetween(from, to, "day", "[]")) {
-        console.log(true, date, from, to);
         return transaction;
       }
     });

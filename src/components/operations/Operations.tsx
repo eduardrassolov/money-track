@@ -4,6 +4,7 @@ import Sort from './sort/Sort'
 import { styled } from 'styled-components'
 import { devices } from '../../styles/breakPoints'
 import Search from '../search/Search'
+import DateFilter from '../dateRangePicker/DateFilter'
 
 
 export const OperationsContainer = styled.div`
@@ -39,7 +40,8 @@ export default function Operation() {
     return (
         <OperationsContainer>
             <FirstContainer>
-                <Filter options={FILTER_DATE_OPTIONS} filterKey={FILTER_KEYS.DATE} />
+                {/* <Filter options={FILTER_DATE_OPTIONS} filterKey={FILTER_KEYS.DATE} /> */}
+                <DateFilter />
             </FirstContainer>
 
             <SecondContainer>
