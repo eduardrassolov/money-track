@@ -10,18 +10,14 @@ export const SELECT = {
   `,
 };
 
-export default async function getTransactions({
-  filter,
-  sortBy,
-  userId,
-}: ILoaderTransaction): Promise<Array<ITransaction>> {
+export default async function getTransactions({ sortBy, userId }: ILoaderTransaction): Promise<Array<ITransaction>> {
   let query = supabase.from("transactions").select(SELECT.ALL_TRANSACTIONS).eq("profile_id", userId);
 
-  console.log("filter", filter);
+  // console.log("filter", filter);
 
-  if (filter) {
-    query = query.gt("completed_at", filter);
-  }
+  // if (filter) {
+  //   query = query.gt("completed_at", filter);
+  // }
 
   query = query.order(sortBy.field, { ascending: sortBy.direction === "asc" ? true : false });
   const { data } = await query;

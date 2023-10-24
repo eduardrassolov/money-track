@@ -18,7 +18,6 @@ const StyledContainer = styled.div`
 `
 
 export default function PieDiagram({ label, data }: IPieDiagram) {
-    console.log(data);
     return (
         <>
             {data?.length ?

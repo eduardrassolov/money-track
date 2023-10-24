@@ -4,12 +4,31 @@ import getRangeDates from "../../services/getRangeDate";
 import { defaultSort } from "../transactions/loader";
 import { Filter } from "../../types/filterBy.type";
 import { SortBy } from "../../types/sortBy.type";
+import dayjs from "dayjs";
+import isBetween from "dayjs/plugin/isBetween";
 
+dayjs.extend(isBetween);
 // export async function loaderExpenses({ filter = null, sortBy = { ...defaultSort }, userId }: ILoaderTransaction) {
-export async function loaderExpenses(userId: string, filter: Filter = null, sortBy: SortBy = { ...defaultSort }) {
+export async function loaderExpenses(
+  userId: string,
+  filter: Filter = null,
+  sortBy: SortBy = { ...defaultSort },
+  from: string = "",
+  to: string = ""
+) {
   const filterByDate = !filter ? null : getRangeDates(filter);
-  console.log("test", userId, filter, sortBy);
   const data: Array<ITransaction> = await getExpenses({ filter: filterByDate, sortBy, userId });
+
+  if (from && to) {
+    const filteredData = data.filter((transaction) => {
+      const date = dayjs(transaction.completedAt).format("YYYY-MM-DD");
+      if (dayjs(date).isBetween(from, to, "day", "[]")) {
+        console.log(true, date, from, to);
+        return transaction;
+      }
+    });
+    return filteredData;
+  }
 
   return data;
 }

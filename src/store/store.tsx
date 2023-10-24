@@ -1,4 +1,5 @@
 
+import dayjs from "dayjs";
 import { create } from "zustand";
 
 export const dark: ITheme = {
@@ -38,10 +39,17 @@ export interface ITheme {
   error: string,
 }
 
+export type RangeDate = {
+  from: string,
+  to: string
+}
 interface IStore {
   search: string,
   theme: ITheme,
   categoryFilter: string[],
+  filterRange: RangeDate,
+  setFilterRange: (fromTo: RangeDate) => void,
+
   toogleTheme: (nextTheme: string) => void,
   setSearch: (value: string) => void,
   setCategoryFilter: (category: string) => void,
@@ -52,6 +60,10 @@ export const useCurrStore = create<IStore>()((set) => ({
   search: "",
   theme: { ...light },
   categoryFilter: [],
+
+  filterRange: { from: dayjs(new Date()).startOf("month").format("YYYY-MM-DD"), to: dayjs(new Date).format("YYYY-MM-DD") },
+
+  setFilterRange: (fromTo: RangeDate) => set(() => ({ filterRange: fromTo })),
 
 
   setSearch: (value: string) => set(() => ({ search: value })),

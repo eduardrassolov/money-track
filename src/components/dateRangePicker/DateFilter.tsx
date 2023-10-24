@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react"
 import { ConfigProvider, DatePicker } from 'antd';
 import styled from "styled-components";
 import useTheme from "../../utils/hooks/useTheme";
 import { devices } from "../../styles/breakPoints";
-import dayjs from "dayjs";
-import useRangePicker from "./useRangePicker";
-import { useSearchParams } from "react-router-dom";
+import dayjs from 'dayjs'
+import { RangeDate, useCurrStore } from "../../store/store";
 const { RangePicker } = DatePicker;
 
 const StyledRangePicker = styled(RangePicker)`
@@ -27,33 +25,31 @@ const StyledContainer = styled.div`
         }
     }
 `
+
 export default function DateFilter() {
     const { theme } = useTheme();
 
-    const { rangeDates, changeRange } = useRangePicker();
-    function handleChange(e) {
-        changeRange(e);
-    }
+    const { filterRange: { from, to }, setFilterRange } = useCurrStore((state) => (
+        {
+            setFilterRange: state.setFilterRange,
+            filterRange: state.filterRange
+        }));
 
-    const [searchParams, setSearchParams] = useSearchParams();
+    //TODO refactor ANY
+    const rangeDates: any = [dayjs(from), dayjs(to)];
 
-    useEffect(() => {
-        if (!rangeDates) {
-            setSearchParams(params => {
-                params.delete("from");
-                params.delete("to");
-                return params;
-            })
+    //TODO refactor ANY
+    function handleChange(value: any) {
+        if (!value)
+            return;
+
+        const [startValue, endValue] = value;
+        const fromTo: RangeDate = {
+            from: dayjs(startValue.$d).format("YYYY-MM-DD"),
+            to: dayjs(endValue.$d).format("YYYY-MM-DD")
         }
-        setSearchParams(params => {
-            const [start, end] = rangeDates
-            params.set("from", dayjs(start.$d).format("DD-MMM-YYYY"));
-            params.set("to", dayjs(start.$d).format("DD-MMM-YYYY"));
-            return params;
-
-        })
-    }, [rangeDates])
-
+        setFilterRange({ ...fromTo });
+    }
 
     return (
         <>
