@@ -1,5 +1,3 @@
-import { FILTER_DATE_OPTIONS, FILTER_KEYS } from './filter/filterParameters'
-import Filter from './filter/Filter'
 import Sort from './sort/Sort'
 import { styled } from 'styled-components'
 import { devices } from '../../styles/breakPoints'
@@ -27,13 +25,13 @@ const Container = styled.div`
     width: 100%;
 `
 const FirstContainer = styled(Container)`
-    grid-area: 1/1/2/2; 
+    grid-area: 1/1/2/3; 
 `
 const SecondContainer = styled(Container)`
-    grid-area: 1/2/2/3; 
+    grid-area: 2/1/3/2; 
 `
 const ThirdContainer = styled(Container)`
-    grid-area: 2/1/3/3; 
+    grid-area: 2/2/3/3; 
 `
 
 export default function Operation() {
@@ -45,11 +43,11 @@ export default function Operation() {
             </FirstContainer>
 
             <SecondContainer>
-                <Sort />
+                <Search />
             </SecondContainer>
 
             <ThirdContainer>
-                <Search />
+                <Sort />
             </ThirdContainer>
 
         </OperationsContainer>
