@@ -44,6 +44,7 @@ export default function DateFilter() {
             setFilterRange: state.setFilterRange,
             filterRange: state.filterRange
         }));
+    console.log(from, to);
 
     //TODO refactor ANY
     const rangeDates: any = [dayjs(from), dayjs(to)];

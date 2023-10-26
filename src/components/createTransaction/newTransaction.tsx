@@ -71,7 +71,6 @@ export default function NewTransaction({ type }: { type: number }) {
         }
     });
 
-    console.log(errors);
     const onSubmit: SubmitHandler<NewTransaction> = ({ description, amount, completedAt, categoryId, currency }) => {
         if (!description.trim() || !amount || !completedAt || !categoryId || !currency) {
             console.log("Empty fields");
