@@ -6,7 +6,7 @@ import CategoryTransaction from './CategoryTransaction';
 import CurrenctyTransaction from './CurrenctyTransaction';
 import TimeCreatedTransaction from './TimeCreatedTransaction';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import dayjs from 'dayjs';
+
 import { PrimaryBtn } from '../../styles/Button';
 import styled from 'styled-components';
 import { HiArrowRightCircle, HiOutlineArrowLeftCircle } from 'react-icons/hi2';
@@ -19,6 +19,11 @@ import useSort from '../../utils/hooks/useSort';
 import { SortBy } from '../../types/sortBy.type';
 import { useBoundStore } from '../../store/store';
 import TimeLine from './TimeLine';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { transactionSchema } from './transactionSchema';
+import { ErrorP } from '../newTransaction/FormTransaction.style';
+import dayjs from 'dayjs';
 
 const length = 4;
 
@@ -36,6 +41,11 @@ const StyledContainer = styled.div`
     align-items: center;
     gap: 0.5rem;
     margin: 1rem 0;
+`
+const Div = styled.div`
+    display: flex;
+    flex-direction: column;
+    
 `
 
 const steps = [1, 2, 3, 4, 5];
@@ -57,15 +67,15 @@ export default function NewTransaction({ type }: number) {
     const nextStep = () => setStep((prev) => prev === length ? prev : prev + 1);
     const prevStep = () => setStep((prev) => prev === 0 ? prev : prev - 1);
 
-    const { register, handleSubmit, reset } = useForm<NewTransaction>({
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({
+        resolver: yupResolver(transactionSchema),
         defaultValues: {
-            description: "",
             completedAt: dayjs(new Date()).format("YYYY-MM-DD HH:mm"),
             currency: userCurrency
         }
     });
 
-
+    console.log(errors);
     const onSubmit: SubmitHandler<NewTransaction> = ({ description, amount, completedAt, categoryId, currency }) => {
         if (!description.trim() || !amount || !completedAt || !categoryId || !currency) {
             console.log("Empty fields");
@@ -118,6 +128,11 @@ export default function NewTransaction({ type }: number) {
                     }
                 </StyledContainer>
 
+                <div>
+                    <ErrorP>{errors?.amount?.message}</ErrorP>
+                    <ErrorP>{errors?.categoryId?.message}</ErrorP>
+                    <ErrorP>{errors?.description?.message}</ErrorP>
+                </div>
             </form >
         </>
     )

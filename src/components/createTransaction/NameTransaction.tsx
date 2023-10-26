@@ -1,6 +1,7 @@
 
 import styled from "styled-components";
 import { StyledInput } from "../input/Input";
+import { ErrorP } from "../newTransaction/FormTransaction.style";
 
 export const StyledDescriptions = styled.div`
     display: flex;
