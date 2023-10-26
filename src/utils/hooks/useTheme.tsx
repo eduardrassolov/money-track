@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useBoundStore, useCurrStore } from '../../store/store';
+import { useBoundStore } from '../../store/store';
 
 export default function useTheme() {
     // const { theme, toogleTheme } = useCurrStore((state) => state);

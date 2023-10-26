@@ -1,9 +1,8 @@
 import dayjs from "dayjs";
-import { useState } from "react";
 import { StyledInput } from "../input/Input";
 import { StyledDescriptions, TitleText } from "./NameTransaction";
 
-export default function TimeCreatedTransaction({ register }) {
+export default function TimeCreatedTransaction({ register }: any) {
     const now = dayjs(new Date()).format("YYYY-MM-DD HH:mm");
 
     return (

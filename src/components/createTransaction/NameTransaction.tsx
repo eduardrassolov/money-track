@@ -1,7 +1,6 @@
 
 import styled from "styled-components";
 import { StyledInput } from "../input/Input";
-import { ErrorP } from "../newTransaction/FormTransaction.style";
 
 export const StyledDescriptions = styled.div`
     display: flex;
@@ -14,7 +13,7 @@ export const TitleText = styled.p`
     font-size: 1.1rem;
 `
 
-export default function NameTransaction({ register }) {
+export default function NameTransaction({ register }: any) {
 
     return (
         <StyledDescriptions>

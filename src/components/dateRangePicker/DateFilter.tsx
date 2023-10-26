@@ -3,7 +3,8 @@ import styled from "styled-components";
 import useTheme from "../../utils/hooks/useTheme";
 import { devices } from "../../styles/breakPoints";
 import dayjs from 'dayjs'
-import { RangeDate, useBoundStore } from "../../store/store";
+import { useBoundStore } from "../../store/store";
+import { RangeDate } from '../../store/storeConfig';
 const { RangePicker } = DatePicker;
 
 const StyledRangePicker = styled(RangePicker)`

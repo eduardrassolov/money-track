@@ -3,7 +3,6 @@ import { devices } from '../../styles/breakPoints';
 import TitleTrigger from './TitleTrigger';
 import { FC, useState } from 'react';
 import TYPES_TRANSACTION from '../../config/typeTransactions';
-import useResize from '../../pages/dashboard/pie/useResize';
 import NewTransaction from '../createTransaction/newTransaction';
 
 export interface INewTransactionProps {
@@ -42,7 +41,7 @@ const CreateNewTransactionForm: FC<INewTransactionProps> = ({ type }) => {
 
             {isOpen ?
                 <>
-                    <NewTransaction type={1} />
+                    <NewTransaction type={type} />
                     {/* <NewForm type={1} /> */}
                 </>
                 : ""}

@@ -29,10 +29,11 @@ const length = 4;
 
 type NewTransaction = {
     description: string,
-    amount?: number,
-    categoryId?: string,
-    currency?: string,
-    completedAt: string | Date,
+    currency: string,
+    completedAt: string,
+    amount: number,
+    categoryId: string
+
 }
 
 const StyledContainer = styled.div`
@@ -42,15 +43,10 @@ const StyledContainer = styled.div`
     gap: 0.5rem;
     margin: 1rem 0;
 `
-const Div = styled.div`
-    display: flex;
-    flex-direction: column;
-    
-`
 
 const steps = [1, 2, 3, 4, 5];
 
-export default function NewTransaction({ type }: number) {
+export default function NewTransaction({ type }: { type: number }) {
     const { user } = useUser();
     const queryClient = useQueryClient();
     const { createTransaction } = useCreateTransaction();
@@ -71,7 +67,7 @@ export default function NewTransaction({ type }: number) {
         resolver: yupResolver(transactionSchema),
         defaultValues: {
             completedAt: dayjs(new Date()).format("YYYY-MM-DD HH:mm"),
-            currency: userCurrency
+            currency: userCurrency,
         }
     });
 
@@ -82,14 +78,13 @@ export default function NewTransaction({ type }: number) {
             return;
         }
 
-        console.log(description, amount, completedAt, categoryId, currency);
         const key = type === TYPES_TRANSACTION.INCOME ? QUERY_KEY.INCOMES : QUERY_KEY.EXPENSES;
 
         createTransaction({
             description,
             amount,
-            completedAt: new Date(completedAt),
-            categoryId: categoryId,
+            completedAt,
+            categoryId,
             profileId: userId,
             currencyId: currency
         }, {

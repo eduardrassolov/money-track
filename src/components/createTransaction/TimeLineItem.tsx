@@ -26,7 +26,14 @@ const Span = styled.span<{ $isHighlight: boolean }>`
     color: ${props => props.$isHighlight ? props.theme.colorLogoMain : props.theme.border};
 `
 
-export default function TimeLineItem({ item, index, currentStep, length }) {
+interface ITimeLineItem {
+    item: any,
+    index: number,
+    currentStep: number,
+    length: number
+}
+
+export default function TimeLineItem({ item, index, currentStep, length }: ITimeLineItem) {
     return (
         <>
             <AnimatedContainer delay={0.1 * index} direction={slideDown} >

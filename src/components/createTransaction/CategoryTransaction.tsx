@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import TYPES_TRANSACTION from '../../config/typeTransactions';
 import { QUERY_KEY } from '../../config/queryClientKeys';
 import { useQuery } from '@tanstack/react-query';
@@ -36,7 +36,13 @@ const Text = styled(TitleText)`
     color: gray;
 `
 
-export default function CategoryTransaction({ type, userId, register }) {
+interface ICategoryTransaction {
+    type: number,
+    userId: string,
+    register: any
+}
+
+export default function CategoryTransaction({ type, userId, register }: ICategoryTransaction) {
 
     const { data: optionsList, isLoading: isOptionsLoading } = useQuery(
         {
@@ -50,7 +56,7 @@ export default function CategoryTransaction({ type, userId, register }) {
         });
 
     const [checkedId, setChecked] = useState("");
-    const handleCheckedId = (e) => setChecked(() => e.target.id);
+    const handleCheckedId = (e: React.ChangeEvent<HTMLInputElement>) => setChecked(() => e.target.value);
 
     return (
         <Descriptions>

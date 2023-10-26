@@ -1,11 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { useUser } from "../../utils/hooks/useUser";
 import Select from "../dropDown/Select";
 import apiGetCurrency from "../../services/api/apiGetCurrency";
 import LoadingUi from "../spinner/LoadingUi";
 import { StyledDescriptions, TitleText } from "./NameTransaction";
 
-export default function CurrenctyTransaction({ register }) {
+export default function CurrenctyTransaction({ register }: any) {
 
     const { data: optionCurrency, isLoading: isCurrencyLoading } = useQuery({ queryKey: ["currency"], queryFn: apiGetCurrency });
 

@@ -2,7 +2,7 @@
 import { StyledInput } from '../input/Input'
 import { StyledDescriptions, TitleText } from './NameTransaction'
 
-export default function AmountTransaction({ register }) {
+export default function AmountTransaction({ register }: any) {
     return (
         <StyledDescriptions>
             <TitleText>Amount transaction:</TitleText>
