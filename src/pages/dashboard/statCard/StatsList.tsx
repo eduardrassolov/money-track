@@ -22,6 +22,10 @@ export const slideUp = {
     hidden: { y: 100 },
     visible: { y: 0 }
 }
+export const slideDown = {
+    hidden: { y: -30 },
+    visible: { y: 0 }
+}
 
 export default function StatsList() {
     console.log("statsrender");
@@ -31,7 +35,6 @@ export default function StatsList() {
 
     if (!defaultCurrency || !expenses || !incomes || !transactions)
         return null;
-
 
     const convertedExpenses = convertToOneCurrency(expenses, defaultCurrency);
     const convertedIncomes = convertToOneCurrency(incomes, defaultCurrency);

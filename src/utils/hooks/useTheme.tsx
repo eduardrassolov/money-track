@@ -1,26 +1,30 @@
 import { useEffect } from 'react';
-import { useCurrStore } from '../../store/store';
+import { useBoundStore, useCurrStore } from '../../store/store';
 
 export default function useTheme() {
-    const { theme, toogleTheme } = useCurrStore((state) => state);
+    // const { theme, toogleTheme } = useCurrStore((state) => state);
+    const { theme, toggleTheme } = useBoundStore(state => ({
+        theme: state.theme,
+        toggleTheme: state.toggleTheme
+    }))
 
     useEffect(() => {
         const theme = localStorage.getItem("theme");
         if (theme) {
-            toogleTheme(theme);
+            toggleTheme(theme);
         }
         else {
-            toogleTheme("light");
+            toggleTheme("light");
         }
     }, [])
 
     function changeTheme() {
         if (theme.name === "light") {
-            toogleTheme("dark");
+            toggleTheme("dark");
             localStorage.setItem("theme", "dark");
         }
         else {
-            toogleTheme("light");
+            toggleTheme("light");
             localStorage.setItem("theme", "light");
         }
     }

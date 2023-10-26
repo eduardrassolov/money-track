@@ -1,6 +1,5 @@
-import { HiOutlineMinus, HiOutlinePlus } from 'react-icons/hi2'
+import { HiChevronDown, HiChevronUp } from 'react-icons/hi2'
 import styled from 'styled-components'
-import useResize from '../../pages/dashboard/pie/useResize'
 
 const Title = styled.div`
     display: flex;
@@ -13,6 +12,7 @@ const ToggleBtn = styled.button`
     background: none;
     border: none;
     text-decoration: none;
+    text-align: center;
     color: ${props => props.theme.text};
     cursor: pointer;
 `
@@ -24,20 +24,17 @@ interface ITitleTrigger {
 }
 
 export default function TitleTrigger({ isOpen, onOpenClose, text }: ITitleTrigger) {
-    const { isSmallScreen } = useResize();
     return (
         <Title>
             <span>{text}</span>
-            {isSmallScreen ?
-                <ToggleBtn onClick={onOpenClose}>
-                    {!isOpen ?
-                        <HiOutlinePlus size={"1.5rem"} />
-                        :
-                        <HiOutlineMinus size={"1.5rem"} />
-                    }
-                </ToggleBtn>
-                : ""
-            }
+            <ToggleBtn onClick={onOpenClose}>
+                {!isOpen ?
+                    <HiChevronDown size={"1.5rem"} />
+                    :
+                    <HiChevronUp size={"1.5rem"} />
+                }
+            </ToggleBtn>
+
 
         </Title>
     )

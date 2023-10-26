@@ -1,6 +1,5 @@
 import { ThemeProvider, keyframes, styled } from "styled-components"
-import { useCurrStore } from "../../store/store"
-
+import { useBoundStore } from "../../store/store"
 
 const rotation = keyframes`
     from{
@@ -11,7 +10,7 @@ const rotation = keyframes`
     }
 `
 
-const Loader = styled.span<{$size: number}>`
+const Loader = styled.span<{ $size: number }>`
     width: ${props => props.$size}px;
     height:  ${props => props.$size}px;
     border-radius: 50%;
@@ -53,18 +52,18 @@ const sizes = {
     lg: 100
 }
 
-export default function LoadingUi({size = "sm"}: Size) {
-    const theme = useCurrStore((state) => state.theme);
+export default function LoadingUi({ size = "sm" }: Size) {
+    const theme = useBoundStore((state) => state.theme);
 
     return (
         <ThemeProvider theme={theme}>
             {
-                size === "sm" ? 
-                <center> <Loader $size={sizes[size]} /> </center>
-                :  
-                <Container>
-                    <Loader $size={sizes[size]}></Loader> 
-                </Container>
+                size === "sm" ?
+                    <center> <Loader $size={sizes[size]} /> </center>
+                    :
+                    <Container>
+                        <Loader $size={sizes[size]}></Loader>
+                    </Container>
             }
         </ThemeProvider>
     )

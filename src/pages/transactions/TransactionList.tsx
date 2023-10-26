@@ -11,7 +11,7 @@ import { Filter } from "../../types/filterBy.type.ts";
 import apiDeleteTransaction from "../../services/api/deleteTransaction.ts";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
-import { useCurrStore } from "../../store/store.tsx";
+import { useBoundStore } from "../../store/store.tsx";
 
 import { searchTransactionsByMask } from "../../utils/helpers/searchTransactionsByMask.ts";
 import LoadingUi from "../../components/spinner/LoadingUi.tsx";
@@ -40,21 +40,19 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const { mutate: deleteTransaction } = useMutation({ mutationFn: apiDeleteTransaction, onSuccess: succesHandle });
-    const mask = useCurrStore((state) => state.search);
+    const mask = useBoundStore((state) => state.search);
     const { filter } = useFilter();
     const sortBy: SortBy = useSort();
     const { user } = useUser();
 
     const { currPage } = usePagination();
-    const categoryFilter = useCurrStore((state) => state.categoryFilter);
-    console.log(categoryFilter);
 
     if (!user) {
         return null;
     }
 
     const { id: userId } = user;
-    const { from, to } = useCurrStore((state) => state.filterRange);
+    const { from, to } = useBoundStore((state) => state.filterRange);
     const { data: filteredSortedTransactions, isLoading } = useQuery(
         {
             queryKey: [userId, listType, from, to, sortBy],
@@ -67,7 +65,7 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
 
     function succesHandle() {
         toast.success('Successfully deleted.');
-        queryClient.invalidateQueries({ queryKey: [userId, listType, filter, sortBy] });
+        queryClient.invalidateQueries({ queryKey: [userId, listType, from, to, sortBy] });
     }
 
     const transactions = searchTransactionsByMask(filteredSortedTransactions, mask);

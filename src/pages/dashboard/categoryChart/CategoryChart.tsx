@@ -5,7 +5,7 @@ import { FC, useState } from "react";
 import styled from "styled-components";
 
 import CustomLegend from "./CustomLegend";
-import { useCurrStore } from "../../../store/store";
+import { useBoundStore } from "../../../store/store";
 
 import useDefaultCurrency from "../../../utils/hooks/useDefaultCurrency";
 import { pieChartColors } from "../../../config/chartPieColors.ts";
@@ -78,7 +78,7 @@ const CategoryChart: FC<ICategoryChart> = ({ data }) => {
     const [selected, setSelect] = useState<string>("");
     const handleSelect = (id: string) => setSelect(prev => prev === id ? "" : id);
 
-    const theme = useCurrStore((state) => state.theme);
+    const theme = useBoundStore((state) => state.theme);
 
     const { defaultCurrency } = useDefaultCurrency();
     function handleClick(id: string) {

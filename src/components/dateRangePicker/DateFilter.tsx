@@ -3,7 +3,7 @@ import styled from "styled-components";
 import useTheme from "../../utils/hooks/useTheme";
 import { devices } from "../../styles/breakPoints";
 import dayjs from 'dayjs'
-import { RangeDate, useCurrStore } from "../../store/store";
+import { RangeDate, useBoundStore } from "../../store/store";
 const { RangePicker } = DatePicker;
 
 const StyledRangePicker = styled(RangePicker)`
@@ -33,13 +33,12 @@ const StyledContainer = styled.div`
             flex-direction:row;
         }
     }
-    
 `
 
 export default function DateFilter() {
     const { theme } = useTheme();
 
-    const { filterRange: { from, to }, setFilterRange } = useCurrStore((state) => (
+    const { filterRange: { from, to }, setFilterRange } = useBoundStore((state) => (
         {
             setFilterRange: state.setFilterRange,
             filterRange: state.filterRange

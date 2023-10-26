@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { SearchInput } from "../input/Input";
-import { useCurrStore } from "../../store/store";
+import { useBoundStore } from "../../store/store";
 
+//TODO check this component for refactoring
 export default function Search() {
     const [mask, setMask] = useState("");
-    const setSearch = useCurrStore((state) => state.setSearch);
+    const setSearch = useBoundStore((state) => state.setSearch);
 
     useEffect(() => {
         setSearch(mask);
