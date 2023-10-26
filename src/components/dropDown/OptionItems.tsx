@@ -16,7 +16,7 @@ export default function OptionItems({ optionList, labelText, isDefaultCategory =
     <Group>
       <Label>{labelText}</Label>
 
-      {optionList.map((option: any) =>
+      {optionList?.map((option: any) =>
         <CustomOption key={option.id}>
           <SelectItem value={option.id} disabled={isDisabled}>{`${option.name}`}</SelectItem>
 

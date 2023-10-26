@@ -7,13 +7,13 @@ const Container = styled.div`
   margin: 2rem 0 0%;
   padding: 2rem 0.5rem;
 
-  @media only screen and (min-width: ${devices.md}px) {
+  /* @media only screen and (min-width: ${devices.md}px) {
     display: grid;
     grid-template-columns: 1fr 3fr;
     grid-column-gap: 0.5rem;
     max-width: 1000px;
     flex-direction: column;
-  }
+  } */
 `
 
 const FormDiv = styled.div`
