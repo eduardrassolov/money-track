@@ -47,6 +47,8 @@ const StyledContainer = styled.div`
 const steps = [1, 2, 3, 4, 5];
 
 export default function NewTransaction({ type }: { type: number }) {
+
+
     const { user } = useUser();
     const queryClient = useQueryClient();
     const { createTransaction } = useCreateTransaction();
@@ -56,8 +58,18 @@ export default function NewTransaction({ type }: { type: number }) {
         return null;
     }
 
+
+
     const { id: userId } = user;
     const userCurrency = user.user_metadata.currency as string;
+
+    const [newTransaction, setNewTransaction] = useState({
+        desciption: "",
+        amount: null,
+        categoryId: null,
+        currencyId: userCurrency,
+        userId: userId.
+    })
 
     const [currentStep, setStep] = useState(0);
     const nextStep = () => setStep((prev) => prev === length ? prev : prev + 1);
