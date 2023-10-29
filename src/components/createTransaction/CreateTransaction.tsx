@@ -37,7 +37,7 @@ export default function CreateNewTransaction({ type }: { type: number }) {
 
     const key = type === TYPES_TRANSACTION.INCOME ? QUERY_KEY.INCOMES : QUERY_KEY.EXPENSES;
 
-    const { transaction, transactionDataArr, reset } = useNewTransaction(user);
+    const { transaction, transactionDataArr, reset } = useNewTransaction(user, type);
 
     const [currentStep, setStep] = useState(0);
     const nextStep = () => setStep((prev) => prev === transactionDataArr.length ? prev : prev + 1);

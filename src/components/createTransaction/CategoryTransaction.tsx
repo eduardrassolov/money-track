@@ -63,7 +63,9 @@ export default function CategoryTransaction({ categoryId, onChange, type, userId
 
             <Container>
                 <Text>Custom category</Text>
-                {isCustomOptionsLoading ? <LoadingUi /> :
+                {isCustomOptionsLoading ?
+                    <LoadingUi />
+                    :
                     <StyledDIv>
                         {userCategory?.map(category =>
                             <StyledDiv key={category.id} $isSelected={categoryId === category.id} onClick={() => onChange("categoryId", category.id)}>
@@ -75,7 +77,9 @@ export default function CategoryTransaction({ categoryId, onChange, type, userId
 
             <Container>
                 <Text>Default category</Text>
-                {isOptionsLoading ? <LoadingUi /> :
+                {isOptionsLoading ?
+                    <LoadingUi />
+                    :
                     <StyledDIv>
                         {optionsList?.map(category =>
                             <StyledDiv key={category.id} $isSelected={categoryId === category.id} onClick={() => onChange("categoryId", category.id)}>
