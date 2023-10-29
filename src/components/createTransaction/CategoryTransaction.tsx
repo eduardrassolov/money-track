@@ -37,12 +37,14 @@ const Text = styled(TitleText)`
 `
 
 interface ICategoryTransaction {
+    categoryId: string,
+    onChange: (key: string, id: string) => void,
     type: number,
     userId: string,
-    register: any
+
 }
 
-export default function CategoryTransaction({ type, userId, register }: ICategoryTransaction) {
+export default function CategoryTransaction({ categoryId, onChange, type, userId }: ICategoryTransaction) {
 
     const { data: optionsList, isLoading: isOptionsLoading } = useQuery(
         {
@@ -55,8 +57,7 @@ export default function CategoryTransaction({ type, userId, register }: ICategor
             queryFn: () => apiGetUserCategory(type, userId)
         });
 
-    const [checkedId, setChecked] = useState("");
-    const handleCheckedId = (e: React.ChangeEvent<HTMLInputElement>) => setChecked(() => e.target.value);
+
 
     return (
         <Descriptions>
@@ -67,9 +68,8 @@ export default function CategoryTransaction({ type, userId, register }: ICategor
                 {isCustomOptionsLoading ? <LoadingUi /> :
                     <StyledDIv>
                         {userCategory?.map(category =>
-                            <StyledDiv key={category.id} $isSelected={checkedId === category.id} >
-                                <input type="radio" value={category.id} id={category.id} {...register("categoryId")} onChange={handleCheckedId} />
-                                <label htmlFor={category.id}>{category.name}</label>
+                            <StyledDiv key={category.id} $isSelected={categoryId === category.id} onClick={() => onChange("categoryId", category.id)}>
+                                <span>{category.name}</span>
                             </StyledDiv>)}
                     </StyledDIv>
                 }
@@ -80,9 +80,8 @@ export default function CategoryTransaction({ type, userId, register }: ICategor
                 {isOptionsLoading ? <LoadingUi /> :
                     <StyledDIv>
                         {optionsList?.map(category =>
-                            <StyledDiv key={category.id} $isSelected={checkedId === category.id} >
-                                <input type="radio" value={category.id} id={category.id} {...register("categoryId")} onChange={handleCheckedId} />
-                                <label htmlFor={category.id}>{category.name}</label>
+                            <StyledDiv key={category.id} $isSelected={categoryId === category.id} onClick={() => onChange("categoryId", category.id)}>
+                                <span>{category.name}</span>
                             </StyledDiv>)}
                     </StyledDIv>
                 }
