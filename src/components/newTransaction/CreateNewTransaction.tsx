@@ -3,7 +3,6 @@ import { devices } from '../../styles/breakPoints';
 import TitleTrigger from './TitleTrigger';
 import { FC, useState } from 'react';
 import TYPES_TRANSACTION from '../../config/typeTransactions';
-import NewTransaction from '../createTransaction/newTransaction';
 import CreateTransaction from '../createTransaction/CreateTransaction';
 
 export interface INewTransactionProps {
@@ -41,8 +40,7 @@ const CreateNewTransactionForm: FC<INewTransactionProps> = ({ type }) => {
             <TitleTrigger isOpen={isOpen} onOpenClose={handleOpenClose} text={textForTitle} />
 
             {isOpen ?
-
-                <CreateTransaction />
+                <CreateTransaction type={type} />
                 : ""
             }
 

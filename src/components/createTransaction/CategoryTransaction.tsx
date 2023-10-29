@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import TYPES_TRANSACTION from '../../config/typeTransactions';
 import { QUERY_KEY } from '../../config/queryClientKeys';
 import { useQuery } from '@tanstack/react-query';
@@ -6,6 +5,7 @@ import { apiGetCategories, apiGetUserCategory } from '../../services/api/apiGetC
 import styled from 'styled-components';
 import LoadingUi from '../spinner/LoadingUi';
 import { StyledDescriptions, TitleText } from './NameTransaction';
+import { TransactionProp } from './useNewTransaction';
 
 const StyledDIv = styled.div`
     display: flex;
@@ -36,15 +36,13 @@ const Text = styled(TitleText)`
     color: gray;
 `
 
-interface ICategoryTransaction {
+type CategoryTransactionProps = TransactionProp & {
     categoryId: string,
-    onChange: (key: string, id: string) => void,
     type: number,
     userId: string,
-
 }
 
-export default function CategoryTransaction({ categoryId, onChange, type, userId }: ICategoryTransaction) {
+export default function CategoryTransaction({ categoryId, onChange, type, userId }: CategoryTransactionProps) {
 
     const { data: optionsList, isLoading: isOptionsLoading } = useQuery(
         {

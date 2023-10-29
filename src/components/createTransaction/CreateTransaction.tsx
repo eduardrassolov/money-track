@@ -11,7 +11,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import useSort from '../../utils/hooks/useSort';
 import { SortBy } from '../../types/sortBy.type';
 import { useBoundStore } from '../../store/store';
-import TimeLine from './TimeLine';
+import TimeLine from './StepLine';
 import useNewTransaction from './useNewTransaction';
 
 const StyledContainer = styled.div`

@@ -12,19 +12,19 @@ interface ITimeLine {
     currentStep: number
 
 }
-export default function TimeLine({ maxLength, currentStep }: ITimeLine) {
-    const numbers = new Array<number>(maxLength).fill().map((_, i) => i + 1);
+export default function StepLine({ maxLength, currentStep }: ITimeLine) {
+    const stepNumbers = Array.from({ length: maxLength }, (_, i) => i + 1);
 
     return (
         <Container>
             {
-                numbers.map((item, index: number) =>
+                stepNumbers.map((item, index: number) =>
                     <TimeLineItem
                         key={`time_line_item${index}`}
                         item={item}
                         index={index}
                         currentStep={currentStep}
-                        length={numbers?.length || 0} />
+                        length={stepNumbers?.length || 0} />
                 )
             }
         </Container >

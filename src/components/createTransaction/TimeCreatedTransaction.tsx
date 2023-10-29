@@ -1,9 +1,14 @@
 import dayjs from "dayjs";
 import { StyledInput } from "../input/Input";
 import { StyledDescriptions, TitleText } from "./NameTransaction";
+import { TransactionProp } from "./useNewTransaction";
 
-export default function TimeCreatedTransaction({ timeCompleted, onChange }) {
-    const handleChange = (e) => onChange("timeCompleted", dayjs(e.target.value).format("YYYY-MM-DD HH:mm"));
+type TimeTrProps = TransactionProp & {
+    timeCompleted: string
+}
+
+export default function TimeCreatedTransaction({ timeCompleted, onChange }: TimeTrProps) {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => onChange("timeCompleted", dayjs(e.target.value).format("YYYY-MM-DD HH:mm"));
 
     return (
         <StyledDescriptions>

@@ -5,6 +5,7 @@ import AmountTransaction from './AmountTransaction';
 import CategoryTransaction from './CategoryTransaction';
 import CurrenctyTransaction from './CurrenctyTransaction';
 import TimeCreatedTransaction from './TimeCreatedTransaction';
+import { User } from '@supabase/supabase-js';
 
 const defaultTransaction = {
     description: "",
@@ -13,7 +14,11 @@ const defaultTransaction = {
     timeCompleted: dayjs(new Date()).format("YYYY-MM-DD HH:mm")
 }
 
-export default function useNewTransaction(user) {
+export type TransactionProp = {
+    onChange: (key: string, value: string) => void;
+}
+
+export default function useNewTransaction(user: User) {
     const { id: userId } = user;
     const userCurrency = user?.user_metadata.currency as string;
 

@@ -1,11 +1,17 @@
 
+import React from 'react';
 import { StyledInput } from '../input/Input'
 import { StyledDescriptions, TitleText } from './NameTransaction'
+import { TransactionProp } from './useNewTransaction';
 
-export default function AmountTransaction({ amount, onChange }) {
-    const handleChange = (e) => {
-        console.log(e.target.value);
-        onChange("amount", Number(e.target.value));
+type AmountTransactionProps = TransactionProp & {
+    amount: number | null,
+}
+
+export default function AmountTransaction({ amount, onChange }: AmountTransactionProps) {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { target: { value } } = e;
+        onChange("amount", value);
     }
     return (
         <StyledDescriptions>
@@ -13,7 +19,7 @@ export default function AmountTransaction({ amount, onChange }) {
 
             <StyledInput
                 type="number"
-                value={amount}
+                value={amount as number}
                 onChange={handleChange}
                 placeholder="Enter amount of transaction"
                 autoFocus />

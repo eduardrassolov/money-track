@@ -1,9 +1,7 @@
 
 import styled from "styled-components";
 import { StyledInput } from "../input/Input";
-import { HiArrowRightCircle, HiOutlineArrowLeftCircle } from "react-icons/hi2";
-import { useState } from "react";
-import useNewTransaction from "./useNewTransaction";
+import { TransactionProp } from "./useNewTransaction";
 
 export const StyledDescriptions = styled.div`
     display: flex;
@@ -16,9 +14,13 @@ export const TitleText = styled.p`
     font-size: 1.1rem;
 `
 
-export default function NameTransaction({ description, onChange }) {
+type NameTransacrtionProps = TransactionProp & {
+    description: string
+}
 
-    const handleChange = (e) => onChange("description", e.target.value);
+export default function NameTransaction({ description, onChange }: NameTransacrtionProps) {
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => onChange("description", e.target.value);
 
     return (
         <StyledDescriptions>

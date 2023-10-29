@@ -1,15 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
-import Select, { StyledSelect } from "../dropDown/Select";
+import { StyledSelect } from "../dropDown/Select";
 import apiGetCurrency from "../../services/api/apiGetCurrency";
 import LoadingUi from "../spinner/LoadingUi";
 import { StyledDescriptions, TitleText } from "./NameTransaction";
+import { TransactionProp } from "./useNewTransaction";
+import React from "react";
 
-export default function CurrenctyTransaction({ currencyId, onChange }) {
+type CurrencyTransaction = TransactionProp & {
+    currencyId: string
+}
+
+export default function CurrenctyTransaction({ currencyId, onChange }: CurrencyTransaction) {
 
     const { data: optionCurrency, isLoading: isCurrencyLoading } = useQuery({ queryKey: ["currency"], queryFn: apiGetCurrency });
-    const handleChange = (e) => {
-        console.log(e.target.value);
-        onChange("currencyId", e.target.value);
+    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const { target: { value } } = e;
+        onChange("currencyId", value);
     }
 
     console.log(currencyId);
