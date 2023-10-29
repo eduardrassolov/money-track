@@ -8,22 +8,23 @@ const Container = styled.div`
 `
 
 interface ITimeLine {
-    stepsList: number[],
+    maxLength: number,
     currentStep: number
 
 }
-export default function TimeLine({ stepsList, currentStep }: ITimeLine) {
+export default function StepLine({ maxLength, currentStep }: ITimeLine) {
+    const stepNumbers = Array.from({ length: maxLength }, (_, i) => i + 1);
 
     return (
         <Container>
             {
-                stepsList?.map((item, index: number) =>
+                stepNumbers.map((item, index: number) =>
                     <TimeLineItem
                         key={`time_line_item${index}`}
                         item={item}
                         index={index}
                         currentStep={currentStep}
-                        length={stepsList?.length || 0} />
+                        length={stepNumbers?.length || 0} />
                 )
             }
         </Container >

@@ -1,6 +1,7 @@
 
 import styled from "styled-components";
 import { StyledInput } from "../input/Input";
+import { TransactionProp } from "./useNewTransaction";
 
 export const StyledDescriptions = styled.div`
     display: flex;
@@ -13,12 +14,26 @@ export const TitleText = styled.p`
     font-size: 1.1rem;
 `
 
-export default function NameTransaction({ register }: any) {
+type NameTransacrtionProps = TransactionProp & {
+    description: string
+}
+
+export default function NameTransaction({ description, onChange }: NameTransacrtionProps) {
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => onChange("description", e.target.value);
 
     return (
         <StyledDescriptions>
             <TitleText>Transaction name:</TitleText>
-            <StyledInput type="text" {...register("description")} autoFocus placeholder="Enter name of transaction" />
+            <StyledInput
+                type="text"
+                required
+                autoFocus
+                placeholder="Enter name of transaction"
+                name={"description"}
+                value={description}
+                onChange={handleChange}
+            />
         </StyledDescriptions>
     )
 }

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import TYPES_TRANSACTION from '../../config/typeTransactions';
 import { QUERY_KEY } from '../../config/queryClientKeys';
 import { useQuery } from '@tanstack/react-query';
@@ -6,6 +5,7 @@ import { apiGetCategories, apiGetUserCategory } from '../../services/api/apiGetC
 import styled from 'styled-components';
 import LoadingUi from '../spinner/LoadingUi';
 import { StyledDescriptions, TitleText } from './NameTransaction';
+import { TransactionProp } from './useNewTransaction';
 
 const StyledDIv = styled.div`
     display: flex;
@@ -36,13 +36,13 @@ const Text = styled(TitleText)`
     color: gray;
 `
 
-interface ICategoryTransaction {
+type CategoryTransactionProps = TransactionProp & {
+    categoryId: string,
     type: number,
     userId: string,
-    register: any
 }
 
-export default function CategoryTransaction({ type, userId, register }: ICategoryTransaction) {
+export default function CategoryTransaction({ categoryId, onChange, type, userId }: CategoryTransactionProps) {
 
     const { data: optionsList, isLoading: isOptionsLoading } = useQuery(
         {
@@ -55,8 +55,7 @@ export default function CategoryTransaction({ type, userId, register }: ICategor
             queryFn: () => apiGetUserCategory(type, userId)
         });
 
-    const [checkedId, setChecked] = useState("");
-    const handleCheckedId = (e: React.ChangeEvent<HTMLInputElement>) => setChecked(() => e.target.value);
+
 
     return (
         <Descriptions>
@@ -67,9 +66,8 @@ export default function CategoryTransaction({ type, userId, register }: ICategor
                 {isCustomOptionsLoading ? <LoadingUi /> :
                     <StyledDIv>
                         {userCategory?.map(category =>
-                            <StyledDiv key={category.id} $isSelected={checkedId === category.id} >
-                                <input type="radio" value={category.id} id={category.id} {...register("categoryId")} onChange={handleCheckedId} />
-                                <label htmlFor={category.id}>{category.name}</label>
+                            <StyledDiv key={category.id} $isSelected={categoryId === category.id} onClick={() => onChange("categoryId", category.id)}>
+                                <span>{category.name}</span>
                             </StyledDiv>)}
                     </StyledDIv>
                 }
@@ -80,9 +78,8 @@ export default function CategoryTransaction({ type, userId, register }: ICategor
                 {isOptionsLoading ? <LoadingUi /> :
                     <StyledDIv>
                         {optionsList?.map(category =>
-                            <StyledDiv key={category.id} $isSelected={checkedId === category.id} >
-                                <input type="radio" value={category.id} id={category.id} {...register("categoryId")} onChange={handleCheckedId} />
-                                <label htmlFor={category.id}>{category.name}</label>
+                            <StyledDiv key={category.id} $isSelected={categoryId === category.id} onClick={() => onChange("categoryId", category.id)}>
+                                <span>{category.name}</span>
                             </StyledDiv>)}
                     </StyledDIv>
                 }
