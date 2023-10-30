@@ -6,6 +6,7 @@ const Title = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem 0;
+    cursor: pointer;
 `
 
 const ToggleBtn = styled.button`
@@ -25,9 +26,9 @@ interface ITitleTrigger {
 
 export default function TitleTrigger({ isOpen, onOpenClose, text }: ITitleTrigger) {
     return (
-        <Title>
+        <Title onClick={onOpenClose}>
             <span>{text}</span>
-            <ToggleBtn onClick={onOpenClose}>
+            <ToggleBtn>
                 {!isOpen ?
                     <HiChevronDown size={"1.5rem"} />
                     :

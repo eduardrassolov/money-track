@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { useUser } from '../../utils/hooks/useUser';
-import { PrimaryBtn } from '../../styles/Button';
 import styled from 'styled-components';
-import { HiArrowRightCircle, HiOutlineArrowLeftCircle } from 'react-icons/hi2';
+import { HiArrowRightCircle, HiMiniCheckCircle, HiOutlineArrowLeftCircle } from 'react-icons/hi2';
 import TYPES_TRANSACTION from '../../config/typeTransactions';
 import { QUERY_KEY } from '../../config/queryClientKeys';
 import useCreateTransaction from '../newTransaction/useCreateTransaction';
@@ -37,7 +36,7 @@ export default function CreateNewTransaction({ type }: { type: number }) {
 
     const key = type === TYPES_TRANSACTION.INCOME ? QUERY_KEY.INCOMES : QUERY_KEY.EXPENSES;
 
-    const { transaction, transactionDataArr, reset } = useNewTransaction(user);
+    const { transaction, transactionDataArr, reset } = useNewTransaction(user, type);
 
     const [currentStep, setStep] = useState(0);
     const nextStep = () => setStep((prev) => prev === transactionDataArr.length ? prev : prev + 1);
@@ -75,7 +74,7 @@ export default function CreateNewTransaction({ type }: { type: number }) {
                 <HiOutlineArrowLeftCircle onClick={prevStep} size={"2.4rem"} cursor={"pointer"} />
 
                 {currentStep === transactionDataArr.length - 1 ?
-                    <PrimaryBtn onClick={createNewTransaction}>Create</PrimaryBtn>
+                    <HiMiniCheckCircle onClick={createNewTransaction} size={"2.5rem"} color={"#7286D3"} cursor={"pointer"}>Create</HiMiniCheckCircle>
                     :
                     <HiArrowRightCircle onClick={nextStep} size={"2.4rem"} cursor={"pointer"} color={"#7286D3"} />}
 

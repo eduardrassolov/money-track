@@ -18,7 +18,7 @@ export type TransactionProp = {
     onChange: (key: string, value: string) => void;
 }
 
-export default function useNewTransaction(user: User) {
+export default function useNewTransaction(user: User, type: number) {
     const { id: userId } = user;
     const userCurrency = user?.user_metadata.currency as string;
 
@@ -32,13 +32,14 @@ export default function useNewTransaction(user: User) {
         {
             ...prev,
             [key]: value
-        }))
+        }));
+
     const reset = () => setTransaction((prev) => ({ ...prev, ...defaultTransaction }))
 
     const transactionDataArr = [
         <NameTransaction description={transaction.description} onChange={handleChange} />,
         <AmountTransaction amount={transaction.amount} onChange={handleChange} />,
-        <CategoryTransaction categoryId={transaction.categoryId} onChange={handleChange} type={1} userId={userId} />,
+        <CategoryTransaction categoryId={transaction.categoryId} onChange={handleChange} type={type} userId={userId} />,
         <CurrenctyTransaction currencyId={transaction.currencyId} onChange={handleChange} />,
         <TimeCreatedTransaction timeCompleted={transaction.timeCompleted} onChange={handleChange} />
     ]

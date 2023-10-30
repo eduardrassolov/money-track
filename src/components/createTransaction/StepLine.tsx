@@ -1,4 +1,3 @@
-
 import styled from "styled-components"
 import TimeLineItem from "./TimeLineItem"
 

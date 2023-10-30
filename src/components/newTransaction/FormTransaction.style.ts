@@ -31,6 +31,7 @@ const ErrorP = styled.p`
   margin: 0.5rem 0 1rem;
   transition: all 300ms;
 `;
+
 const FormFooter = styled.div`
   display: flex;
   justify-content: flex-end;
