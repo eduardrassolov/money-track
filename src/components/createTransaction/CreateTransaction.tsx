@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useUser } from '../../utils/hooks/useUser';
-import { PrimaryBtn } from '../../styles/Button';
 import styled from 'styled-components';
 import { HiArrowRightCircle, HiMiniCheckCircle, HiOutlineArrowLeftCircle } from 'react-icons/hi2';
 import TYPES_TRANSACTION from '../../config/typeTransactions';

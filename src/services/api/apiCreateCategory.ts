@@ -2,7 +2,7 @@ import { TABLE } from "../../config/dbTablesNames";
 import { SUPABASE_ERROR_CODE } from "../../config/sbErrorCodes";
 import supabase from "../supabase";
 
-interface IApiCreateCategory {
+export interface IApiCreateCategory {
   user_id: string;
   name: string;
   type_id: number;

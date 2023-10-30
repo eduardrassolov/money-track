@@ -1,4 +1,3 @@
-
 import styled from "styled-components";
 import { StyledInput } from "../input/Input";
 import { TransactionProp } from "./useNewTransaction";

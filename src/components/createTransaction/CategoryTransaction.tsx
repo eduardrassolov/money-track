@@ -81,7 +81,11 @@ export default function CategoryTransaction({ categoryId, onChange, type, userId
     const { mutate: deleteCategory } = useMutation({
         mutationFn: apiDeleteCategory,
         onSuccess: () => queryClient.invalidateQueries([QUERY_KEY.USER_CATEGORIES]),
-        onError: (err) => toast.error(err?.message || "Something goes wrong!")
+        onError: (err) => {
+            if (err instanceof Error) {
+                toast.error(err?.message || "Something goes wrong!");
+            }
+        }
     })
 
     const [editModeId, setEditMode] = useState("");
@@ -94,10 +98,10 @@ export default function CategoryTransaction({ categoryId, onChange, type, userId
 
     return (
         <Descriptions>
-            <TitleText>Choose category transaction:</TitleText>
+            <TitleText>Choose category of transaction:</TitleText>
 
             <Container>
-                <Text>Default category</Text>
+                <Text>Default category: </Text>
                 {isOptionsLoading ?
                     <LoadingUi />
                     :
@@ -112,7 +116,7 @@ export default function CategoryTransaction({ categoryId, onChange, type, userId
 
             <Container>
                 <StyledTitle>
-                    <Text>Custom category</Text>
+                    <Text>Custom category: </Text>
                     <HiOutlinePlusCircle size={"1.5rem"} cursor={"pointer"} onClick={handleOpen} />
                 </StyledTitle>
 
