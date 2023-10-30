@@ -32,7 +32,8 @@ export default function useNewTransaction(user: User, type: number) {
         {
             ...prev,
             [key]: value
-        }))
+        }));
+
     const reset = () => setTransaction((prev) => ({ ...prev, ...defaultTransaction }))
 
     const transactionDataArr = [
