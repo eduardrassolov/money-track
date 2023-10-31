@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import usePagination from "../../utils/hooks/usePagination";
 import { HiOutlineArrowSmallLeft, HiOutlineArrowSmallRight } from "react-icons/hi2";
-import { useBoundStore } from "../../store/store";
+import scrollTop from "../../utils/helpers/scrollTop";
 
 const onePageItems = 10;
 
@@ -60,7 +60,7 @@ export default function Pagination({ maxLength }: IPagination) {
 
     const handlePrev = () => {
         //TODO fix this
-        document.querySelector("section")?.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+        scrollTop();
         if (currPage > 1) {
             moveToPage(currPage - 1);
         }
@@ -68,7 +68,7 @@ export default function Pagination({ maxLength }: IPagination) {
     }
     const handleNext = () => {
         //TODO fix this
-        document.querySelector("section")?.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+        scrollTop();
         if (currPage < lastPage) {
             moveToPage(currPage + 1);
         }
