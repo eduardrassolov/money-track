@@ -12,6 +12,7 @@ import { SortBy } from '../../types/sortBy.type';
 import { useBoundStore } from '../../store/store';
 import TimeLine from './StepLine';
 import useNewTransaction from './useNewTransaction';
+import scrollTop from '../../utils/helpers/scrollTop';
 
 const StyledContainer = styled.div`
     display: flex;
@@ -39,7 +40,10 @@ export default function CreateNewTransaction({ type }: { type: number }) {
     const { transaction, transactionDataArr, reset } = useNewTransaction(user, type);
 
     const [currentStep, setStep] = useState(0);
-    const nextStep = () => setStep((prev) => prev === transactionDataArr.length ? prev : prev + 1);
+    const nextStep = () => {
+        scrollTop();
+        setStep((prev) => prev === transactionDataArr.length ? prev : prev + 1);
+    }
     const prevStep = () => setStep((prev) => !prev ? prev : prev - 1);
 
     function createNewTransaction() {
