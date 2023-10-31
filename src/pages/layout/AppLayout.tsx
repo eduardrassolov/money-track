@@ -6,12 +6,14 @@ import Aside from '../../components/aside/Aside.tsx';
 import Overlay from '../../components/overlay/Overlay.tsx';
 import useBurgerMenu from '../../components/aside/NavBar/useBurger.tsx';
 import { Section, StyledLayout } from './AppLayou.style.ts';
+import { useRef } from 'react';
 
 export default function AppLayout() {
     const { isBurgerOpen, handleBurger } = useBurgerMenu();
 
+    const containter = useRef(null);
 
-    console.log("Im rendered");
+
     return (
         <StyledLayout>
             <NavBar isBurgerOpen={isBurgerOpen} onClose={handleBurger} />
@@ -21,7 +23,7 @@ export default function AppLayout() {
 
             <Overlay isShow={isBurgerOpen} onClose={handleBurger} />
 
-            <Section>
+            <Section ref={containter}>
                 <Outlet />
             </Section>
         </StyledLayout>
