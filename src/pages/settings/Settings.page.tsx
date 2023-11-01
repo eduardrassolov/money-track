@@ -1,22 +1,7 @@
 import { useUser } from "../../utils/hooks/useUser";
-import Avatar from "../../components/user/Avatar";
-import { PrimaryBtn, SecondaryBtn } from "../../styles/Button";
-import { useNavigate } from "react-router-dom";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import apiGetCurrency from "../../services/api/apiGetCurrency";
-import { SubmitHandler, useForm } from "react-hook-form";
-import useSettings from "./useSettings";
-import FormRow from "../../components/newTransaction/FormRow";
-import Input from "../../components/input/Input";
 import styled from "styled-components";
-import Select from "../../components/dropDown/Select";
 import { devices } from "../../styles/breakPoints";
-import { QUERY_KEY } from "../../config/queryClientKeys";
-import * as yup from "yup";
-import { ErrorP } from "../../components/newTransaction/FormTransaction.style";
-import { yupResolver } from "@hookform/resolvers/yup";
 import SettingsHeader from "./SettingsHeader";
-import SettingsFooter from "./SettingsFooter";
 import ProfileTab from "./ProfileTab";
 import ApplicationTab from "./ApplicationTab";
 import { useState } from "react";
@@ -37,7 +22,7 @@ export const Container = styled.div`
     margin: 1rem;
     border-radius: 15px;
     transition: all 300ms;
-    gap: 2rem;
+    gap: 1rem;
 
     hr{
         width: 100%;
@@ -64,12 +49,7 @@ export const SectionFull = styled.section`
 `
 
 export default function Settings() {
-    const navigate = useNavigate();
     const { user, created, lastUpd, firstName, lastName, currency } = useUser();
-
-    const handleBack = () => navigate(-1);
-
-
 
     const [activeTab, setActiveTab] = useState("profileTab");
     const handleTab = (tabName: string) => setActiveTab(() => tabName);
@@ -78,21 +58,11 @@ export default function Settings() {
             <Container>
                 <SettingsHeader email={user?.email} created={created} lastUpd={lastUpd} />
 
-                <TabsList activeTab={activeTab} onChangeTab={handleTab}>
+                <TabsList activeTab={activeTab} onChangeTab={handleTab} />
 
-                    {activeTab === "profileTab" ? <ProfileTab firstName={firstName} lastName={lastName} /> : ""}
-                    {activeTab === "applicationTab" ? <ApplicationTab currencyId={currency} /> : ""}
+                {activeTab === "profileTab" ? <ProfileTab firstName={firstName} lastName={lastName} /> : ""}
+                {activeTab === "applicationTab" ? <ApplicationTab currencyId={currency} /> : ""}
 
-
-                    {/* 
-
-                    <FormRow lblFor="currency" lblText="Currency">
-                        <Select options={options} register={register} name={"currency"} ></Select>
-                    </FormRow>
-
-                    <SettingsFooter />
-
-                </form> */}
             </Container>
         </SectionFull >
     )
