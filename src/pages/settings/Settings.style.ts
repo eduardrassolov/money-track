@@ -59,12 +59,6 @@ export const ReadOnly = styled(Input)`
   color: #5f5f5f;
 `;
 
-export const SettingsFooter = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.5rem;
-  margin: 2rem 0 1rem;
-`;
 export const Select = styled.select`
   width: 200px;
   padding: 0.5rem 1rem;
