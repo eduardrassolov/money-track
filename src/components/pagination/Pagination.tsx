@@ -3,8 +3,6 @@ import usePagination from "../../utils/hooks/usePagination";
 import { HiOutlineArrowSmallLeft, HiOutlineArrowSmallRight } from "react-icons/hi2";
 import scrollTop from "../../utils/helpers/scrollTop";
 
-const onePageItems = 10;
-
 const PaginationContainer = styled.div`
     display: flex;
     justify-content: center;

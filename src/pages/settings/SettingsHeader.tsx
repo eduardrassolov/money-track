@@ -11,7 +11,14 @@ const InformationContainer = styled.div`
         color: gray;
     }
 `
-export default function SettingsHeader({ email, created, lastUpd }) {
+
+interface ISettingsHeader {
+    email: string,
+    created: string,
+    lastUpd: string
+}
+
+export default function SettingsHeader({ email, created, lastUpd }: ISettingsHeader) {
     return (
         <>
             <Avatar />
