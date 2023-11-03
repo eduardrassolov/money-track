@@ -52,12 +52,16 @@ export const SectionFull = styled.section`
 export default function Settings() {
     const { user, created, lastUpd, firstName, lastName, currency } = useUser();
 
+    if (!user) {
+        return null;
+    }
+
     const [activeTab, setActiveTab] = useState("profileTab");
     const handleTab = (tabName: string) => setActiveTab(() => tabName);
     return (
         <SectionFull>
             <Container>
-                <SettingsHeader email={user?.email} created={created} lastUpd={lastUpd} />
+                <SettingsHeader email={user.email as string} created={created} lastUpd={lastUpd} />
 
                 <TabsList activeTab={activeTab} onChangeTab={handleTab} />
 
