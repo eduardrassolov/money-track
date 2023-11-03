@@ -29,7 +29,7 @@ interface IInput {
     type: HTMLInputTypeAttribute,
     id?: string,
     placeHolder?: string,
-    name: "description" | "amount" | "completed_at" | "firstName" | "lastName" | "email" | "password" | "repeatPass",
+    name: "description" | "amount" | "completed_at" | "firstName" | "lastName" | "email" | "password" | "repeatPass" | "numberPerPage",
     // register: UseFormRegister<Inputs> | UseFormRegister<SignInInputs> | UseFormRegister<InputsSettings> | UseFormRegister<ILoginInputs>,
     register: any,
     autoFocus?: boolean,
@@ -46,6 +46,7 @@ const Input: FC<IInput> = ({ type = "text", id, placeHolder, name, register, aut
                     placeholder={placeHolder}
                     {...register(name)}
                     autoFocus={autoFocus}
+                    defaultValue={defaultValue}
                     min={type === "number" ? "1" : ""}
                     step={type === "number" ? '1' : ""} />
                 :
