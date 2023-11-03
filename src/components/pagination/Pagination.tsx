@@ -54,9 +54,8 @@ export default function Pagination({ maxLength }: IPagination) {
     if (!maxLength)
         return null;
 
-    // const lastPage = maxLength <= ITEMS_PER_PAGE ? 1 : Math.round(maxLength / onePageItems);
-    const lastPage = Math.ceil(maxLength / onePageItems);
-    console.log("Last page", lastPage);
+    const transactionsPerPage = localStorage.getItem("transactionPerPage") || 10;
+    const lastPage = Math.ceil(maxLength / Number(transactionsPerPage));
 
     const handlePrev = () => {
         //TODO fix this

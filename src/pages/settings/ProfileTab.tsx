@@ -55,7 +55,7 @@ export default function ProfileTab({ firstName, lastName }: InputsProfile) {
             <P>Make changes to your account here.<br /> Click save when you're done.</P>
 
             <FormRow lblFor="firstName" lblText="First name">
-                <Input type="text" register={register} name={"firstName"} />
+                <Input type="text" register={register} name={"firstName"} autoFocus />
                 <ErrorP>{errors.firstName?.message}</ErrorP>
             </FormRow>
 

@@ -2,6 +2,7 @@ import { useUser } from "../../utils/hooks/useUser";
 import styled from "styled-components";
 import { devices } from "../../styles/breakPoints";
 import SettingsHeader from "./SettingsHeader";
+
 import ProfileTab from "./ProfileTab";
 import ApplicationTab from "./ApplicationTab";
 import { useState } from "react";
@@ -22,7 +23,7 @@ export const Container = styled.div`
     margin: 1rem;
     border-radius: 15px;
     transition: all 300ms;
-    gap: 1rem;
+    gap: 2rem;
 
     hr{
         width: 100%;

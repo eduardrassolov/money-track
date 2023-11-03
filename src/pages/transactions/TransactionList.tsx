@@ -17,7 +17,7 @@ import { searchTransactionsByMask } from "../../utils/helpers/searchTransactions
 import LoadingUi from "../../components/spinner/LoadingUi.tsx";
 import Pagination from "../../components/pagination/Pagination.tsx";
 import usePagination from "../../utils/hooks/usePagination.tsx";
-import { ITEMS_PER_PAGE } from "../../config/paginationItems.ts";
+import { DEFAULT_ITEMS_PER_PAGE } from "../../config/paginationItems.ts";
 import { ROUTES } from "../../config/routes.ts";
 
 const List = styled.div`
@@ -69,7 +69,8 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
     }
 
     const transactions = searchTransactionsByMask(filteredSortedTransactions, mask);
-    const data = transactions?.slice((currPage - 1) * ITEMS_PER_PAGE, currPage * ITEMS_PER_PAGE);
+    const numberTransactionsPerPage = Number(localStorage.getItem("transactionPerPage")) || DEFAULT_ITEMS_PER_PAGE;
+    const data = transactions?.slice((currPage - 1) * numberTransactionsPerPage, currPage * numberTransactionsPerPage);
 
     return (
         <List>
