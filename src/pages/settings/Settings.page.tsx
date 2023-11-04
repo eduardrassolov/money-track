@@ -49,6 +49,8 @@ export const SectionFull = styled.section`
     transition: all 300ms;
 `
 
+
+
 export default function Settings() {
     const { user, created, lastUpd, firstName, lastName, currency } = useUser();
 

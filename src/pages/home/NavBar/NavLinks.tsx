@@ -1,10 +1,10 @@
 import { styled } from "styled-components"
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { devices } from "../../../styles/breakPoints";
-import { useUser } from "../../../utils/hooks/useUser";
 
 import Switch from "../../../components/swtich/Switch";
 import { ROUTES } from "../../../config/routes";
+import { CTAButton } from "../HeaderSection.page";
 
 const Ul = styled.ul<{ $isOpen: boolean }>`
         position: fixed;
@@ -49,18 +49,6 @@ const Ul = styled.ul<{ $isOpen: boolean }>`
         }
 `
 
-const StyledNavLink = styled(NavLink)`
-    text-decoration: none;
-    transition: all 0.3s ;
-    color: ${props => props.theme.text};
-    transition: all 300ms;
-
-    &:hover{
-        transition: all 300ms;
-        color: ${props => props.theme.colorLogoMain}
-    }
-
-`
 const A = styled.a`
     &:hover{
         transition: all 300ms;
@@ -82,16 +70,22 @@ const Li = styled.li`
 
 
 export default function NavLinks({ isOpen = false, onClose }: NavLinksProps) {
-    const { isAuthenticated } = useUser();
+    const navigate = useNavigate();
     const handleClick = (id: string) => {
         onClose?.();
         document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     }
 
+    const handleClickStart = () => navigate(ROUTES.LOGIN);
+
 
     return (
         <>
             <Ul $isOpen={isOpen}>
+                <Li>
+                    {/* <button onClick={changeTheme}>Change</button> */}
+                    <Switch />
+                </Li>
                 <li>
                     <A onClick={() => handleClick("header")}>Home</A>
                 </li >
@@ -99,12 +93,10 @@ export default function NavLinks({ isOpen = false, onClose }: NavLinksProps) {
                     <A onClick={() => handleClick("feature")}>Features</A>
                 </li>
                 <li>
-                    <StyledNavLink to={isAuthenticated ? ROUTES.DASHBOARD : ROUTES.LOGIN}>{isAuthenticated ? 'To app' : 'Login'}</StyledNavLink>
+                    {/* <StyledNavLink to={isAuthenticated ? ROUTES.DASHBOARD : ROUTES.LOGIN}>{isAuthenticated ? 'To app' : 'Login'}</StyledNavLink> */}
+                    <CTAButton onClick={handleClickStart}>Go to app</CTAButton>
                 </li>
-                <Li>
-                    {/* <button onClick={changeTheme}>Change</button> */}
-                    <Switch />
-                </Li>
+
             </Ul>
         </>
     )

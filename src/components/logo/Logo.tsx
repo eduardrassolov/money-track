@@ -14,28 +14,25 @@ const NavLogo = styled.div`
     img{
         width: 35px;
     }
-
-    p{
-        &:hover{
-            color: #7286D3;
-            cursor: pointer;
-        }
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 800;
-        font-size: 1.5rem;
-
-        @media only screen and (max-width: ${devices.md}px){
-            display: none;
-        }
-    }
 `
-    
+
+const H1 = styled.h1`
+    display: none;
+
+    @media only screen and (min-width: ${devices.md}px){
+        display: block;
+        font-size: 1.5rem;
+        margin: 0;
+    }
+
+`
+
 export default function Logo() {
     return (
         <NavLogo>
             <img src="/logo.png" alt="logo" />
-        
-            <p>Budget Control</p>
+
+            <H1>Budget Control</H1>
         </NavLogo>
     )
 }
