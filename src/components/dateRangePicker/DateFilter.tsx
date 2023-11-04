@@ -1,4 +1,4 @@
-import { ConfigProvider, DatePicker, TimeRangePickerProps, theme } from 'antd';
+import { ConfigProvider, DatePicker, TimeRangePickerProps } from 'antd';
 import styled from "styled-components";
 import useTheme from "../../utils/hooks/useTheme";
 import { devices } from "../../styles/breakPoints";
@@ -19,13 +19,12 @@ const StyledRangePicker = styled(RangePicker)`
     border: 1px solid ${props => props.theme.border};
     width: 100%;
     text-align: center;
-    z-index: 0;
-
 
     @media only screen and (min-width: ${devices.sm}px){
         width: fit-content;
     }
 `
+
 const StyledContainer = styled.div<{ $isSmallScreen: boolean }>`
     .ant-picker-panels > *:nth-child(2) {
         display: none;
@@ -92,7 +91,6 @@ export default function DateFilter() {
             setFilterRange: state.setFilterRange,
             filterRange: state.filterRange
         }));
-    console.log(from, to);
 
     //TODO refactor ANY
     const rangeDates: any = [dayjs(from), dayjs(to)];
@@ -111,7 +109,7 @@ export default function DateFilter() {
         setFilterRange({ ...fromTo });
     }
 
-    const handleClickPreset = (value) => {
+    const handleClickPreset = (value: any) => {
         handleChange(value);
         inputRef.current?.blur();
     }
@@ -135,7 +133,9 @@ export default function DateFilter() {
                     }
                 }
             }}>
+                {/* TODO: fix error with ref */}
                 <StyledRangePicker
+                    //@ts-ignore
                     ref={inputRef}
                     value={rangeDates}
                     onChange={handleChange}

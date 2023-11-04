@@ -8,9 +8,6 @@ import ApplicationTab from "./ApplicationTab";
 import { useState } from "react";
 import TabsList from "./TabsList";
 
-import type { TimeRangePickerProps } from 'antd';
-import dayjs from "dayjs";
-
 export type InputsSettings = {
     id?: number;
     firstName: string;
