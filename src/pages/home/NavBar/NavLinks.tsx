@@ -1,7 +1,6 @@
 import { styled } from "styled-components"
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { devices } from "../../../styles/breakPoints";
-import { useUser } from "../../../utils/hooks/useUser";
 
 import Switch from "../../../components/swtich/Switch";
 import { ROUTES } from "../../../config/routes";
@@ -50,18 +49,6 @@ const Ul = styled.ul<{ $isOpen: boolean }>`
         }
 `
 
-const StyledNavLink = styled(NavLink)`
-    text-decoration: none;
-    transition: all 0.3s ;
-    color: ${props => props.theme.text};
-    transition: all 300ms;
-
-    &:hover{
-        transition: all 300ms;
-        color: ${props => props.theme.colorLogoMain}
-    }
-
-`
 const A = styled.a`
     &:hover{
         transition: all 300ms;
@@ -84,7 +71,6 @@ const Li = styled.li`
 
 export default function NavLinks({ isOpen = false, onClose }: NavLinksProps) {
     const navigate = useNavigate();
-    const { isAuthenticated } = useUser();
     const handleClick = (id: string) => {
         onClose?.();
         document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
