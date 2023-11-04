@@ -11,7 +11,7 @@ import Input from '../../components/input/Input.tsx';
 import { ErrorP } from '../../components/newTransaction/FormTransaction.style.ts';
 import { toast } from 'react-toastify';
 import AnimatedContainer from '../../components/animation/AnimatedContainer.tsx';
-import { slideLeft } from '../home/HeaderSection.tsx';
+import { slideLeft } from '../home/HeaderSection.page.tsx';
 import { ROUTES } from '../../config/routes.ts';
 
 export type SignInInputs = {

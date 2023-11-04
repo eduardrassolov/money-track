@@ -3,7 +3,7 @@ import { styled } from 'styled-components'
 import { IFeatureData } from './FeaturesSection'
 import { devices } from '../../styles/breakPoints';
 import AnimatedContainer from '../../components/animation/AnimatedContainer';
-import { slideUp } from './HeaderSection';
+import { slideUp } from './HeaderSection.page';
 
 const FeaturesItem = styled.div<{ $side: string }>`
     display: flex;
@@ -62,15 +62,15 @@ const Feature: FC<IFeature> = ({ data: { title, text, imgPath }, side }) => {
     return (
         <AnimatedContainer direction={slideUp}>
             <FeaturesItem $side={side} >
-                    <TextContainer>
-                        <h2>{title}</h2>
-                        <p>{text}</p>
-                    </TextContainer>
+                <TextContainer>
+                    <h2>{title}</h2>
+                    <p>{text}</p>
+                </TextContainer>
 
-                    <ImageContainer>
-                        <img src={imgPath} alt={`${title} image`} />
-                    </ImageContainer>
-            </FeaturesItem> 
+                <ImageContainer>
+                    <img src={imgPath} alt={`${title} image`} />
+                </ImageContainer>
+            </FeaturesItem>
         </AnimatedContainer>
     )
 }

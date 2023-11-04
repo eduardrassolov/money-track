@@ -7,7 +7,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useLogin } from '../login/useLogin';
 import AnimatedContainer from '../../components/animation/AnimatedContainer';
-import { slideRight } from '../home/HeaderSection';
+import { slideRight } from '../home/HeaderSection.page';
 import { ROUTES } from '../../config/routes';
 
 const schema = yup.object({

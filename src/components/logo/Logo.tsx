@@ -15,7 +15,7 @@ const NavLogo = styled.div`
         width: 35px;
     }
 
-    p{
+    /* p{
         &:hover{
             color: #7286D3;
             cursor: pointer;
@@ -27,15 +27,21 @@ const NavLogo = styled.div`
         @media only screen and (max-width: ${devices.md}px){
             display: none;
         }
-    }
+    } */
 `
-    
+
+const H1 = styled.h1`
+    font-size: 1.5rem;
+    margin: 0;
+
+`
+
 export default function Logo() {
     return (
         <NavLogo>
             <img src="/logo.png" alt="logo" />
-        
-            <p>Budget Control</p>
+
+            <H1>Budget Control</H1>
         </NavLogo>
     )
 }
