@@ -8,6 +8,9 @@ import ApplicationTab from "./ApplicationTab";
 import { useState } from "react";
 import TabsList from "./TabsList";
 
+import type { TimeRangePickerProps } from 'antd';
+import dayjs from "dayjs";
+
 export type InputsSettings = {
     id?: number;
     firstName: string;
@@ -48,6 +51,8 @@ export const SectionFull = styled.section`
     padding: 4rem 2rem;
     transition: all 300ms;
 `
+
+
 
 export default function Settings() {
     const { user, created, lastUpd, firstName, lastName, currency } = useUser();
