@@ -1,10 +1,11 @@
 import { styled } from "styled-components"
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { devices } from "../../../styles/breakPoints";
 import { useUser } from "../../../utils/hooks/useUser";
 
 import Switch from "../../../components/swtich/Switch";
 import { ROUTES } from "../../../config/routes";
+import { CTAButton } from "../HeaderSection.page";
 
 const Ul = styled.ul<{ $isOpen: boolean }>`
         position: fixed;
@@ -82,16 +83,23 @@ const Li = styled.li`
 
 
 export default function NavLinks({ isOpen = false, onClose }: NavLinksProps) {
+    const navigate = useNavigate();
     const { isAuthenticated } = useUser();
     const handleClick = (id: string) => {
         onClose?.();
         document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     }
 
+    const handleClickStart = () => navigate(ROUTES.LOGIN);
+
 
     return (
         <>
             <Ul $isOpen={isOpen}>
+                <Li>
+                    {/* <button onClick={changeTheme}>Change</button> */}
+                    <Switch />
+                </Li>
                 <li>
                     <A onClick={() => handleClick("header")}>Home</A>
                 </li >
@@ -99,12 +107,10 @@ export default function NavLinks({ isOpen = false, onClose }: NavLinksProps) {
                     <A onClick={() => handleClick("feature")}>Features</A>
                 </li>
                 <li>
-                    <StyledNavLink to={isAuthenticated ? ROUTES.DASHBOARD : ROUTES.LOGIN}>{isAuthenticated ? 'To app' : 'Login'}</StyledNavLink>
+                    {/* <StyledNavLink to={isAuthenticated ? ROUTES.DASHBOARD : ROUTES.LOGIN}>{isAuthenticated ? 'To app' : 'Login'}</StyledNavLink> */}
+                    <CTAButton onClick={handleClickStart}>Go to app</CTAButton>
                 </li>
-                <Li>
-                    {/* <button onClick={changeTheme}>Change</button> */}
-                    <Switch />
-                </Li>
+
             </Ul>
         </>
     )

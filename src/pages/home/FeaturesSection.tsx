@@ -1,6 +1,6 @@
-import { styled } from "styled-components"
-import Feature from "./Feature"
-import { devices } from "../../styles/breakPoints"
+import { styled } from "styled-components";
+import Feature from "./Feature";
+import { devices } from "../../styles/breakPoints";
 
 const Section = styled.section`
     display: flex;
@@ -39,29 +39,41 @@ export interface IFeatureData {
 const featuresData: Array<IFeatureData> = [
     {
         id: "feature1",
-        title: "Effortless Expense Tracking",
-        text: "Say goodbye to the hassle of manual expense tracking. We simplifies the process by allowing you to effortlessly record and categorize your expenses in seconds.",
+        title: "📊 Track Every Penny",
+        text: "Keep a close eye on your expenses and incomes, ensuring you know where every dollar goes and where it comes from.",
         imgPath: "/pic1.jpg"
     },
     {
         id: "feature2",
-        title: "Real-Time Budget Visualization",
-        text: "Visualize your budget in real time with intuitive graphs and charts. See where your money is going, identify trends, and make informed decisions to optimize your spending.",
+        title: "📈 Visualize Your Financial Health",
+        text: "Gain insightful, interactive graphs and charts that give you a real-time snapshot of your financial well-being.",
         imgPath: "/pic2.jpg"
     },
     {
         id: "feature3",
-        title: "Access Anytime, Anywhere",
-        text: "Access your financial information on the go. Application is available on web, ensuring you're always in control of your money.",
+        title: "📱 Access Anywhere, Anytime",
+        text: "Our web app is fully responsive, meaning you can access it from your computer, tablet, or mobile device – wherever you are, whenever you need it.",
         imgPath: "/pic3.jpg"
-    }
+    },
+    // {
+    //     id: "feature4",
+    //     title: "🎯 Stay on Budget: ",
+    //     text: "Set up budgets for different categories and receive real-time alerts when you approach or exceed your limits.",
+    //     imgPath: "/pic3.jpg"
+    // },
+    // {
+    //     id: "feature5",
+    //     title: "🤝 Collaborate with Family or Team: ",
+    //     text: "Share your budget and financial goals with your family or team, allowing everyone to be on the same page when it comes to financial decisions..",
+    //     imgPath: "/pic3.jpg"
+    // }
 ]
 
 export default function FeaturesSection({ id }: IHeader) {
- 
+
     return (
         <Section id={id}>
-                {featuresData.map((feature, index) => <Feature key={feature.id} data={feature} side={index % 2 ? "right" : "left"} />)}
+            {featuresData.map((feature, index) => <Feature key={feature.id} data={feature} side={index % 2 ? "right" : "left"} />)}
         </Section>
     )
 }

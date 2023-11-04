@@ -65,7 +65,7 @@ const TitleText = styled.p`
     font-style: normal;
     font-weight: 400;
 `
-const CTAButton = styled.button`
+export const CTAButton = styled.button`
     padding: 14px 20px;
     background: ${props => props.theme.colorLogoMain};
     border: 1px solid ${props => props.theme.colorLogoMain};
@@ -126,8 +126,8 @@ export default function HeaderSection({ id }: IHeader) {
             </TextContainer >
 
             <ImageContainer>
-                <Image src="src/pages/home/Light.svg" />
-                <SmallImage src="src/pages/home/Mockup.svg" />
+                <Image src="/Browser.svg" alt="Browser" />
+                <SmallImage src="/Phone.svg" alt="Phone" />
             </ImageContainer>
         </Section >
     )
