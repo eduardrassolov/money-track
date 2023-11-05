@@ -15,10 +15,9 @@ const StyledRangePicker = styled(RangePicker)`
         font-size: 0.9rem;
         padding: 0.1rem;
     }
+
     background: ${props => props.theme.background};
     border: 1px solid ${props => props.theme.border};
-    width: 100%;
-    text-align: center;
 
     @media only screen and (min-width: ${devices.sm}px){
         width: fit-content;

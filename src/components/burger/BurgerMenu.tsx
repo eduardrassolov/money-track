@@ -12,7 +12,7 @@ export const StyledBurgerMenu = styled.div<{ $isOpen: boolean }>`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: fixed;
+    position: absolute;
     top: 1rem;
     left: 1rem;
     z-index: 30;
@@ -60,11 +60,13 @@ export const StyledBurgerMenu = styled.div<{ $isOpen: boolean }>`
 
 const BurgerMenu: FC<IBurgerMenu> = ({ isOpen, onClose }) => {
     return (
-        <StyledBurgerMenu $isOpen={isOpen} onClick={onClose}>
-            <div></div>
-            <div></div>
-            <div></div>
-        </StyledBurgerMenu>
+        <>
+            <StyledBurgerMenu $isOpen={isOpen} onClick={onClose}>
+                <div></div>
+                <div></div>
+                <div></div>
+            </StyledBurgerMenu>
+        </>
     )
 }
 export default BurgerMenu
