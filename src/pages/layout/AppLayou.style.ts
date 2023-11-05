@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 
 const StyledLayout = styled.div`
   display: flex;
+  flex-direction: column;
   background-color: #fff;
   height: 100dvh;
 `;

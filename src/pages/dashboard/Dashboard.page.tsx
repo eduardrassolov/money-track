@@ -8,7 +8,6 @@ export default function Dashboard() {
   return (
     <>
       <DashboardSection>
-        {/* <Filter options={FILTER_DASHBOARD} filterKey={FILTER_KEYS.DATE} /> */}
 
         <DateFilter />
 

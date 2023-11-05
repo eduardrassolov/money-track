@@ -5,7 +5,7 @@ type AsideItemProps = {
     name: string;
     path: string;
     icon: JSX.Element;
-    onClose: () => void;
+    onCloseBurger: () => void;
 }
 
 export const logout = async () => {
@@ -17,10 +17,10 @@ export const logout = async () => {
     return true;
 }
 
-export default function AsideItem({ name, path, icon, onClose }: AsideItemProps) {
+export default function AsideItem({ name, path, icon, onCloseBurger }: AsideItemProps) {
     return (
         <li>
-            <StyledNavLink to={path} onClick={onClose}>
+            <StyledNavLink to={path} onClick={onCloseBurger}>
                 {icon} <Span>{name}</Span>
             </StyledNavLink>
         </li>

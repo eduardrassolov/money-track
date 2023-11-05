@@ -1,5 +1,5 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { HiMiniArrowRightOnRectangle, HiOutlineCog6Tooth, HiOutlineHome, HiOutlineWrenchScrewdriver } from 'react-icons/hi2';
+import { HiMiniArrowRightOnRectangle, HiOutlineHome, HiOutlineWrenchScrewdriver } from 'react-icons/hi2';
 import styled from 'styled-components';
 import useTheme from '../../../../utils/hooks/useTheme';
 import ThemeToggle from './ThemeToggle';
@@ -7,8 +7,8 @@ import { ROUTES } from '../../../../config/routes';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { apiLogout } from '../../../../services/api/apiUser';
-import IconItem from './IconItem';
 import AnimatedContainer from '../../../animation/AnimatedContainer';
+import Profile from '../../../user/Profile';
 
 
 
@@ -16,7 +16,6 @@ const Trigger = styled(DropdownMenu.Trigger)`
     background: transparent;
     border: none;
     color: ${props => props.theme.text};
-    font-size: 2rem;
     display: flex;
 
     &:hover{
@@ -75,7 +74,8 @@ export default function MenuDropDown() {
     return (
         <DropdownMenu.Root>
             <Trigger>
-                <IconItem><HiOutlineCog6Tooth /></IconItem>
+                {/* <IconItem><HiOutlineCog6Tooth /></IconItem> */}
+                <Profile />
             </Trigger>
 
             <DropdownMenu.Portal>

@@ -5,11 +5,9 @@ import { styled } from 'styled-components'
 const AvatarContainer = styled.div`
     color:  #3b82f6;
     border-radius: 15px;
-    font-size: 4rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 1rem auto;
     transition: all 100ms ease-in-out;
     
     &:hover{
@@ -22,7 +20,7 @@ const AvatarContainer = styled.div`
 export default function Avatar() {
     return (
         <AvatarContainer>
-            <FaUserCircle />
+            <FaUserCircle size={"2rem"} />
         </AvatarContainer>
     )
 }

@@ -11,7 +11,7 @@ const StyledOverlay = styled.div<{ $isShow: boolean }>`
     width: 100vw;
     height: 100vh;
     background-color: rgba(0,0,0,0.5);
-    z-index: 10;
+    z-index: 25;
 
     @media only screen and (min-width: ${devices.md}px){
         display: none; 
