@@ -34,17 +34,15 @@ const DayIcon = styled(HiOutlineSun) <{ $currentTheme: string }>`
     transition: all 500ms cubic-bezier(.58,.65,.58,1.43);
 `
 
-export default function Switch() {
-    const { theme, changeTheme } = useTheme();
+export default function ThemeSwitch() {
+    const { theme: { name }, changeTheme } = useTheme();
 
-    function handleClick() {
-        changeTheme();
-    }
+    const handleClick = () => changeTheme();
 
     return (
         <NavIcons onClick={handleClick}>
-            <DarkIcon $currentTheme={theme.name} />
-            <DayIcon $currentTheme={theme.name} />
+            <DarkIcon $currentTheme={name} />
+            <DayIcon $currentTheme={name} />
         </NavIcons>
     )
 }

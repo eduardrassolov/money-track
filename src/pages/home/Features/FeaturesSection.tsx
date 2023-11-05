@@ -1,40 +1,5 @@
-import { styled } from "styled-components";
-import Feature from "./Feature";
-import { devices } from "../../styles/breakPoints";
-
-const Section = styled.section`
-    display: flex;
-    flex-direction: column ;
-    background: ${(props) => props.theme.background};
-    color: ${props => props.theme.text};
-    border-bottom: 2px solid ${props => props.theme.border};
-    transition: all 300ms;
-    padding: 5rem 0;
-    gap: 5rem;
-
-    img{
-        width: 250px;
-        border-radius: 15px;
-        box-shadow: 0px 6px 16px 1px rgba(0,0,0, 0.4);  
-    }
-
-    @media only screen and (min-width: ${devices.md}px){
-            img{
-            width: 350px;
-        }
-    }
-`
-
-interface IHeader {
-    id: string
-}
-
-export interface IFeatureData {
-    id: string,
-    title: string,
-    text: string,
-    imgPath: string
-}
+import Feature from "./FeatureItem";
+import { Section } from "./FeaturesSection.style";
 
 const featuresData: Array<IFeatureData> = [
     {
@@ -68,6 +33,19 @@ const featuresData: Array<IFeatureData> = [
     //     imgPath: "/pic3.jpg"
     // }
 ]
+
+interface IHeader {
+    id: string
+}
+
+export interface IFeatureData {
+    id: string,
+    title: string,
+    text: string,
+    imgPath: string
+}
+
+
 
 export default function FeaturesSection({ id }: IHeader) {
 

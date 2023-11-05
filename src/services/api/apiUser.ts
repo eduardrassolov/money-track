@@ -1,4 +1,4 @@
-import { ILogin } from "../../pages/login/useLogin";
+import { ILogin } from "../../pages/authorization/useLogin";
 import supabase from "../supabase";
 
 export async function login({ email, password }: ILogin) {

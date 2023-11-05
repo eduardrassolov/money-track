@@ -5,10 +5,10 @@ import { LoginBtn } from '../../styles/Button';
 import * as yup from 'yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useLogin } from '../login/useLogin';
+import { useLogin } from './useLogin';
 import AnimatedContainer from '../../components/animation/AnimatedContainer';
-import { slideRight } from '../home/HeaderSection.page';
 import { ROUTES } from '../../config/routes';
+import { slideRight } from '../../config/animationCfg';
 
 const schema = yup.object({
     email: yup.string().required('Email is required').email('Email is invalid'),
@@ -22,20 +22,17 @@ export interface ILoginInputs {
 export default function LogIn() {
     const { login, isLoading } = useLogin();
 
-    const { register, handleSubmit, formState: { errors } } = useForm<ILoginInputs>({
-        resolver: yupResolver(schema)
-    });
+    const { register, handleSubmit, formState: { errors } } = useForm<ILoginInputs>({ resolver: yupResolver(schema) });
 
     const onSubmit: SubmitHandler<ILoginInputs> = (data) => login(data);
+
     function demoHandle() {
         const demoAccount: ILoginInputs = {
             email: import.meta.env.VITE_DEMO_LOGIN,
             password: import.meta.env.VITE_DEMO_PASS
         };
-        console.log(demoAccount);
         login(demoAccount);
     }
-
 
     return (
         <AnimatedContainer delay={0} duration={0.5} direction={slideRight}>
@@ -56,7 +53,7 @@ export default function LogIn() {
 
                 </Group>
 
-                <LoginBtn type="submit" disabled={isLoading}>{isLoading ? 'Loging...' : 'Continue'}</LoginBtn>
+                <LoginBtn type="submit" disabled={isLoading}>{isLoading ? 'Loging in...' : 'Continue'}</LoginBtn>
 
                 <BottomText>
                     <span>Don't have acount? </span>

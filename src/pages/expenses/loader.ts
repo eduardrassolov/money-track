@@ -8,7 +8,6 @@ import dayjs from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
 
 dayjs.extend(isBetween);
-// export async function loaderExpenses({ filter = null, sortBy = { ...defaultSort }, userId }: ILoaderTransaction) {
 export async function loaderExpenses(
   userId: string,
   filter: Filter = null,

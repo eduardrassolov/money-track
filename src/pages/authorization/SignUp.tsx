@@ -11,8 +11,8 @@ import Input from '../../components/input/Input.tsx';
 import { ErrorP } from '../../components/newTransaction/FormTransaction.style.ts';
 import { toast } from 'react-toastify';
 import AnimatedContainer from '../../components/animation/AnimatedContainer.tsx';
-import { slideLeft } from '../home/HeaderSection.page.tsx';
 import { ROUTES } from '../../config/routes.ts';
+import { slideLeft } from '../../config/animationCfg.ts';
 
 export type SignInInputs = {
     email: string,
@@ -48,7 +48,6 @@ export default function SignUpPage() {
     const onSubmit: SubmitHandler<SignInInputs> = async (data) => {
         const { error } = await apiSignUp(data.email, data.password, data.firstName, data.lastName);
 
-        console.log(data);
         if (error) {
             toast.error(error.message);
             return null;

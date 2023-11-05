@@ -2,21 +2,20 @@ import { useEffect } from 'react';
 import { useBoundStore } from '../../store/store';
 
 export default function useTheme() {
-    // const { theme, toogleTheme } = useCurrStore((state) => state);
     const { theme, toggleTheme } = useBoundStore(state => ({
         theme: state.theme,
         toggleTheme: state.toggleTheme
-    }))
+    }));
 
     useEffect(() => {
-        const theme = localStorage.getItem("theme");
-        if (theme) {
-            toggleTheme(theme);
+        const curTheme = localStorage.getItem("theme");
+        if (curTheme) {
+            toggleTheme(curTheme);
         }
         else {
             toggleTheme("light");
         }
-    }, [])
+    }, []);
 
     function changeTheme() {
         if (theme.name === "light") {
