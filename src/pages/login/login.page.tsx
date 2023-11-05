@@ -1,5 +1,5 @@
 import { LoginBtn } from "../../styles/Button";
-import { useLogin } from "./useLogin";
+import { useLogin } from "../authorization/useLogin.tsx";
 import { BottomText, Form, Group, H1, StyledLink } from "./Login.style.ts";
 import useTheme from "../../utils/hooks/useTheme.tsx";
 import styled, { ThemeProvider } from "styled-components";

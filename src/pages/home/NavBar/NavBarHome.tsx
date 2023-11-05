@@ -1,10 +1,11 @@
 
-import { styled } from "styled-components"
-import NavLinks from "./NavLinks"
-import Overlay from "../../../components/overlay/Overlay"
-import Logo from "../../../components/logo/Logo"
-import Switch from "../../../components/swtich/Switch"
-import { devices } from "../../../styles/breakPoints"
+import { styled } from "styled-components";
+
+import NavLinks from "./NavLinks";
+import Overlay from "../../../components/overlay/Overlay";
+import Logo from "../../../components/logo/Logo";
+import ThemeSwitch from "../../../components/swtich/ThemeSwitch";
+import { devices } from "../../../styles/breakPoints";
 
 const Nav = styled.nav`
     backdrop-filter: blur(9px) saturate(180%);
@@ -19,11 +20,10 @@ const Nav = styled.nav`
     width: 100%;
     transition: all 300ms;
     z-index: 5;
-    
 `
 
 const SwitchContainer = styled.div`
-    margin: auto 4rem ;
+    margin: auto 4rem;
 
     @media only screen and (min-width: ${devices.md}px){
         display: none;
@@ -32,16 +32,17 @@ const SwitchContainer = styled.div`
 interface INavBar {
     isOpen: boolean,
     onClose: () => void
-}
+};
 
 export default function NavBarHome({ isOpen, onClose }: INavBar) {
     return (
         <Nav>
             <Logo />
+
             <Overlay isShow={isOpen} onClose={onClose} />
 
             <SwitchContainer>
-                <Switch />
+                <ThemeSwitch />
             </SwitchContainer>
 
             <NavLinks isOpen={isOpen} onClose={onClose} />

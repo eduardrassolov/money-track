@@ -1,6 +1,7 @@
-import { styled } from "styled-components"
-import { devices } from "../../styles/breakPoints";
+import { styled } from "styled-components";
 import { FC } from "react";
+
+import { devices } from "../../styles/breakPoints";
 import AnimatedContainer from "../animation/AnimatedContainer";
 
 const StyledOverlay = styled.div<{ $isShow: boolean }>`

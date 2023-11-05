@@ -18,13 +18,14 @@ export const useLogin = () => {
     useEffect(() => {
         const checkAuth = async () => {
             const { data: { user }, error } = await supabase.auth.getUser();
+
             if (user && !error) {
-                navigate(ROUTES.ROOT);
+                navigate(`${ROUTES.EXPENSES}?page=1`);
             }
         }
+
         checkAuth();
     }, [])
-
 
     const { mutate: login, isLoading } = useMutation({
         mutationFn: ({ email, password }: ILogin) => loginApi({ email, password }),
