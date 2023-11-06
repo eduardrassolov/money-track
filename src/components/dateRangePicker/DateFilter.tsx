@@ -1,7 +1,7 @@
 import { ConfigProvider, DatePicker, TimeRangePickerProps } from 'antd';
 import styled from "styled-components";
 import useTheme from "../../utils/hooks/useTheme";
-import { devices } from "../../styles/breakPoints";
+import { devices } from "../../config/breakPoints";
 import dayjs from 'dayjs'
 import { useBoundStore } from "../../store/store";
 import { RangeDate } from '../../store/storeConfig';

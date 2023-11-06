@@ -1,6 +1,6 @@
 import { styled } from "styled-components"
 import { useNavigate } from "react-router-dom";
-import { devices } from "../../../styles/breakPoints";
+import { devices } from "../../../config/breakPoints";
 
 import ThemeSwitch from "../../../components/swtich/ThemeSwitch";
 import { ROUTES } from "../../../config/routes";

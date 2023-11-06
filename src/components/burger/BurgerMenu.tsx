@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { styled } from 'styled-components';
-import { devices } from '../../styles/breakPoints';
+import { devices } from '../../config/breakPoints';
 
 interface IBurgerMenu {
     isOpen: boolean,

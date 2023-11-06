@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { devices } from '../../../styles/breakPoints';
+import { devices } from '../../../config/breakPoints';
 import { IChartData } from './CategoryChart';
 import AnimatedContainer from '../../../components/animation/AnimatedContainer';
 import { slideUp } from '../statCard/StatsList';

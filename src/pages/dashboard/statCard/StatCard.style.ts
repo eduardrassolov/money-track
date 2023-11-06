@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { devices } from "../../../styles/breakPoints";
+import { devices } from "../../../config/breakPoints";
 
 const IconContainer = styled.div<{ $bgColor?: string }>`
   display: flex;

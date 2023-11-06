@@ -1,6 +1,6 @@
 import Sort from './sort/Sort'
 import { styled } from 'styled-components'
-import { devices } from '../../styles/breakPoints'
+import { devices } from '../../config/breakPoints'
 import Search from '../search/Search'
 import DateFilter from '../dateRangePicker/DateFilter'
 

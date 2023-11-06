@@ -1,11 +1,7 @@
 import { styled } from "styled-components";
-import { devices } from "../../styles/breakPoints";
+import { devices } from "../../config/breakPoints";
 
 const Form = styled.form`
-  /* border: 1px solid ${(props) => props.theme.border}; */
-  /* background: ${(props) => props.theme.background}; */
-  /* color: ${(props) => props.theme.text}; */
-  /* border-radius: 15px; */
   padding: 1rem 0;
   width: auto;
   transition: all 300ms;
@@ -25,12 +21,6 @@ const FormGroup = styled.div`
     transition: all 300ms;
   }
 `;
-const ErrorP = styled.p`
-  font-size: 0.7rem;
-  color: ${(props) => props.theme.error};
-  margin: 0.5rem 0 1rem;
-  transition: all 300ms;
-`;
 
 const FormFooter = styled.div`
   display: flex;
@@ -39,4 +29,4 @@ const FormFooter = styled.div`
   gap: 0.5rem;
 `;
 
-export { Form, FormGroup, ErrorP, FormFooter };
+export { Form, FormGroup, FormFooter };

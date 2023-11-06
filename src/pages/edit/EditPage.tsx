@@ -1,8 +1,7 @@
 import { useLoaderData, useNavigate } from "react-router-dom"
 import Header from "../../ui/header/Header";
-import { ErrorP, FormFooter, FormGroup } from "../../components/newTransaction/FormTransaction.style";
+import { FormFooter, FormGroup } from "../../components/newTransaction/FormTransaction.style";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { PrimaryBtn, SecondaryBtn } from "../../styles/Button";
 import { QUERY_KEY } from "../../config/queryClientKeys";
 import { useQuery } from "@tanstack/react-query";
 import { apiGetCategories, apiGetUserCategory } from "../../services/api/apiGetCategory";
@@ -19,6 +18,8 @@ import { format } from "date-fns";
 import { StyledSelect } from "../../components/dropDown/Select";
 import apiGetCurrency from "../../services/api/apiGetCurrency";
 import { newTransactionSchema } from "../../components/newTransaction/newTrasactionValidation";
+import { PrimaryBtn, SecondaryBtn } from "../../styles/Button.style";
+import ErrorLabel from "../../components/error/ErrorLabel";
 
 export default function EditPage() {
     const [data] = useLoaderData() as Array<GetAllTransactionsDTO>;
@@ -83,7 +84,8 @@ export default function EditPage() {
                     <FormGroup>
                         <label htmlFor="description">Description:</label>
                         <Input register={register} type={"text"} placeHolder={"Enter description"} name={"description"} />
-                        <ErrorP>{errors?.description?.message}</ErrorP>
+
+                        <ErrorLabel errMsg={errors?.description?.message} />
                     </FormGroup>
 
                     {defaultCategory
@@ -91,7 +93,8 @@ export default function EditPage() {
                         <FormGroup>
                             <label htmlFor="category">Category:</label>
                             <DropDown defaultOption={defaultCategory} customOption={userCategories} selected={updatedCategory} onSelect={changeTempCategory} currentTypeTransaction={1} />
-                            <ErrorP></ErrorP>
+
+                            <ErrorLabel />
                         </FormGroup>
                         : ''
                     }
@@ -99,13 +102,15 @@ export default function EditPage() {
                     <FormGroup>
                         <label htmlFor="amount">Amount:</label>
                         <Input type={"number"} register={register} placeHolder={"0,00"} name={"amount"} />
-                        <ErrorP>{errors?.amount?.message}</ErrorP>
+
+                        <ErrorLabel errMsg={errors?.amount?.message} />
                     </FormGroup>
 
                     <FormGroup>
                         <label htmlFor="completed_at">Date:</label>
                         <Input type={"datetime-local"} register={register} name={"completed_at"} />
-                        <ErrorP>{errors?.completed_at?.message}</ErrorP>
+
+                        <ErrorLabel errMsg={errors?.completed_at?.message} />
                     </FormGroup>
 
                     <FormGroup>
@@ -116,7 +121,7 @@ export default function EditPage() {
                             ))}
                         </StyledSelect>
 
-                        <ErrorP></ErrorP>
+                        <ErrorLabel />
                     </FormGroup>
 
                     <FormFooter>

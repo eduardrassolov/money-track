@@ -3,7 +3,7 @@ import { FC } from "react";
 import BurgerMenu from "../../burger/BurgerMenu";
 import MenuDropDown from "./menuDropDown/MenuDropDown";
 import NavMenu from "./NavMenu";
-import { devices } from "../../../styles/breakPoints";
+import { devices } from "../../../config/breakPoints";
 
 const Nav = styled.nav`
     background: ${(props) => props.theme.background};

@@ -1,5 +1,5 @@
 import { asideMenuList } from '../../../config/asideMenuList';
-import { devices } from '../../../styles/breakPoints';
+import { devices } from '../../../config/breakPoints';
 import AsideItem from '../AsideItem';
 import { HiMiniArrowsUpDown, HiOutlineChartPie, HiOutlineCreditCard, HiOutlineShoppingBag } from 'react-icons/hi2'
 import styled from 'styled-components';

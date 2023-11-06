@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { devices } from '../../styles/breakPoints';
+import { devices } from '../../config/breakPoints';
 import TitleTrigger from './TitleTrigger';
 import { FC, useState } from 'react';
 import TYPES_TRANSACTION from '../../config/typeTransactions';

@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { devices } from "../../styles/breakPoints";
+import { devices } from "../../config/breakPoints";
 
 export const StyledAside = styled.div<{ $isBurgerOpen: boolean }>`
   background: ${(props) => props.theme.background};

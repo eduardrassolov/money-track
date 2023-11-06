@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { devices } from "../../styles/breakPoints";
+import { devices } from "../../config/breakPoints";
 import { NavLink } from "react-router-dom";
 
 export const Div = styled.div`
@@ -20,38 +20,26 @@ export const Div = styled.div`
   }
 `;
 
-export const H1 = styled.h1`
-  margin: 0 0 0.5rem;
-  padding: 0;
-`;
-export const P = styled.p`
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 409;
-  color: #71717a;
-  display: flex;
-  width: 100%;
-  font-weight: 400;
-  width: fit-content;
-`;
-export const BottomText = styled(P)`
-  color: #8f8f8f;
-  margin: 1rem auto 0;
-  font-size: 0.8rem;
-  width: fit-content;
-  gap: 0.5rem;
-`;
+// export const P = styled.p`
+//   margin: 0;
+//   font-size: 1rem;
+//   font-weight: 409;
+//   color: #71717a;
+//   display: flex;
+//   width: 100%;
+//   font-weight: 400;
+//   width: fit-content;
+// `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  /* width: 100%; */
-  /* max-width: 400px; */
   height: auto;
   margin: 2rem 0;
   padding: 0 0 1rem;
 `;
+
 export const GropHorizontal = styled.div`
   display: flex;
   margin: 0 0 1.5rem;

@@ -5,10 +5,11 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import apiCreateCategory from '../../services/api/apiCreateCategory';
 import { useUser } from '../../utils/hooks/useUser';
 
-import { PrimaryBtn, SecondaryBtn } from '../../styles/Button';
+
 import styled from 'styled-components';
 import { InputWithError } from './EditCategory';
 import { toast } from 'react-toastify';
+import { PrimaryBtn, SecondaryBtn } from '../../styles/Button.style';
 
 const StyledContainer = styled.div`
     display: flex;

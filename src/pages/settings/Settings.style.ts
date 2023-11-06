@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { devices } from "../../styles/breakPoints";
+import { devices } from "../../config/breakPoints";
 
 export const Container = styled.div`
   background: ${(props) => props.theme.background};

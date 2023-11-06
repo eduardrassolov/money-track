@@ -1,6 +1,6 @@
 import { useUser } from "../../utils/hooks/useUser";
 import styled from "styled-components";
-import { devices } from "../../styles/breakPoints";
+import { devices } from "../../config/breakPoints";
 import SettingsHeader from "./SettingsHeader";
 
 import ProfileTab from "./ProfileTab";

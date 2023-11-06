@@ -1,16 +1,13 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom"
-import { login as loginApi } from "../../services/api/apiUser";
-
 import { toast } from "react-toastify";
 import { useEffect } from "react";
-import supabase from "../../services/supabase";
-import { ROUTES } from "../../config/routes";
 
-export interface ILogin {
-    email: string,
-    password: string
-}
+import { ROUTES } from "../../../config/routes.ts";
+import supabase from "../../../services/supabase.ts";
+import { apiLogin } from "../../../services/api/apiUser.ts";
+import { TLogin } from "./login.type.ts";
+
 
 export const useLogin = () => {
     const navigate = useNavigate();
@@ -28,7 +25,7 @@ export const useLogin = () => {
     }, [])
 
     const { mutate: login, isLoading } = useMutation({
-        mutationFn: ({ email, password }: ILogin) => loginApi({ email, password }),
+        mutationFn: ({ email, password }: TLogin) => apiLogin({ email, password }),
         onSuccess: () => navigate(`${ROUTES.EXPENSES}?page=1`),
         onError: () => toast.error("Wrong email or password!")
     })

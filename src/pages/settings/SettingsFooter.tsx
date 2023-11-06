@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { PrimaryBtn, SecondaryBtn } from "../../styles/Button";
+
 import { useNavigate } from "react-router-dom";
+import { SecondaryBtn, PrimaryBtn } from "../../styles/Button.style";
 
 export const StyledContainer = styled.div`
   display: flex;
