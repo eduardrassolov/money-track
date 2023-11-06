@@ -10,8 +10,7 @@ import FormRow from './FormRow';
 import TYPES_TRANSACTION from '../../config/typeTransactions'
 
 import { QUERY_KEY } from '../../config/queryClientKeys';
-import { PrimaryBtn, SecondaryBtn } from '../../styles/Button';
-import { ErrorP, Form, FormFooter } from './FormTransaction.style';
+import { Form, FormFooter } from './FormTransaction.style';
 import { Inputs } from '../../types/Inputs.type';
 import { useUser } from '../../utils/hooks/useUser';
 import useCreateTransaction from './useCreateTransaction';
@@ -25,6 +24,8 @@ import LoadingUi from '../spinner/LoadingUi';
 import { newTransactionSchema } from './newTrasactionValidation';
 import DropDown from '../dropDown/DropDown';
 import { apiGetCategories, apiGetUserCategory } from '../../services/api/apiGetCategory';
+import ErrorLabel from '../error/ErrorLabel';
+import { PrimaryBtn, SecondaryBtn } from '../../styles/Button.style';
 interface INewTransactionProps {
     type: number;
 }
@@ -98,7 +99,7 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
 
                     <FormRow lblFor={"description"} lblText={"Description"}>
                         <Input type={"text"} id={"description"} name={"description"} placeHolder={`Enter name of ${transactionType}`} autoFocus={true} register={register} />
-                        <ErrorP>{errors.description?.message}</ErrorP>
+                        <ErrorLabel errMsg={errors.description?.message} />
                     </FormRow>
 
                     {optionsList
@@ -110,24 +111,24 @@ const TransactionForm: FC<INewTransactionProps> = ({ type }) => {
                                 selected={category}
                                 onSelect={setCategory}
                                 currentTypeTransaction={type} />
-                            <ErrorP></ErrorP>
+                            <ErrorLabel />
                         </FormRow>
                         : ''
                     }
 
                     <FormRow lblFor="amount" lblText={"Amount"}>
                         <Input type={"number"} name={"amount"} placeHolder={"0,00"} register={register} />
-                        <ErrorP>{errors.amount?.message}</ErrorP>
+                        <ErrorLabel errMsg={errors.amount?.message} />
                     </FormRow>
 
                     <FormRow lblFor={"currency"} lblText={"Currency"}>
                         <Select options={optionCurrency} register={register} name={"currency"} selectedDefault={userCurrency}></Select>
-                        <ErrorP></ErrorP>
+                        <ErrorLabel />
                     </FormRow>
 
                     <FormRow lblFor={"completed_at"} lblText={"Date"}>
                         <Input type={"datetime-local"} name={"completed_at"} register={register} defaultValue={formatedTime} />
-                        <ErrorP>{errors.completed_at?.message}</ErrorP>
+                        <ErrorLabel errMsg={errors.completed_at?.message} />
                     </FormRow>
 
                     <FormFooter>

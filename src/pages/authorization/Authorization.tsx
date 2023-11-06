@@ -8,6 +8,7 @@ export default function AuthorizationLayout() {
     return (
         <ThemeProvider theme={theme}>
             <StyledAuthorization>
+
                 <ImageContainer>
                     <img src="/login.svg" />
                 </ImageContainer>
@@ -15,6 +16,7 @@ export default function AuthorizationLayout() {
                 <StyledContainer>
                     <Outlet />
                 </StyledContainer>
+
             </StyledAuthorization>
         </ThemeProvider >
     )

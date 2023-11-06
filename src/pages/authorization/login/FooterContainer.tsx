@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import { StyledLink } from '../../login/Login.style';
+
 import { ROUTES } from '../../../config/routes';
 import { useLogin } from './useLogin';
+import { StyledLink } from '../Authorizations.style';
 
 const P = styled.p`
   margin: 0;
@@ -25,11 +26,8 @@ export const BottomText = styled(P)`
 export default function FooterContainer() {
     const { login } = useLogin();
 
-    function demoHandle() {
-        login({
-            email: import.meta.env.VITE_DEMO_LOGIN,
-            password: import.meta.env.VITE_DEMO_PASS
-        });
+    function handleClickDemo() {
+        login({ email: import.meta.env.VITE_DEMO_LOGIN, password: import.meta.env.VITE_DEMO_PASS });
     }
 
     return (
@@ -38,7 +36,8 @@ export default function FooterContainer() {
                 <span>Don't have acount? </span>
                 <StyledLink to={ROUTES.SIGN_UP}>Sign Up</StyledLink>
                 <span>or</span>
-                <StyledLink to={""} onClick={demoHandle}>Demo</StyledLink>
+
+                <StyledLink to={""} onClick={handleClickDemo}>Demo</StyledLink>
             </BottomText>
 
             <BottomText>

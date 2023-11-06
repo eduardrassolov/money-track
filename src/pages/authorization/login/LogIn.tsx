@@ -1,6 +1,5 @@
-import { Form, Group, StyledLink } from '../../login/Login.style';
+
 import Input from '../../../components/input/Input';
-import * as yup from 'yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useLogin } from './useLogin';
@@ -11,11 +10,9 @@ import { TLogin } from './login.type';
 import HeaderText from '../../../components/Header/HeaderText';
 import ErrorLabel from '../../../components/error/ErrorLabel';
 import FooterContainer from './FooterContainer';
+import { schema } from './schema';
+import { Form, Group } from '../Authorizations.style';
 
-const schema = yup.object({
-    email: yup.string().required('Email is required').email('Email is invalid'),
-    password: yup.string().required('Password is required'),
-});
 
 export default function LogIn() {
     const { login, isLoading } = useLogin();

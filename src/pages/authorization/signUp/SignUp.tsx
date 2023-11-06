@@ -7,7 +7,7 @@ import AnimatedContainer from '../../../components/animation/AnimatedContainer.t
 import Input from '../../../components/input/Input.tsx';
 
 import { apiSignUp } from '../../../services/api/apiUser.ts';
-import { Form, Group, StyledLink } from '../../login/Login.style.ts';
+
 import { ROUTES } from '../../../config/routes.ts';
 import { slideLeft } from '../../../config/animationCfg.ts';
 import { LoginBtn } from '../../../styles/Button.style.ts';
@@ -16,6 +16,7 @@ import { signUpSchema } from './schema.ts';
 import ErrorLabel from '../../../components/error/ErrorLabel.tsx';
 import HeaderText from '../../../components/Header/HeaderText.tsx';
 import { BottomText } from '../login/FooterContainer.tsx';
+import { Form, Group, StyledLink } from '../Authorizations.style.ts';
 
 const defaultValues: TSignUp = {
     email: "",
