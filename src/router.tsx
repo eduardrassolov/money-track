@@ -13,12 +13,18 @@ import AuthorizationLayout from "./pages/authorization/Authorization.tsx";
 import LogIn from "./pages/authorization/login/LogIn.tsx";
 import SignUp from "./pages/authorization/signUp/SignUp.tsx";
 import { ROUTES } from "./config/routes.ts";
+// import TransactionView from "./components/transactionView/TransactionView.tsx";
+import TYPES_TRANSACTION from "./config/typeTransactions.ts";
+import { QUERY_KEY } from "./config/queryClientKeys.ts";
+import { loaderExpenses } from "./pages/expenses/loader.ts";
+import { loaderIncomes } from "./pages/income/loader.ts";
 
 const AppLayout = lazy(() => import("./pages/layout/AppLayout.tsx"));
 const Transactions = lazy(() => import("./pages/transactions/Transactions.page.tsx"));
 const Dashboard = lazy(() => import("./pages/dashboard/Dashboard.page.tsx"));
 const Incomes = lazy(() => import("./pages/income/Incomes.page.tsx"));
 const Expenses = lazy(() => import("./pages/expenses/Expenses.page.tsx"));
+const TransactionView = lazy(() => import("./components/transactionView/TransactionView.tsx"));
 
 const routes: RouteObject[] = [
     {
@@ -41,7 +47,13 @@ const routes: RouteObject[] = [
             },
             {
                 path: ROUTES.INCOMES,
-                element: <Suspense fallback={<LoadingUi />}><Incomes /></Suspense>
+                element: <Suspense fallback={<LoadingUi />}>
+                    <TransactionView
+                        transactionType={TYPES_TRANSACTION.INCOME}
+                        queryKey={QUERY_KEY.INCOMES}
+                        dataLoader={loaderIncomes}
+                    />
+                </Suspense>
             },
             {
                 path: ROUTES.INCOME_ID,
@@ -50,7 +62,11 @@ const routes: RouteObject[] = [
             },
             {
                 path: ROUTES.EXPENSES,
-                element: <Expenses />,
+                element: <Suspense fallback={<LoadingUi />}><TransactionView
+                    transactionType={TYPES_TRANSACTION.EXPENSE}
+                    queryKey={QUERY_KEY.EXPENSES}
+                    dataLoader={loaderExpenses} />
+                </Suspense >,
                 index: true
             },
             {

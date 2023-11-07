@@ -7,6 +7,7 @@ export interface IFilterRangeSlice {
   setFilterRange: (fromTo: RangeDate) => void;
 }
 
+//TODO remove magic values
 export const createFilterRangeSlice: StateCreator<IFilterRangeSlice> = (set) => ({
   filterRange: {
     from: dayjs(new Date()).startOf("month").format("YYYY-MM-DD"),

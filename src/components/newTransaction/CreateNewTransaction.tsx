@@ -4,6 +4,7 @@ import TitleTrigger from './TitleTrigger';
 import { FC, useState } from 'react';
 import TYPES_TRANSACTION from '../../config/typeTransactions';
 import CreateTransaction from '../createTransaction/CreateTransaction';
+import { FormContainer } from '../../styles/TransactionContainer';
 
 export interface INewTransactionProps {
     type: number;
@@ -36,15 +37,17 @@ const CreateNewTransactionForm: FC<INewTransactionProps> = ({ type }) => {
     const textForTitle: string = type === TYPES_TRANSACTION.INCOME ? "Add new income" : "Add new expense";
 
     return (
-        <StyledNewTransactionFrom $isOpen={isOpen}>
-            <TitleTrigger isOpen={isOpen} onOpenClose={handleOpenClose} text={textForTitle} />
+        <FormContainer>
+            <StyledNewTransactionFrom $isOpen={isOpen}>
+                <TitleTrigger isOpen={isOpen} onOpenClose={handleOpenClose} text={textForTitle} />
 
-            {isOpen ?
-                <CreateTransaction type={type} />
-                : ""
-            }
+                {isOpen ?
+                    <CreateTransaction type={type} />
+                    : ""
+                }
 
-        </StyledNewTransactionFrom>
+            </StyledNewTransactionFrom>
+        </FormContainer>
     )
 }
 export default CreateNewTransactionForm;

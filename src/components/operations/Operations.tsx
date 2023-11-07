@@ -39,15 +39,19 @@ export default function Operation() {
         <OperationsContainer>
             <FirstContainer>
                 {/* <Filter options={FILTER_DATE_OPTIONS} filterKey={FILTER_KEYS.DATE} /> */}
-                <DateFilter />
+                {/* <DateFilter /> */}
             </FirstContainer>
 
             <SecondContainer>
-                <Search />
+                {/* <Search /> */}
+                <DateFilter />
+
             </SecondContainer>
 
             <ThirdContainer>
                 <Sort />
+
+                {/* <Search /> */}
             </ThirdContainer>
 
         </OperationsContainer>
