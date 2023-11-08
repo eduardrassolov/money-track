@@ -4,17 +4,20 @@ const StyledLayout = styled.div`
   display: flex;
   flex-direction: row;
   background-color: #fff;
-  height: 100dvh;
-  width: 100dvw;
+  height: 100vh;
+  width: 100vw;
+`;
+
+export const ContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
 `;
 
 const Section = styled.section`
   background: ${(props) => props.theme.background2};
   width: 100%;
   height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   overflow: scroll;
   transition: all 300ms;
 `;
