@@ -16,11 +16,6 @@ export const StyledNavLink = styled(NavLink)`
   &:hover {
     background-color: ${(props) => props.theme.hoverAside};
     border-bottom: 3px solid ${(props) => props.theme.hoverAside};
-    /* box-shadow:
-      rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-      rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; */
-    /* scale: 1.05; */
-    /* transform: translateY(0.3rem); */
     transition: all 300ms;
   }
   &.active {

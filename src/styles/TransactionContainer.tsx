@@ -1,10 +1,14 @@
 import { styled } from "styled-components"
 
 const Container = styled.div`
+background: ${props => props.theme.backround};
+  border-right: 1px solid ${props => props.theme.border};
+  max-width: 600px;
   display: flex;
   flex-direction: column;
-  margin: 2rem 0 0%;
-  padding: 2rem 0.5rem;
+  height: 100%;
+  overflow: scroll;
+  padding: 0 1rem;  
 `
 
 const FormContainer = styled.div`

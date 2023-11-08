@@ -13,6 +13,7 @@ const Nav = styled.nav`
     justify-content: space-between;
     transition: all 300ms;
     padding: 0 1rem;
+    height: 50px;
 
     @media only screen and (min-width: ${devices.md}px){
     }

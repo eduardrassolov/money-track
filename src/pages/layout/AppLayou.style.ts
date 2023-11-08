@@ -16,9 +16,7 @@ export const ContentContainer = styled.div`
 
 const Section = styled.section`
   background: ${(props) => props.theme.background2};
-  width: 100%;
-  height: 100dvh;
-  overflow: scroll;
+  height: calc(100vh - 50px);
   transition: all 300ms;
 `;
 

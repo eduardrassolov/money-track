@@ -50,9 +50,10 @@ export default function TransactionView({ transactionType, queryKey, dataLoader 
 
     return (
         <Container>
-            <CreateNewTransactionForm type={transactionType} />
+            {/* <CreateNewTransactionForm type={transactionType} />
 
-            <Operation />
+            <Operation /> */}
+
             {isLoading || !trasactions ? <LoadingUi /> : <TransactionsList transactions={trasactions} />}
 
             <Pagination maxLength={transactionsWithSearchMask?.length} />
