@@ -1,5 +1,7 @@
+import styled from "styled-components";
 import supabase from "../../services/supabase";
-import { Span, StyledNavLink } from "./AsideItem.style";
+import { NavLink, useNavigate } from "react-router-dom";
+
 
 type AsideItemProps = {
     name: string;
@@ -7,6 +9,37 @@ type AsideItemProps = {
     icon: JSX.Element;
     onCloseBurger: () => void;
 }
+
+const Li = styled.li`
+    padding: 0 0.5rem;
+`
+
+const Icon = styled.span`
+    font-size: 1.5rem;
+`
+
+const StyledItem = styled(NavLink)`
+    text-decoration: none;
+    display: flex;
+    font-size: 1rem;
+    gap: 0.5rem;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    transition: 300ms all;
+    color: gray;
+    border-radius: 10px;
+
+    &:hover{
+        background: ${props => props.theme.hoverAside};
+        color: ${props => props.theme.text};
+    }
+    &.active{
+        background: ${props => props.theme.hoverAside};
+        color: ${props => props.theme.text};
+    }
+`
 
 export const logout = async () => {
     const { error } = await supabase.auth.signOut();
@@ -18,11 +51,17 @@ export const logout = async () => {
 }
 
 export default function AsideItem({ name, path, icon, onCloseBurger }: AsideItemProps) {
+    const navigate = useNavigate();
+
+    function handleClick() {
+        navigate(path);
+    }
     return (
-        <li>
-            <StyledNavLink to={path} onClick={onCloseBurger}>
-                {icon} <Span>{name}</Span>
-            </StyledNavLink>
-        </li>
+        <Li>
+            <StyledItem to={path}>
+                <Icon>{icon}</Icon>
+                <span>{name}</span>
+            </StyledItem>
+        </Li>
     )
 }
