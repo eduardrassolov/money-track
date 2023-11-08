@@ -17,10 +17,9 @@ export default function Search() {
         setMask(() => e.target.value);
         setSearch(mask);
         moveToPage(1);
-
     }
 
     return (
-        <SearchInput type="text" placeholder="Search..." value={mask} onInput={handleInput} />
+        <SearchInput type="text" placeholder="Search transaction" value={mask} onInput={handleInput} />
     )
 }

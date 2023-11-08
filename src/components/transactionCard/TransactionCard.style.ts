@@ -2,9 +2,9 @@ import { HiOutlinePencilSquare, HiOutlineTrash } from "react-icons/hi2";
 import { styled } from "styled-components";
 
 const Container = styled.div<{ $bg: string }>`
-  background: ${(props) => props.theme.background};
+  background: ${(props) => props.theme.background2};
   color: ${(props) => props.theme.text};
-  border: 1px solid ${(props) => props.theme.border};
+  border-bottom: 1px solid ${(props) => props.theme.border};
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   /* margin: 0 0 0.8rem; */

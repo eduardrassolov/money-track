@@ -16,6 +16,7 @@ import Pagination from '../pagination/Pagination'
 import { searchTransactionsByMask } from '../../utils/helpers/searchTransactionsByMask'
 import { DEFAULT_ITEMS_PER_PAGE } from '../../config/paginationItems'
 import usePagination from '../../utils/hooks/usePagination'
+import styled from 'styled-components'
 
 interface ITransactionView {
     transactionType: number,
@@ -24,6 +25,17 @@ interface ITransactionView {
 
 }
 
+const Header = styled.div`
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+`
+
+const Text = styled.p`
+    font-size: 1.2rem;
+    color: ${props => props.theme.text};
+`
+
 export default function TransactionView({ transactionType, queryKey, dataLoader }: ITransactionView) {
     const { user } = useUser();
     if (!user) {
@@ -31,7 +43,7 @@ export default function TransactionView({ transactionType, queryKey, dataLoader 
     }
 
     const { id: userId } = user;
-    const { from, to } = useBoundStore((state) => state.filterRange);
+    const [from, to] = useBoundStore((state) => state.range);
     const mask = useBoundStore((state) => state.search);
 
     const sortBy: SortBy = useSort();
@@ -50,9 +62,11 @@ export default function TransactionView({ transactionType, queryKey, dataLoader 
 
     return (
         <Container>
-            {/* <CreateNewTransactionForm type={transactionType} />
-
-            <Operation /> */}
+            {/* <CreateNewTransactionForm type={transactionType} /> */}
+            <Header>
+                <Text>Transactions</Text>
+                <Operation />
+            </Header>
 
             {isLoading || !trasactions ? <LoadingUi /> : <TransactionsList transactions={trasactions} />}
 
