@@ -9,50 +9,50 @@ export const OperationsContainer = styled.div`
     display: flex;;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     gap: 0.1rem;
     margin: 0 0 0.5rem;
 
     
-    @media only screen and (min-width: ${devices.xs}px) {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
+    @media only screen and (min-width: ${devices.sm}px) {
+        
     }
 `
 
 const Container = styled.div`
     width: 100%;
 `
-const FirstContainer = styled(Container)`
-    grid-area: 1/1/2/3; 
-`
-const SecondContainer = styled(Container)`
-    grid-area: 2/1/3/2; 
-`
-const ThirdContainer = styled(Container)`
-    grid-area: 2/2/3/3; 
-`
+// const FirstContainer = styled(Container)`
+//     grid-area: 1/1/2/3; 
+// `
+// const SecondContainer = styled(Container)`
+//     grid-area: 2/1/3/2; 
+// `
+// const ThirdContainer = styled(Container)`
+//     grid-area: 2/2/3/3; 
+// `
 
 export default function Operation() {
     return (
         <OperationsContainer>
-            <FirstContainer>
-                {/* <Filter options={FILTER_DATE_OPTIONS} filterKey={FILTER_KEYS.DATE} /> */}
-                {/* <DateFilter /> */}
-            </FirstContainer>
+            {/* <FirstContainer> */}
+            {/* <Filter options={FILTER_DATE_OPTIONS} filterKey={FILTER_KEYS.DATE} /> */}
+            {/* <DateFilter /> */}
+            {/* </FirstContainer> */}
 
-            <SecondContainer>
-                {/* <Search /> */}
-                <DateFilter />
+            {/* <SecondContainer> */}
+            {/* <Search /> */}
 
-            </SecondContainer>
+            <DateFilter />
 
-            <ThirdContainer>
+            {/* </SecondContainer> */}
+
+            {/* <ThirdContainer> */}
+            <div>
                 <Sort />
+            </div>
 
-                {/* <Search /> */}
-            </ThirdContainer>
+            {/* <Search /> */}
+            {/* </ThirdContainer> */}
 
         </OperationsContainer>
     )

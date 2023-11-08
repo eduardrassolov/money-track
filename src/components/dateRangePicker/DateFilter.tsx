@@ -17,7 +17,8 @@ const StyledRangePicker = styled(RangePicker)`
     }
 
     background: ${props => props.theme.background};
-    border: 1px solid ${props => props.theme.border};
+    /* border: 1px solid ${props => props.theme.border}; */
+    border: 1px solid ${props => props.theme.background};
 
     @media only screen and (min-width: ${devices.sm}px){
         width: fit-content;
@@ -68,6 +69,20 @@ const StyledList = styled.ul`
         }
     }
 `
+const StyledTitle = styled.p`
+    color: gray;
+    margin: 0;
+    padding: 1rem 1rem 0;
+`
+const Div = styled.div`
+    background: ${props => props.theme.background};
+    border: 1px solid ${props => props.theme.colorLogoMain};
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-radius: 7px;
+    width: fit-content;
+`
 
 const rangePresets: TimeRangePickerProps["presets"] = [
     { label: 'Today', value: [dayjs(), dayjs()] },
@@ -114,7 +129,8 @@ export default function DateFilter() {
     }
 
     return (
-        <>
+        <Div>
+            <StyledTitle>Date range: </StyledTitle>
             <ConfigProvider theme={{
                 components: {
                     DatePicker: {
@@ -153,6 +169,6 @@ export default function DateFilter() {
                     }
                 />
             </ConfigProvider>
-        </>
+        </Div>
     )
 }
