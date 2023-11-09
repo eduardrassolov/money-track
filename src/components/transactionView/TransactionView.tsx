@@ -16,10 +16,10 @@ import Pagination from '../pagination/Pagination'
 import { searchTransactionsByMask } from '../../utils/helpers/searchTransactionsByMask'
 import { DEFAULT_ITEMS_PER_PAGE } from '../../config/paginationItems'
 import usePagination from '../../utils/hooks/usePagination'
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 interface ITransactionView {
-    transactionType: number,
+    // transactionType: number,
     queryKey: string,
     dataLoader: (userId: string, filter: Filter, sortBy: SortBy, from: string, to: string) => Promise<ITransaction[]>;
 
@@ -28,15 +28,23 @@ interface ITransactionView {
 const Header = styled.div`
     display: flex;
     justify-content: space-between;
-    padding: 1rem 0;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid ${props => props.theme.border};
 `
 
 const Text = styled.p`
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: ${props => props.theme.text};
 `
 
-export default function TransactionView({ transactionType, queryKey, dataLoader }: ITransactionView) {
+const Div = styled.div`
+  display: grid;
+  grid-template-columns: minmax(350px, 600px) minmax(200px, 400px);
+  height: 100%;
+`
+
+export default function TransactionView({ queryKey, dataLoader }: ITransactionView) {
     const { user } = useUser();
     if (!user) {
         return null;
@@ -61,17 +69,19 @@ export default function TransactionView({ transactionType, queryKey, dataLoader 
     const trasactions = transactionsWithSearchMask?.slice((currPage - 1) * numberTransactionsPerPage, currPage * numberTransactionsPerPage);
 
     return (
-        <Container>
-            {/* <CreateNewTransactionForm type={transactionType} /> */}
-            <Header>
-                <Text>Transactions</Text>
-                <Operation />
-            </Header>
+        <Div>
+            <Container>
+                {/* <CreateNewTransactionForm type={transactionType} /> */}
+                <Header>
+                    <Text>Transactions date range: </Text>
+                    <Operation />
+                </Header>
 
-            {isLoading || !trasactions ? <LoadingUi /> : <TransactionsList transactions={trasactions} />}
+                {isLoading || !trasactions ? <LoadingUi /> : <TransactionsList transactions={trasactions} />}
 
-            <Pagination maxLength={transactionsWithSearchMask?.length} />
-            {/* <TransactionList listType={QUERY_KEY.INCOMES} loader={dataLoader} /> */}
-        </Container>
+                <Pagination maxLength={transactionsWithSearchMask?.length} />
+                {/* <TransactionList listType={QUERY_KEY.INCOMES} loader={dataLoader} /> */}
+            </Container>
+        </Div>
     )
 }

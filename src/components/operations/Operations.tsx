@@ -14,14 +14,11 @@ import { theme } from 'antd';
 import { string } from 'yup';
 import { useBoundStore } from '../../store/store';
 import { Range } from '../../store/createDateRangeFilterSlice';
+import { createPortal } from 'react-dom';
 
 
 export const OperationsContainer = styled.div`
-    display: flex;;
-    flex-direction: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin: 0 0 0.5rem;
+   
     
     @media only screen and (min-width: ${devices.sm}px) {
     }
@@ -60,16 +57,19 @@ export default function Operation() {
     }
 
     return (
-        <OperationsContainer>
-            <StyledRangePicker
+        <>
+            {/* <StyledRangePicker
                 onChange={handleRangeChange}
                 value={range}
                 clearIcon={null}
                 maxDate={new Date()}
                 rangeDivider={"-"}
                 format={"dd-MMM"}
-            />
+                locale="en-IN"
 
-        </OperationsContainer>
+            /> */}
+            <DateFilter />
+
+        </>
     )
 }

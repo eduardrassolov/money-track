@@ -1,6 +1,5 @@
 import { styled } from "styled-components";
 import { FC } from "react";
-import BurgerMenu from "../../burger/BurgerMenu";
 import MenuDropDown from "./menuDropDown/MenuDropDown";
 import { devices } from "../../../config/breakPoints";
 import Search from "../../search/Search";

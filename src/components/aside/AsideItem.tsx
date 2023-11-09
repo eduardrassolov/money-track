@@ -21,7 +21,7 @@ const Icon = styled.span`
 const StyledItem = styled(NavLink)`
     text-decoration: none;
     display: flex;
-    font-size: 1rem;
+    font-size: 0.9rem;
     gap: 0.5rem;
     align-items: center;
     text-align: center;

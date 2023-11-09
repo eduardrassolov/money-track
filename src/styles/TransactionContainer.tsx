@@ -3,7 +3,6 @@ import { styled } from "styled-components"
 const Container = styled.div`
   background: ${props => props.theme.background2};
   border-right: 1px solid ${props => props.theme.border};
-  max-width: 600px;
   display: flex;
   flex-direction: column;
   height: 100%;

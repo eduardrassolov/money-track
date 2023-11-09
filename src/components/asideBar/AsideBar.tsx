@@ -17,11 +17,11 @@ const StyledAside = styled.aside`
 
 const Ul = styled.ul`
     list-style: none;
-    margin: 0;
-    padding: 0;
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
+    margin: 2rem 0;
+    padding: 0;
 `
 
 const icons: Array<JSX.Element> =

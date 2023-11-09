@@ -18,12 +18,13 @@ import TYPES_TRANSACTION from "./config/typeTransactions.ts";
 import { QUERY_KEY } from "./config/queryClientKeys.ts";
 import { loaderExpenses } from "./pages/expenses/loader.ts";
 import { loaderIncomes } from "./pages/income/loader.ts";
+import { loaderTransactions } from "./pages/transactions/loader.ts";
 
 const AppLayout = lazy(() => import("./pages/layout/AppLayout.tsx"));
-const Transactions = lazy(() => import("./pages/transactions/Transactions.page.tsx"));
+// const Transactions = lazy(() => import("./pages/transactions/Transactions.page.tsx"));
 const Dashboard = lazy(() => import("./pages/dashboard/Dashboard.page.tsx"));
-const Incomes = lazy(() => import("./pages/income/Incomes.page.tsx"));
-const Expenses = lazy(() => import("./pages/expenses/Expenses.page.tsx"));
+// const Incomes = lazy(() => import("./pages/income/Incomes.page.tsx"));
+// const Expenses = lazy(() => import("./pages/expenses/Expenses.page.tsx"));
 const TransactionView = lazy(() => import("./components/transactionView/TransactionView.tsx"));
 
 const routes: RouteObject[] = [
@@ -38,7 +39,12 @@ const routes: RouteObject[] = [
         children: [
             {
                 path: ROUTES.TRANSACTIONS,
-                element: <Suspense fallback={<LoadingUi />}><Transactions /></Suspense>,
+                element: <Suspense fallback={<LoadingUi />}>
+                    <TransactionView
+                        queryKey={QUERY_KEY.TRANSACTIONS}
+                        dataLoader={loaderTransactions}
+                    />
+                </Suspense>,
             },
             {
                 path: ROUTES.TRANSACTION_ID,
@@ -49,7 +55,6 @@ const routes: RouteObject[] = [
                 path: ROUTES.INCOMES,
                 element: <Suspense fallback={<LoadingUi />}>
                     <TransactionView
-                        transactionType={TYPES_TRANSACTION.INCOME}
                         queryKey={QUERY_KEY.INCOMES}
                         dataLoader={loaderIncomes}
                     />
@@ -63,7 +68,6 @@ const routes: RouteObject[] = [
             {
                 path: ROUTES.EXPENSES,
                 element: <Suspense fallback={<LoadingUi />}><TransactionView
-                    transactionType={TYPES_TRANSACTION.EXPENSE}
                     queryKey={QUERY_KEY.EXPENSES}
                     dataLoader={loaderExpenses} />
                 </Suspense >,

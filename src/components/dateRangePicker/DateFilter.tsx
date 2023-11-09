@@ -13,15 +13,18 @@ const StyledRangePicker = styled(RangePicker)`
     .ant-picker-input > input{
         text-align: center;
         font-size: 0.9rem;
-        padding: 0.1rem;
+
     }
 
-    background: ${props => props.theme.background};
+    background: ${props => props.theme.background2};
     /* border: 1px solid ${props => props.theme.border}; */
-    border: 1px solid ${props => props.theme.background};
+    border: 1px solid ${props => props.theme.border};
 
+    input{
+        width: 6rem;
+    }
     @media only screen and (min-width: ${devices.sm}px){
-        width: fit-content;
+
     }
 `
 
@@ -31,11 +34,11 @@ const StyledContainer = styled.div<{ $isSmallScreen: boolean }>`
         justify-content: center;
         text-align: center;
         align-items: center;
-        width: 100%;
+        /* width: 100%; */
         @media only screen and (min-width: ${devices.sm}px){
             display: flex;
             flex-direction:row;
-            width: fit-content;
+            /* width: fit-content; */
         }  
     }  
     .ant-picker-header > button{
@@ -129,46 +132,46 @@ export default function DateFilter() {
     }
 
     return (
-        <Div>
-            <StyledTitle>Date range: </StyledTitle>
-            <ConfigProvider theme={{
-                components: {
-                    DatePicker: {
-                        cellWidth: 38,
-                        cellHeight: 20,
-                        colorText: theme.text,
-                        colorTextHeading: theme.text,
-                        colorIcon: theme.text,
-                        colorBgElevated: theme.background,
-                        colorIconHover: "gray",
-                        colorTextPlaceholder: theme.text,
-                        cellActiveWithRangeBg: theme.border,
-                        cellHoverWithRangeBg: theme.border,
-                        colorTextDisabled: "gray",
-                    }
+        <ConfigProvider theme={{
+            components: {
+                DatePicker: {
+                    cellWidth: 38,
+                    cellHeight: 20,
+                    colorText: theme.text,
+                    colorTextHeading: theme.text,
+                    colorIcon: theme.text,
+                    colorBgElevated: theme.background,
+                    colorIconHover: "gray",
+                    colorTextPlaceholder: theme.text,
+                    cellActiveWithRangeBg: theme.border,
+                    cellHoverWithRangeBg: theme.border,
+                    colorTextDisabled: "gray",
                 }
-            }}>
-                {/* TODO: fix error with ref */}
-                <StyledRangePicker
-                    //@ts-ignore
-                    ref={inputRef}
-                    value={rangeDates}
-                    onChange={handleChange}
-                    size={"large"}
-                    picker={"date"}
-                    style={{ alignItems: "center", textAlign: "center" }}
-                    panelRender={(node) => (
-                        <StyledContainer $isSmallScreen={isSmallScreen}>{node}</StyledContainer>
-                    )}
-                    renderExtraFooter={() =>
-                        <StyledList>
-                            {rangePresets?.map(rangeItem =>
-                                <li onClick={() => handleClickPreset(rangeItem.value)}>{rangeItem.label}</li>
-                            )}
-                        </StyledList>
-                    }
-                />
-            </ConfigProvider>
-        </Div>
+            }
+        }}>
+            {/* TODO: fix error with ref */}
+            <StyledRangePicker
+                //@ts-ignore
+                ref={inputRef}
+                allowClear={false}
+                format={"DD-MMM-YYYY"}
+                value={rangeDates}
+                onChange={handleChange}
+                size={"small"}
+                picker={"date"}
+                style={{ alignItems: "center", textAlign: "center" }}
+                panelRender={(node) => (
+                    <StyledContainer $isSmallScreen={isSmallScreen}>{node}</StyledContainer>
+                )}
+                renderExtraFooter={() =>
+                    <StyledList>
+                        {rangePresets?.map(rangeItem =>
+                            <li onClick={() => handleClickPreset(rangeItem.value)}>{rangeItem.label}</li>
+                        )}
+                    </StyledList>
+                }
+            />
+        </ConfigProvider>
+
     )
 }
