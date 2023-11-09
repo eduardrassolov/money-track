@@ -8,7 +8,10 @@ import dayjs from "dayjs";
 import styled from "styled-components";
 
 import TYPES_TRANSACTION from "../../config/typeTransactions";
-
+import { useBoundStore } from "../../store/store";
+import { HiOutlineTrash } from "react-icons/hi2";
+import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import { DiRasberryPi } from "react-icons/di";
 
 interface ITransactionProps {
   item: ITransaction;
@@ -57,6 +60,37 @@ const OpetaionsContainer = styled.div`
   gap: 0.3rem;
 `
 
+const IconButton = styled.button`
+  border: 1px solid ${props => props.theme.border};
+  color: ${props => props.theme.text};
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 10px;
+  transition: 300ms all;
+
+  &:hover{
+    border: 1px solid ${props => props.theme.colorLogoMain};
+  }
+
+  span{
+    font-size: 0.8rem;
+  }
+  `
+const Div = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+`
+const Icon = styled.span`
+  background: ${props => props.theme.background2};
+  display: flex;
+  padding: 0.5rem;
+  border-radius: 50%;
+`
 
 const TransactionCard: FC<ITransactionProps> = ({ item, onDelete, onEdit, index = 1 }) => {
   const { description, amount, completedAt, category, currency, type, id } = item;
@@ -64,16 +98,21 @@ const TransactionCard: FC<ITransactionProps> = ({ item, onDelete, onEdit, index 
   const formattedTime = dayjs(completedAt).format("DD MMMM YYYY HH:mm");
   const formattedAmount = new Intl.NumberFormat("en-IN", { style: "currency", currency: currency?.shortName || "USD" }).format(amount);
 
-  const formattedPrice = type.id === TYPES_TRANSACTION.EXPENSE ? "red" : "green";
+  const theme = useBoundStore((state) => state.theme);
+
+  const formattedPrice = type.id === TYPES_TRANSACTION.EXPENSE ? theme.expensePrice : theme.incomePrice;
   const typeTransaction = type.id === TYPES_TRANSACTION.EXPENSE ? "-" : "+";
 
   return (
     <AnimatedContainer duration={0.9} delay={0.1 * index} animateOnStart={true}>
       <Container $bg={""}>
-        <InfoSection>
-          <Title>{description}</Title>
-          <Time>{formattedTime}</Time>
-        </InfoSection>
+        <Div>
+          <Icon><DiRasberryPi size={"1.5rem"} /></Icon>
+          <InfoSection>
+            <Title>{description}</Title>
+            <Time>{formattedTime}</Time>
+          </InfoSection>
+        </Div>
 
         <CategoryDiv>
           <SmallText>{category.name}</SmallText>
@@ -84,8 +123,8 @@ const TransactionCard: FC<ITransactionProps> = ({ item, onDelete, onEdit, index 
         </PriceDiv>
 
         <OpetaionsContainer>
-          <button onClick={onEdit}>edit</button>
-          <button onClick={onDelete}>delete</button>
+          <IconButton onClick={onEdit}><AiOutlineEdit size={"1rem"} /><span>edit</span></IconButton>
+          <IconButton onClick={onDelete}><AiOutlineDelete size={"1rem"} /> <span>delete</span></IconButton>
         </OpetaionsContainer>
       </Container>
     </AnimatedContainer >

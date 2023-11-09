@@ -7,7 +7,8 @@ const Container = styled.div`
   flex-direction: column;
   height: 100%;
   overflow: scroll;
-  padding: 0 1rem; 
+  padding: 0 1rem;
+  
 `
 
 const FormContainer = styled.div`

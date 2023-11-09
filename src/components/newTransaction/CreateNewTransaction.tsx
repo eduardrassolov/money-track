@@ -1,27 +1,23 @@
 import styled from 'styled-components';
 import { devices } from '../../config/breakPoints';
 import TitleTrigger from './TitleTrigger';
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import TYPES_TRANSACTION from '../../config/typeTransactions';
 import CreateTransaction from '../createTransaction/CreateTransaction';
-import { FormContainer } from '../../styles/TransactionContainer';
-import { QUERY_KEY } from '../../config/queryClientKeys';
-import { useLocation } from 'react-router-dom';
 
 export interface INewTransactionProps {
     type: number;
 }
 
 const StyledNewTransactionFrom = styled.div<{ $isOpen: boolean }>`
-    border: ${props => props.$isOpen ? `1px solid ${props.theme.border}` : ""};
+    /* border: ${props => props.$isOpen ? `1px solid ${props.theme.border}` : ""}; */
     background: ${(props) => props.theme.background};
     color: ${(props) => props.theme.text};
-    padding: ${props => props.$isOpen ? "1.5rem 1.5rem 1rem" : "0"};
+    padding: ${props => props.$isOpen ? "1rem 0" : "0"};
     
     border-radius: 7px;
     width: 100%;
     transition: all 300ms;
-    margin: auto auto 1rem;
 
     display: flex;
     flex-direction: column;
@@ -38,20 +34,11 @@ export function CreateNewTransactionForm({ type }: INewTransactionProps) {
 
     const textForTitle: string = type === TYPES_TRANSACTION.INCOME ? "Income" : "Expense";
 
-    const location = useLocation();
-    console.log(location.pathname);
-
     return (
-        <>
-            <StyledNewTransactionFrom $isOpen={isOpen}>
-                <TitleTrigger isOpen={isOpen} onOpenClose={handleOpenClose} text={textForTitle} />
+        <StyledNewTransactionFrom $isOpen={isOpen}>
+            <TitleTrigger isOpen={isOpen} onOpenClose={handleOpenClose} text={textForTitle} />
 
-                {isOpen ?
-                    <CreateTransaction type={type} /> : ""
-                }
-
-            </StyledNewTransactionFrom>
-
-        </>
+            {isOpen ? <CreateTransaction type={type} /> : null}
+        </StyledNewTransactionFrom>
     )
 }

@@ -56,6 +56,7 @@ const Div = styled.div`
         display: grid;
         grid-template-columns: minmax(350px, 600px) minmax(200px, 400px);
         height: 100%;
+        gap: 1rem;
     }
 `;
 
@@ -63,7 +64,8 @@ const StyledHeaderContainer = styled.header`
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin: 1rem 0;
+    margin: 0;
+    padding: 0;
     width: 100%;
 `;
 
@@ -72,8 +74,6 @@ const H1 = styled.h1`
     font-weight: 500;
     margin: 0;
 `;
-
-
 
 export default function TransactionView({ queryKey, dataLoader }: ITransactionView) {
     const { user } = useUser();
@@ -94,8 +94,6 @@ export default function TransactionView({ queryKey, dataLoader }: ITransactionVi
         queryKey: [userId, queryKey, from, to, sortBy],
         queryFn: () => dataLoader(userId, filter, sortBy, from, to),
     });
-
-
 
     const transactionsWithSearchMask = searchTransactionsByMask(filteredTransactionData, mask);
     const numberTransactionsPerPage = Number(localStorage.getItem("transactionPerPage")) || DEFAULT_ITEMS_PER_PAGE;

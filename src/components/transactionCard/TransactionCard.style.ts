@@ -7,7 +7,7 @@ const Container = styled.div<{ $bg: string }>`
     border-bottom: 1px solid ${(props) => props.theme.border};
     display: grid;
     grid-template-columns: 1fr 1fr 0.5fr;
-    padding: 1rem;
+    padding: 1rem 0;
     justify-content: space-between;
     transition: all 300ms;
     font-size: 1rem;
