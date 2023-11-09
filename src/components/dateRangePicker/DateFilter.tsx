@@ -7,6 +7,7 @@ import { useBoundStore } from "../../store/store";
 import { RangeDate } from '../../store/storeConfig';
 import { useRef } from 'react';
 import useResize from '../../pages/dashboard/pie/useResize';
+import { Range } from '../../store/createDateRangeFilterSlice';
 const { RangePicker } = DatePicker;
 
 const StyledRangePicker = styled(RangePicker)`
@@ -17,12 +18,9 @@ const StyledRangePicker = styled(RangePicker)`
     }
 
     background: ${props => props.theme.background2};
-    /* border: 1px solid ${props => props.theme.border}; */
     border: 1px solid ${props => props.theme.border};
 
-    input{
-        width: 6rem;
-    }
+    
     @media only screen and (min-width: ${devices.sm}px){
 
     }
@@ -72,20 +70,6 @@ const StyledList = styled.ul`
         }
     }
 `
-const StyledTitle = styled.p`
-    color: gray;
-    margin: 0;
-    padding: 1rem 1rem 0;
-`
-const Div = styled.div`
-    background: ${props => props.theme.background};
-    border: 1px solid ${props => props.theme.colorLogoMain};
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    border-radius: 7px;
-    width: fit-content;
-`
 
 const rangePresets: TimeRangePickerProps["presets"] = [
     { label: 'Today', value: [dayjs(), dayjs()] },
@@ -103,27 +87,20 @@ export default function DateFilter() {
     const inputRef = useRef<HTMLInputElement>();
     const { isSmallScreen } = useResize();
 
-    const { filterRange: { from, to }, setFilterRange } = useBoundStore((state) => (
+    const { range, changeRange } = useBoundStore((state) => (
         {
-            setFilterRange: state.setFilterRange,
-            filterRange: state.filterRange
+            range: state.range,
+            changeRange: state.changeRange
         }));
 
-    //TODO refactor ANY
-    const rangeDates: any = [dayjs(from), dayjs(to)];
-
+    const [dateFrom, dateTo] = range;
     //TODO refactor ANY
     function handleChange(value: any) {
         if (!value) {
             return;
         }
 
-        const [startValue, endValue] = value;
-        const fromTo: RangeDate = {
-            from: dayjs(startValue.$d).format("YYYY-MM-DD"),
-            to: dayjs(endValue.$d).format("YYYY-MM-DD")
-        }
-        setFilterRange({ ...fromTo });
+        changeRange(value);
     }
 
     const handleClickPreset = (value: any) => {
@@ -155,7 +132,7 @@ export default function DateFilter() {
                 ref={inputRef}
                 allowClear={false}
                 format={"DD-MMM-YYYY"}
-                value={rangeDates}
+                value={[dayjs(new Date(dateFrom)), dayjs(new Date(dateTo))]}
                 onChange={handleChange}
                 size={"small"}
                 picker={"date"}
