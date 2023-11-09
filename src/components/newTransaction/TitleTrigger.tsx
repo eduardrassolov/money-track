@@ -16,6 +16,10 @@ const ToggleBtn = styled.button`
     text-align: center;
     color: ${props => props.theme.text};
     cursor: pointer;
+
+    span{
+        font-size: 2rem;
+    }
 `
 
 interface ITitleTrigger {
@@ -30,9 +34,11 @@ export default function TitleTrigger({ isOpen, onOpenClose, text }: ITitleTrigge
             <span>{text}</span>
             <ToggleBtn>
                 {!isOpen ?
-                    <HiChevronDown size={"1.5rem"} />
+                    // <HiChevronDown size={"1.5rem"} />
+                    <span>+</span>
                     :
-                    <HiChevronUp size={"1.5rem"} />
+                    // <HiChevronUp size={"1.5rem"} />
+                    <span>-</span>
                 }
             </ToggleBtn>
 

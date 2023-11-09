@@ -5,7 +5,7 @@ import { devices } from "../../../config/breakPoints";
 import Search from "../../search/Search";
 
 const Nav = styled.nav`
-    background: ${(props) => props.theme.background2};
+    background: ${(props) => props.theme.background};
     color: ${(props) => props.theme.text};
     border-bottom: 1px solid ${props => props.theme.border};
     display: flex;

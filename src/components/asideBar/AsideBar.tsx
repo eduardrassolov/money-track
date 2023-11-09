@@ -6,7 +6,7 @@ import { HiMiniArrowsUpDown, HiOutlineChartPie, HiOutlineCreditCard, HiOutlineSh
 import { devices } from "../../config/breakPoints";
 
 const StyledAside = styled.aside`
-    background: ${props => props.theme.background2};
+    background: ${props => props.theme.background};
     border: 1px solid ${props => props.theme.border};
     display: none;
 

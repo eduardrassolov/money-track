@@ -3,20 +3,21 @@ import TransactionCard from "../transactionCard/TransactionCard"
 import { useMutation } from "@tanstack/react-query";
 import apiDeleteTransaction from "../../services/api/deleteTransaction";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../config/routes";
 
 interface ITransactionList {
-    transactions: Array<ITransaction>
+    transactions: Array<ITransaction>,
+    onDeleteTransaction: (id: number) => void
 }
 
 const List = styled.div`
     display: flex;
     flex-direction: column;
 `
-export default function TransactionsList({ transactions }: ITransactionList) {
-    const handleEdit = (id: number) => { };
-
-    const { mutate: deleteTransaction } = useMutation({ mutationFn: apiDeleteTransaction });
-    const handleDelete = (id: number) => deleteTransaction(id);
+export default function TransactionsList({ transactions, onDeleteTransaction }: ITransactionList) {
+    const navigate = useNavigate();
+    const handleEdit = (id: number) => navigate(`${ROUTES.TRANSACTION}/${id}`);
 
     return (
         <List>
@@ -24,8 +25,8 @@ export default function TransactionsList({ transactions }: ITransactionList) {
                 <TransactionCard
                     key={transaction.id}
                     item={transaction}
-                    onDelete={() => { handleDelete(transaction.id) }}
-                    onEdit={handleEdit}
+                    onDelete={() => onDeleteTransaction(transaction.id)}
+                    onEdit={() => handleEdit(transaction.id)}
                     index={index}
                 />)}
         </List>

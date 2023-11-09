@@ -7,8 +7,10 @@ export const ROUTES = {
 
     ROOT: "/app",
 
+    TRANSACTION: "/app/transaction",
+
     TRANSACTIONS: `/app/transactions`,
-    TRANSACTION_ID: "/app/transactions/:id",
+    TRANSACTION_ID: "/app/transaction/:id",
 
     INCOMES: "/app/incomes",
     INCOME_ID: "/app/incomes/:id",

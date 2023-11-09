@@ -1,13 +1,13 @@
 import { styled } from "styled-components"
 
 const Container = styled.div`
-  background: ${props => props.theme.background2};
+  background: ${props => props.theme.background};
   border-right: 1px solid ${props => props.theme.border};
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow: scroll;
-  padding: 0 1rem;  
+  padding: 0 1rem; 
 `
 
 const FormContainer = styled.div`

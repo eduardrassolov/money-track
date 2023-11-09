@@ -13,6 +13,8 @@ import { useBoundStore } from '../../store/store';
 import TimeLine from './StepLine';
 import useNewTransaction from './useNewTransaction';
 import scrollTop from '../../utils/helpers/scrollTop';
+import { toast } from 'react-toastify';
+import { RangeDate } from '../../store/storeConfig';
 
 const StyledContainer = styled.div`
     display: flex;
@@ -27,7 +29,7 @@ export default function CreateNewTransaction({ type }: { type: number }) {
     const queryClient = useQueryClient();
     const { createTransaction } = useCreateTransaction();
     const sortBy: SortBy = useSort();
-    const { from, to } = useBoundStore(state => state.filterRange);
+    const range = useBoundStore(state => state.range);
 
     if (!user) {
         return null;
@@ -36,6 +38,7 @@ export default function CreateNewTransaction({ type }: { type: number }) {
     const userCurrency = user?.user_metadata.currency as string;
 
     const key = type === TYPES_TRANSACTION.INCOME ? QUERY_KEY.INCOMES : QUERY_KEY.EXPENSES;
+    console.log("Key", key);
 
     const { transaction, transactionDataArr, reset } = useNewTransaction(user, type);
 
@@ -61,6 +64,8 @@ export default function CreateNewTransaction({ type }: { type: number }) {
             currencyId: userCurrency
         }, {
             onSuccess: () => {
+                toast.success("New transaction added.");
+                const [from, to] = range;
                 queryClient.invalidateQueries({ queryKey: [userId, key, from, to, sortBy] });
                 setStep(() => 0);
                 reset();
