@@ -4,12 +4,12 @@ import { CheckIcon, ResetIcon } from '@radix-ui/react-icons';
 import { useState } from 'react';
 
 import { StyledInput } from '../input/Input.tsx';
-import { PrimaryBtn } from '../../styles/Button.tsx';
 import { useUser } from '../../utils/hooks/useUser.tsx';
 import { ButtonIcon, Container, CreateContainer, StyledDiv } from './DropDown.style.ts';
 import useCategorySelect from './useCategorySelect.ts'
 import { QUERY_KEY } from '../../config/queryClientKeys.ts';
 import { toast } from 'react-toastify';
+import { PrimaryBtn } from '../../styles/Button.style.ts';
 
 export default function CreateCategorySection({ type_id, isCreateMode, changeState }: { type_id: number, isCreateMode: boolean, changeState: () => void }) {
     const { addCategory, clear } = useCategorySelect();

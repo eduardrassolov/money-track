@@ -2,13 +2,13 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import FormRow from '../../components/newTransaction/FormRow'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { ErrorP } from '../../components/newTransaction/FormTransaction.style';
 import SettingsFooter from './SettingsFooter';
 import Input from '../../components/input/Input';
 import { useMutation } from '@tanstack/react-query';
 import apiUpdateProfileData from '../../services/api/apiUpdateProfileData';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
+import ErrorLabel from '../../components/error/ErrorLabel';
 
 type InputsProfile = {
     firstName: string,
@@ -56,12 +56,12 @@ export default function ProfileTab({ firstName, lastName }: InputsProfile) {
 
             <FormRow lblFor="firstName" lblText="First name">
                 <Input type="text" register={register} name={"firstName"} autoFocus />
-                <ErrorP>{errors.firstName?.message}</ErrorP>
+                <ErrorLabel errMsg={errors.firstName?.message} />
             </FormRow>
 
             <FormRow lblFor="lastName" lblText="Last name">
                 <Input type="text" register={register} name={"lastName"} />
-                <ErrorP>{errors.lastName?.message}</ErrorP>
+                <ErrorLabel errMsg={errors.lastName?.message} />
             </FormRow>
 
             <SettingsFooter />

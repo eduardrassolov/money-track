@@ -20,9 +20,10 @@ export const StyledInput = styled.input`
 `
 export const SearchInput = styled(StyledInput)`
     display: flex;
-    width: 100%;
     box-sizing: border-box;
     margin: 0;
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
 `
 
 interface IInput {

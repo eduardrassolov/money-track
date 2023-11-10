@@ -6,8 +6,8 @@ import { useQuery } from '@tanstack/react-query';
 import apiGetCurrency from '../../services/api/apiGetCurrency';
 import LoadingUi from '../../components/spinner/LoadingUi';
 import { Form, P } from './ProfileTab';
-import { ErrorP } from '../../components/newTransaction/FormTransaction.style';
 import Input from '../../components/input/Input';
+import ErrorLabel from '../../components/error/ErrorLabel';
 
 type ApplicationTabProps = {
     currencyId: string,
@@ -38,7 +38,7 @@ export default function ApplicationTab({ currencyId }: ApplicationTabProps) {
             <P>Make changes to your application here.<br /> Click save when you're done.</P>
             <FormRow lblFor="numberPerPage" lblText="Show transactions per page">
                 <Input register={register} id={"perPage"} name={"numberPerPage"} type={"number"} autoFocus />
-                <ErrorP></ErrorP>
+                <ErrorLabel />
             </FormRow>
 
             <FormRow lblFor="currency" lblText="Currency by default">
@@ -47,7 +47,7 @@ export default function ApplicationTab({ currencyId }: ApplicationTabProps) {
                     :
                     <Select options={optionCurrency} selectedDefault={currencyId} register={register} name={"currencyId"} ></Select>
                 }
-                <ErrorP></ErrorP>
+                <ErrorLabel />
             </FormRow>
 
             <SettingsFooter />

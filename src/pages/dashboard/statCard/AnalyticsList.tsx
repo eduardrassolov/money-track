@@ -1,6 +1,6 @@
 import useDashboard from '../useDashboard';
 import createDiagramData from '../createDiagramData';
-import { ISummary, getSummaryData } from '../../../utils/helpers/getStats';
+import { ISummary, getDataSummmary } from '../../../utils/helpers/getStats';
 import Diagram from '../diagram/Diagram';
 
 import calculateStats from '../../../utils/helpers/calculateStats';
@@ -27,8 +27,7 @@ export const slideDown = {
     visible: { y: 0 }
 }
 
-export default function StatsList() {
-    console.log("statsrender");
+export default function AnalyticsList() {
     const { transactions, expenses, incomes, isExpenseLoading, isIncomeLoading, isTransactionLoading } = useDashboard();
     const { currency } = useUser();
     const { defaultCurrency } = useCurrency(currency);
@@ -44,8 +43,8 @@ export default function StatsList() {
 
     const dataDiagram = createDiagramData(convertedTransactions);
 
-    const summaryExpenses: Array<ISummary> = getSummaryData(convertedExpenses);
-    const summaryIncomes: Array<ISummary> = getSummaryData(convertedIncomes);
+    const summaryExpenses: Array<ISummary> = getDataSummmary(convertedExpenses);
+    const summaryIncomes: Array<ISummary> = getDataSummmary(convertedIncomes);
 
     return <>
         {isTransactionLoading || isExpenseLoading || isIncomeLoading ?

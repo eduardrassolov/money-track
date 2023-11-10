@@ -2,58 +2,50 @@ import { HiOutlinePencilSquare, HiOutlineTrash } from "react-icons/hi2";
 import { styled } from "styled-components";
 
 const Container = styled.div<{ $bg: string }>`
-  background: ${(props) => props.theme.background};
-  color: ${(props) => props.theme.text};
-  border-radius: 15px;
-  border: 1px solid ${(props) => props.theme.border};
-  display: flex;
-  margin: 0 0 0.8rem;
-  padding: 1.5rem 1.8rem;
-  justify-content: space-between;
-  transition: all 300ms;
-
-  &:hover {
-    background: ${(props) => (props.$bg === "expenses" ? "rgba(36, 143, 233, 0.05)" : "rgba(142, 230, 20, 0.05)")};
-    border: 1px solid ${(props) => (props.$bg === "expenses" ? "rgb(36, 143, 233)" : "rgb(142, 230, 20)")};
-    cursor: pointer;
+    background: ${(props) => props.theme.background};
+    color: ${(props) => props.theme.text};
+    border-bottom: 1px solid ${(props) => props.theme.border};
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.5fr;
+    padding: 1rem 0;
+    justify-content: space-between;
     transition: all 300ms;
-  }
-  @media (max-width: 800px) {
-    margin: 0 0 10px;
-  }
+    font-size: 1rem;
+    gap: 1rem;
+    row-gap: 0;
 `;
 
 const InfoSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 0 1rem 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 `;
 
 const OperationSection = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 0.5rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem;
 `;
 
 const StyledIcon = styled(HiOutlineTrash)`
-  font-size: 1.3rem;
-  cursor: pointer;
+    font-size: 1.3rem;
+    cursor: pointer;
 
-  &:hover {
-    transform: scale(1.1);
-    transition: all 0.4s ease-in-out;
-  }
+    &:hover {
+        transform: scale(1.1);
+        transition: all 0.4s ease-in-out;
+    }
 `;
 
 const StyledEdit = styled(HiOutlinePencilSquare)`
-  font-size: 1.3rem;
-  cursor: pointer;
+    font-size: 1.3rem;
+    cursor: pointer;
 
-  &:hover {
-    transform: scale(1.1);
-    transition: all 0.4s ease-in-out;
-  }
+    &:hover {
+        transform: scale(1.1);
+        transition: all 0.4s ease-in-out;
+    }
 `;
 
 export { Container, InfoSection, OperationSection, StyledIcon, StyledEdit };

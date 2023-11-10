@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { devices } from "./breakPoints";
+import { devices } from "../config/breakPoints";
 
 const StyledGrid = styled.div`
   display: grid;

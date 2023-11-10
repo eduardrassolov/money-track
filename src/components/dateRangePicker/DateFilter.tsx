@@ -1,11 +1,11 @@
-import { ConfigProvider, DatePicker, TimeRangePickerProps } from 'antd';
+
 import styled from "styled-components";
-import useTheme from "../../utils/hooks/useTheme";
-import { devices } from "../../styles/breakPoints";
-import dayjs from 'dayjs'
-import { useBoundStore } from "../../store/store";
-import { RangeDate } from '../../store/storeConfig';
 import { useRef } from 'react';
+import dayjs from 'dayjs'
+import { ConfigProvider, DatePicker, TimeRangePickerProps } from 'antd';
+import useTheme from "../../utils/hooks/useTheme";
+import { devices } from "../../config/breakPoints";
+import { useBoundStore } from "../../store/store";
 import useResize from '../../pages/dashboard/pie/useResize';
 const { RangePicker } = DatePicker;
 
@@ -13,14 +13,15 @@ const StyledRangePicker = styled(RangePicker)`
     .ant-picker-input > input{
         text-align: center;
         font-size: 0.9rem;
-        padding: 0.1rem;
+
     }
 
-    background: ${props => props.theme.background};
+    background: ${props => props.theme.background2};
     border: 1px solid ${props => props.theme.border};
 
+    
     @media only screen and (min-width: ${devices.sm}px){
-        width: fit-content;
+
     }
 `
 
@@ -30,11 +31,11 @@ const StyledContainer = styled.div<{ $isSmallScreen: boolean }>`
         justify-content: center;
         text-align: center;
         align-items: center;
-        width: 100%;
+        /* width: 100%; */
         @media only screen and (min-width: ${devices.sm}px){
             display: flex;
             flex-direction:row;
-            width: fit-content;
+            /* width: fit-content; */
         }  
     }  
     .ant-picker-header > button{
@@ -85,27 +86,20 @@ export default function DateFilter() {
     const inputRef = useRef<HTMLInputElement>();
     const { isSmallScreen } = useResize();
 
-    const { filterRange: { from, to }, setFilterRange } = useBoundStore((state) => (
+    const { range, changeRange } = useBoundStore((state) => (
         {
-            setFilterRange: state.setFilterRange,
-            filterRange: state.filterRange
+            range: state.range,
+            changeRange: state.changeRange
         }));
 
-    //TODO refactor ANY
-    const rangeDates: any = [dayjs(from), dayjs(to)];
-
+    const [dateFrom, dateTo] = range;
     //TODO refactor ANY
     function handleChange(value: any) {
         if (!value) {
             return;
         }
 
-        const [startValue, endValue] = value;
-        const fromTo: RangeDate = {
-            from: dayjs(startValue.$d).format("YYYY-MM-DD"),
-            to: dayjs(endValue.$d).format("YYYY-MM-DD")
-        }
-        setFilterRange({ ...fromTo });
+        changeRange(value);
     }
 
     const handleClickPreset = (value: any) => {
@@ -114,45 +108,46 @@ export default function DateFilter() {
     }
 
     return (
-        <>
-            <ConfigProvider theme={{
-                components: {
-                    DatePicker: {
-                        cellWidth: 38,
-                        cellHeight: 20,
-                        colorText: theme.text,
-                        colorTextHeading: theme.text,
-                        colorIcon: theme.text,
-                        colorBgElevated: theme.background,
-                        colorIconHover: "gray",
-                        colorTextPlaceholder: theme.text,
-                        cellActiveWithRangeBg: theme.border,
-                        cellHoverWithRangeBg: theme.border,
-                        colorTextDisabled: "gray",
-                    }
+        <ConfigProvider theme={{
+            components: {
+                DatePicker: {
+                    cellWidth: 38,
+                    cellHeight: 20,
+                    colorText: theme.text,
+                    colorTextHeading: theme.text,
+                    colorIcon: theme.text,
+                    colorBgElevated: theme.background,
+                    colorIconHover: "gray",
+                    colorTextPlaceholder: theme.text,
+                    cellActiveWithRangeBg: theme.border,
+                    cellHoverWithRangeBg: theme.border,
+                    colorTextDisabled: "gray",
                 }
-            }}>
-                {/* TODO: fix error with ref */}
-                <StyledRangePicker
-                    //@ts-ignore
-                    ref={inputRef}
-                    value={rangeDates}
-                    onChange={handleChange}
-                    size={"large"}
-                    picker={"date"}
-                    style={{ alignItems: "center", textAlign: "center" }}
-                    panelRender={(node) => (
-                        <StyledContainer $isSmallScreen={isSmallScreen}>{node}</StyledContainer>
-                    )}
-                    renderExtraFooter={() =>
-                        <StyledList>
-                            {rangePresets?.map(rangeItem =>
-                                <li onClick={() => handleClickPreset(rangeItem.value)}>{rangeItem.label}</li>
-                            )}
-                        </StyledList>
-                    }
-                />
-            </ConfigProvider>
-        </>
+            }
+        }}>
+            {/* TODO: fix error with ref */}
+            <StyledRangePicker
+                //@ts-ignore
+                ref={inputRef}
+                allowClear={false}
+                format={"DD-MMM-YYYY"}
+                value={[dayjs(new Date(dateFrom)), dayjs(new Date(dateTo))]}
+                onChange={handleChange}
+                size={"small"}
+                picker={"date"}
+                style={{ alignItems: "center", textAlign: "center" }}
+                panelRender={(node) => (
+                    <StyledContainer $isSmallScreen={isSmallScreen}>{node}</StyledContainer>
+                )}
+                renderExtraFooter={() =>
+                    <StyledList>
+                        {rangePresets?.map(rangeItem =>
+                            <li onClick={() => handleClickPreset(rangeItem.value)}>{rangeItem.label}</li>
+                        )}
+                    </StyledList>
+                }
+            />
+        </ConfigProvider>
+
     )
 }

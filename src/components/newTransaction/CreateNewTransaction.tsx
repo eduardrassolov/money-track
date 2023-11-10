@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { devices } from '../../styles/breakPoints';
+import { devices } from '../../config/breakPoints';
 import TitleTrigger from './TitleTrigger';
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import TYPES_TRANSACTION from '../../config/typeTransactions';
 import CreateTransaction from '../createTransaction/CreateTransaction';
 
@@ -10,15 +10,14 @@ export interface INewTransactionProps {
 }
 
 const StyledNewTransactionFrom = styled.div<{ $isOpen: boolean }>`
-    border: 1px solid ${(props) => props.theme.border};
+    /* border: ${props => props.$isOpen ? `1px solid ${props.theme.border}` : ""}; */
     background: ${(props) => props.theme.background};
     color: ${(props) => props.theme.text};
-    padding: ${props => props.$isOpen ? "1.5rem 1.5rem 1rem" : "0.2rem 1rem"};
+    padding: ${props => props.$isOpen ? "1rem 0" : "0"};
     
     border-radius: 7px;
-    width: auto;
+    width: 100%;
     transition: all 300ms;
-    margin: auto auto 1rem;
 
     display: flex;
     flex-direction: column;
@@ -28,23 +27,18 @@ const StyledNewTransactionFrom = styled.div<{ $isOpen: boolean }>`
     }
 `
 
-const CreateNewTransactionForm: FC<INewTransactionProps> = ({ type }) => {
+export function CreateNewTransactionForm({ type }: INewTransactionProps) {
     const [isOpen, setOpen] = useState<boolean>(false);
 
     const handleOpenClose = () => setOpen(prev => !prev);
 
-    const textForTitle: string = type === TYPES_TRANSACTION.INCOME ? "Add new income" : "Add new expense";
+    const textForTitle: string = type === TYPES_TRANSACTION.INCOME ? "Income" : "Expense";
 
     return (
         <StyledNewTransactionFrom $isOpen={isOpen}>
             <TitleTrigger isOpen={isOpen} onOpenClose={handleOpenClose} text={textForTitle} />
 
-            {isOpen ?
-                <CreateTransaction type={type} />
-                : ""
-            }
-
+            {isOpen ? <CreateTransaction type={type} /> : null}
         </StyledNewTransactionFrom>
     )
 }
-export default CreateNewTransactionForm;

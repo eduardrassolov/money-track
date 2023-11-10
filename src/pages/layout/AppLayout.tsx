@@ -1,29 +1,29 @@
 import { Outlet } from 'react-router-dom'
 import "react-toastify/dist/ReactToastify.css";
-import NavBar from '../../components/aside/NavBar/NavBar.tsx';
-import BurgerMenu from '../../components/burger/BurgerMenu.tsx';
-import useBurgerMenu from '../../components/aside/NavBar/useBurger.tsx';
-import { Section, StyledLayout } from './AppLayou.style.ts';
+// import useBurgerMenu from '../../components/aside/NavBar/useBurger.tsx';
+import { ContentContainer, Section, StyledLayout } from './AppLayou.style.ts';
 import { useRef } from 'react';
-import Overlay from '../../components/overlay/Overlay.tsx';
+import AsideBar from '../../components/asideBar/AsideBar.tsx';
+import { NavBar } from '../../components/aside/NavBar/NavBar.tsx';
+
 
 export default function AppLayout() {
-    const { isBurgerOpen, handleBurger, closeBurger } = useBurgerMenu();
+    // const { isBurgerOpen, handleBurger, closeBurger } = useBurgerMenu();
 
     const containter = useRef(null);
 
     return (
         <StyledLayout>
-            <Overlay isShow={isBurgerOpen} onClose={handleBurger} />
+            <AsideBar />
 
-            <NavBar isBurgerOpen={isBurgerOpen} onClose={closeBurger} />
+            <ContentContainer>
+                {/* <NavBar isBurgerOpen={isBurgerOpen} onClose={closeBurger} /> */}
+                <NavBar />
 
-            <BurgerMenu isOpen={isBurgerOpen} onClose={handleBurger} />
-
-            <Section ref={containter}>
-                <Outlet />
-            </Section>
-
+                <Section ref={containter}>
+                    <Outlet />
+                </Section>
+            </ContentContainer>
         </StyledLayout>
     )
 }

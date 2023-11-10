@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { devices } from "../../../styles/breakPoints";
+import { devices } from "../../../config/breakPoints";
 
 export const FeaturesItem = styled.div<{ $side: string }>`
   display: flex;

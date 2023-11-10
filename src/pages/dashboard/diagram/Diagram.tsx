@@ -5,7 +5,7 @@ import { DiagramData } from '../createDiagramData';
 import { CustomTooltip } from './CustomTooltip';
 import Header from '../../../ui/header/Header';
 import AnimatedContainer from '../../../components/animation/AnimatedContainer';
-import { slideUp } from '../statCard/StatsList';
+import { slideUp } from '../statCard/AnalyticsList';
 
 const ChartContainer = styled.div`
   width: 100%;

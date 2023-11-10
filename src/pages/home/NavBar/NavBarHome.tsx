@@ -5,7 +5,7 @@ import NavLinks from "./NavLinks";
 import Overlay from "../../../components/overlay/Overlay";
 import Logo from "../../../components/logo/Logo";
 import ThemeSwitch from "../../../components/swtich/ThemeSwitch";
-import { devices } from "../../../styles/breakPoints";
+import { devices } from "../../../config/breakPoints";
 
 const Nav = styled.nav`
     backdrop-filter: blur(9px) saturate(180%);

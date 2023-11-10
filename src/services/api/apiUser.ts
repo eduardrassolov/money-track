@@ -1,7 +1,7 @@
-import { ILogin } from "../../pages/authorization/useLogin";
+import { TLogin } from "../../pages/authorization/login/login.type";
 import supabase from "../supabase";
 
-export async function login({ email, password }: ILogin) {
+export async function apiLogin({ email, password }: TLogin) {
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
   if (error) {

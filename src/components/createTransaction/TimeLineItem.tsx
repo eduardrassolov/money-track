@@ -2,7 +2,7 @@
 import AnimatedContainer from '../animation/AnimatedContainer'
 import styled from 'styled-components'
 import { HiArrowSmallRight } from 'react-icons/hi2'
-import { slideDown } from '../../pages/dashboard/statCard/StatsList'
+import { slideDown } from '../../pages/dashboard/statCard/AnalyticsList'
 
 const StyledNumber = styled.span<{ $isHighlight: boolean }>`
     color: ${props => props.$isHighlight ? "#fff" : props.theme.text};

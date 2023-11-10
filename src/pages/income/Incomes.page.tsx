@@ -4,26 +4,20 @@ import { QUERY_KEY } from "../../config/queryClientKeys";
 
 import { loaderIncomes } from "./loader";
 import TransactionList from "../transactions/TransactionList";
-import { Container, FormDiv, ListDiv } from "../../styles/TransactionContainer";
+import { Container, ListDiv } from "../../styles/TransactionContainer";
 import Operation from "../../components/operations/Operations";
-import CreateNewTransactionForm from "../../components/newTransaction/CreateNewTransaction";
-// import CategoryBadgesList from "../../components/badges/CategoryBadges";
+import { CreateNewTransactionForm } from "../../components/newTransaction/CreateNewTransaction";
 
 export default function Incomes() {
 
     return (
-        <>
-            <Container>
-                <FormDiv>
-                    <CreateNewTransactionForm type={TYPES_TRANSACTION.INCOME} />
-                </FormDiv>
+        <Container>
+            <CreateNewTransactionForm type={TYPES_TRANSACTION.INCOME} />
 
-                <ListDiv>
-                    <Operation />
-                    <TransactionList listType={QUERY_KEY.INCOMES} loader={loaderIncomes} />
-                </ListDiv>
-            </Container>
-        </>
-
+            <ListDiv>
+                <Operation />
+                <TransactionList listType={QUERY_KEY.INCOMES} loader={loaderIncomes} />
+            </ListDiv>
+        </Container>
     )
 }
