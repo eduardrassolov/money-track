@@ -14,7 +14,6 @@ import LogIn from "./pages/authorization/login/LogIn.tsx";
 import SignUp from "./pages/authorization/signUp/SignUp.tsx";
 import { ROUTES } from "./config/routes.ts";
 // import TransactionView from "./components/transactionView/TransactionView.tsx";
-import TYPES_TRANSACTION from "./config/typeTransactions.ts";
 import { QUERY_KEY } from "./config/queryClientKeys.ts";
 import { loaderExpenses } from "./pages/expenses/loader.ts";
 import { loaderIncomes } from "./pages/income/loader.ts";

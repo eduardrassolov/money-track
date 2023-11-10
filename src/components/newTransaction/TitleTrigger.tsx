@@ -1,4 +1,4 @@
-import { HiChevronDown, HiChevronUp } from 'react-icons/hi2'
+
 import styled from 'styled-components'
 
 const Title = styled.div`
@@ -22,6 +22,10 @@ const ToggleBtn = styled.button`
     }
 `
 
+const TriggerText = styled.span`
+    font-size: 1.3rem;
+`
+
 interface ITitleTrigger {
     isOpen: boolean,
     onOpenClose: () => void,
@@ -31,13 +35,11 @@ interface ITitleTrigger {
 export default function TitleTrigger({ isOpen, onOpenClose, text }: ITitleTrigger) {
     return (
         <Title onClick={onOpenClose}>
-            <span>{text}</span>
+            <TriggerText>{text}</TriggerText>
             <ToggleBtn>
                 {!isOpen ?
-                    // <HiChevronDown size={"1.5rem"} />
                     <span>+</span>
                     :
-                    // <HiChevronUp size={"1.5rem"} />
                     <span>-</span>
                 }
             </ToggleBtn>

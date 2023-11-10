@@ -1,5 +1,4 @@
 import { styled } from "styled-components";
-import { FC } from "react";
 import MenuDropDown from "./menuDropDown/MenuDropDown";
 import { devices } from "../../../config/breakPoints";
 import Search from "../../search/Search";
@@ -26,7 +25,7 @@ export interface IBar {
     onClose: () => void;
 }
 
-const NavBar: FC<IBar> = ({ isBurgerOpen, onClose }) => {
+export function NavBar() {
     return (
         <Nav>
             <Search />
@@ -38,4 +37,3 @@ const NavBar: FC<IBar> = ({ isBurgerOpen, onClose }) => {
         </Nav >
     )
 }
-export default NavBar;

@@ -9,9 +9,7 @@ import { loaderIncomes } from '../income/loader';
 
 export default function useDashboard() {
     const { user } = useUser();
-
     const userId = user?.id;
-
 
     if (!userId) {
         throw new Error('User not found');
@@ -39,7 +37,6 @@ export default function useDashboard() {
             queryKey: [userId, QUERY_KEY.INCOMES, from, to, sortBy],
             queryFn: () => loaderIncomes(userId, filter, sortBy, from, to),
         });
-    console.log("new", expenses);
 
     return { transactions, expenses, incomes, isTransactionLoading, isExpenseLoading, isIncomeLoading }
 }

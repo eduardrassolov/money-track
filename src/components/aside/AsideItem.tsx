@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import supabase from "../../services/supabase";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
 type AsideItemProps = {
@@ -50,12 +50,12 @@ export const logout = async () => {
     return true;
 }
 
-export default function AsideItem({ name, path, icon, onCloseBurger }: AsideItemProps) {
-    const navigate = useNavigate();
+export default function AsideItem({ name, path, icon }: AsideItemProps) {
+    // const navigate = useNavigate();
 
-    function handleClick() {
-        navigate(path);
-    }
+    // function handleClick() {
+    //     navigate(path);
+    // }
     return (
         <Li>
             <StyledItem to={path}>

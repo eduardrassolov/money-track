@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+
 import { Container } from "../../styles/TransactionContainer";
 import { useUser } from "../../utils/hooks/useUser";
 import { useBoundStore } from "../../store/store";
@@ -17,10 +19,7 @@ import usePagination from "../../utils/hooks/usePagination";
 import DateFilter from "../dateRangePicker/DateFilter";
 import { devices } from "../../config/breakPoints";
 import apiDeleteTransaction from "../../services/api/deleteTransaction";
-import { useState } from "react";
-import useNewTransaction from "../createTransaction/useNewTransaction";
 import { CreateNewTransactionForm } from "../newTransaction/CreateNewTransaction";
-import { toast } from "react-toastify";
 import { QUERY_KEY } from "../../config/queryClientKeys";
 import TYPES_TRANSACTION from "../../config/typeTransactions";
 
@@ -33,7 +32,7 @@ interface ITransactionView {
 const Header = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 0.5rem;
     padding: 1rem 0;
     border-bottom: 1px solid ${(props) => props.theme.border};
 
@@ -43,18 +42,19 @@ const Header = styled.div`
     }
 `;
 
-const Text = styled.p`
+export const Text = styled.p`
     font-size: 1rem;
     margin: 0;
     padding: 0;
     color: ${(props) => props.theme.text};
 `;
 
-const Div = styled.div`
+const Main = styled.main`
     display: flex;
-    @media only screen and (min-width: ${devices.md}px) {
+    width: 100%;
+    @media only screen and (min-width: ${devices.sm}px) {
         display: grid;
-        grid-template-columns: minmax(350px, 600px) minmax(200px, 400px);
+        grid-template-columns: minmax(350px, 700px) minmax(200px, 400px);
         height: 100%;
         gap: 1rem;
     }
@@ -67,12 +67,6 @@ const StyledHeaderContainer = styled.header`
     margin: 0;
     padding: 0;
     width: 100%;
-`;
-
-const H1 = styled.h1`
-    font-size: 1.2rem;
-    font-weight: 500;
-    margin: 0;
 `;
 
 export default function TransactionView({ queryKey, dataLoader }: ITransactionView) {
@@ -107,7 +101,7 @@ export default function TransactionView({ queryKey, dataLoader }: ITransactionVi
     }
 
     return (
-        <Div>
+        <Main>
             <Container>
                 {queryKey === QUERY_KEY.TRANSACTIONS ? "" :
                     <StyledHeaderContainer>
@@ -128,6 +122,6 @@ export default function TransactionView({ queryKey, dataLoader }: ITransactionVi
 
                 <Pagination maxLength={transactionsWithSearchMask?.length} />
             </Container>
-        </Div>
+        </Main>
     );
 }

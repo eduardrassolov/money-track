@@ -1,22 +1,20 @@
 import { FC } from "react";
 import { ITransaction } from "../../interface/ITransactions";
-import TransactionFooter from "./TransactionFooter";
-import TransactionHeader from "./TransactionHeader";
-import { Container, InfoSection, OperationSection, StyledEdit, StyledIcon } from "./TransactionCard.style";
+import { Container, InfoSection } from "./TransactionCard.style";
 import AnimatedContainer from "../animation/AnimatedContainer";
 import dayjs from "dayjs";
 import styled from "styled-components";
 
 import TYPES_TRANSACTION from "../../config/typeTransactions";
 import { useBoundStore } from "../../store/store";
-import { HiOutlineTrash } from "react-icons/hi2";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { DiRasberryPi } from "react-icons/di";
+import { devices } from "../../config/breakPoints";
 
 interface ITransactionProps {
   item: ITransaction;
   onDelete: () => void;
-  onEdit: () => void;
+  onEdit: (id: number) => void;
   index?: number;
 }
 
@@ -37,12 +35,19 @@ const Time = styled.span`
 
 const Price = styled(SmallText) <{ $typeTransaction: string }>`
   color: ${props => props.$typeTransaction};
+  font-size: 0.9rem;
+  white-space: nowrap;
 `
 
 const CenterDiv = styled.div`
   display: flex;
   justify-content: start;
-  align-items: center;
+  align-items: start;
+
+  @media only screen and (min-width: ${devices.sm}px){
+
+  }
+
 `
 
 const CategoryDiv = styled(CenterDiv)`
@@ -123,7 +128,7 @@ const TransactionCard: FC<ITransactionProps> = ({ item, onDelete, onEdit, index 
         </PriceDiv>
 
         <OpetaionsContainer>
-          <IconButton onClick={onEdit}><AiOutlineEdit size={"1rem"} /><span>edit</span></IconButton>
+          <IconButton onClick={() => onEdit(id)}><AiOutlineEdit size={"1rem"} /><span>edit</span></IconButton>
           <IconButton onClick={onDelete}><AiOutlineDelete size={"1rem"} /> <span>delete</span></IconButton>
         </OpetaionsContainer>
       </Container>

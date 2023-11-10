@@ -1,13 +1,12 @@
-import { ConfigProvider, DatePicker, TimeRangePickerProps } from 'antd';
+
 import styled from "styled-components";
+import { useRef } from 'react';
+import dayjs from 'dayjs'
+import { ConfigProvider, DatePicker, TimeRangePickerProps } from 'antd';
 import useTheme from "../../utils/hooks/useTheme";
 import { devices } from "../../config/breakPoints";
-import dayjs from 'dayjs'
 import { useBoundStore } from "../../store/store";
-import { RangeDate } from '../../store/storeConfig';
-import { useRef } from 'react';
 import useResize from '../../pages/dashboard/pie/useResize';
-import { Range } from '../../store/createDateRangeFilterSlice';
 const { RangePicker } = DatePicker;
 
 const StyledRangePicker = styled(RangePicker)`

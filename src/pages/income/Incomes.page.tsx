@@ -6,7 +6,7 @@ import { loaderIncomes } from "./loader";
 import TransactionList from "../transactions/TransactionList";
 import { Container, ListDiv } from "../../styles/TransactionContainer";
 import Operation from "../../components/operations/Operations";
-import CreateNewTransactionForm from "../../components/newTransaction/CreateNewTransaction";
+import { CreateNewTransactionForm } from "../../components/newTransaction/CreateNewTransaction";
 
 export default function Incomes() {
 

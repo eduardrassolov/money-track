@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { devices } from '../../../config/breakPoints';
 import { IChartData } from './CategoryChart';
 import AnimatedContainer from '../../../components/animation/AnimatedContainer';
-import { slideUp } from '../statCard/StatsList';
+import { slideUp } from '../statCard/AnalyticsList';
 
 const StyledLegend = styled.div`
     display: flex;

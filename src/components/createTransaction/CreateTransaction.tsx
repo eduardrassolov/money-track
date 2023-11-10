@@ -14,7 +14,6 @@ import TimeLine from './StepLine';
 import useNewTransaction from './useNewTransaction';
 import scrollTop from '../../utils/helpers/scrollTop';
 import { toast } from 'react-toastify';
-import { RangeDate } from '../../store/storeConfig';
 
 const StyledContainer = styled.div`
     display: flex;

@@ -1,7 +1,5 @@
 import { ITransaction } from "../../interface/ITransactions"
 import TransactionCard from "../transactionCard/TransactionCard"
-import { useMutation } from "@tanstack/react-query";
-import apiDeleteTransaction from "../../services/api/deleteTransaction";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../config/routes";

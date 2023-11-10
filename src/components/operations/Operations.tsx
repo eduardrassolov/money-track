@@ -1,20 +1,13 @@
-import Sort from './sort/Sort'
 import { styled } from 'styled-components'
 import { devices } from '../../config/breakPoints'
-import Search from '../search/Search'
 import DateFilter from '../dateRangePicker/DateFilter';
 
 
-import DateRangePicker from '@wojtekmaj/react-daterange-picker';
+// import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import '@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css';
 import 'react-calendar/dist/Calendar.css';
-import { useState } from 'react';
-import dayjs from 'dayjs';
-import { theme } from 'antd';
-import { string } from 'yup';
-import { useBoundStore } from '../../store/store';
-import { Range } from '../../store/createDateRangeFilterSlice';
-import { createPortal } from 'react-dom';
+// import { useBoundStore } from '../../store/store';
+// import { Range } from '../../store/createDateRangeFilterSlice';
 
 
 export const OperationsContainer = styled.div`
@@ -24,37 +17,37 @@ export const OperationsContainer = styled.div`
     }
 `
 
-const Filter = styled.div`
-    border: 1px solid ${props => props.theme.border};
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-`
+// const Filter = styled.div`
+//     border: 1px solid ${props => props.theme.border};
+//     border-radius: 10px;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     padding: 0.5rem 1rem;
+//     cursor: pointer;
+// `
 
-const StyledRangePicker = styled(DateRangePicker)`
-    background: ${props => props.theme.background2};
-    color: ${props => props.theme.text};
-    font-size: 0.8rem;
+// const StyledRangePicker = styled(DateRangePicker)`
+//     background: ${props => props.theme.background2};
+//     color: ${props => props.theme.text};
+//     font-size: 0.8rem;
 
-    .react-daterange-picker__wrapper{
-        border: 1px solid ${props => props.theme.border};
-        padding: 0.2rem 0.5rem;
-        border-radius: 10px;
-    }
-`
+//     .react-daterange-picker__wrapper{
+//         border: 1px solid ${props => props.theme.border};
+//         padding: 0.2rem 0.5rem;
+//         border-radius: 10px;
+//     }
+// `
 
-type ValuePiece = string | null;
-type Value = ValuePiece | [ValuePiece, ValuePiece];
+// type ValuePiece = string | null;
+// type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 export default function Operation() {
-    const { range, changeRange } = useBoundStore((state) => ({ range: state.range, changeRange: state.changeRange }));
+    // const { range, changeRange } = useBoundStore((state) => ({ range: state.range, changeRange: state.changeRange }));
 
-    function handleRangeChange(range: Range) {
-        changeRange(range);
-    }
+    // function handleRangeChange(range: Range) {
+    //     changeRange(range);
+    // }
 
     return (
         <>

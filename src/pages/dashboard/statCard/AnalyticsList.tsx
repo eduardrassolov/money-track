@@ -27,8 +27,7 @@ export const slideDown = {
     visible: { y: 0 }
 }
 
-export default function StatsList() {
-    console.log("statsrender");
+export default function AnalyticsList() {
     const { transactions, expenses, incomes, isExpenseLoading, isIncomeLoading, isTransactionLoading } = useDashboard();
     const { currency } = useUser();
     const { defaultCurrency } = useCurrency(currency);
