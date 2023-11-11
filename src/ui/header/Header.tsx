@@ -23,11 +23,10 @@ const H1 = styled.h1`
     font-size: 1.2rem;
 `
 
-const Header: FC<HeaderProps> = memo(function ({ text }) {
+export function Header({ text }: HeaderProps) {
     return (
         <Div>
             <H1>{text}</H1>
         </Div>
     )
-})
-export default Header;
+}

@@ -6,7 +6,6 @@ const DashboardSection = styled.div`
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    width: fit-content;
     gap: 1rem;
     height: calc(100vh - 62px);
     overflow: scroll;
