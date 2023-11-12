@@ -19,14 +19,23 @@ import convertToOneCurrency from "../../services/createData.ts";
 import { ISummary, getDataSummmary } from "../../utils/helpers/getStats.ts";
 import calculateStats from "../../utils/helpers/calculateStats.ts";
 import createDiagramData from "./createDiagramData.ts";
+import DateFilter from "../../components/filterDate/DateFilter.tsx";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
-const DateFilter = lazy(() => import("../../components/dateRangePicker/DateFilter.tsx"));
+
 
 const Div = styled.div`
   display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
   align-items: center;
-  gap: 0.8rem;
+  width: 100%;
+
+  h1{
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: ${props => props.theme.text}
+  }
 `
 
 const StyledDiv = styled.div`
@@ -37,66 +46,58 @@ const StyledDiv = styled.div`
   height: 500px;
 `
 
-const DonutDiv = styled.div`
-  height: 500px;
+const Container = styled.div`
+  background: ${props => props.theme.background};
+  max-width: 1200px;
+  border-radius: 15px;
+  border: 1px solid ${props => props.theme.border};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
+
+const DateFilterContainer = styled.div`
+  margin: 0 2rem 0 auto;
+`
+
+const Main = styled.main`
+  background: white;
+`
+
+const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
 
 export default function Dashboard() {
   const { user, currency } = useUser();
   if (!user)
-    return null;
-  const { id: userId } = user;
+    return;
+  console.log(user);
+
   const { defaultCurrency } = useCurrency(currency);
-
   const [from, to] = useBoundStore(state => state.range);
-  const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
 
-  const { data: transactions } = useQuery(
+
+  const { data: transactions, isLoading } = useQuery(
     {
-      queryKey: [userId, QUERY_KEY.TRANSACTIONS, from, to, sortBy],
-      queryFn: () => loaderTransactions(userId, null, sortBy, from, to)
-    });
-  const { data: expenses } = useQuery(
-    {
-      queryKey: [userId, QUERY_KEY.EXPENSES, from, to, sortBy],
-      queryFn: () => loaderTransactions(userId, null, sortBy, from, to)
-    });
-  const { data: incomes } = useQuery(
-    {
-      queryKey: [userId, QUERY_KEY.INCOMES, from, to, sortBy],
-      queryFn: () => loaderTransactions(userId, null, sortBy, from, to)
+      queryKey: [user?.id, QUERY_KEY.TRANSACTIONS, from, to, sortBy],
+      queryFn: () => loaderTransactions(user?.id, null, sortBy, from, to)
     });
 
-  if (!defaultCurrency || !expenses || !incomes || !transactions)
-    return null;
-
-  const convertedExpenses = convertToOneCurrency(expenses, defaultCurrency);
-  const convertedIncomes = convertToOneCurrency(incomes, defaultCurrency);
-  const convertedTransactions = convertToOneCurrency(transactions, defaultCurrency);
-
-  const stats = calculateStats(convertedExpenses, convertedIncomes);
-
-  const dataDiagram = createDiagramData(convertedTransactions);
-
-  const summaryExpenses: Array<ISummary> = getDataSummmary(convertedExpenses);
-  const summaryIncomes: Array<ISummary> = getDataSummmary(convertedIncomes);
-
+  if (!defaultCurrency)
+    return;
 
 
   return (
-    <DashboardSection>
-      {/* <Div>
-        <Text>Date range:</Text>
-        <DateFilter />
-      </Div> */}
+    <Main>
+      <Container>
+        <Div>
+          <h1>Diagram</h1>
+          <DateFilterContainer>
+            <DateFilter />
+          </DateFilterContainer>
+        </Div>
 
-      {/* <AnalyticsList /> */}
-
-      {transactions && expenses && incomes ? <Diagram label={"Diagram:"} data={dataDiagram} currency={defaultCurrency} /> : ""}
-
-
-
-
-    </DashboardSection>
+        <Diagram transactions={transactions} currency={defaultCurrency} isLoading={isLoading} />
+      </Container>
+    </Main>
   )
 }

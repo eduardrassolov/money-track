@@ -9,7 +9,7 @@ export default function useFilter() {
     const filterValue = params.get(FILTER_KEYS.DATE);
     const filter = !filterValue ? null : filterValue as Filter;
 
-    const range = useBoundStore(state => state.filterRange);
+    const [from, to] = useBoundStore(state => state.range);
 
-    return { filter, from: range.from, to: range.to };
+    return { filter, from, to };
 }

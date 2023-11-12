@@ -12,22 +12,30 @@ import { TLogin } from "./login.type.ts";
 export const useLogin = () => {
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const checkAuth = async () => {
-            const { data: { user }, error } = await supabase.auth.getUser();
+    // useEffect(() => {
+    //     const checkAuth = async () => {
+    //         const { data: { user }, error } = await supabase.auth.getUser();
 
-            if (user && !error) {
-                navigate(`${ROUTES.EXPENSES}?page=1`);
-            }
-        }
+    //         if (user && !error) {
+    //             navigate(`${ROUTES.EXPENSES}?page=1`);
+    //         }
+    //     }
 
-        checkAuth();
-    }, [])
+    //     checkAuth();
+    // }, [])
 
     const { mutate: login, isLoading } = useMutation({
         mutationFn: ({ email, password }: TLogin) => apiLogin({ email, password }),
-        onSuccess: () => navigate(`${ROUTES.EXPENSES}?page=1`),
-        onError: () => toast.error("Wrong email or password!")
+        onSuccess: (user) => {
+            console.log(user);
+            navigate(`${ROUTES.DASHBOARD}`)
+        },
+
+        onError: (error) => {
+            if (error instanceof Error) {
+                toast.error(error.message);
+            }
+        }
     })
 
     return { login, isLoading }

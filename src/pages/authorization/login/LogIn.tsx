@@ -17,7 +17,7 @@ import { Form, Group } from '../Authorizations.style';
 export default function LogIn() {
     const { login, isLoading } = useLogin();
 
-    const { register, handleSubmit, formState: { errors } } = useForm<TLogin>({ resolver: yupResolver(schema) });
+    const { register, handleSubmit, formState: { errors } } = useForm<TLogin>({ resolver: yupResolver(schema), defaultValues: { email: "test@test.com", password: "test" } });
 
     const onSubmit: SubmitHandler<TLogin> = (data) => login(data);
 

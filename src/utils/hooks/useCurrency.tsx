@@ -11,10 +11,10 @@ export interface ICurrency {
 }
 
 export default function useCurrency(defaultCurrencyId: string) {
-    const {data: currencies} = useQuery({ queryKey: [QUERY_KEY.CURRENCY], queryFn: apiGetCurrency})
+    const { data: currencies, isLoading } = useQuery({ queryKey: [QUERY_KEY.CURRENCY], queryFn: apiGetCurrency })
 
     const defaultCurrency = currencies?.find(currency => currency.id === defaultCurrencyId);
 
-    return {currencies, defaultCurrency}
+    return { currencies, defaultCurrency, isLoading }
 
 }
