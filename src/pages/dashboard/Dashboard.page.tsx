@@ -20,7 +20,8 @@ import { ISummary, getDataSummmary } from "../../utils/helpers/getStats.ts";
 import calculateStats from "../../utils/helpers/calculateStats.ts";
 import createDiagramData from "./createDiagramData.ts";
 import DateFilter from "../../components/filterDate/DateFilter.tsx";
-
+import PieDiagram from "./pie/PieDiagram.tsx";
+import PieView from "./PieView.tsx";
 
 
 const Div = styled.div`
@@ -38,17 +39,8 @@ const Div = styled.div`
   }
 `
 
-const StyledDiv = styled.div`
-  display: flex;
-  gap: 1rem;
-  border: 1px solid white;
-  justify-content: center;
-  height: 500px;
-`
-
 const Container = styled.div`
   background: ${props => props.theme.background};
-  max-width: 1200px;
   border-radius: 15px;
   border: 1px solid ${props => props.theme.border};
   display: flex;
@@ -61,30 +53,41 @@ const DateFilterContainer = styled.div`
 `
 
 const Main = styled.main`
-  background: white;
+  max-width: 1200px;
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 90vh;
+  overflow: scroll;;
+`
+
+const DonutContainer = styled.div`
+  background: ${props => props.theme.background};
+  border: 1px solid ${props => props.theme.border};
+  display: flex;
+  border-radius: 15px;
 `
 
 const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
 
 export default function Dashboard() {
   const { user, currency } = useUser();
-  if (!user)
-    return;
-  console.log(user);
 
   const { defaultCurrency } = useCurrency(currency);
-  const [from, to] = useBoundStore(state => state.range);
 
+  const [from, to] = useBoundStore(state => state.range);
 
   const { data: transactions, isLoading } = useQuery(
     {
       queryKey: [user?.id, QUERY_KEY.TRANSACTIONS, from, to, sortBy],
-      queryFn: () => loaderTransactions(user?.id, null, sortBy, from, to)
+      queryFn: () => {
+        return loaderTransactions(user?.id, null, sortBy, from, to);
+      }
     });
 
   if (!defaultCurrency)
     return;
-
 
   return (
     <Main>
@@ -98,6 +101,8 @@ export default function Dashboard() {
 
         <Diagram transactions={transactions} currency={defaultCurrency} isLoading={isLoading} />
       </Container>
+
+      <PieView user={user} currency={currency} />
     </Main>
   )
 }
