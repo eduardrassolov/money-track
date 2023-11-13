@@ -8,6 +8,7 @@ import { ITransaction } from '../../../interface/ITransactions';
 import { ICurrency } from '../../../utils/hooks/useCurrency';
 import LoadingUi from '../../../components/spinner/LoadingUi';
 import convertToOneCurrency from '../../../services/createData';
+import { useBoundStore } from '../../../store/store';
 
 const ChartContainer = styled.div`
   width: 100%;
@@ -39,8 +40,11 @@ interface IDiagramProps {
 export default function Diagram({ transactions, currency, isLoading }: IDiagramProps) {
     const { symbol } = currency;
 
+    const [from, to] = useBoundStore(state => state.range);
+    const isDayRange = from === to ? "DD-MMM-YYYY HH:mm" : "DD-MMM-YYYY";
+
     const convertedTransactions = convertToOneCurrency(transactions, currency);
-    const dataDiagram = createDiagramData(convertedTransactions);
+    const dataDiagram = createDiagramData(convertedTransactions, isDayRange);
 
     return (
         <>
@@ -68,7 +72,10 @@ export default function Diagram({ transactions, currency, isLoading }: IDiagramP
                             axisLine={false}
                             tickLine={false}
                             tickCount={5}
-                            tickFormatter={(date) => dayjs(date).format("DD MMM")}
+                            tickFormatter={(date) => {
+                                const formatLine = from === to ? "HH:mm" : "DD MMM";
+                                return dayjs(date).format(formatLine);
+                            }}
                         />
                         <YAxis tickLine={false} axisLine={false} tickCount={8} tickFormatter={(amount) => `${symbol}${amount}`} />
 

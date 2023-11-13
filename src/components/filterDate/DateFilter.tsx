@@ -58,13 +58,13 @@ export default function DateFilter() {
     }
 
     return (
-        <div>
+        <>
             <Ul>
                 {filterList.map((filterItem) =>
                     <Li key={filterItem.id} onClick={() => handleSelectRange(filterItem.id)} $isSelected={selected === filterItem.id}>
                         {filterItem.label}
                     </Li>)}
             </Ul>
-        </div>
+        </>
     )
 }

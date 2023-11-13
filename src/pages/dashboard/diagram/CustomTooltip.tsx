@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useUser } from "../../../utils/hooks/useUser";
 import useCurrency from "../../../utils/hooks/useCurrency";
 import dayjs from "dayjs";
+import { useBoundStore } from "../../../store/store";
 
 export const StyledTooltip = styled.div`
     background: ${(props) => props.theme.background};
@@ -43,7 +44,11 @@ export const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload, l
     const { currency } = useUser();
     const { defaultCurrency: { shortName } } = useCurrency(currency);
 
-    const formattedLable = dayjs(label).format("dddd, DD MMM YYYY");
+
+    const [from, to] = useBoundStore(state => state.range);
+    const isDayRange = from === to ? "dddd, DD-MMM-YYYY HH:mm" : "dddd, DD-MMM-YYYY";
+
+    const formattedLable = dayjs(label).format(isDayRange);
 
     const [income, expense] = payload;;
     const { name: incomeTitle, value: incomeAmount } = income;

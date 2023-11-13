@@ -12,13 +12,13 @@ interface IDiagramData {
     [key: string]: DiagramData;
 }
 
-export default function createDiagramData(transactions: ITransaction[] | undefined): DiagramData[] | [] {
+export default function createDiagramData(transactions: ITransaction[] | undefined, formatDate: string): DiagramData[] | [] {
     if (!transactions) {
         return [];
     }
 
     const dataDiagram = transactions.reduce((acc: IDiagramData, { completedAt, type, amount }) => {
-        const dateKey = dayjs(completedAt).format("DD-MMM-YYYY");
+        const dateKey = dayjs(completedAt).format(formatDate);
 
         if (!acc[dateKey]) {
             acc[dateKey] = { completedAt: dateKey, Expense: 0, Income: 0 };
