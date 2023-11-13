@@ -1,9 +1,5 @@
 import styled from 'styled-components'
-
-import { devices } from '../../../config/breakPoints';
 import { IChartData } from './CategoryChart';
-import AnimatedContainer from '../../../components/animation/AnimatedContainer';
-import { slideUp } from '../statCard/AnalyticsList';
 import { useUser } from '../../../utils/hooks/useUser';
 import useCurrency from '../../../utils/hooks/useCurrency';
 

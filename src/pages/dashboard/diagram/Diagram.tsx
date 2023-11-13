@@ -1,4 +1,3 @@
-import { styled } from 'styled-components'
 import { Area, AreaChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import createDiagramData from '../createDiagramData';
 import { CustomTooltip } from './CustomTooltip';
@@ -10,26 +9,26 @@ import LoadingUi from '../../../components/spinner/LoadingUi';
 import convertToOneCurrency from '../../../services/createData';
 import { useBoundStore } from '../../../store/store';
 
-const ChartContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid ${(props) => props.theme.border};
-  background: ${(props) => props.theme.background};
-  color: ${(props) => props.theme.text};
-  padding: 2rem 0;
-  border-radius: 15px;
-  overflow: scroll;
-    transition: all 300ms;
-`
+// const ChartContainer = styled.div`
+//   width: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   border: 1px solid ${(props) => props.theme.border};
+//   background: ${(props) => props.theme.background};
+//   color: ${(props) => props.theme.text};
+//   padding: 2rem 0;
+//   border-radius: 15px;
+//   overflow: scroll;
+//     transition: all 300ms;
+// `
 
-const Div = styled.div`
-    display: flex;
-    width: 95%;
-    justify-content: flex-end;
-    /* padding: 0 5rem; */
-`
+// const Div = styled.div`
+//     display: flex;
+//     width: 95%;
+//     justify-content: flex-end;
+//     /* padding: 0 5rem; */
+// `
 
 interface IDiagramProps {
     transactions: Array<ITransaction> | undefined;

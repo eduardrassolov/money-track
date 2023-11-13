@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import supabase from "../../services/supabase";
 import { NavLink } from "react-router-dom";
-import { devices } from "../../config/breakPoints";
-
 
 type AsideItemProps = {
     name: string;

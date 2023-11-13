@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { useBoundStore } from '../../store/store';
+import { Range } from '../../store/createDateRangeFilterSlice';
 
 // const filterList = ["Day", "Week", "Month", "Year"];
 const filterList = [
@@ -53,8 +54,12 @@ export default function DateFilter() {
         setSelected(() => id);
 
         console.log(id);
-        const { range: selectedRange } = filterList.find(item => item.id === id);
-        changeRange(selectedRange);
+        const result = filterList.find(item => item.id === id);
+        if (!result) {
+            return;
+        }
+        const { range } = result;
+        changeRange(range as Range);
     }
 
     return (

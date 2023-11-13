@@ -24,7 +24,6 @@ import { QUERY_KEY } from "../../config/queryClientKeys";
 import TYPES_TRANSACTION from "../../config/typeTransactions";
 
 interface ITransactionView {
-    // transactionType: number,
     queryKey: string;
     dataLoader: (userId: string, filter: Filter, sortBy: SortBy, from: string, to: string) => Promise<ITransaction[]>;
 }
@@ -51,13 +50,16 @@ export const Text = styled.p`
 
 const Main = styled.main`
     display: flex;
-    width: 100%;
-    @media only screen and (min-width: ${devices.sm}px) {
+    gap: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+    height: 100%;
+    /* @media only screen and (min-width: ${devices.sm}px) {
         display: grid;
         grid-template-columns: minmax(350px, 700px) minmax(200px, 400px);
         height: 100%;
         gap: 1rem;
-    }
+    } */
 `;
 
 const StyledHeaderContainer = styled.header`

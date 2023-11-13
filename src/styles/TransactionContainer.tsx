@@ -8,6 +8,7 @@ const Container = styled.div`
   height: 100%;
   overflow: scroll;
   padding: 0 1rem;
+  width: 100%;
   
 `
 

@@ -12,7 +12,7 @@ interface IDiagramData {
     [key: string]: DiagramData;
 }
 
-export default function createDiagramData(transactions: ITransaction[] | undefined, formatDate: string): DiagramData[] | [] {
+export default function createDiagramData(transactions: ITransaction[] | undefined, formatDate: string = "DD-MMM-YYY"): DiagramData[] | [] {
     if (!transactions) {
         return [];
     }

@@ -1,17 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react'
+
 import { loaderExpenses } from '../expenses/loader';
-import { QUERY_KEY } from '../../config/queryClientKeys';
+
 import { SortBy } from '../../types/sortBy.type';
 import { useBoundStore } from '../../store/store';
-import convertToOneCurrency from '../../services/createData';
+
 import PieItem from './PieItem';
 import LoadingUi from '../../components/spinner/LoadingUi';
-import { MyResponsivePieCanvas } from './DonutTest';
+
 import styled from 'styled-components';
 import TYPES_TRANSACTION from '../../config/typeTransactions';
 import { loaderIncomes } from '../income/loader';
 import { devices } from '../../config/breakPoints';
+import { User } from '@supabase/supabase-js';
+import { ICurrency } from '../../utils/hooks/useCurrency';
 
 const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
 
@@ -26,18 +28,18 @@ const Div = styled.div`
     }
 `
 
-export default function PieView({ user, currency }) {
+export default function PieView({ user, currency }: { user: User, currency: ICurrency }) {
 
     const [from, to] = useBoundStore(state => state.range);
 
-    const { data: expenses, isExpenseLoading } = useQuery(
+    const { data: expenses, isLoading: isExpenseLoading } = useQuery(
         {
             queryKey: [user?.id, TYPES_TRANSACTION.EXPENSE, from, to, sortBy],
             queryFn: () => {
                 return loaderExpenses(user?.id, null, sortBy, from, to);
             }
         });
-    const { data: incomes, isIncomesLoading } = useQuery(
+    const { data: incomes, isLoading: isIncomesLoading } = useQuery(
         {
             queryKey: [user?.id, TYPES_TRANSACTION.INCOME, from, to, sortBy],
             queryFn: () => {
@@ -48,7 +50,7 @@ export default function PieView({ user, currency }) {
     console.log("data", expenses, incomes);
     return (
         <Div>
-            {isExpenseLoading || isIncomesLoading ? <LoadingUi /> : <>
+            {isExpenseLoading || isIncomesLoading || !expenses || !incomes ? <LoadingUi /> : <>
                 <PieItem label={"Expenses by categories:"} transactions={expenses} currency={currency} />
                 <PieItem label={"Incomes by categories:"} transactions={incomes} currency={currency} />
             </>}

@@ -1,17 +1,15 @@
 import styled from "styled-components";
-import { ISummary, getDataSummmary } from "../../utils/helpers/getStats";
+import { getDataSummmary } from "../../utils/helpers/getStats";
 import { Header } from "../../ui/header/Header";
 import CategoryChart from "./categoryChart/CategoryChart";
 import { ITransaction } from "../../interface/ITransactions";
 import convertToOneCurrency from "../../services/createData";
-import createDiagramData from "./createDiagramData";
 import { ICurrency } from "../../utils/hooks/useCurrency";
 import { devices } from "../../config/breakPoints";
 
 
 interface IPieDiagram {
     label: string;
-    data: ISummary[];
     transactions: ITransaction[];
     currency: ICurrency;
 }
@@ -32,8 +30,6 @@ const StyledContainer = styled.div`
 
 
 export default function PieItem({ label, transactions, currency }: IPieDiagram) {
-    const { symbol } = currency;
-
     const convertedTransactions = convertToOneCurrency(transactions, currency);
     console.log("dddd", convertedTransactions);
     const data = getDataSummmary(convertedTransactions)

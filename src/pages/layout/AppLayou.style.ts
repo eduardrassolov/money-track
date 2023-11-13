@@ -18,7 +18,7 @@ const Section = styled.section`
     background: ${(props) => props.theme.background2};
     height: calc(100vh - 50px);
     transition: all 300ms;
-    padding: 0 1rem;
+    padding: 0;
 `;
 
 export { StyledLayout, Section };

@@ -1,26 +1,14 @@
-import { lazy } from "react";
-import { DashboardSection } from "./Dashboard.page.style.ts";
+
 import styled from "styled-components";
-import { Text } from "../../components/transactionView/TransactionView.tsx";
+import { useQuery } from "@tanstack/react-query";
 import { useUser } from "../../utils/hooks/useUser.tsx";
 import { SortBy } from "../../types/sortBy.type.ts";
-import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEY } from "../../config/queryClientKeys.ts";
 import { loaderTransactions } from "../transactions/loader.ts";
-import LoadingUi from "../../components/spinner/LoadingUi.tsx";
 import { useBoundStore } from "../../store/store.tsx";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import AreaChart from "./AreaChart.tsx";
-import AnalyticsList from "./statCard/AnalyticsList.tsx";
-import { DoughnutChart } from "../../components/doughnut/DoughnutChart.tsx";
 import Diagram from "./diagram/Diagram.tsx";
 import useCurrency from "../../utils/hooks/useCurrency.tsx";
-import convertToOneCurrency from "../../services/createData.ts";
-import { ISummary, getDataSummmary } from "../../utils/helpers/getStats.ts";
-import calculateStats from "../../utils/helpers/calculateStats.ts";
-import createDiagramData from "./createDiagramData.ts";
 import DateFilter from "../../components/filterDate/DateFilter.tsx";
-import PieDiagram from "./pie/PieDiagram.tsx";
 import PieView from "./PieView.tsx";
 import { devices } from "../../config/breakPoints.ts";
 
@@ -72,6 +60,10 @@ const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
 
 export default function Dashboard() {
   const { user, currency } = useUser();
+  if (!user) {
+    return null;
+  }
+  const { id: userId } = user;
 
   const { defaultCurrency } = useCurrency(currency);
 
@@ -79,9 +71,9 @@ export default function Dashboard() {
 
   const { data: transactions, isLoading } = useQuery(
     {
-      queryKey: [user?.id, QUERY_KEY.TRANSACTIONS, from, to, sortBy],
+      queryKey: [userId, QUERY_KEY.TRANSACTIONS, from, to, sortBy],
       queryFn: () => {
-        return loaderTransactions(user?.id, null, sortBy, from, to);
+        return loaderTransactions(userId, null, sortBy, from, to);
       }
     });
 

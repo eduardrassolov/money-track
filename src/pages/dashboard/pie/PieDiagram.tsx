@@ -2,8 +2,8 @@ import { ISummary } from '../../../utils/helpers/getStats';
 import CategoryChart from '../categoryChart/CategoryChart';
 import styled from 'styled-components';
 import AnimatedContainer from '../../../components/animation/AnimatedContainer';
-import { slideUp } from '../statCard/AnalyticsList';
 import { Header } from '../../../ui/header/Header';
+import { slideUp } from '../../../config/animationCfg';
 
 interface IPieDiagram {
     label: string;

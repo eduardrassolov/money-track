@@ -37,12 +37,12 @@ type payloadType = {
 
 
 export const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload, label }) => {
-    if (!payload || !active || !payload.length) {
+    const { currency } = useUser();
+    if (!payload || !active || !payload.length || !currency?.shortName) {
         return null;
     }
 
-    const { currency } = useUser();
-    const { defaultCurrency: { shortName } } = useCurrency(currency);
+    const { defaultCurrency } = useCurrency(currency);
 
 
     const [from, to] = useBoundStore(state => state.range);
@@ -54,8 +54,8 @@ export const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload, l
     const { name: incomeTitle, value: incomeAmount } = income;
     const { name: expenseTitle, value: expenseAmount } = expense;
 
-    const formattedIncomeAmount = Intl.NumberFormat("en-IN", { style: "currency", currency: shortName }).format(incomeAmount);
-    const formattedExpenseAmount = Intl.NumberFormat("en-IN", { style: "currency", currency: shortName }).format(expenseAmount);
+    const formattedIncomeAmount = Intl.NumberFormat("en-IN", { style: "currency", currency: defaultCurrency?.shortName || "usd" }).format(Number(incomeAmount));
+    const formattedExpenseAmount = Intl.NumberFormat("en-IN", { style: "currency", currency: defaultCurrency?.shortName || "usd" }).format(Number(expenseAmount));
 
     return (
         <StyledTooltip>
