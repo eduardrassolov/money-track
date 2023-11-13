@@ -4,6 +4,8 @@ import { devices } from '../../../config/breakPoints';
 import { IChartData } from './CategoryChart';
 import AnimatedContainer from '../../../components/animation/AnimatedContainer';
 import { slideUp } from '../statCard/AnalyticsList';
+import { useUser } from '../../../utils/hooks/useUser';
+import useCurrency from '../../../utils/hooks/useCurrency';
 
 const StyledLegend = styled.div`
     display: flex;
@@ -30,6 +32,11 @@ const LegendItem = styled.div<{ $bgColor: string, $textColor: string, $isSelecte
     font-size: 0.9rem;
 `
 
+const Span = styled.span`
+white-space: nowrap;
+`
+
+
 interface ICustomLegend {
     data: IChartData[],
     selected: string,
@@ -39,6 +46,9 @@ interface ICustomLegend {
 export default function CustomLegend({ data, selected, onSelect }: ICustomLegend) {
     const sortedData = data.sort((a, b) => b.percentage - a.percentage);
 
+    const { user } = useUser();
+    const { defaultCurrency } = useCurrency(user?.user_metadata.currency);
+    console.log(defaultCurrency);
     return (
         <StyledLegend>
             {sortedData?.map((entry) =>
@@ -54,9 +64,9 @@ export default function CustomLegend({ data, selected, onSelect }: ICustomLegend
                         {entry.name}
                     </span>
 
-                    <span>
-                        {entry.percentage.toFixed(2)}%
-                    </span>
+                    <Span>
+                        {defaultCurrency?.symbol} {entry.value.toFixed(2)} ({entry.percentage.toFixed(2)}%)
+                    </Span>
                 </LegendItem>
             )
             }

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import supabase from "../../services/supabase";
 import { NavLink } from "react-router-dom";
+import { devices } from "../../config/breakPoints";
 
 
 type AsideItemProps = {
@@ -41,6 +42,10 @@ const StyledItem = styled(NavLink)`
     }
 `
 
+const Text = styled.span`
+
+`
+
 export const logout = async () => {
     const { error } = await supabase.auth.signOut();
 
@@ -51,16 +56,11 @@ export const logout = async () => {
 }
 
 export default function AsideItem({ name, path, icon }: AsideItemProps) {
-    // const navigate = useNavigate();
-
-    // function handleClick() {
-    //     navigate(path);
-    // }
     return (
         <Li>
             <StyledItem to={path}>
                 <Icon>{icon}</Icon>
-                <span>{name}</span>
+                <Text>{name}</Text>
             </StyledItem>
         </Li>
     )

@@ -19,8 +19,7 @@ export default function convertToOneCurrency(transactions: ITransaction[] | unde
 
 function _convertFromTo(amount: number, from: string, to: string) {
     const rates: IRate = currencyData.rates;
-    // const rate = apiGetCurrencyRate(from, to);
-    // console.log(rate);
+    console.log(from, to);
 
     return Math.round((amount / rates[from]) * rates[to]);
 }

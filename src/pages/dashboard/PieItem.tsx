@@ -6,6 +6,7 @@ import { ITransaction } from "../../interface/ITransactions";
 import convertToOneCurrency from "../../services/createData";
 import createDiagramData from "./createDiagramData";
 import { ICurrency } from "../../utils/hooks/useCurrency";
+import { devices } from "../../config/breakPoints";
 
 
 interface IPieDiagram {
@@ -15,17 +16,26 @@ interface IPieDiagram {
     currency: ICurrency;
 }
 
-const StyledContainer = styled.div`
+const StyledContainer = styled.div`    
+    display: flex;
+    flex-direction: column;
     background: ${prev => prev.theme.background};
     border-radius: 12px;
-    padding: 2rem 1rem 1rem;
     border: 1px solid ${props => props.theme.border};
-    min-width: 320px;
+    width: 100%;
+
+
+    @media only screen and (min-width: ${devices.md}px){
+        width: 50%;
+    }
 `
+
 
 export default function PieItem({ label, transactions, currency }: IPieDiagram) {
     const { symbol } = currency;
+
     const convertedTransactions = convertToOneCurrency(transactions, currency);
+    console.log("dddd", convertedTransactions);
     const data = getDataSummmary(convertedTransactions)
 
     console.log(data);
@@ -37,3 +47,5 @@ export default function PieItem({ label, transactions, currency }: IPieDiagram) 
         </StyledContainer>
     )
 }
+
+

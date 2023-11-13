@@ -44,7 +44,7 @@ export default function Diagram({ transactions, currency, isLoading }: IDiagramP
 
     return (
         <>
-            <ResponsiveContainer width="95%" height={500}>
+            <ResponsiveContainer width="100%" height={500}>
                 {isLoading ? <LoadingUi /> :
                     <AreaChart data={dataDiagram} margin={{ top: 20, right: 30, left: 50, bottom: 0 }}>
                         <defs>

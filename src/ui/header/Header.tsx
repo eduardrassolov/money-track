@@ -15,7 +15,7 @@ const Div = styled.div`
     transition: all 300ms;
 `
 const H1 = styled.h1`
-    margin: 0;
+    margin: 1rem;
     padding: 0;
     font-weight: 500;
     text-align: center;

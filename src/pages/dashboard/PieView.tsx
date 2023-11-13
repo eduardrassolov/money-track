@@ -11,15 +11,21 @@ import { MyResponsivePieCanvas } from './DonutTest';
 import styled from 'styled-components';
 import TYPES_TRANSACTION from '../../config/typeTransactions';
 import { loaderIncomes } from '../income/loader';
+import { devices } from '../../config/breakPoints';
 
 const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
 
 const Div = styled.div`
     display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 0.5rem;
     width: 100%;
+
+    @media only screen and (min-width: ${devices.md}px){
+        flex-direction: row;
+    }
 `
+
 export default function PieView({ user, currency }) {
 
     const [from, to] = useBoundStore(state => state.range);
@@ -43,9 +49,8 @@ export default function PieView({ user, currency }) {
     return (
         <Div>
             {isExpenseLoading || isIncomesLoading ? <LoadingUi /> : <>
-                <PieItem label={"Expenses by categories"} transactions={expenses} currency={currency} />
-
-                <PieItem label={"Incomes by categories"} transactions={incomes} currency={currency} />
+                <PieItem label={"Expenses by categories:"} transactions={expenses} currency={currency} />
+                <PieItem label={"Incomes by categories:"} transactions={incomes} currency={currency} />
             </>}
         </Div>
     )

@@ -22,6 +22,7 @@ import createDiagramData from "./createDiagramData.ts";
 import DateFilter from "../../components/filterDate/DateFilter.tsx";
 import PieDiagram from "./pie/PieDiagram.tsx";
 import PieView from "./PieView.tsx";
+import { devices } from "../../config/breakPoints.ts";
 
 
 const Div = styled.div`
@@ -41,7 +42,7 @@ const Div = styled.div`
 
 const Container = styled.div`
   background: ${props => props.theme.background};
-  border-radius: 15px;
+  border-radius: 0 0 15px 15px;
   border: 1px solid ${props => props.theme.border};
   display: flex;
   flex-direction: column;
@@ -53,20 +54,18 @@ const DateFilterContainer = styled.div`
 `
 
 const Main = styled.main`
-  max-width: 1200px;
-  margin: 1rem auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  height: 90vh;
-  overflow: scroll;;
-`
+  gap: 0.5rem;
+  height: 93vh;
+  overflow: scroll;
+  max-width: 1200px;
+  width: 100%;
 
-const DonutContainer = styled.div`
-  background: ${props => props.theme.background};
-  border: 1px solid ${props => props.theme.border};
-  display: flex;
-  border-radius: 15px;
+  @media only screen and (min-width: ${devices.md}px){
+    width: 95%;
+  }
 `
 
 const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
@@ -102,7 +101,7 @@ export default function Dashboard() {
         <Diagram transactions={transactions} currency={defaultCurrency} isLoading={isLoading} />
       </Container>
 
-      <PieView user={user} currency={currency} />
-    </Main>
+      <PieView user={user} currency={defaultCurrency} />
+    </Main >
   )
 }
