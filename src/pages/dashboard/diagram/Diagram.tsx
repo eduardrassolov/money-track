@@ -1,64 +1,91 @@
-import { FC } from 'react'
-import { styled } from 'styled-components'
-import { Area, AreaChart, Legend, Tooltip, XAxis, YAxis } from "recharts";
-import { DiagramData } from '../createDiagramData';
+import { Area, AreaChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import createDiagramData from '../createDiagramData';
 import { CustomTooltip } from './CustomTooltip';
-import Header from '../../../ui/header/Header';
-import AnimatedContainer from '../../../components/animation/AnimatedContainer';
-import { slideUp } from '../statCard/AnalyticsList';
 
-const ChartContainer = styled.div`
-  width: 100%;
-  border: 1px solid ${(props) => props.theme.border};
-  background: ${(props) => props.theme.background};
-  color: ${(props) => props.theme.text};
-  padding: 2rem 0;
-  border-radius: 15px;
-  overflow: scroll;
-    transition: all 300ms;
-`
+import dayjs from 'dayjs';
+import { ITransaction } from '../../../interface/ITransactions';
+import { ICurrency } from '../../../utils/hooks/useCurrency';
+import LoadingUi from '../../../components/spinner/LoadingUi';
+import convertToOneCurrency from '../../../services/createData';
+import { useBoundStore } from '../../../store/store';
+
+// const ChartContainer = styled.div`
+//   width: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   border: 1px solid ${(props) => props.theme.border};
+//   background: ${(props) => props.theme.background};
+//   color: ${(props) => props.theme.text};
+//   padding: 2rem 0;
+//   border-radius: 15px;
+//   overflow: scroll;
+//     transition: all 300ms;
+// `
+
+// const Div = styled.div`
+//     display: flex;
+//     width: 95%;
+//     justify-content: flex-end;
+//     /* padding: 0 5rem; */
+// `
+
 interface IDiagramProps {
-    data: Array<DiagramData>;
-    label: string;
+    transactions: Array<ITransaction> | undefined;
+    currency: ICurrency;
+    isLoading: boolean
 }
 
-const Diagram: FC<IDiagramProps> = ({ data, label }) => {
+export default function Diagram({ transactions, currency, isLoading }: IDiagramProps) {
+    const { symbol } = currency;
+
+    const [from, to] = useBoundStore(state => state.range);
+    const isDayRange = from === to ? "DD-MMM-YYYY HH:mm" : "DD-MMM-YYYY";
+
+    const convertedTransactions = convertToOneCurrency(transactions, currency);
+    const dataDiagram = createDiagramData(convertedTransactions, isDayRange);
+
     return (
         <>
-            {data?.length ?
-                <AnimatedContainer duration={1} delay={0.2} direction={slideUp}>
-                    <ChartContainer>
-                        <Header text={label} />
-                        <AnimatedContainer>
-                            <AreaChart width={1200} height={550} data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                                <Legend />
-                                <defs>
-                                    <linearGradient id="colorExpense" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor="rgb(36, 143, 233)" stopOpacity={0.6} />
-                                        <stop offset="95%" stopColor="#rgb(255, 255, 255)" stopOpacity={0} />
-                                    </linearGradient>
+            <ResponsiveContainer width="100%" height={500}>
+                {isLoading ? <LoadingUi /> :
+                    <AreaChart data={dataDiagram} margin={{ top: 20, right: 30, left: 50, bottom: 0 }}>
+                        <defs>
+                            <linearGradient id="colorExpense" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stopColor="#c28794" stopOpacity={0.7} />
+                                <stop offset="75%" stopColor="#c28794" stopOpacity={0.05} />
+                            </linearGradient>
 
-                                    <linearGradient id="colorIncome" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor="rgb(142, 230, 20)" stopOpacity={0.6} />
-                                        <stop offset="95%" stopColor="rgb(142, 230, 20)" stopOpacity={0} />
-                                    </linearGradient>
-                                </defs>
-                                <XAxis dataKey="completedAt" /><YAxis />
+                            <linearGradient id="colorIncome" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stopColor="#5cc49b" stopOpacity={0.7} />
+                                <stop offset="75%" stopColor="#5cc49b" stopOpacity={0.05} />
+                            </linearGradient>
+                        </defs>
+                        <Legend />
 
-                                <Tooltip content={<CustomTooltip />} />
+                        <Area dataKey="Income" stroke={"#72cb72"} fill={"url(#colorIncome)"} dot={true} />
+                        <Area dataKey="Expense" stroke={"#f5d4d5"} fill={"url(#colorExpense)"} dot={true} animationDuration={2000} />
 
-                                <Area type="monotone" dataKey="Expense" stroke="rgb(36, 143, 233)" fillOpacity={1} fill="url(#colorExpense)" />
-                                <Area type="monotone" dataKey="Income" stroke="rgb(142, 230, 20)" fillOpacity={1} fill="url(#colorIncome)" />
+                        <XAxis
+                            dataKey="completedAt"
+                            axisLine={false}
+                            tickLine={false}
+                            tickCount={5}
+                            tickFormatter={(date) => {
+                                const formatLine = from === to ? "HH:mm" : "DD MMM";
+                                return dayjs(date).format(formatLine);
+                            }}
+                        />
+                        <YAxis tickLine={false} axisLine={false} tickCount={8} tickFormatter={(amount) => `${symbol}${amount}`} />
 
-                                {/* <CartesianGrid strokeDasharray="4" fillOpacity={0.2} /> */}
-                            </AreaChart>
-                        </AnimatedContainer>
-                    </ChartContainer>
-                </AnimatedContainer>
-                : ""}
+                        <Tooltip content={<CustomTooltip />} />
+                        <CartesianGrid strokeDasharray="0.5" stroke="gray" opacity={0.2} vertical={false} />
+
+                    </AreaChart>
+                }
+            </ResponsiveContainer>
         </>
 
     )
 }
-export default Diagram;
 

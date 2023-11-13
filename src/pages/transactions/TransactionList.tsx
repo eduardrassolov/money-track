@@ -52,7 +52,7 @@ const TransactionList: FC<ITransactionList> = ({ listType, loader }) => {
     }
 
     const { id: userId } = user;
-    const { from, to } = useBoundStore((state) => state.filterRange);
+    const [from, to] = useBoundStore((state) => state.range);
     const { data: filteredSortedTransactions, isLoading } = useQuery(
         {
             queryKey: [userId, listType, from, to, sortBy],

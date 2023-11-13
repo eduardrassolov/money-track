@@ -2,11 +2,10 @@ import { styled } from "styled-components";
 import { devices } from "../../config/breakPoints";
 
 const DashboardSection = styled.div`
-    background: ${(props) => props.theme.background};
-    border-radius: 10px;
+    background: ${(props) => props.theme.background2};
+
     display: flex;
     flex-direction: column;
-    width: fit-content;
     gap: 1rem;
     height: calc(100vh - 62px);
     overflow: scroll;

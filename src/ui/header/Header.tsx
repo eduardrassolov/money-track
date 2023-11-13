@@ -1,4 +1,3 @@
-import { FC, memo } from "react";
 import { styled } from "styled-components";
 
 type HeaderProps = {
@@ -15,7 +14,7 @@ const Div = styled.div`
     transition: all 300ms;
 `
 const H1 = styled.h1`
-    margin: 0;
+    margin: 1rem;
     padding: 0;
     font-weight: 500;
     text-align: center;
@@ -23,11 +22,10 @@ const H1 = styled.h1`
     font-size: 1.2rem;
 `
 
-const Header: FC<HeaderProps> = memo(function ({ text }) {
+export function Header({ text }: HeaderProps) {
     return (
         <Div>
             <H1>{text}</H1>
         </Div>
     )
-})
-export default Header;
+}

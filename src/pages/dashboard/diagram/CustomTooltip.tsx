@@ -1,15 +1,18 @@
 import styled from "styled-components";
 import { useUser } from "../../../utils/hooks/useUser";
 import useCurrency from "../../../utils/hooks/useCurrency";
+import dayjs from "dayjs";
+import { useBoundStore } from "../../../store/store";
 
 export const StyledTooltip = styled.div`
-    padding: 0.5rem 1rem;
     background: ${(props) => props.theme.background};
     border: 1px solid ${(props) => props.theme.border};
-    border-radius: 7px;
+    border-radius: 0.30rem;
     color: ${(props) => props.theme.text};
     justify-content: center;
     align-items: center;
+    padding: 1rem;  
+    box-shadow: 15px 30px 40px 5px rgba(0, 0, 0, 0.3);
 
     p{
         margin: 0 0 0.3rem;
@@ -25,23 +28,40 @@ interface CustomTooltipProps {
     active?: boolean;
     payload?: payloadType[];
     label?: number;
-    }
-    
-    type payloadType = {
+}
+
+type payloadType = {
     value: string | number;
     name: string;
 };
 
-export const CustomTooltip: React.FC<CustomTooltipProps> = ({active, payload, label}) => {
-    const {currency} = useUser();
-    const {defaultCurrency} = useCurrency(currency);
-    
-    if (active && payload && payload.length > 0) {
-        return <StyledTooltip>
-            <Title>{label}</Title>
-            <p>{`${payload[0].name} : ${defaultCurrency?.symbol} ${payload[0]?.value}`}</p>
-            <p>{`${payload[1].name} :  ${defaultCurrency?.symbol} ${payload[1]?.value}`}</p>
-        </StyledTooltip>;
+
+export const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload, label }) => {
+    const { currency } = useUser();
+    if (!payload || !active || !payload.length || !currency?.shortName) {
+        return null;
     }
-    return null;
+
+    const { defaultCurrency } = useCurrency(currency);
+
+
+    const [from, to] = useBoundStore(state => state.range);
+    const isDayRange = from === to ? "dddd, DD-MMM-YYYY HH:mm" : "dddd, DD-MMM-YYYY";
+
+    const formattedLable = dayjs(label).format(isDayRange);
+
+    const [income, expense] = payload;;
+    const { name: incomeTitle, value: incomeAmount } = income;
+    const { name: expenseTitle, value: expenseAmount } = expense;
+
+    const formattedIncomeAmount = Intl.NumberFormat("en-IN", { style: "currency", currency: defaultCurrency?.shortName || "usd" }).format(Number(incomeAmount));
+    const formattedExpenseAmount = Intl.NumberFormat("en-IN", { style: "currency", currency: defaultCurrency?.shortName || "usd" }).format(Number(expenseAmount));
+
+    return (
+        <StyledTooltip>
+            <Title>{formattedLable}</Title>
+            <p>{`${incomeTitle} : ${formattedIncomeAmount}`}</p>
+            <p>{`${expenseTitle} : ${formattedExpenseAmount}`}</p>
+        </StyledTooltip>
+    )
 };

@@ -1,5 +1,4 @@
 import { useLoaderData, useNavigate } from "react-router-dom"
-import Header from "../../ui/header/Header";
 import { FormFooter, FormGroup } from "../../components/newTransaction/FormTransaction.style";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { QUERY_KEY } from "../../config/queryClientKeys";
@@ -20,6 +19,7 @@ import apiGetCurrency from "../../services/api/apiGetCurrency";
 import { newTransactionSchema } from "../../components/newTransaction/newTrasactionValidation";
 import { PrimaryBtn, SecondaryBtn } from "../../styles/Button.style";
 import ErrorLabel from "../../components/error/ErrorLabel";
+import { Header } from "../../ui/header/Header";
 
 export default function EditPage() {
     const [data] = useLoaderData() as Array<GetAllTransactionsDTO>;

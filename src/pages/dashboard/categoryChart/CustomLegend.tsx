@@ -1,24 +1,17 @@
 import styled from 'styled-components'
-
-import { devices } from '../../../config/breakPoints';
 import { IChartData } from './CategoryChart';
-import AnimatedContainer from '../../../components/animation/AnimatedContainer';
-import { slideUp } from '../statCard/AnalyticsList';
+import { useUser } from '../../../utils/hooks/useUser';
+import useCurrency from '../../../utils/hooks/useCurrency';
 
 const StyledLegend = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.1rem;
-
-    @media only screen and (min-width: ${devices.sm}px){
-        margin:  auto auto auto 2rem;
-        width: 300px;
-    }
 `
 const LegendItem = styled.div<{ $bgColor: string, $textColor: string, $isSelected: boolean }>`
     display: flex;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 2rem;
     padding: 0.5rem 1rem;
 
     background: ${props => props.$isSelected ? props.$bgColor : props.theme.background};
@@ -31,7 +24,14 @@ const LegendItem = styled.div<{ $bgColor: string, $textColor: string, $isSelecte
         background: ${props => props.$bgColor};
         color: ${props => props.$textColor};
     }
+
+    font-size: 0.9rem;
 `
+
+const Span = styled.span`
+white-space: nowrap;
+`
+
 
 interface ICustomLegend {
     data: IChartData[],
@@ -42,35 +42,30 @@ interface ICustomLegend {
 export default function CustomLegend({ data, selected, onSelect }: ICustomLegend) {
     const sortedData = data.sort((a, b) => b.percentage - a.percentage);
 
+    const { user } = useUser();
+    const { defaultCurrency } = useCurrency(user?.user_metadata.currency);
+    console.log(defaultCurrency);
     return (
-        <>
-            {sortedData?.length ?
-                <AnimatedContainer direction={slideUp}>
-                    <StyledLegend> {
-                        sortedData?.map((entry) =>
-                            <LegendItem
-                                key={entry.id}
-                                id={entry.id}
-                                $bgColor={entry?.color?.text || "rgba(62, 111, 210, 0.3)"}
-                                $textColor={entry?.color?.fill || "rgb(62, 111, 210)"}
-                                $isSelected={entry.id === selected}
-                                onClick={() => onSelect(entry.id)} >
+        <StyledLegend>
+            {sortedData?.map((entry) =>
+                <LegendItem
+                    key={entry.id}
+                    id={entry.id}
+                    $bgColor={entry?.color?.text || "rgba(62, 111, 210, 0.3)"}
+                    $textColor={entry?.color?.fill || "rgb(62, 111, 210)"}
+                    $isSelected={entry.id === selected}
+                    onClick={() => onSelect(entry.id)} >
 
-                                <span>
-                                    {entry.name}
-                                </span>
+                    <span>
+                        {entry.name}
+                    </span>
 
-                                <span>
-                                    {entry.percentage.toFixed(2)}%
-                                </span>
-                            </LegendItem>
-                        )
-                    }
-                    </StyledLegend >
-                </AnimatedContainer >
-                : ""
+                    <Span>
+                        {defaultCurrency?.symbol} {entry.value.toFixed(2)} ({entry.percentage.toFixed(2)}%)
+                    </Span>
+                </LegendItem>
+            )
             }
-        </>
-
+        </StyledLegend >
     )
 }

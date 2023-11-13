@@ -71,7 +71,7 @@ const CategoryChart: FC<ICategoryChart> = ({ data }) => {
     const { isSmallScreen } = useResize();
     const dt: IChartData[] = createData(data);
 
-    const size = isSmallScreen ? 125 : 175;
+    const size = 125;
     const defaultPading = data.length === 1 ? 0 : 3;
     const defaultHeight = isSmallScreen ? 50 : 20;
 
@@ -87,20 +87,18 @@ const CategoryChart: FC<ICategoryChart> = ({ data }) => {
     }
 
     return (
-        <ResponsiveContainer width="100%" height={350 + (defaultHeight * dt.length)}>
+        <ResponsiveContainer width="100%" height={500 + (defaultHeight * dt.length)}>
             <PieChart>
                 <Pie
                     dataKey="value"
-                    isAnimationActive={false}
                     data={dt}
                     cx="50%"
                     cy="50%"
                     outerRadius={size}
-                    innerRadius={size / 2}
+                    innerRadius={size / 1.8}
                     paddingAngle={defaultPading}
                     label={({ value }) => `${defaultCurrency} ${value}`}
                 >
-
                     {dt.map((item, index) => {
                         return <Cell
                             key={`cell - ${index} `}
@@ -117,9 +115,9 @@ const CategoryChart: FC<ICategoryChart> = ({ data }) => {
                 <Tooltip content={<CustomTooltip />} />
 
                 <Legend
-                    verticalAlign={isSmallScreen ? "bottom" : "top"}
-                    align="left"
-                    layout={isSmallScreen ? "horizontal" : "vertical"}
+                    verticalAlign={"bottom"}
+                    align="center"
+                    layout={"vertical"}
                     content={<CustomLegend data={dt} selected={selected} onSelect={handleSelect} />}
                 />
 

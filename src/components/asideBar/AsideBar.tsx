@@ -10,7 +10,7 @@ const StyledAside = styled.aside`
     border: 1px solid ${props => props.theme.border};
     display: none;
 
-    @media only screen and (min-width: ${devices.sm}px){
+    @media only screen and (min-width: ${devices.md}px){
         display: block;
     }
 `
