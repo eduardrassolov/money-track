@@ -38,14 +38,14 @@ type payloadType = {
 
 export const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload, label }) => {
     const { currency } = useUser();
-    if (!payload || !active || !payload.length || !currency?.shortName) {
+    const { defaultCurrency } = useCurrency(currency);
+    const [from, to] = useBoundStore(state => state.range);
+
+    console.log("cur", currency);
+    if (!payload || !active || !payload.length || !defaultCurrency) {
         return null;
     }
 
-    const { defaultCurrency } = useCurrency(currency);
-
-
-    const [from, to] = useBoundStore(state => state.range);
     const isDayRange = from === to ? "dddd, DD-MMM-YYYY HH:mm" : "dddd, DD-MMM-YYYY";
 
     const formattedLable = dayjs(label).format(isDayRange);
