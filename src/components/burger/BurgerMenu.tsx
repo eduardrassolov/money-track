@@ -58,10 +58,10 @@ export const StyledBurgerMenu = styled.div<{ $isOpen: boolean }>`
     }
 `
 
-const BurgerMenu: FC<IBurgerMenu> = ({ isOpen, onClose }) => {
+const BurgerMenu: FC<IBurgerMenu> = ({ isOpen, onBurgerClick }) => {
     return (
         <>
-            <StyledBurgerMenu $isOpen={isOpen} onClick={onClose}>
+            <StyledBurgerMenu $isOpen={isOpen} onClick={onBurgerClick}>
                 <div></div>
                 <div></div>
                 <div></div>
