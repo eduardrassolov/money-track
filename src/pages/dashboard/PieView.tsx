@@ -47,7 +47,6 @@ export default function PieView({ user, currency }: { user: User, currency: ICur
             }
         });
 
-    console.log("data", expenses, incomes);
     return (
         <Div>
             {isExpenseLoading || isIncomesLoading || !expenses || !incomes ? <LoadingUi /> : <>

@@ -9,31 +9,6 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      category: {
-        Row: {
-          id: number
-          name: string
-          type_id: number
-        }
-        Insert: {
-          id?: never
-          name: string
-          type_id: number
-        }
-        Update: {
-          id?: never
-          name?: string
-          type_id?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "category_type_id_fkey"
-            columns: ["type_id"]
-            referencedRelation: "type_transaction"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
       Category: {
         Row: {
           id: string
@@ -60,12 +35,14 @@ export interface Database {
           {
             foreignKeyName: "Category_type_id_fkey"
             columns: ["type_id"]
+            isOneToOne: false
             referencedRelation: "type_transaction"
             referencedColumns: ["id"]
           },
           {
             foreignKeyName: "Category_user_id_fkey"
             columns: ["user_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           }
@@ -94,6 +71,42 @@ export interface Database {
           symbol?: string | null
         }
         Relationships: []
+      }
+      Settings: {
+        Row: {
+          defaultCurrencyId: string
+          id: string
+          itemsPerPage: number
+          userId: string
+        }
+        Insert: {
+          defaultCurrencyId: string
+          id?: string
+          itemsPerPage?: number
+          userId: string
+        }
+        Update: {
+          defaultCurrencyId?: string
+          id?: string
+          itemsPerPage?: number
+          userId?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "Settings_defaultCurrencyId_fkey"
+            columns: ["defaultCurrencyId"]
+            isOneToOne: false
+            referencedRelation: "Currency"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "Settings_userId_fkey"
+            columns: ["userId"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       transactions: {
         Row: {
@@ -127,18 +140,21 @@ export interface Database {
           {
             foreignKeyName: "transactions_category_id_fkey"
             columns: ["category_id"]
+            isOneToOne: false
             referencedRelation: "Category"
             referencedColumns: ["id"]
           },
           {
             foreignKeyName: "transactions_currency_id_fkey"
             columns: ["currency_id"]
+            isOneToOne: false
             referencedRelation: "Currency"
             referencedColumns: ["id"]
           },
           {
             foreignKeyName: "transactions_profile_id_fkey"
             columns: ["profile_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           }

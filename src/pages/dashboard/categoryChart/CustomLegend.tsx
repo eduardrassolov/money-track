@@ -44,7 +44,6 @@ export default function CustomLegend({ data, selected, onSelect }: ICustomLegend
 
     const { user } = useUser();
     const { defaultCurrency } = useCurrency(user?.user_metadata.currency);
-    console.log(defaultCurrency);
     return (
         <StyledLegend>
             {sortedData?.map((entry) =>

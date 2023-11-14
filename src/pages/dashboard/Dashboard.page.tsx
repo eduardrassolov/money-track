@@ -11,6 +11,8 @@ import useCurrency from "../../utils/hooks/useCurrency.tsx";
 import DateFilter from "../../components/filterDate/FilterDate.tsx";
 import PieView from "./PieView.tsx";
 import { devices } from "../../config/breakPoints.ts";
+import { apiGetUserSettings } from "../../services/api/apiGetUserSettings.ts";
+
 
 
 const Div = styled.div`
@@ -80,7 +82,13 @@ export default function Dashboard() {
       }
     });
 
-  if (!defaultCurrency)
+  const { data: userSettings } = useQuery({
+    queryKey: ["userSettings"],
+    queryFn: () => apiGetUserSettings(userId)
+  });
+
+  console.log("test", userSettings);
+  if (!userSettings)
     return;
 
   return (
@@ -93,10 +101,10 @@ export default function Dashboard() {
           </DateFilterContainer>
         </Div>
 
-        <Diagram transactions={transactions} currency={defaultCurrency} isLoading={isLoading} />
+        <Diagram transactions={transactions} currency={userSettings.defaultCurrency} isLoading={isLoading} />
       </Container>
 
-      <PieView user={user} currency={defaultCurrency} />
+      <PieView user={user} currency={userSettings.defaultCurrency} />
     </Main >
   )
 }

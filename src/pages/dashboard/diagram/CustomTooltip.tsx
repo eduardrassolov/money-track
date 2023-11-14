@@ -41,7 +41,6 @@ export const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload, l
     const { defaultCurrency } = useCurrency(currency);
     const [from, to] = useBoundStore(state => state.range);
 
-    console.log("cur", currency);
     if (!payload || !active || !payload.length || !defaultCurrency) {
         return null;
     }
