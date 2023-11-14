@@ -8,7 +8,7 @@ import { loaderTransactions } from "../transactions/loader.ts";
 import { useBoundStore } from "../../store/store.tsx";
 import Diagram from "./diagram/Diagram.tsx";
 import useCurrency from "../../utils/hooks/useCurrency.tsx";
-import DateFilter from "../../components/filterDate/DateFilter.tsx";
+import DateFilter from "../../components/filterDate/FilterDate.tsx";
 import PieView from "./PieView.tsx";
 import { devices } from "../../config/breakPoints.ts";
 
@@ -38,7 +38,10 @@ const Container = styled.div`
 `
 
 const DateFilterContainer = styled.div`
+  margin: 0;
+@media only screen and (min-width: ${devices.md}px){
   margin: 0 2rem 0 auto;
+}
 `
 
 const Main = styled.main`
