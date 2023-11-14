@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import { styled } from 'styled-components';
 import { devices } from '../../config/breakPoints';
 
@@ -58,10 +57,10 @@ export const StyledBurgerMenu = styled.div<{ $isOpen: boolean }>`
     }
 `
 
-const BurgerMenu: FC<IBurgerMenu> = ({ isOpen, onBurgerClick }) => {
+export function BurgerMenu({ isOpen, onClose }: IBurgerMenu) {
     return (
         <>
-            <StyledBurgerMenu $isOpen={isOpen} onClick={onBurgerClick}>
+            <StyledBurgerMenu $isOpen={isOpen} onClick={onClose}>
                 <div></div>
                 <div></div>
                 <div></div>

@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { useUser } from "../../../utils/hooks/useUser";
-import useCurrency from "../../../utils/hooks/useCurrency";
 import dayjs from "dayjs";
 import { useBoundStore } from "../../../store/store";
 
@@ -28,6 +26,7 @@ interface CustomTooltipProps {
     active?: boolean;
     payload?: payloadType[];
     label?: number;
+    currency: any
 }
 
 type payloadType = {

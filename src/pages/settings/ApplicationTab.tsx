@@ -10,9 +10,11 @@ import Input from '../../components/input/Input';
 import ErrorLabel from '../../components/error/ErrorLabel';
 import { ISettings, apiUpdateUserSettings } from '../../services/api/apiGetUserSettings';
 import { useUser } from '../../utils/hooks/useUser';
+import { toast } from 'react-toastify';
 
 type ApplicationTabProps = {
     currencyId: string,
+    itemsPerPage: number
 };
 
 type InputsSettings = ApplicationTabProps & {
@@ -30,8 +32,12 @@ export default function ApplicationTab({ currencyId, itemsPerPage }: Application
 
     const { mutate: changeDefaultCurrency } = useMutation({
         mutationFn: apiUpdateUserSettings,
-        onSuccess: () => console.log("succes"),
-        onError: (err) => console.log("error", err?.message)
+        onSuccess: () => toast.success("Updated"),
+        onError: (err) => {
+            if (err instanceof Error) {
+                toast.error(err.message);
+            }
+        }
     })
 
 
@@ -41,7 +47,7 @@ export default function ApplicationTab({ currencyId, itemsPerPage }: Application
 
         const settings: ISettings = { defaultCurrencyId: id, itemsPerPage: numberPerPage };
         console.log(settings);
-        changeDefaultCurrency({ userId: user?.id, settings });
+        changeDefaultCurrency({ userId: user?.id || "", settings });
     };
 
     return (

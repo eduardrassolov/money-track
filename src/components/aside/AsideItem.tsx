@@ -56,7 +56,7 @@ export const logout = async () => {
 export default function AsideItem({ name, path, icon, onCloseBurger }: AsideItemProps) {
     const navigate = useNavigate();
 
-    function handleClick(path) {
+    function handleClick(path: string) {
         navigate(path);
         onCloseBurger();
     }

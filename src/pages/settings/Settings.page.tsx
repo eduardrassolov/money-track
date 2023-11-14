@@ -58,7 +58,7 @@ export default function Settings() {
         return null;
     }
 
-    const { data: userSettings, isLoading } = useQuery({
+    const { data: userSettings } = useQuery({
         queryKey: ["userSettings"],
         queryFn: () => apiGetUserSettings(user.id)
     })
@@ -73,7 +73,7 @@ export default function Settings() {
                 <TabsList activeTab={activeTab} onChangeTab={handleTab} />
 
                 {activeTab === "profileTab" ? <ProfileTab firstName={firstName} lastName={lastName} /> : ""}
-                {activeTab === "applicationTab" ? <ApplicationTab itemsPerPage={userSettings?.itemsPerPage} currencyId={userSettings?.defaultCurrency?.id} /> : ""}
+                {activeTab === "applicationTab" ? <ApplicationTab itemsPerPage={userSettings?.itemsPerPage || 10} currencyId={userSettings?.defaultCurrency?.id || ""} /> : ""}
 
             </Container>
         </SectionFull >

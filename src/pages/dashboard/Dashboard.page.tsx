@@ -7,11 +7,9 @@ import { QUERY_KEY } from "../../config/queryClientKeys.ts";
 import { loaderTransactions } from "../transactions/loader.ts";
 import { useBoundStore } from "../../store/store.tsx";
 import Diagram from "./diagram/Diagram.tsx";
-import useCurrency from "../../utils/hooks/useCurrency.tsx";
 import DateFilter from "../../components/filterDate/FilterDate.tsx";
 import PieView from "./PieView.tsx";
 import { devices } from "../../config/breakPoints.ts";
-import { apiGetUserSettings } from "../../services/api/apiGetUserSettings.ts";
 import { useUserSettings } from "../../utils/hooks/useUserSettings.tsx";
 
 
@@ -99,9 +97,10 @@ export default function Dashboard() {
           </DateFilterContainer>
         </Div>
 
-        <Diagram transactions={transactions} currency={userSettings.defaultCurrency} isLoading={isLoading} />
+        <Diagram transactions={transactions} userId={userId} isLoading={isLoading} />
       </Container>
 
+      {/* @ts-ignore */}
       <PieView user={user} currency={userSettings.defaultCurrency} />
     </Main >
   )

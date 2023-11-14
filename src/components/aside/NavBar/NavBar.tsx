@@ -22,15 +22,15 @@ const Nav = styled.nav`
 
 
 export interface IBar {
-    isBurgerOpen: boolean;
-    onClose: () => void;
+    isOpen: boolean,
+    onBurgerClick: () => void;
 }
 
-export function NavBar({ isBurgerOpen, onBurgerClick }) {
+export function NavBar({ isOpen, onBurgerClick }: IBar) {
     return (
         <Nav>
             <Search />
-            <BurgerMenu onBurgerClick={onBurgerClick} />
+            <BurgerMenu isOpen={isOpen} onClose={onBurgerClick} />
 
             {/* <NavMenu isOpen={isBurgerOpen} onCloseBurger={onClose} /> */}
 

@@ -9,7 +9,7 @@ import useBurgerMenu from '../../components/aside/NavBar/useBurger.tsx';
 
 
 export default function AppLayout() {
-    const { isBurgerOpen, handleBurger, closeBurger } = useBurgerMenu();
+    const { isBurgerOpen, handleBurger } = useBurgerMenu();
 
     const containter = useRef(null);
 
@@ -19,7 +19,7 @@ export default function AppLayout() {
 
             <ContentContainer>
                 {/* <NavBar isBurgerOpen={isBurgerOpen} onClose={closeBurger} /> */}
-                <NavBar isBurgerOpen={isBurgerOpen} onBurgerClick={handleBurger} />
+                <NavBar isOpen={isBurgerOpen} onBurgerClick={handleBurger} />
 
                 <Section ref={containter}>
                     <Outlet />

@@ -44,8 +44,13 @@ const Background = styled.div<{ $isOpen: boolean }>`
 const icons: Array<JSX.Element> =
     [<HiOutlineChartPie />, <HiOutlineShoppingBag />, <HiOutlineCreditCard />, <HiMiniArrowsUpDown />]
 
+interface IAsideBar {
+    isOpen: boolean,
+    onClose: () => void
+}
 
-export default function AsideBar({ isOpen = false, onClose }) {
+
+export default function AsideBar({ isOpen = false, onClose }: IAsideBar) {
     return (
         <>
             <Background $isOpen={isOpen} onClick={onClose} />

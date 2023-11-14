@@ -6,7 +6,7 @@ export interface ISettings {
 }
 
 export async function apiGetUserSettings(userId: string) {
-    const { data, error } = await supabase
+    const { data } = await supabase
         .from("Settings")
         .select("id, itemsPerPage, defaultCurrency:Currency!inner(id, name, symbol, shortName, code)")
         .eq("userId", userId)
@@ -15,7 +15,7 @@ export async function apiGetUserSettings(userId: string) {
     return data;
 }
 
-export async function apiUpdateUserSettings({ userId, settings }) {
+export async function apiUpdateUserSettings({ userId, settings }: { userId: string; settings: ISettings }) {
     console.log("set", userId, settings);
     const { data, error } = await supabase
         .from("Settings")
