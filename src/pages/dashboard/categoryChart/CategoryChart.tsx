@@ -9,6 +9,8 @@ import { useBoundStore } from "../../../store/store";
 
 import useDefaultCurrency from "../../../utils/hooks/useDefaultCurrency";
 import { pieChartColors } from "../../../config/chartPieColors.ts";
+import useSettings from "../../settings/useSettings.ts";
+import { useUserSettings } from "../../../utils/hooks/useUserSettings.tsx";
 
 export interface IChartData {
     id: string,
@@ -67,7 +69,7 @@ const createData = (arr: Array<ISummary>): Array<IChartData> => {
     });
 };
 
-const CategoryChart: FC<ICategoryChart> = ({ data }) => {
+const CategoryChart: FC<ICategoryChart> = ({ data, currency }) => {
     const { isSmallScreen } = useResize();
     const dt: IChartData[] = createData(data);
 
@@ -80,7 +82,6 @@ const CategoryChart: FC<ICategoryChart> = ({ data }) => {
 
     const theme = useBoundStore((state) => state.theme);
 
-    const { defaultCurrency } = useDefaultCurrency();
     function handleClick(id: string) {
         console.log("clicked", id);
         setSelect(id);
@@ -97,7 +98,7 @@ const CategoryChart: FC<ICategoryChart> = ({ data }) => {
                     outerRadius={size}
                     innerRadius={size / 1.8}
                     paddingAngle={defaultPading}
-                    label={({ value }) => `${defaultCurrency} ${value}`}
+                    label={({ value }) => `${currency.symbol} ${value}`}
                 >
                     {dt.map((item, index) => {
                         return <Cell

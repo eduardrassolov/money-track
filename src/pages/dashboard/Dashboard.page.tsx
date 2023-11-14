@@ -12,6 +12,7 @@ import DateFilter from "../../components/filterDate/FilterDate.tsx";
 import PieView from "./PieView.tsx";
 import { devices } from "../../config/breakPoints.ts";
 import { apiGetUserSettings } from "../../services/api/apiGetUserSettings.ts";
+import { useUserSettings } from "../../utils/hooks/useUserSettings.tsx";
 
 
 
@@ -64,13 +65,13 @@ const Main = styled.main`
 const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
 
 export default function Dashboard() {
-  const { user, currency } = useUser();
+  const { user } = useUser();
   if (!user) {
     return null;
   }
   const { id: userId } = user;
 
-  const { defaultCurrency } = useCurrency(currency);
+  // const { defaultCurrency } = useCurrency(currency);
 
   const [from, to] = useBoundStore(state => state.range);
 
@@ -82,10 +83,7 @@ export default function Dashboard() {
       }
     });
 
-  const { data: userSettings } = useQuery({
-    queryKey: ["userSettings"],
-    queryFn: () => apiGetUserSettings(userId)
-  });
+  const { userSettings } = useUserSettings(userId);
 
   console.log("test", userSettings);
   if (!userSettings)

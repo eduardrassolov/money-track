@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { IChartData } from './CategoryChart';
 import { useUser } from '../../../utils/hooks/useUser';
-import useCurrency from '../../../utils/hooks/useCurrency';
+import { useUserSettings } from '../../../utils/hooks/useUserSettings';
 
 const StyledLegend = styled.div`
     display: flex;
@@ -32,7 +32,6 @@ const Span = styled.span`
 white-space: nowrap;
 `
 
-
 interface ICustomLegend {
     data: IChartData[],
     selected: string,
@@ -43,7 +42,8 @@ export default function CustomLegend({ data, selected, onSelect }: ICustomLegend
     const sortedData = data.sort((a, b) => b.percentage - a.percentage);
 
     const { user } = useUser();
-    const { defaultCurrency } = useCurrency(user?.user_metadata.currency);
+    const { userSettings } = useUserSettings(user?.id || "");
+
     return (
         <StyledLegend>
             {sortedData?.map((entry) =>
@@ -60,7 +60,7 @@ export default function CustomLegend({ data, selected, onSelect }: ICustomLegend
                     </span>
 
                     <Span>
-                        {defaultCurrency?.symbol} {entry.value.toFixed(2)} ({entry.percentage.toFixed(2)}%)
+                        {userSettings?.defaultCurrency?.symbol} {entry.value.toFixed(2)} ({entry.percentage.toFixed(2)}%)
                     </Span>
                 </LegendItem>
             )

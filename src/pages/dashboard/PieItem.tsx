@@ -36,7 +36,7 @@ export default function PieItem({ label, transactions, currency }: IPieDiagram) 
     return (
         <StyledContainer>
             <Header text={label} />
-            <CategoryChart data={data} />
+            <CategoryChart data={data} currency={currency} />
         </StyledContainer>
     )
 }

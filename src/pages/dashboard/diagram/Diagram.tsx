@@ -37,8 +37,8 @@ interface IDiagramProps {
 }
 
 export default function Diagram({ transactions, currency, isLoading }: IDiagramProps) {
-    const { symbol } = currency;
 
+    const { symbol } = currency;
     const [from, to] = useBoundStore(state => state.range);
     const isDayRange = from === to ? "DD-MMM-YYYY HH:mm" : "DD-MMM-YYYY";
 
@@ -78,7 +78,7 @@ export default function Diagram({ transactions, currency, isLoading }: IDiagramP
                         />
                         <YAxis tickLine={false} axisLine={false} tickCount={8} tickFormatter={(amount) => `${symbol}${amount}`} />
 
-                        <Tooltip content={<CustomTooltip />} />
+                        <Tooltip content={<CustomTooltip currency={currency} />} />
                         <CartesianGrid strokeDasharray="0.5" stroke="gray" opacity={0.2} vertical={false} />
 
                     </AreaChart>
