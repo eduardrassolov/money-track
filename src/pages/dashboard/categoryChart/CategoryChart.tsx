@@ -7,8 +7,9 @@ import styled from "styled-components";
 import CustomLegend from "./CustomLegend";
 import { useBoundStore } from "../../../store/store";
 
-import useDefaultCurrency from "../../../utils/hooks/useDefaultCurrency";
+
 import { pieChartColors } from "../../../config/chartPieColors.ts";
+
 
 export interface IChartData {
     id: string,
@@ -23,7 +24,7 @@ export interface IChartData {
 }
 
 interface ICategoryChart {
-    data: Array<ISummary>
+    data: Array<ISummary>,
 }
 
 const StyledDiv = styled.div`
@@ -80,7 +81,6 @@ const CategoryChart: FC<ICategoryChart> = ({ data }) => {
 
     const theme = useBoundStore((state) => state.theme);
 
-    const { defaultCurrency } = useDefaultCurrency();
     function handleClick(id: string) {
         console.log("clicked", id);
         setSelect(id);
@@ -97,7 +97,7 @@ const CategoryChart: FC<ICategoryChart> = ({ data }) => {
                     outerRadius={size}
                     innerRadius={size / 1.8}
                     paddingAngle={defaultPading}
-                    label={({ value }) => `${defaultCurrency} ${value}`}
+                // label={({ value }) => `${currency.symbol} ${value}`}
                 >
                     {dt.map((item, index) => {
                         return <Cell

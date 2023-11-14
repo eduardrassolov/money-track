@@ -2,35 +2,52 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import FormRow from '../../components/newTransaction/FormRow';
 import SettingsFooter from './SettingsFooter';
 import Select from '../../components/dropDown/Select';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import apiGetCurrency from '../../services/api/apiGetCurrency';
 import LoadingUi from '../../components/spinner/LoadingUi';
 import { Form, P } from './ProfileTab';
 import Input from '../../components/input/Input';
 import ErrorLabel from '../../components/error/ErrorLabel';
+import { ISettings, apiUpdateUserSettings } from '../../services/api/apiGetUserSettings';
+import { useUser } from '../../utils/hooks/useUser';
+import { toast } from 'react-toastify';
 
 type ApplicationTabProps = {
     currencyId: string,
+    itemsPerPage: number
 };
 
 type InputsSettings = ApplicationTabProps & {
     numberPerPage: number
 }
 
-export default function ApplicationTab({ currencyId }: ApplicationTabProps) {
+export default function ApplicationTab({ currencyId, itemsPerPage }: ApplicationTabProps) {
+    const { user } = useUser();
     const { data: optionCurrency, isLoading: isCurrencyLoading } = useQuery({ queryKey: ["currency"], queryFn: apiGetCurrency });
     const { register, handleSubmit } = useForm<InputsSettings>({
         defaultValues: {
-            currencyId, numberPerPage: Number(localStorage.getItem("transactionPerPage")) || 10
+            currencyId, numberPerPage: itemsPerPage
         }
     });
 
+    const { mutate: changeDefaultCurrency } = useMutation({
+        mutationFn: apiUpdateUserSettings,
+        onSuccess: () => toast.success("Updated"),
+        onError: (err) => {
+            if (err instanceof Error) {
+                toast.error(err.message);
+            }
+        }
+    })
+
+
     const onSubmit: SubmitHandler<InputsSettings> = (data) => {
         const { currencyId: id, numberPerPage } = data;
-        localStorage.setItem("transactionPerPage", numberPerPage.toString());
-        if (id === currencyId) {
-            return;
-        }
+        console.log(id, currencyId);
+
+        const settings: ISettings = { defaultCurrencyId: id, itemsPerPage: numberPerPage };
+        console.log(settings);
+        changeDefaultCurrency({ userId: user?.id || "", settings });
     };
 
     return (

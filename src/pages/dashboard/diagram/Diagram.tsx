@@ -4,10 +4,11 @@ import { CustomTooltip } from './CustomTooltip';
 
 import dayjs from 'dayjs';
 import { ITransaction } from '../../../interface/ITransactions';
-import { ICurrency } from '../../../utils/hooks/useCurrency';
+
 import LoadingUi from '../../../components/spinner/LoadingUi';
 import convertToOneCurrency from '../../../services/createData';
 import { useBoundStore } from '../../../store/store';
+import { useUserSettings } from "../../../utils/hooks/useUserSettings";
 
 // const ChartContainer = styled.div`
 //   width: 100%;
@@ -32,12 +33,15 @@ import { useBoundStore } from '../../../store/store';
 
 interface IDiagramProps {
     transactions: Array<ITransaction> | undefined;
-    currency: ICurrency;
+    userId: string;
     isLoading: boolean
 }
 
-export default function Diagram({ transactions, currency, isLoading }: IDiagramProps) {
-    const { symbol } = currency;
+export default function Diagram({ transactions, isLoading, userId }: IDiagramProps) {
+    const { userSettings } = useUserSettings(userId);
+
+    const symbol = userSettings?.defaultCurrency?.symbol;
+    const currency = userSettings?.defaultCurrency;
 
     const [from, to] = useBoundStore(state => state.range);
     const isDayRange = from === to ? "DD-MMM-YYYY HH:mm" : "DD-MMM-YYYY";
@@ -78,7 +82,7 @@ export default function Diagram({ transactions, currency, isLoading }: IDiagramP
                         />
                         <YAxis tickLine={false} axisLine={false} tickCount={8} tickFormatter={(amount) => `${symbol}${amount}`} />
 
-                        <Tooltip content={<CustomTooltip />} />
+                        <Tooltip content={<CustomTooltip currency={currency} />} />
                         <CartesianGrid strokeDasharray="0.5" stroke="gray" opacity={0.2} vertical={false} />
 
                     </AreaChart>

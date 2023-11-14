@@ -7,10 +7,11 @@ import { QUERY_KEY } from "../../config/queryClientKeys.ts";
 import { loaderTransactions } from "../transactions/loader.ts";
 import { useBoundStore } from "../../store/store.tsx";
 import Diagram from "./diagram/Diagram.tsx";
-import useCurrency from "../../utils/hooks/useCurrency.tsx";
-import DateFilter from "../../components/filterDate/DateFilter.tsx";
+import DateFilter from "../../components/filterDate/FilterDate.tsx";
 import PieView from "./PieView.tsx";
 import { devices } from "../../config/breakPoints.ts";
+import { useUserSettings } from "../../utils/hooks/useUserSettings.tsx";
+
 
 
 const Div = styled.div`
@@ -38,7 +39,10 @@ const Container = styled.div`
 `
 
 const DateFilterContainer = styled.div`
+  margin: 0;
+@media only screen and (min-width: ${devices.md}px){
   margin: 0 2rem 0 auto;
+}
 `
 
 const Main = styled.main`
@@ -59,13 +63,13 @@ const Main = styled.main`
 const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
 
 export default function Dashboard() {
-  const { user, currency } = useUser();
+  const { user } = useUser();
   if (!user) {
     return null;
   }
   const { id: userId } = user;
 
-  const { defaultCurrency } = useCurrency(currency);
+  // const { defaultCurrency } = useCurrency(currency);
 
   const [from, to] = useBoundStore(state => state.range);
 
@@ -77,7 +81,10 @@ export default function Dashboard() {
       }
     });
 
-  if (!defaultCurrency)
+  const { userSettings } = useUserSettings(userId);
+
+  console.log("test", userSettings);
+  if (!userSettings)
     return;
 
   return (
@@ -90,10 +97,11 @@ export default function Dashboard() {
           </DateFilterContainer>
         </Div>
 
-        <Diagram transactions={transactions} currency={defaultCurrency} isLoading={isLoading} />
+        <Diagram transactions={transactions} userId={userId} isLoading={isLoading} />
       </Container>
 
-      <PieView user={user} currency={defaultCurrency} />
+      {/* @ts-ignore */}
+      <PieView user={user} currency={userSettings.defaultCurrency} />
     </Main >
   )
 }

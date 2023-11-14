@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import MenuDropDown from "./menuDropDown/MenuDropDown";
 import { devices } from "../../../config/breakPoints";
 import Search from "../../search/Search";
+import BurgerMenu from "../../burger/BurgerMenu";
 
 const Nav = styled.nav`
     background: ${(props) => props.theme.background};
@@ -21,15 +22,15 @@ const Nav = styled.nav`
 
 
 export interface IBar {
-    isBurgerOpen: boolean;
-    onClose: () => void;
+    isOpen: boolean,
+    onBurgerClick: () => void;
 }
 
-export function NavBar() {
+export function NavBar({ isOpen, onBurgerClick }: IBar) {
     return (
         <Nav>
             <Search />
-            {/* <BurgerMenu isOpen={isBurgerOpen} onClose={onClose} /> */}
+            <BurgerMenu isOpen={isOpen} onClose={onBurgerClick} />
 
             {/* <NavMenu isOpen={isBurgerOpen} onCloseBurger={onClose} /> */}
 

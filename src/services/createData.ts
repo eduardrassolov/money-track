@@ -1,13 +1,13 @@
 import { ITransaction } from "../interface/ITransactions";
 import * as currencyData from "../_data/currency.json";
-import { ICurrency } from "../utils/hooks/useCurrency";
 
 interface IRate {
     [key: string]: number;
 }
 
-export default function convertToOneCurrency(transactions: ITransaction[] | undefined, currency: ICurrency): ITransaction[] {
-    if (!transactions) {
+//TODO fix any
+export default function convertToOneCurrency(transactions: ITransaction[] | undefined, currency: any): ITransaction[] {
+    if (!transactions || !currency) {
         return [];
     }
 

@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { useUser } from "../../../utils/hooks/useUser";
-import useCurrency from "../../../utils/hooks/useCurrency";
 import dayjs from "dayjs";
 import { useBoundStore } from "../../../store/store";
 
@@ -28,6 +26,7 @@ interface CustomTooltipProps {
     active?: boolean;
     payload?: payloadType[];
     label?: number;
+    currency: any
 }
 
 type payloadType = {
@@ -36,16 +35,14 @@ type payloadType = {
 };
 
 
-export const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload, label }) => {
-    const { currency } = useUser();
-    if (!payload || !active || !payload.length || !currency?.shortName) {
+export const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload, label, currency }) => {
+
+    const [from, to] = useBoundStore(state => state.range);
+
+    if (!payload || !active || !payload.length) {
         return null;
     }
 
-    const { defaultCurrency } = useCurrency(currency);
-
-
-    const [from, to] = useBoundStore(state => state.range);
     const isDayRange = from === to ? "dddd, DD-MMM-YYYY HH:mm" : "dddd, DD-MMM-YYYY";
 
     const formattedLable = dayjs(label).format(isDayRange);
@@ -54,8 +51,8 @@ export const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload, l
     const { name: incomeTitle, value: incomeAmount } = income;
     const { name: expenseTitle, value: expenseAmount } = expense;
 
-    const formattedIncomeAmount = Intl.NumberFormat("en-IN", { style: "currency", currency: defaultCurrency?.shortName || "usd" }).format(Number(incomeAmount));
-    const formattedExpenseAmount = Intl.NumberFormat("en-IN", { style: "currency", currency: defaultCurrency?.shortName || "usd" }).format(Number(expenseAmount));
+    const formattedIncomeAmount = Intl.NumberFormat("en-IN", { style: "currency", currency: currency.shortName || "usd" }).format(Number(incomeAmount));
+    const formattedExpenseAmount = Intl.NumberFormat("en-IN", { style: "currency", currency: currency.shortName || "usd" }).format(Number(expenseAmount));
 
     return (
         <StyledTooltip>

@@ -31,10 +31,7 @@ const StyledContainer = styled.div`
 
 export default function PieItem({ label, transactions, currency }: IPieDiagram) {
     const convertedTransactions = convertToOneCurrency(transactions, currency);
-    console.log("dddd", convertedTransactions);
     const data = getDataSummmary(convertedTransactions)
-
-    console.log(data);
 
     return (
         <StyledContainer>

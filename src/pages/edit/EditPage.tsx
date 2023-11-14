@@ -20,6 +20,7 @@ import { newTransactionSchema } from "../../components/newTransaction/newTrasact
 import { PrimaryBtn, SecondaryBtn } from "../../styles/Button.style";
 import ErrorLabel from "../../components/error/ErrorLabel";
 import { Header } from "../../ui/header/Header";
+import dayjs from "dayjs";
 
 export default function EditPage() {
     const [data] = useLoaderData() as Array<GetAllTransactionsDTO>;
@@ -62,10 +63,12 @@ export default function EditPage() {
         if (!description.trim() || !amount || !completed_at || !updatedCurrency)
             return;
 
+        const formattedDate = dayjs(new Date(completed_at)).format("DD-MMM-YYYY HH:mm")
+
         updateTransaction({
             description,
             amount,
-            completed_at: completed_at,
+            completed_at: formattedDate,
             category: updatedCategory,
             id,
             currency_id: updatedCurrency
