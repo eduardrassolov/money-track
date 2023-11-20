@@ -1,8 +1,10 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { useMutation, useQuery } from '@tanstack/react-query';
+
 import FormRow from '../../components/newTransaction/FormRow';
 import SettingsFooter from './SettingsFooter';
 import Select from '../../components/dropDown/Select';
-import { useMutation, useQuery } from '@tanstack/react-query';
 import apiGetCurrency from '../../services/api/apiGetCurrency';
 import LoadingUi from '../../components/spinner/LoadingUi';
 import { Form, P } from './ProfileTab';
@@ -10,7 +12,6 @@ import Input from '../../components/input/Input';
 import ErrorLabel from '../../components/error/ErrorLabel';
 import { ISettings, apiUpdateUserSettings } from '../../services/api/apiGetUserSettings';
 import { useUser } from '../../utils/hooks/useUser';
-import { toast } from 'react-toastify';
 
 type ApplicationTabProps = {
     currencyId: string,
@@ -39,7 +40,6 @@ export default function ApplicationTab({ currencyId, itemsPerPage }: Application
             }
         }
     })
-
 
     const onSubmit: SubmitHandler<InputsSettings> = (data) => {
         const { currencyId: id, numberPerPage } = data;

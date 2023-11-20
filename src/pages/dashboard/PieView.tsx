@@ -15,7 +15,7 @@ import { devices } from '../../config/breakPoints';
 import { User } from '@supabase/supabase-js';
 import { ICurrency } from '../../utils/hooks/useCurrency';
 
-const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
+export const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
 
 const Div = styled.div`
     display: flex;
@@ -29,7 +29,6 @@ const Div = styled.div`
 `
 
 export default function PieView({ user, currency }: { user: User, currency: ICurrency }) {
-
     const [from, to] = useBoundStore(state => state.range);
 
     const { data: expenses, isLoading: isExpenseLoading } = useQuery(

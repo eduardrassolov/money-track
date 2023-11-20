@@ -9,7 +9,7 @@ import EditPage from "./pages/edit/EditPage.tsx";
 import loaderTransactionById from "./pages/edit/loader.ts";
 import Settings from "./pages/settings/Settings.page.tsx";
 import LoadingUi from "./components/spinner/LoadingUi.tsx";
-import AuthorizationLayout from "./pages/authorization/Authorization.tsx";
+import AuthorizationLayout from "./pages/authorization/Authorization.page..tsx";
 import LogIn from "./pages/authorization/login/LogIn.tsx";
 import SignUp from "./pages/authorization/signUp/SignUp.tsx";
 import { ROUTES } from "./config/routes.ts";

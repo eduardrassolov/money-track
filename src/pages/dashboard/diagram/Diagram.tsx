@@ -1,35 +1,15 @@
 import { Area, AreaChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import dayjs from 'dayjs';
+
 import createDiagramData from '../createDiagramData';
 import { CustomTooltip } from './CustomTooltip';
 
-import dayjs from 'dayjs';
 import { ITransaction } from '../../../interface/ITransactions';
 
 import LoadingUi from '../../../components/spinner/LoadingUi';
 import convertToOneCurrency from '../../../services/createData';
 import { useBoundStore } from '../../../store/store';
 import { useUserSettings } from "../../../utils/hooks/useUserSettings";
-
-// const ChartContainer = styled.div`
-//   width: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   border: 1px solid ${(props) => props.theme.border};
-//   background: ${(props) => props.theme.background};
-//   color: ${(props) => props.theme.text};
-//   padding: 2rem 0;
-//   border-radius: 15px;
-//   overflow: scroll;
-//     transition: all 300ms;
-// `
-
-// const Div = styled.div`
-//     display: flex;
-//     width: 95%;
-//     justify-content: flex-end;
-//     /* padding: 0 5rem; */
-// `
 
 interface IDiagramProps {
     transactions: Array<ITransaction> | undefined;
@@ -41,7 +21,7 @@ export default function Diagram({ transactions, isLoading, userId }: IDiagramPro
     const { userSettings } = useUserSettings(userId);
 
     const symbol = userSettings?.defaultCurrency?.symbol;
-    const currency = userSettings?.defaultCurrency;
+    const currency = userSettings?.defaultCurrency || "USD";
 
     const [from, to] = useBoundStore(state => state.range);
     const isDayRange = from === to ? "DD-MMM-YYYY HH:mm" : "DD-MMM-YYYY";
@@ -53,7 +33,7 @@ export default function Diagram({ transactions, isLoading, userId }: IDiagramPro
         <>
             <ResponsiveContainer width="100%" height={500}>
                 {isLoading ? <LoadingUi /> :
-                    <AreaChart data={dataDiagram} margin={{ top: 20, right: 30, left: 50, bottom: 0 }}>
+                    <AreaChart data={dataDiagram} margin={{ top: 20, right: 30, left: 50, bottom: 20 }}>
                         <defs>
                             <linearGradient id="colorExpense" x1="0" y1="0" x2="0" y2="1">
                                 <stop offset="0%" stopColor="#c28794" stopOpacity={0.7} />

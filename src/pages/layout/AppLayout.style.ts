@@ -15,7 +15,7 @@ export const ContentContainer = styled.div`
 `;
 
 const Section = styled.section`
-    background: ${(props) => props.theme.background2};
+    background: ${(props) => props.theme.background};
     height: calc(100vh - 50px);
     transition: all 300ms;
     padding: 0;

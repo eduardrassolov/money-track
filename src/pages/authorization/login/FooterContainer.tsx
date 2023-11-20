@@ -33,7 +33,7 @@ export default function FooterContainer() {
     return (
         <>
             <BottomText>
-                <span>Don't have acount? </span>
+                <span>Don't have acount?</span>
                 <StyledLink to={ROUTES.SIGN_UP}>Sign Up</StyledLink>
                 <span>or</span>
 

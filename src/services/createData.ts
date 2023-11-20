@@ -7,6 +7,7 @@ interface IRate {
 
 //TODO fix any
 export default function convertToOneCurrency(transactions: ITransaction[] | undefined, currency: any): ITransaction[] {
+    console.log(transactions, currency);
     if (!transactions || !currency) {
         return [];
     }
