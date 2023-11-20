@@ -7,7 +7,6 @@ import convertToOneCurrency from "../../services/createData";
 import { ICurrency } from "../../utils/hooks/useCurrency";
 import { devices } from "../../config/breakPoints";
 
-
 interface IPieDiagram {
     label: string;
     transactions: ITransaction[];
@@ -31,13 +30,17 @@ const StyledContainer = styled.div`
 
 export default function PieItem({ label, transactions, currency }: IPieDiagram) {
     const convertedTransactions = convertToOneCurrency(transactions, currency);
-    const data = getDataSummmary(convertedTransactions)
+    const data = getDataSummmary(convertedTransactions);
 
     return (
-        <StyledContainer>
-            <Header text={label} />
-            <CategoryChart data={data} />
-        </StyledContainer>
+        <>
+            {!data.length ? "" :
+                <StyledContainer>
+                    <Header text={label} />
+                    <CategoryChart data={data} />
+                </StyledContainer>
+            }
+        </>
     )
 }
 

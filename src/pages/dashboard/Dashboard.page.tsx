@@ -1,4 +1,3 @@
-
 import styled from "styled-components";
 import { useQuery } from "@tanstack/react-query";
 import { useUser } from "../../utils/hooks/useUser.tsx";
@@ -11,8 +10,6 @@ import DateFilter from "../../components/filterDate/FilterDate.tsx";
 import PieView from "./PieView.tsx";
 import { devices } from "../../config/breakPoints.ts";
 import { useUserSettings } from "../../utils/hooks/useUserSettings.tsx";
-
-
 
 const Div = styled.div`
   display: flex;
@@ -40,9 +37,9 @@ const Container = styled.div`
 
 const DateFilterContainer = styled.div`
   margin: 0;
-@media only screen and (min-width: ${devices.md}px){
-  margin: 0 2rem 0 auto;
-}
+  @media only screen and (min-width: ${devices.md}px){
+    margin: 0 2rem 0 auto;
+  }
 `
 
 const Main = styled.main`
@@ -69,8 +66,6 @@ export default function Dashboard() {
   }
   const { id: userId } = user;
 
-  // const { defaultCurrency } = useCurrency(currency);
-
   const [from, to] = useBoundStore(state => state.range);
 
   const { data: transactions, isLoading } = useQuery(
@@ -83,10 +78,6 @@ export default function Dashboard() {
 
   const { userSettings } = useUserSettings(userId);
 
-  console.log("test", userSettings);
-  if (!userSettings)
-    return;
-
   return (
     <Main>
       <Container>
@@ -97,11 +88,12 @@ export default function Dashboard() {
           </DateFilterContainer>
         </Div>
 
-        <Diagram transactions={transactions} userId={userId} isLoading={isLoading} />
+        {!transactions ? "" : <Diagram transactions={transactions} userId={userId} isLoading={isLoading} />}
       </Container>
 
       {/* @ts-ignore */}
-      <PieView user={user} currency={userSettings.defaultCurrency} />
+      {!userSettings ? "" : <PieView user={user} currency={userSettings.defaultCurrency} />}
+
     </Main >
   )
 }

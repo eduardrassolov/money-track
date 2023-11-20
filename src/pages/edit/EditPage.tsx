@@ -1,26 +1,27 @@
-import { useLoaderData, useNavigate } from "react-router-dom"
-import { FormFooter, FormGroup } from "../../components/newTransaction/FormTransaction.style";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { QUERY_KEY } from "../../config/queryClientKeys";
 import { useQuery } from "@tanstack/react-query";
+import { yupResolver } from "@hookform/resolvers/yup";
+import React, { useState } from "react";
+import { format } from "date-fns";
+
+import { FormFooter, FormGroup } from "../../components/newTransaction/FormTransaction.style";
+import { QUERY_KEY } from "../../config/queryClientKeys";
 import { apiGetCategories, apiGetUserCategory } from "../../services/api/apiGetCategory";
 import useEdit from "./useEdit";
 import { queryClient } from "../../main";
 import { GetAllTransactionsDTO } from "../../services/api/dto/getTransactions.dto";
 import Input from "../../components/input/Input";
 import { Container, SectionFull } from "../settings/Settings.page";
-import { yupResolver } from "@hookform/resolvers/yup";
 import DropDown from "../../components/dropDown/DropDown";
 import { useUser } from "../../utils/hooks/useUser";
-import React, { useState } from "react";
-import { format } from "date-fns";
 import { StyledSelect } from "../../components/dropDown/Select";
 import apiGetCurrency from "../../services/api/apiGetCurrency";
 import { newTransactionSchema } from "../../components/newTransaction/newTrasactionValidation";
 import { PrimaryBtn, SecondaryBtn } from "../../styles/Button.style";
 import ErrorLabel from "../../components/error/ErrorLabel";
 import { Header } from "../../ui/header/Header";
-import dayjs from "dayjs";
 
 export default function EditPage() {
     const [data] = useLoaderData() as Array<GetAllTransactionsDTO>;
@@ -57,9 +58,6 @@ export default function EditPage() {
 
     //TODO fix any
     const onSubmit: SubmitHandler<any> = async ({ description, amount, completed_at, currency }) => {
-
-        console.log(currency);
-        console.log("curr", updatedCurrency);
         if (!description.trim() || !amount || !completed_at || !updatedCurrency)
             return;
 

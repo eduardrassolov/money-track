@@ -41,7 +41,6 @@ const StyledItem = styled(NavLink)`
 `
 
 const Text = styled.span`
-
 `
 
 export const logout = async () => {

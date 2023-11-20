@@ -1,7 +1,7 @@
-
-import Input from '../../../components/input/Input';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+
+import Input from '../../../components/input/Input';
 import { useLogin } from './useLogin';
 import AnimatedContainer from '../../../components/animation/AnimatedContainer';
 import { slideRight } from '../../../config/animationCfg';
@@ -10,14 +10,13 @@ import { TLogin } from './login.type';
 import HeaderText from '../../../components/Header/HeaderText';
 import ErrorLabel from '../../../components/error/ErrorLabel';
 import FooterContainer from './FooterContainer';
-import { schema } from './schema';
+import { schema } from './login.schema';
 import { Form, Group } from '../Authorizations.style';
-
 
 export default function LogIn() {
     const { login, isLoading } = useLogin();
 
-    const { register, handleSubmit, formState: { errors } } = useForm<TLogin>({ resolver: yupResolver(schema), defaultValues: { email: "test@test.com", password: "test" } });
+    const { register, handleSubmit, formState: { errors } } = useForm<TLogin>({ resolver: yupResolver(schema) });
 
     const onSubmit: SubmitHandler<TLogin> = (data) => login(data);
 

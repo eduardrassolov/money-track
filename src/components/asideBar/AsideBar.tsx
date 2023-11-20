@@ -1,8 +1,8 @@
 import styled from "styled-components";
+import { HiMiniArrowsUpDown, HiOutlineChartPie, HiOutlineCreditCard, HiOutlineShoppingBag } from 'react-icons/hi2';
+
 import { asideMenuList } from "../../config/asideMenuList";
 import AsideItem from "../aside/AsideItem";
-
-import { HiMiniArrowsUpDown, HiOutlineChartPie, HiOutlineCreditCard, HiOutlineShoppingBag } from 'react-icons/hi2';
 import { devices } from "../../config/breakPoints";
 
 const StyledAside = styled.aside<{ $isOpen: boolean }>`
@@ -38,6 +38,10 @@ const Background = styled.div<{ $isOpen: boolean }>`
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(1px);
+
+    @media only screen and (min-width: ${devices.sm}px){
+        display: none;
+    }
     
 `
 
@@ -54,6 +58,7 @@ export default function AsideBar({ isOpen = false, onClose }: IAsideBar) {
     return (
         <>
             <Background $isOpen={isOpen} onClick={onClose} />
+
             <StyledAside $isOpen={isOpen}>
                 <Ul>
                     {asideMenuList.map((item, index) =>

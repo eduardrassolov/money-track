@@ -29,7 +29,6 @@ const Div = styled.div`
 `
 
 export default function PieView({ user, currency }: { user: User, currency: ICurrency }) {
-
     const [from, to] = useBoundStore(state => state.range);
 
     const { data: expenses, isLoading: isExpenseLoading } = useQuery(
