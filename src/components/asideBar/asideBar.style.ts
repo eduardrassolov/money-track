@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { devices } from "../../config/breakPoints";
-import { de } from "date-fns/locale";
 
 export const StyledAside = styled.aside<{ $isOpen: boolean }>`
     background: ${(props) => props.theme.background};

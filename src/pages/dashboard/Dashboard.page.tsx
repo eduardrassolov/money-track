@@ -34,15 +34,17 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 1rem 0 0;
+
   padding: 1rem 0;
 `
 
 const DateFilterContainer = styled.div`
-  margin: 0;
-  @media only screen and (min-width: ${devices.md}px){
-    margin: 0 2rem 0 auto;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: end;
+  justify-content: flex-end;
+  margin: 2rem 0 0 0;
 `
 
 const Main = styled.main`
@@ -83,14 +85,18 @@ export default function Dashboard() {
 
   return (
     <Main>
-      <StatList transactions={transactions} user={user} currency={userSettings?.defaultCurrency} />
+      <DateFilterContainer>
+        <DateFilter />
+      </DateFilterContainer>
+
+
+      {!userSettings?.defaultCurrency ? "" : <StatList user={user} currency={userSettings.defaultCurrency} />}
+
 
       <Container>
         <Div>
           <h1>Diagram</h1>
-          <DateFilterContainer>
-            <DateFilter />
-          </DateFilterContainer>
+
         </Div>
 
         {!transactions ? "" : <Diagram transactions={transactions} userId={userId} isLoading={isLoading} />}
