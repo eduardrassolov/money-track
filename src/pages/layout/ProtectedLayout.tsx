@@ -1,9 +1,9 @@
 import React, { FC, Suspense, useEffect } from "react";
-import { useUser } from "../../utils/hooks/useUser";
-import { ThemeProvider } from "styled-components";
-import LoadingUi from "../../components/spinner/LoadingUi";
-
 import { useNavigate } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+
+import { useUser } from "../../utils/hooks/useUser";
+import LoadingUi from "../../components/spinner/LoadingUi";
 import { ROUTES } from "../../config/routes";
 import { useBoundStore } from "../../store/store";
 interface IProtected {

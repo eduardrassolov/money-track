@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
@@ -17,59 +16,16 @@ import { searchTransactionsByMask } from "../../utils/helpers/searchTransactions
 import { DEFAULT_ITEMS_PER_PAGE } from "../../config/paginationItems";
 import usePagination from "../../utils/hooks/usePagination";
 import DateFilter from "../dateRangePicker/DateFilter";
-import { devices } from "../../config/breakPoints";
 import apiDeleteTransaction from "../../services/api/deleteTransaction";
 import { CreateNewTransactionForm } from "../newTransaction/CreateNewTransaction";
 import { QUERY_KEY } from "../../config/queryClientKeys";
 import TYPES_TRANSACTION from "../../config/typeTransactions";
+import { Header, Main, StyledHeaderContainer, Text } from "./transactionView.style";
 
 interface ITransactionView {
     queryKey: string;
     dataLoader: (userId: string, filter: Filter, sortBy: SortBy, from: string, to: string) => Promise<ITransaction[]>;
 }
-
-const Header = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid ${(props) => props.theme.border};
-
-    @media only screen and (min-width: ${devices.sm}px) {
-        justify-content: space-between;
-        flex-direction: row;
-    }
-`;
-
-export const Text = styled.p`
-    font-size: 1rem;
-    margin: 0;
-    padding: 0;
-    color: ${(props) => props.theme.text};
-`;
-
-const Main = styled.main`
-    display: flex;
-    gap: 1rem;
-    max-width: 800px;
-    margin: 0 auto;
-    height: 100%;
-    /* @media only screen and (min-width: ${devices.sm}px) {
-        display: grid;
-        grid-template-columns: minmax(350px, 700px) minmax(200px, 400px);
-        height: 100%;
-        gap: 1rem;
-    } */
-`;
-
-const StyledHeaderContainer = styled.header`
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-`;
 
 export default function TransactionView({ queryKey, dataLoader }: ITransactionView) {
     const { user } = useUser();

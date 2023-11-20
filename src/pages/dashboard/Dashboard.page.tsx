@@ -10,6 +10,7 @@ import DateFilter from "../../components/filterDate/FilterDate.tsx";
 import PieView from "./PieView.tsx";
 import { devices } from "../../config/breakPoints.ts";
 import { useUserSettings } from "../../utils/hooks/useUserSettings.tsx";
+import StatList from "./statsBadge/StatList.tsx";
 
 const Div = styled.div`
   display: flex;
@@ -28,11 +29,13 @@ const Div = styled.div`
 
 const Container = styled.div`
   background: ${props => props.theme.background};
-  border-radius: 0 0 15px 15px;
+  border-radius: 15px;
   border: 1px solid ${props => props.theme.border};
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 1rem 0 0;
+  padding: 1rem 0;
 `
 
 const DateFilterContainer = styled.div`
@@ -46,7 +49,7 @@ const Main = styled.main`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
   height: 93vh;
   overflow: scroll;
   max-width: 1200px;
@@ -80,6 +83,8 @@ export default function Dashboard() {
 
   return (
     <Main>
+      <StatList transactions={transactions} user={user} currency={userSettings?.defaultCurrency} />
+
       <Container>
         <Div>
           <h1>Diagram</h1>

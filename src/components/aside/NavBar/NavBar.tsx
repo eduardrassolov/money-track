@@ -1,6 +1,5 @@
 import { styled } from "styled-components";
 import MenuDropDown from "./menuDropDown/MenuDropDown";
-import { devices } from "../../../config/breakPoints";
 import Search from "../../search/Search";
 import BurgerMenu from "../../burger/BurgerMenu";
 
@@ -15,11 +14,7 @@ const Nav = styled.nav`
     padding: 0 1rem;
     height: 50px;
     gap: 1rem;
-
-    @media only screen and (min-width: ${devices.md}px){
-    }
 `
-
 
 export interface IBar {
     isOpen: boolean,
@@ -29,10 +24,9 @@ export interface IBar {
 export function NavBar({ isOpen, onBurgerClick }: IBar) {
     return (
         <Nav>
-            <Search />
             <BurgerMenu isOpen={isOpen} onClose={onBurgerClick} />
 
-            {/* <NavMenu isOpen={isBurgerOpen} onCloseBurger={onClose} /> */}
+            <Search />
 
             <MenuDropDown />
         </Nav >

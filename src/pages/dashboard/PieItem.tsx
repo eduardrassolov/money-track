@@ -27,7 +27,6 @@ const StyledContainer = styled.div`
     }
 `
 
-
 export default function PieItem({ label, transactions, currency }: IPieDiagram) {
     const convertedTransactions = convertToOneCurrency(transactions, currency);
     const data = getDataSummmary(convertedTransactions);
