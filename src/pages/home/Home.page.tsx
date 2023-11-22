@@ -1,21 +1,12 @@
-import { ThemeProvider, styled } from "styled-components";
-import HeaderSection from "./HeaderSection/HeaderSection";
-import NavBarHome from "./NavBar/NavBarHome";
-import Burger from "./NavBar/Burger";
+import { ThemeProvider } from "styled-components";
+import HeaderSection from "./headerSection/HeaderSection";
+import NavBarHome from "./navBar/NavBarHome";
 import useBurgerMenu from "../../components/aside/NavBar/useBurger";
-import Footer from "./Footer/Footer";
+import Footer from "./footer/Footer";
 import useTheme from "../../utils/hooks/useTheme";
-import FeaturesSection from "./Features/FeaturesSection";
-
-const Container = styled.div`
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    color: ${(props) => props.theme.text};
-    transition: all 300ms;
-`
+import FeaturesSection from "./features/FeaturesSection";
+import { Container } from "./Home.page.style";
+import { Background } from "../../components/asideBar/asideBar.style";
 
 export default function HomePage() {
     const { isBurgerOpen, handleBurger } = useBurgerMenu();
@@ -24,9 +15,8 @@ export default function HomePage() {
     return (
         <ThemeProvider theme={theme}>
             <Container>
-                <NavBarHome isOpen={isBurgerOpen} onClose={handleBurger} />
 
-                <Burger isOpen={isBurgerOpen} onCLose={handleBurger} />
+                <NavBarHome isOpen={isBurgerOpen} onClose={handleBurger} />
 
                 <HeaderSection id={"header"} />
 
