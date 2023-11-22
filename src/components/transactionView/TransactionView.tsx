@@ -29,11 +29,6 @@ interface ITransactionView {
 
 export default function TransactionView({ queryKey, dataLoader }: ITransactionView) {
     const { user } = useUser();
-    if (!user) {
-        return null;
-    }
-
-    const { id: userId } = user;
     const [from, to] = useBoundStore((state) => state.range);
     const mask = useBoundStore((state) => state.search);
 
@@ -41,6 +36,13 @@ export default function TransactionView({ queryKey, dataLoader }: ITransactionVi
     const { filter } = useFilter();
     const { currPage } = usePagination();
 
+    const queryClient = useQueryClient();
+
+    if (!user) {
+        return null;
+    }
+
+    const { id: userId } = user;
 
     const { data: filteredTransactionData, isLoading } = useQuery({
         queryKey: [userId, queryKey, from, to, sortBy],
@@ -51,7 +53,6 @@ export default function TransactionView({ queryKey, dataLoader }: ITransactionVi
     const numberTransactionsPerPage = Number(localStorage.getItem("transactionPerPage")) || DEFAULT_ITEMS_PER_PAGE;
     const trasactions = transactionsWithSearchMask?.slice((currPage - 1) * numberTransactionsPerPage, currPage * numberTransactionsPerPage);
 
-    const queryClient = useQueryClient();
     const { mutate: deleteTransaction } = useMutation({ mutationFn: apiDeleteTransaction, onSuccess: succesHandle });
     function succesHandle() {
         toast.success('Successfully deleted.');

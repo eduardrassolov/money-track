@@ -27,6 +27,7 @@ export default function TransactionsList({ transactions, onDeleteTransaction }: 
                     onEdit={() => handleEdit(transaction.id)}
                     index={index}
                 />)}
+
         </List>
     )
 }

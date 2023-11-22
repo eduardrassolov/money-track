@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useQuery } from "@tanstack/react-query";
+
 import { useUser } from "../../utils/hooks/useUser.tsx";
 import { SortBy } from "../../types/sortBy.type.ts";
 import { QUERY_KEY } from "../../config/queryClientKeys.ts";

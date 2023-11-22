@@ -14,11 +14,13 @@ const ProtectedLayout: FC<IProtected> = ({ children }) => {
     const { isAuthenticated, isLoading } = useUser();
     const theme = useBoundStore(state => state.theme);
     const navigate = useNavigate();
+    console.log("isAuth", isAuthenticated);
 
     useEffect(function () {
         if (!isAuthenticated && !isLoading) {
             navigate(ROUTES.LOGIN);
         }
+
     }, [isAuthenticated, isLoading, navigate]);
 
 
