@@ -6,7 +6,6 @@ import Footer from "./footer/Footer";
 import useTheme from "../../utils/hooks/useTheme";
 import FeaturesSection from "./features/FeaturesSection";
 import { Container } from "./Home.page.style";
-import { Background } from "../../components/asideBar/asideBar.style";
 
 export default function HomePage() {
     const { isBurgerOpen, handleBurger } = useBurgerMenu();
