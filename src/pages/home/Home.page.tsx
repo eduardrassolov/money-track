@@ -1,7 +1,7 @@
 import { ThemeProvider } from "styled-components";
 import HeaderSection from "./headerSection/HeaderSection";
 import NavBarHome from "./navBar/NavBarHome";
-import useBurgerMenu from "../../components/aside/NavBar/useBurger";
+import useBurgerMenu from "../../components/navBarApp/useBurger";
 import Footer from "./footer/Footer";
 import useTheme from "../../utils/hooks/useTheme";
 import FeaturesSection from "./features/FeaturesSection";

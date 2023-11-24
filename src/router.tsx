@@ -12,9 +12,7 @@ import LogIn from "./pages/authorization/login/LogIn.tsx";
 import SignUp from "./pages/authorization/signUp/SignUp.tsx";
 import { ROUTES } from "./config/routes.ts";
 import { QUERY_KEY } from "./config/queryClientKeys.ts";
-import { loaderExpenses } from "./pages/expenses/loader.ts";
-import { loaderIncomes } from "./pages/income/loader.ts";
-import { loaderTransactions } from "./pages/transactions/loader.ts";
+
 
 const AppLayout = lazy(() => import("./pages/layout/AppLayout.tsx"));
 const Dashboard = lazy(() => import("./pages/dashboard/Dashboard.page.tsx"));
@@ -54,7 +52,6 @@ const routes: RouteObject[] = [
                     <Suspense fallback={<LoadingUi />}>
                         <TransactionView
                             queryKey={QUERY_KEY.TRANSACTIONS}
-                            dataLoader={loaderTransactions}
                         />
                     </Suspense>,
             },
@@ -72,7 +69,6 @@ const routes: RouteObject[] = [
                     <Suspense fallback={<LoadingUi />}>
                         <TransactionView
                             queryKey={QUERY_KEY.INCOMES}
-                            dataLoader={loaderIncomes}
                         />
                     </Suspense>
             },
@@ -86,8 +82,7 @@ const routes: RouteObject[] = [
                 element:
                     <Suspense fallback={<LoadingUi />}>
                         <TransactionView
-                            queryKey={QUERY_KEY.EXPENSES}
-                            dataLoader={loaderExpenses} />
+                            queryKey={QUERY_KEY.EXPENSES} />
                     </Suspense >,
                 index: true
             },

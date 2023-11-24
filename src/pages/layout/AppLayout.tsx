@@ -4,8 +4,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { ContentContainer, Section, StyledLayout } from './AppLayout.style.ts';
 import AsideBar from '../../components/asideBar/AsideBar.tsx';
-import { NavBar } from '../../components/aside/NavBar/NavBar.tsx';
-import useBurgerMenu from '../../components/aside/NavBar/useBurger.tsx';
+import { NavBar } from '../../components/navBarApp/NavBar.tsx';
+import useBurgerMenu from '../../components/navBarApp/useBurger.tsx';
 
 export default function AppLayout() {
     const { isBurgerOpen, handleBurger } = useBurgerMenu();

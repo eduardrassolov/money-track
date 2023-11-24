@@ -1,5 +1,3 @@
-import { QUERY_KEY } from "../../config/queryClientKeys";
-import TYPES_TRANSACTION from "../../config/typeTransactions";
 import { ITransaction } from "../../interface/ITransactions";
 
 import supabase from "../../services/supabase";
@@ -19,25 +17,12 @@ export interface ILoaderTransaction {
 }
 export const defaultSort: SortBy = { field: "completed_at", direction: "desc" };
 
-function getTransactionType(type: string): number {
-    if (type === QUERY_KEY.EXPENSES) {
-        return TYPES_TRANSACTION.EXPENSE;
-    } else if (type === QUERY_KEY.INCOMES) {
-        return TYPES_TRANSACTION.INCOME;
-    } else {
-        return 0;
-    }
-}
-
-export async function loadTransactions(userId: string, transactionType: string, sortBy: SortBy = { ...defaultSort }) {
-    const type = getTransactionType(transactionType);
-
+export async function apiLoadTransactions(userId: string, sortBy: SortBy = { ...defaultSort }) {
     try {
         let query = supabase
             .from("transactions")
             .select(SELECT.FULL_TRANSACTION_INFO)
             .eq("profile_id", userId)
-            .eq("Category.type.id", type)
             .order(sortBy.field, { ascending: sortBy.direction === "asc" ? true : false });
 
         const { data } = await query;

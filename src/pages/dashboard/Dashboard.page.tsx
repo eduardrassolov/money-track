@@ -1,111 +1,59 @@
-import styled from "styled-components";
 import { useQuery } from "@tanstack/react-query";
+import dayjs from "dayjs";
+import isBetween from "dayjs/plugin/isBetween";
 
 import { useUser } from "../../utils/hooks/useUser.tsx";
 import { SortBy } from "../../types/sortBy.type.ts";
 import { QUERY_KEY } from "../../config/queryClientKeys.ts";
-import { loaderTransactions } from "../transactions/loader.ts";
 import { useBoundStore } from "../../store/store.tsx";
 import Diagram from "./diagram/Diagram.tsx";
-import DateFilter from "../../components/filterDate/FilterDate.tsx";
-import PieView from "./PieView.tsx";
-import { devices } from "../../config/breakPoints.ts";
+import DateFilter from "./periodInterval/PeriodInterval.tsx";
+import PieView from "./pie/PieView.tsx";
 import { useUserSettings } from "../../utils/hooks/useUserSettings.tsx";
 import StatList from "./statsBadge/StatList.tsx";
+import { apiLoadTransactions } from "./apiLoadTransactions.ts";
+import { DateFilterContainer, Main } from "./Dashboard.page.style.ts";
 
-const Div = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-
-  h1{
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: ${props => props.theme.text}
-  }
-`
-
-const Container = styled.div`
-  background: ${props => props.theme.background};
-  border-radius: 15px;
-  border: 1px solid ${props => props.theme.border};
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  padding: 1rem 0;
-`
-
-const DateFilterContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: end;
-  justify-content: flex-end;
-  margin: 2rem 0 0 0;
-`
-
-const Main = styled.main`
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  height: 93vh;
-  overflow: scroll;
-  max-width: 1200px;
-  width: 100%;
-
-  @media only screen and (min-width: ${devices.md}px){
-    width: 95%;
-  }
-`
-
-const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
+const sortBy: SortBy = { field: "completed_at", direction: "asc" };
+dayjs.extend(isBetween);
 
 export default function Dashboard() {
-  const { user } = useUser();
-  if (!user) {
-    return null;
-  }
-  const { id: userId } = user;
+    const { user } = useUser();
+    if (!user) {
+        return null;
+    }
+    const { id: userId } = user;
 
-  const [from, to] = useBoundStore(state => state.range);
+    const [from, to] = useBoundStore((state) => state.range);
 
-  const { data: transactions, isLoading } = useQuery(
-    {
-      queryKey: [userId, QUERY_KEY.TRANSACTIONS, from, to, sortBy],
-      queryFn: () => {
-        return loaderTransactions(userId, null, sortBy, from, to);
-      }
+    const { data: transactions, isLoading } = useQuery({
+        queryKey: [userId, QUERY_KEY.TRANSACTIONS, sortBy],
+        queryFn: () => {
+            return apiLoadTransactions(userId, sortBy);
+        },
     });
 
-  const { userSettings } = useUserSettings(userId);
+    const { userSettings } = useUserSettings(userId);
 
-  return (
-    <Main>
-      <DateFilterContainer>
-        <DateFilter />
-      </DateFilterContainer>
+    const filteredTransactionByRange = transactions?.filter((transaction) => {
+        const date = dayjs(transaction.completedAt).format("YYYY-MM-DD");
+        if (dayjs(date).isBetween(from, to, "day", "[]")) {
+            return transaction;
+        }
+    });
 
+    return (
+        <Main>
+            <DateFilterContainer>
+                <DateFilter />
+            </DateFilterContainer>
 
-      {!userSettings?.defaultCurrency ? "" : <StatList user={user} currency={userSettings.defaultCurrency} />}
+            {!userSettings?.defaultCurrency ? "" : <StatList user={user} currency={userSettings.defaultCurrency} />}
 
+            {!filteredTransactionByRange ? "" : <Diagram transactions={filteredTransactionByRange} userId={userId} isLoading={isLoading} />}
 
-      <Container>
-        <Div>
-          <h1>Diagram</h1>
-
-        </Div>
-
-        {!transactions ? "" : <Diagram transactions={transactions} userId={userId} isLoading={isLoading} />}
-      </Container>
-
-      {/* @ts-ignore */}
-      {!userSettings ? "" : <PieView user={user} currency={userSettings.defaultCurrency} />}
-
-    </Main >
-  )
+            {/* @ts-ignore */}
+            {!userSettings ? "" : <PieView user={user} currency={userSettings.defaultCurrency} />}
+        </Main >
+    );
 }

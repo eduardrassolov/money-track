@@ -10,6 +10,8 @@ import LoadingUi from '../../../components/spinner/LoadingUi';
 import convertToOneCurrency from '../../../services/createData';
 import { useBoundStore } from '../../../store/store';
 import { useUserSettings } from "../../../utils/hooks/useUserSettings";
+import { Container } from "../Dashboard.page.style";
+import { Div } from "./Diagram.style";
 
 interface IDiagramProps {
     transactions: Array<ITransaction> | undefined;
@@ -31,45 +33,52 @@ export default function Diagram({ transactions, isLoading, userId }: IDiagramPro
 
     return (
         <>
-            <ResponsiveContainer width="100%" height={500}>
-                {isLoading ? <LoadingUi /> :
-                    <AreaChart data={dataDiagram} margin={{ top: 20, right: 30, left: 50, bottom: 20 }}>
-                        <defs>
-                            <linearGradient id="colorExpense" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stopColor="#c28794" stopOpacity={0.7} />
-                                <stop offset="75%" stopColor="#c28794" stopOpacity={0.05} />
-                            </linearGradient>
+            {!transactions?.length ? "" :
+                <Container>
+                    <Div>
+                        <h1>Diagram</h1>
+                    </Div>
 
-                            <linearGradient id="colorIncome" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stopColor="#5cc49b" stopOpacity={0.7} />
-                                <stop offset="75%" stopColor="#5cc49b" stopOpacity={0.05} />
-                            </linearGradient>
-                        </defs>
-                        <Legend />
+                    <ResponsiveContainer width="100%" height={500}>
+                        {isLoading ? <LoadingUi /> :
+                            <AreaChart data={dataDiagram} margin={{ top: 20, right: 30, left: 50, bottom: 20 }}>
+                                <defs>
+                                    <linearGradient id="colorExpense" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stopColor="#c28794" stopOpacity={0.7} />
+                                        <stop offset="75%" stopColor="#c28794" stopOpacity={0.05} />
+                                    </linearGradient>
 
-                        <Area dataKey="Income" stroke={"#72cb72"} fill={"url(#colorIncome)"} dot={true} />
-                        <Area dataKey="Expense" stroke={"#f5d4d5"} fill={"url(#colorExpense)"} dot={true} animationDuration={2000} />
+                                    <linearGradient id="colorIncome" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stopColor="#5cc49b" stopOpacity={0.7} />
+                                        <stop offset="75%" stopColor="#5cc49b" stopOpacity={0.05} />
+                                    </linearGradient>
+                                </defs>
+                                <Legend />
 
-                        <XAxis
-                            dataKey="completedAt"
-                            axisLine={false}
-                            tickLine={false}
-                            tickCount={5}
-                            tickFormatter={(date) => {
-                                const formatLine = from === to ? "HH:mm" : "DD MMM";
-                                return dayjs(date).format(formatLine);
-                            }}
-                        />
-                        <YAxis tickLine={false} axisLine={false} tickCount={8} tickFormatter={(amount) => `${symbol}${amount}`} />
+                                <Area dataKey="Income" stroke={"#72cb72"} fill={"url(#colorIncome)"} dot={true} />
+                                <Area dataKey="Expense" stroke={"#f5d4d5"} fill={"url(#colorExpense)"} dot={true} animationDuration={2000} />
 
-                        <Tooltip content={<CustomTooltip currency={currency} />} />
-                        <CartesianGrid strokeDasharray="0.5" stroke="gray" opacity={0.2} vertical={false} />
+                                <XAxis
+                                    dataKey="completedAt"
+                                    axisLine={false}
+                                    tickLine={false}
+                                    tickCount={5}
+                                    tickFormatter={(date) => {
+                                        const formatLine = from === to ? "HH:mm" : "DD MMM";
+                                        return dayjs(date).format(formatLine);
+                                    }}
+                                />
+                                <YAxis tickLine={false} axisLine={false} tickCount={8} tickFormatter={(amount) => `${symbol}${amount}`} />
 
-                    </AreaChart>
-                }
-            </ResponsiveContainer>
+                                <Tooltip content={<CustomTooltip currency={currency} />} />
+                                <CartesianGrid strokeDasharray="0.5" stroke="gray" opacity={0.2} vertical={false} />
+
+                            </AreaChart>
+                        }
+                    </ResponsiveContainer>
+                </Container>
+            }
         </>
-
     )
 }
 

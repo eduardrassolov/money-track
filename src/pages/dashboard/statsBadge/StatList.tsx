@@ -1,15 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
-import { loaderExpenses } from '../../expenses/loader';
-import { loaderIncomes } from '../../income/loader';
-import TYPES_TRANSACTION from '../../../config/typeTransactions';
-import { useBoundStore } from '../../../store/store';
-import { sortBy } from '../PieView';
+import dayjs from 'dayjs';
+import isBetween from "dayjs/plugin/isBetween";
 import styled from 'styled-components';
-import StatItem from './StatItem';
 import { HiOutlineCreditCard, HiOutlineShoppingBag } from 'react-icons/hi2';
 import { User } from '@supabase/supabase-js';
-import { ICurrency } from '../../../utils/hooks/useCurrency';
 
+import TYPES_TRANSACTION from '../../../config/typeTransactions';
+import { useBoundStore } from '../../../store/store';
+import { sortBy } from '../pie/PieView';
+import StatItem from './StatItem';
+import { ICurrency } from '../../../utils/hooks/useCurrency';
+import { loadTransactions } from '../../../components/transactionView/loadTransactions';
+import { QUERY_KEY } from '../../../config/queryClientKeys';
+
+dayjs.extend(isBetween);
 
 const StyledDiv = styled.div`
     width: 100%;
@@ -27,23 +31,37 @@ export default function StatList({ user, currency }: IStatList) {
 
     const { data: expenses } = useQuery(
         {
-            queryKey: [user?.id, TYPES_TRANSACTION.EXPENSE, from, to, sortBy],
+            queryKey: [user?.id, TYPES_TRANSACTION.EXPENSE, sortBy],
             queryFn: () => {
-                return loaderExpenses(user?.id, null, sortBy, from, to);
+                return loadTransactions(user?.id, QUERY_KEY.EXPENSES, sortBy);
             }
         });
     const { data: incomes } = useQuery(
         {
-            queryKey: [user?.id, TYPES_TRANSACTION.INCOME, from, to, sortBy],
+            queryKey: [user?.id, TYPES_TRANSACTION.INCOME, sortBy],
             queryFn: () => {
-                return loaderIncomes(user?.id, null, sortBy, from, to);
+                return loadTransactions(user?.id, QUERY_KEY.INCOMES, sortBy);
             }
         });
 
+    const expensesByRange = expenses?.filter((transaction) => {
+        const date = dayjs(transaction.completedAt).format("YYYY-MM-DD");
+        if (dayjs(date).isBetween(from, to, "day", "[]")) {
+            return transaction;
+        }
+    });
+    const incomesByRange = incomes?.filter((transaction) => {
+        const date = dayjs(transaction.completedAt).format("YYYY-MM-DD");
+        if (dayjs(date).isBetween(from, to, "day", "[]")) {
+            return transaction;
+        }
+    });
+
+
     return (
         <StyledDiv>
-            {!expenses ? "" : <StatItem transaction={expenses} currency={currency} color={"#c28794"} label={"Expenses:"} icon={<HiOutlineShoppingBag size={"2.2rem"} />} />}
-            {!incomes ? "" : <StatItem transaction={incomes} currency={currency} color={"#5cc49b"} label={"Incomes:"} icon={<HiOutlineCreditCard size={"2.2rem"} />} />}
+            <StatItem transaction={expensesByRange} currency={currency} color={"#c28794"} label={"Expenses:"} icon={<HiOutlineShoppingBag size={"2.2rem"} />} />
+            <StatItem transaction={incomesByRange} currency={currency} color={"#5cc49b"} label={"Incomes:"} icon={<HiOutlineCreditCard size={"2.2rem"} />} />
         </StyledDiv>
     )
 }

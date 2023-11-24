@@ -8,7 +8,7 @@ function getSummaryTransaction(transaction: ITransaction[]) {
 }
 
 interface IStatItem {
-    transaction: ITransaction[];
+    transaction: ITransaction[] | undefined;
     currency: ICurrency;
     color: string,
     label: string,
@@ -54,6 +54,7 @@ export default function StatItem({ transaction, currency, color, label, icon }: 
                 <Title>{label}</Title>
                 <Amount $transctionType={color}>{formattedAmount}</Amount>
             </InfomationBlock>
+
         </StyledStat>
     )
 }

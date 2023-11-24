@@ -1,5 +1,5 @@
 import { ITransaction } from "../../interface/ITransactions"
-import TransactionCard from "../transactionCard/TransactionCard"
+import TransactionCard from "./transactionCard/TransactionCard"
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../config/routes";
