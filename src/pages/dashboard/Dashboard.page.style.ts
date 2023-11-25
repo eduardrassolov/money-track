@@ -45,6 +45,7 @@ export const Main = styled.main`
     overflow: scroll;
     max-width: 1200px;
     width: 100%;
+    padding: 0 1rem;
 
     @media only screen and (min-width: ${devices.md}px) {
         width: 95%;

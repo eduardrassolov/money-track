@@ -7,6 +7,7 @@ import Info from "./info/Info";
 import CategoryCard from "./category/CategoryCard";
 import Price from "./price/Price";
 import Operations from "./operations/Operations";
+import AnimatedContainer from "../../animation/AnimatedContainer";
 
 interface ITransactionProps {
     item: ITransaction;
@@ -23,18 +24,18 @@ export function TransactionCard({ item, onDelete, onEdit, index = 1 }: ITransact
     const formattedPrice = type.id === TYPES_TRANSACTION.EXPENSE ? theme.expensePrice : theme.incomePrice;
     // const typeTransaction = type.id === TYPES_TRANSACTION.EXPENSE ? "-" : "+";
     return (
-        // <AnimatedContainer duration={0.9} delay={0.1 * index} animateOnStart={true}>
-        <Card>
-            <IconCard />
+        <AnimatedContainer duration={0.9} delay={0.1 * index} animateOnStart={true}>
+            <Card>
+                <IconCard />
 
-            <Info description={description} time={completedAt} />
+                <Info description={description} time={completedAt} />
 
-            <CategoryCard text={category.name} />
+                <CategoryCard text={category.name} />
 
-            <Price amount={amount} currency={currency} colorTransaction={formattedPrice} />
+                <Price amount={amount} currency={currency} colorTransaction={formattedPrice} />
 
-            <Operations transactionId={id} onDelete={onDelete} onEdit={onEdit} />
-        </Card>
-        // </AnimatedContainer>
+                <Operations transactionId={id} onDelete={onDelete} onEdit={onEdit} />
+            </Card>
+        </AnimatedContainer>
     );
 }
