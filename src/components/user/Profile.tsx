@@ -2,9 +2,15 @@
 import { useUser } from '../../utils/hooks/useUser'
 import { styled } from 'styled-components'
 import Avatar from './Avatar'
+import { devices } from '../../config/breakPoints'
 
 const P = styled.p`
     overflow-wrap: break-word;
+    display: none;
+
+    @media only screen and (min-width: ${devices.sm}px){
+        display: flex;
+    }
 `
 const ProfileContainer = styled.div`
     display: flex;

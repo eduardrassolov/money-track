@@ -10,8 +10,6 @@ import { apiLogout } from '../../../services/api/apiUser';
 import AnimatedContainer from '../../animation/AnimatedContainer';
 import Profile from '../../user/Profile';
 
-
-
 const Trigger = styled(DropdownMenu.Trigger)`
     background: transparent;
     border: none;

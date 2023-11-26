@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import MenuDropDown from "./menuDropDown/MenuDropDown";
 import Search from "../search/Search";
 import BurgerMenu from "../burger/BurgerMenu";
+import { devices } from "../../config/breakPoints";
 
 const Nav = styled.nav`
     background: ${(props) => props.theme.background};
@@ -14,6 +15,11 @@ const Nav = styled.nav`
     padding: 0 1rem;
     height: 50px;
     gap: 1rem;
+    justify-content: space-between;
+
+    @media only screen and (min-width: ${devices.md}px) {
+        justify-content: end;
+    }
 `
 
 export interface IBar {
