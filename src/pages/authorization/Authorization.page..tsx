@@ -26,7 +26,6 @@ export default function AuthorizationLayout() {
                 <StyledContainer>
                     <Outlet />
                 </StyledContainer>
-
             </StyledAuthorization>
         </ThemeProvider >
     )
