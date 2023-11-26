@@ -1,17 +1,13 @@
-import { useEffect, useState } from "react";
-import { SearchInput } from "../input/Input";
-import { useBoundStore } from "../../store/store";
-import usePagination from "../pagination/usePagination";
+import { useState } from "react";
+import usePagination from "../../pagination/usePagination";
+import { useBoundStore } from "../../../store/store";
+import { SearchInput } from "./Search.style";
 
-//TODO check this component for refactoring
 export default function Search() {
     const [mask, setMask] = useState("");
     const { moveToPage } = usePagination();
-    const setSearch = useBoundStore((state) => state.setSearch);
 
-    useEffect(() => {
-        setSearch(mask);
-    }, [mask])
+    const setSearch = useBoundStore((state) => state.setSearch);
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setMask(() => e.target.value);
