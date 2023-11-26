@@ -3,7 +3,7 @@ import usePagination from "./usePagination";
 import { HiOutlineArrowSmallLeft, HiOutlineArrowSmallRight } from "react-icons/hi2";
 import scrollTop from "../../utils/helpers/scrollTop";
 import { useQuery } from "@tanstack/react-query";
-import { apiGetUserSettings } from "../../services/api/apiGetUserSettings";
+import { apiGetUserSettings } from "../../pages/settings/apiGetUserSettings";
 
 const PaginationContainer = styled.div`
     display: flex;

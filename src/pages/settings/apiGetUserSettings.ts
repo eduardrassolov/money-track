@@ -1,4 +1,4 @@
-import supabase from "../supabase";
+import supabase from "../../services/supabase";
 
 export interface ISettings {
     defaultCurrencyId?: string;
@@ -6,23 +6,29 @@ export interface ISettings {
 }
 
 export async function apiGetUserSettings(userId: string) {
-    const { data } = await supabase
+    const { data, error } = await supabase
         .from("Settings")
         .select("id, itemsPerPage, defaultCurrency:Currency!inner(id, name, symbol, shortName, code)")
         .eq("userId", userId)
         .single();
 
+    if (error) {
+        throw new Error(error.message);
+    }
+
     return data;
 }
 
 export async function apiUpdateUserSettings({ userId, settings }: { userId: string; settings: ISettings }) {
-    console.log("set", userId, settings);
     const { data, error } = await supabase
         .from("Settings")
         .update({ ...settings })
         .eq("userId", userId)
         .select();
 
-    if (error) throw new Error(error.message);
+    if (error) {
+        throw new Error(error.message);
+    }
+
     return data;
 }
