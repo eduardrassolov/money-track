@@ -18,6 +18,7 @@ export const StyledInput = styled.input`
         transition: all 0.3s ease-in-out;
     }
 `
+
 export const SearchInput = styled(StyledInput)`
     display: flex;
     box-sizing: border-box;

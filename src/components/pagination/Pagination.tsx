@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import usePagination from "../../utils/hooks/usePagination";
+import usePagination from "./usePagination";
 import { HiOutlineArrowSmallLeft, HiOutlineArrowSmallRight } from "react-icons/hi2";
 import scrollTop from "../../utils/helpers/scrollTop";
+import { useQuery } from "@tanstack/react-query";
+import { apiGetUserSettings } from "../../services/api/apiGetUserSettings";
 
 const PaginationContainer = styled.div`
     display: flex;
@@ -42,17 +44,16 @@ const PaginationButton = styled.button`
         }
 `
 interface IPagination {
+    transactionsPerPage: number,
     maxLength: number | undefined;
 }
 
-export default function Pagination({ maxLength }: IPagination) {
+export default function Pagination({ transactionsPerPage, maxLength }: IPagination) {
     const { currPage, moveToPage } = usePagination();
-    console.log("Total elements", maxLength);
 
     if (!maxLength)
         return null;
 
-    const transactionsPerPage = localStorage.getItem("transactionPerPage") || 10;
     const lastPage = Math.ceil(maxLength / Number(transactionsPerPage));
 
     const handlePrev = () => {
@@ -61,8 +62,8 @@ export default function Pagination({ maxLength }: IPagination) {
         if (currPage > 1) {
             moveToPage(currPage - 1);
         }
-
     }
+
     const handleNext = () => {
         //TODO fix this
         scrollTop();

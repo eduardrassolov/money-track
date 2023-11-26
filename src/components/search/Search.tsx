@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { SearchInput } from "../input/Input";
 import { useBoundStore } from "../../store/store";
-import usePagination from "../../utils/hooks/usePagination";
+import usePagination from "../pagination/usePagination";
 
 //TODO check this component for refactoring
 export default function Search() {

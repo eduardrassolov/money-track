@@ -1,16 +1,15 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import FormRow from '../../components/newTransaction/FormRow'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import SettingsFooter from './SettingsFooter';
-import Input from '../../components/input/Input';
-import { useMutation } from '@tanstack/react-query';
-import apiUpdateProfileData from '../../services/api/apiUpdateProfileData';
-import { toast } from 'react-toastify';
-import styled from 'styled-components';
-import ErrorLabel from '../../components/error/ErrorLabel';
 
-type InputsProfile = {
+import FormRow from '../../../../components/newTransaction/FormRow'
+import SettingsFooter from '../../footer/SettingsFooter';
+import Input from '../../../../components/input/Input';
+import ErrorLabel from '../../../../components/error/ErrorLabel';
+import { Form, P } from './ProfileTab.style';
+import useSettings from '../../useSettings';
+
+export type InputsProfile = {
     firstName: string,
     lastName: string
 };
@@ -20,34 +19,17 @@ const settingsSchema: yup.ObjectSchema<InputsProfile> = yup.object().shape({
     lastName: yup.string().required("Last name is required").min(3, "Last name must be at least 3 characters long"),
 });
 
-export const P = styled.p`
-    font-size: 1rem;
-    color: gray;
-`
-
-export const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-`
-
 export default function ProfileTab({ firstName, lastName }: InputsProfile) {
+    const { updateUserData } = useSettings();
+
     const { register, handleSubmit, formState: { errors } } = useForm<InputsProfile>({
         resolver: yupResolver(settingsSchema),
         defaultValues: { firstName, lastName }
     });
-    const { mutate: updateUser } = useMutation({
-        mutationFn: apiUpdateProfileData,
-        onSuccess: () => toast.success("Successfull updated"),
-        onError: (err) => {
-            toast.error("Something gone wrong");
-            console.log(err);
-        }
-    })
 
     const onSubmit: SubmitHandler<InputsProfile> = (data) => {
         const { firstName, lastName } = data;
-        updateUser({ firstName, lastName });
+        updateUserData({ firstName, lastName });
     };
 
     return (
@@ -65,7 +47,6 @@ export default function ProfileTab({ firstName, lastName }: InputsProfile) {
             </FormRow>
 
             <SettingsFooter />
-
         </Form>
     )
 
