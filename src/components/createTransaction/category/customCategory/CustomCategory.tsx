@@ -1,21 +1,22 @@
-import { useState } from 'react'
-import { toast } from 'react-toastify';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { QUERY_KEY } from '../../../../config/queryClientKeys';
-import apiCreateCategory from '../../../../services/api/apiCreateCategory';
-import { useUser } from '../../../../utils/hooks/useUser';
-import { InputWithError } from '../editCustomCategory/EditCategory';
-import { PrimaryBtn, SecondaryBtn } from '../../../../styles/Button.style';
-import { StyledContainer } from './CustomCategroy.style';
-import { StyledDiv } from '../CategoryTransaction.style';
+import { QUERY_KEY } from "../../../../config/queryClientKeys";
+import apiCreateCategory from "../../../../services/api/apiCreateCategory";
+import { useUser } from "../../../../utils/hooks/useUser";
+import { InputWithError } from "../editCustomCategory/EditCategory";
+import { PrimaryBtn, SecondaryBtn } from "../../../../styles/Button.style";
+import { StyledContainer } from "./CustomCategory.style";
+import { StyledDiv } from "../CategoryTransaction.style";
 
 interface ICustomCategory {
-    isOpen: boolean,
-    onChange: () => void
+    isOpen: boolean;
+    type: number;
+    onChange: () => void;
 }
 
-export default function CustomCategory({ isOpen, onChange }: ICustomCategory) {
+export default function CustomCategory({ isOpen, onChange, type }: ICustomCategory) {
     const { user } = useUser();
 
     if (!user) {
@@ -26,9 +27,11 @@ export default function CustomCategory({ isOpen, onChange }: ICustomCategory) {
 
     const [categoryName, setCategoryName] = useState("");
     const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { target: { value } } = e;
+        const {
+            target: { value },
+        } = e;
         setCategoryName(() => value);
-    }
+    };
 
     const { mutate: addCategory } = useMutation({
         mutationFn: apiCreateCategory,
@@ -41,7 +44,7 @@ export default function CustomCategory({ isOpen, onChange }: ICustomCategory) {
                 setError(() => true);
                 toast.error(err?.message || "Something goes wrong!");
             }
-        }
+        },
     });
     const [isError, setError] = useState(false);
 
@@ -51,23 +54,29 @@ export default function CustomCategory({ isOpen, onChange }: ICustomCategory) {
             setError(() => true);
             return null;
         }
-        addCategory({ user_id: userId, name: categoryName, type_id: 1 });
+        addCategory({ user_id: userId, name: categoryName, type_id: type });
     }
 
     return (
         <>
-            {
-                isOpen ?
-                    <StyledContainer>
-                        <InputWithError $isError={isError} type="text" autoFocus value={categoryName} onChange={handleChangeName} placeholder={"Enter new name category"} />
-                        <StyledDiv>
-                            <SecondaryBtn onClick={onChange}>Cancel</SecondaryBtn>
-                            <PrimaryBtn onClick={handleCreate}>Add</PrimaryBtn>
-                        </StyledDiv>
-                    </StyledContainer >
-                    :
-                    ""
-            }
+            {isOpen ? (
+                <StyledContainer>
+                    <InputWithError
+                        $isError={isError}
+                        type="text"
+                        autoFocus
+                        value={categoryName}
+                        onChange={handleChangeName}
+                        placeholder={"Enter new name category"}
+                    />
+                    <StyledDiv>
+                        <SecondaryBtn onClick={onChange}>Cancel</SecondaryBtn>
+                        <PrimaryBtn onClick={handleCreate}>Add</PrimaryBtn>
+                    </StyledDiv>
+                </StyledContainer>
+            ) : (
+                ""
+            )}
         </>
-    )
+    );
 }

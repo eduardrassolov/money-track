@@ -79,8 +79,7 @@ export default function CategoryTransaction({ categoryId, onChange, type, userId
                     <HiOutlinePlusCircle size={"1.5rem"} cursor={"pointer"} onClick={handleOpen} />
                 </StyledTitle>
 
-                <CustomCategory isOpen={isOpen} onChange={handleOpen} />
-
+                <CustomCategory isOpen={isOpen} onChange={handleOpen} type={type} />
                 {isCustomOptionsLoading ?
                     <LoadingUi />
                     :

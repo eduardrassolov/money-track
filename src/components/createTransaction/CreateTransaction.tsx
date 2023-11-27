@@ -8,9 +8,6 @@ import TYPES_TRANSACTION from "../../config/typeTransactions";
 import { QUERY_KEY } from "../../config/queryClientKeys";
 import useCreateTransaction from "../newTransaction/useCreateTransaction";
 
-import useSort from "../../utils/hooks/useSort";
-import { SortBy } from "../../types/sortBy.type";
-import { useBoundStore } from "../../store/store";
 import StepLine from "./stepLine/StepLineList";
 import useNewTransaction from "./useNewTransaction";
 import scrollTop from "../../utils/helpers/scrollTop";
@@ -20,14 +17,11 @@ export default function CreateNewTransaction({ type }: { type: number }) {
     const { user } = useUser();
     const queryClient = useQueryClient();
     const { createTransaction } = useCreateTransaction();
-    const sortBy: SortBy = useSort();
-    const range = useBoundStore((state) => state.range);
 
     if (!user) {
         return null;
     }
     const { id: userId } = user;
-    const userCurrency = user?.user_metadata.currency as string;
 
     const key = type === TYPES_TRANSACTION.INCOME ? QUERY_KEY.INCOMES : QUERY_KEY.EXPENSES;
 
@@ -62,8 +56,7 @@ export default function CreateNewTransaction({ type }: { type: number }) {
             {
                 onSuccess: () => {
                     toast.success("New transaction added.");
-                    const [from, to] = range;
-                    queryClient.invalidateQueries({ queryKey: [userId, key, from, to, sortBy] });
+                    queryClient.invalidateQueries({ queryKey: [userId, key] });
                     setStep(() => 0);
                     reset();
                 },
