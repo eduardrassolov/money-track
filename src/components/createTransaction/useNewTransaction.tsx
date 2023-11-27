@@ -3,7 +3,7 @@ import { useState } from 'react'
 import NameTransaction from './nameTransaction/NameTransaction';
 import AmountTransaction from './amount/AmountTransaction';
 import CategoryTransaction from './category/CategoryTransaction';
-import CurrenctyTransaction from './currency/CurrenctyTransaction';
+import CurrencyTransaction from './currency/CurrencyTransaction';
 import TimeCreatedTransaction from './timeTransaction/TimeCreatedTransaction';
 import { User } from '@supabase/supabase-js';
 
@@ -40,7 +40,7 @@ export default function useNewTransaction(user: User, type: number) {
         <NameTransaction description={transaction.description} onChange={handleChange} />,
         <AmountTransaction amount={transaction.amount} onChange={handleChange} />,
         <CategoryTransaction categoryId={transaction.categoryId} onChange={handleChange} type={type} userId={userId} />,
-        <CurrenctyTransaction currencyId={transaction.currencyId} onChange={handleChange} />,
+        <CurrencyTransaction currencyId={transaction.currencyId} onChange={handleChange} />,
         <TimeCreatedTransaction timeCompleted={transaction.timeCompleted} onChange={handleChange} />
     ]
 

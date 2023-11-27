@@ -44,6 +44,8 @@ export default function CreateNewTransaction({ type }: { type: number }) {
 
     function createNewTransaction() {
         const { description, amount, categoryId, currencyId, timeCompleted } = transaction;
+        console.log(transaction);
+
         if (!description || !amount || !categoryId || !currencyId || !timeCompleted) {
             return null;
         }
@@ -55,7 +57,7 @@ export default function CreateNewTransaction({ type }: { type: number }) {
                 completedAt: timeCompleted,
                 categoryId,
                 profileId: userId,
-                currencyId: userCurrency,
+                currencyId,
             },
             {
                 onSuccess: () => {

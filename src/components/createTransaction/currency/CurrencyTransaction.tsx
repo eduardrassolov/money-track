@@ -10,11 +10,12 @@ type CurrencyTransaction = TransactionProp & {
     currencyId: string
 }
 
-export default function CurrenctyTransaction({ currencyId, onChange }: CurrencyTransaction) {
+export default function CurrencyTransaction({ currencyId, onChange }: CurrencyTransaction) {
 
     const { data: optionCurrency, isLoading: isCurrencyLoading } = useQuery({ queryKey: ["currency"], queryFn: apiGetCurrency });
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const { target: { value } } = e;
+        console.log(value);
         onChange("currencyId", value);
     }
 
