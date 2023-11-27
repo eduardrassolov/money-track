@@ -1,63 +1,22 @@
-import TYPES_TRANSACTION from '../../config/typeTransactions';
-import { QUERY_KEY } from '../../config/queryClientKeys';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { apiGetCategories, apiGetUserCategory } from '../../services/api/apiGetCategory';
-import styled from 'styled-components';
-import LoadingUi from '../spinner/LoadingUi';
-import { StyledDescriptions, TitleText } from './NameTransaction';
-import { TransactionProp } from './useNewTransaction';
-import CustomCategory from './CustomCategory';
-import { HiOutlinePlusCircle, HiOutlineTrash, HiPencilSquare } from 'react-icons/hi2';
-import apiDeleteCategory from '../../services/api/apiDeleteCategory';
-import { queryClient } from '../../main';
+
 import { toast } from 'react-toastify';
 import { useState } from 'react';
-import EditCategory from './EditCategory';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { HiOutlinePlusCircle, HiOutlineTrash, HiPencilSquare } from 'react-icons/hi2';
 
-const StyledDIv = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
-`
+import TYPES_TRANSACTION from '../../../config/typeTransactions';
+import { QUERY_KEY } from '../../../config/queryClientKeys';
+import { apiGetCategories, apiGetUserCategory } from '../../../services/api/apiGetCategory';
 
-const StyledDiv = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 1.5rem;
-`
-const CustomCategoryText = styled.p<{ $isSelected: boolean }>`
-    background: ${props => props.$isSelected ? props.theme.colorLogoMain : ""};
-    padding: 0.5rem 0 0.5rem 1rem;
-    margin: 0;
-    width: 100%;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 7px;
+import LoadingUi from '../../spinner/LoadingUi';
+import { TransactionProp } from '../useNewTransaction';
+import CustomCategory from './customCategory/CustomCategory';
+import apiDeleteCategory from '../../../services/api/apiDeleteCategory';
+import { queryClient } from '../../../main';
+import EditCategory from './editCustomCategory/EditCategory';
+import { Container, CustomCategoryText, Descriptions, StyledDIv, StyledDiv, StyledTitle, Text } from './CategoryTransaction.style';
+import { TitleText } from '../nameTransaction/NameTransaction.style';
 
-    &:hover{
-        background: ${props => props.theme.colorLogoMain};
-        color: #fff;
-    }
-`
-
-const Descriptions = styled(StyledDescriptions)`
-    gap: 1.5rem;
-`
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-`
-const Text = styled(TitleText)`
-    color: gray;
-`
-
-const StyledTitle = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-`
 
 type CategoryTransactionProps = TransactionProp & {
     categoryId: string,

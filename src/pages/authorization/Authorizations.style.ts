@@ -35,12 +35,16 @@ export const ImageContainer = styled.div`
 export const StyledContainer = styled.div`
     display: flex;
     flex-direction: column;
-    padding: 2rem 1rem;
+
     width: 100%;
+    border-radius: 15px;
+    padding: 3rem;
 
     @media only screen and (min-width: ${devices.sm}px) {
         width: auto;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         max-width: 400px;
+        border: 1px solid ${(props) => props.theme.border};
     }
 `;
 
@@ -58,8 +62,8 @@ export const Group = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
-    margin: 0 0 0.5rem;
 `;
+
 export const Input = styled.input`
     background: ${(props) => props.theme.background};
     color: ${(props) => props.theme.text};
@@ -81,7 +85,4 @@ export const Form = styled.form`
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    height: auto;
-    margin: 2rem 0;
-    padding: 0 0 1rem;
 `;

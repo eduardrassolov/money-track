@@ -1,8 +1,8 @@
 
 import React from 'react';
-import { StyledInput } from '../input/Input'
-import { StyledDescriptions, TitleText } from './NameTransaction'
-import { TransactionProp } from './useNewTransaction';
+import { StyledInput } from '../../input/Input'
+import { TransactionProp } from '../useNewTransaction';
+import { StyledDescriptions, TitleText } from '../nameTransaction/NameTransaction.style';
 
 type AmountTransactionProps = TransactionProp & {
     amount: number | null,

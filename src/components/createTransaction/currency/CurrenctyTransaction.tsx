@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { StyledSelect } from "../dropDown/Select";
-import apiGetCurrency from "../../services/api/apiGetCurrency";
-import LoadingUi from "../spinner/LoadingUi";
-import { StyledDescriptions, TitleText } from "./NameTransaction";
-import { TransactionProp } from "./useNewTransaction";
+import { StyledSelect } from "../../dropDown/Select";
+import apiGetCurrency from "../../../services/api/apiGetCurrency";
+import LoadingUi from "../../spinner/LoadingUi";
+import { TransactionProp } from "../useNewTransaction";
 import React from "react";
+import { StyledDescriptions, TitleText } from "../nameTransaction/NameTransaction.style";
 
 type CurrencyTransaction = TransactionProp & {
     currencyId: string

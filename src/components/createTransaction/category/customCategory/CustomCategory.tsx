@@ -1,27 +1,14 @@
 import { useState } from 'react'
-import { QUERY_KEY } from '../../config/queryClientKeys';
-
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import apiCreateCategory from '../../services/api/apiCreateCategory';
-import { useUser } from '../../utils/hooks/useUser';
-
-
-import styled from 'styled-components';
-import { InputWithError } from './EditCategory';
 import { toast } from 'react-toastify';
-import { PrimaryBtn, SecondaryBtn } from '../../styles/Button.style';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-const StyledContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-`
-
-const StyledDiv = styled.div`
-    display: flex;
-    gap: 0.5rem;
-    margin: 0 0 2rem;
-`
+import { QUERY_KEY } from '../../../../config/queryClientKeys';
+import apiCreateCategory from '../../../../services/api/apiCreateCategory';
+import { useUser } from '../../../../utils/hooks/useUser';
+import { InputWithError } from '../editCustomCategory/EditCategory';
+import { PrimaryBtn, SecondaryBtn } from '../../../../styles/Button.style';
+import { StyledContainer } from './CustomCategroy.style';
+import { StyledDiv } from '../CategoryTransaction.style';
 
 interface ICustomCategory {
     isOpen: boolean,

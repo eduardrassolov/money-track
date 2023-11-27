@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import TimeLineItem from "./TimeLineItem"
+import TimeLineItem from "./item/StepLineItem"
 
 const Container = styled.div`
     display: flex;
@@ -11,7 +11,7 @@ interface ITimeLine {
     currentStep: number
 
 }
-export default function StepLine({ maxLength, currentStep }: ITimeLine) {
+export default function TimeLine({ maxLength, currentStep }: ITimeLine) {
     const stepNumbers = Array.from({ length: maxLength }, (_, i) => i + 1);
 
     return (

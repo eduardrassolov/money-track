@@ -1,10 +1,10 @@
 import dayjs from 'dayjs';
 import { useState } from 'react'
-import NameTransaction from './NameTransaction';
-import AmountTransaction from './AmountTransaction';
-import CategoryTransaction from './CategoryTransaction';
-import CurrenctyTransaction from './CurrenctyTransaction';
-import TimeCreatedTransaction from './TimeCreatedTransaction';
+import NameTransaction from './nameTransaction/NameTransaction';
+import AmountTransaction from './amount/AmountTransaction';
+import CategoryTransaction from './category/CategoryTransaction';
+import CurrenctyTransaction from './currency/CurrenctyTransaction';
+import TimeCreatedTransaction from './timeTransaction/TimeCreatedTransaction';
 import { User } from '@supabase/supabase-js';
 
 const defaultTransaction = {

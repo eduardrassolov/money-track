@@ -1,34 +1,27 @@
-import { useState } from 'react'
-import { useUser } from '../../utils/hooks/useUser';
-import styled from 'styled-components';
-import { HiArrowRightCircle, HiMiniCheckCircle, HiOutlineArrowLeftCircle } from 'react-icons/hi2';
-import TYPES_TRANSACTION from '../../config/typeTransactions';
-import { QUERY_KEY } from '../../config/queryClientKeys';
-import useCreateTransaction from '../newTransaction/useCreateTransaction';
-import { useQueryClient } from '@tanstack/react-query';
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { HiArrowRightCircle, HiMiniCheckCircle, HiOutlineArrowLeftCircle } from "react-icons/hi2";
+import { useQueryClient } from "@tanstack/react-query";
 
-import useSort from '../../utils/hooks/useSort';
-import { SortBy } from '../../types/sortBy.type';
-import { useBoundStore } from '../../store/store';
-import TimeLine from './StepLine';
-import useNewTransaction from './useNewTransaction';
-import scrollTop from '../../utils/helpers/scrollTop';
-import { toast } from 'react-toastify';
+import { useUser } from "../../utils/hooks/useUser";
+import TYPES_TRANSACTION from "../../config/typeTransactions";
+import { QUERY_KEY } from "../../config/queryClientKeys";
+import useCreateTransaction from "../newTransaction/useCreateTransaction";
 
-const StyledContainer = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 0.5rem;
-    margin: 1rem 0;
-`
+import useSort from "../../utils/hooks/useSort";
+import { SortBy } from "../../types/sortBy.type";
+import { useBoundStore } from "../../store/store";
+import StepLine from "./stepLine/StepLineList";
+import useNewTransaction from "./useNewTransaction";
+import scrollTop from "../../utils/helpers/scrollTop";
+import { StyledContainer } from "./CreateTransaction.style";
 
 export default function CreateNewTransaction({ type }: { type: number }) {
     const { user } = useUser();
     const queryClient = useQueryClient();
     const { createTransaction } = useCreateTransaction();
     const sortBy: SortBy = useSort();
-    const range = useBoundStore(state => state.range);
+    const range = useBoundStore((state) => state.range);
 
     if (!user) {
         return null;
@@ -37,16 +30,17 @@ export default function CreateNewTransaction({ type }: { type: number }) {
     const userCurrency = user?.user_metadata.currency as string;
 
     const key = type === TYPES_TRANSACTION.INCOME ? QUERY_KEY.INCOMES : QUERY_KEY.EXPENSES;
-    console.log("Key", key);
 
     const { transaction, transactionDataArr, reset } = useNewTransaction(user, type);
 
     const [currentStep, setStep] = useState(0);
+
     const nextStep = () => {
         scrollTop();
-        setStep((prev) => prev === transactionDataArr.length ? prev : prev + 1);
-    }
-    const prevStep = () => setStep((prev) => !prev ? prev : prev - 1);
+        setStep((prev) => (prev === transactionDataArr.length ? prev : prev + 1));
+    };
+
+    const prevStep = () => setStep((prev) => (!prev ? prev : prev - 1));
 
     function createNewTransaction() {
         const { description, amount, categoryId, currencyId, timeCompleted } = transaction;
@@ -54,39 +48,44 @@ export default function CreateNewTransaction({ type }: { type: number }) {
             return null;
         }
 
-        createTransaction({
-            description,
-            amount,
-            completedAt: timeCompleted,
-            categoryId,
-            profileId: userId,
-            currencyId: userCurrency
-        }, {
-            onSuccess: () => {
-                toast.success("New transaction added.");
-                const [from, to] = range;
-                queryClient.invalidateQueries({ queryKey: [userId, key, from, to, sortBy] });
-                setStep(() => 0);
-                reset();
+        createTransaction(
+            {
+                description,
+                amount,
+                completedAt: timeCompleted,
+                categoryId,
+                profileId: userId,
+                currencyId: userCurrency,
+            },
+            {
+                onSuccess: () => {
+                    toast.success("New transaction added.");
+                    const [from, to] = range;
+                    queryClient.invalidateQueries({ queryKey: [userId, key, from, to, sortBy] });
+                    setStep(() => 0);
+                    reset();
+                },
             }
-        })
+        );
     }
 
     return (
         <>
-            <TimeLine maxLength={transactionDataArr.length} currentStep={currentStep} />
+            <StepLine maxLength={transactionDataArr.length} currentStep={currentStep} />
 
             {transactionDataArr[currentStep]}
 
             <StyledContainer>
                 <HiOutlineArrowLeftCircle onClick={prevStep} size={"2.4rem"} cursor={"pointer"} />
 
-                {currentStep === transactionDataArr.length - 1 ?
-                    <HiMiniCheckCircle onClick={createNewTransaction} size={"2.5rem"} color={"#7286D3"} cursor={"pointer"}>Create</HiMiniCheckCircle>
-                    :
-                    <HiArrowRightCircle onClick={nextStep} size={"2.4rem"} cursor={"pointer"} color={"#7286D3"} />}
-
+                {currentStep === transactionDataArr.length - 1 ? (
+                    <HiMiniCheckCircle onClick={createNewTransaction} size={"2.5rem"} color={"#7286D3"} cursor={"pointer"}>
+                        Create
+                    </HiMiniCheckCircle>
+                ) : (
+                    <HiArrowRightCircle onClick={nextStep} size={"2.4rem"} cursor={"pointer"} color={"#7286D3"} />
+                )}
             </StyledContainer>
         </>
-    )
+    );
 }

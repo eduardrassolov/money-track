@@ -11,7 +11,6 @@ import TransactionsList from "./TransactionsList";
 import LoadingUi from "../spinner/LoadingUi";
 import Pagination from "../pagination/Pagination";
 import { searchTransactionsByMask } from "../../utils/helpers/searchTransactionsByMask";
-import { DEFAULT_ITEMS_PER_PAGE } from "../../config/paginationItems";
 import usePagination from "../pagination/usePagination";
 import apiDeleteTransaction from "../../services/api/deleteTransaction";
 import { CreateNewTransactionForm } from "../newTransaction/CreateNewTransaction";
@@ -31,7 +30,6 @@ interface ITransactionView {
 }
 
 export default function TransactionView({ queryKey }: ITransactionView) {
-    // const numberTransactionsPerPage = Number(localStorage.getItem("transactionPerPage")) || DEFAULT_ITEMS_PER_PAGE;
     const { user } = useUser();
     const [from, to] = useBoundStore((state) => state.range);
     const mask = useBoundStore((state) => state.search);
@@ -56,17 +54,14 @@ export default function TransactionView({ queryKey }: ITransactionView) {
         queryFn: () => getAppSettings(user.id)
     });
 
-    console.log(settings);
-
-
     const transactionWithDateRange = data?.filter((transaction) => {
         const date = dayjs(transaction.completedAt).format("YYYY-MM-DD");
         if (dayjs(date).isBetween(from, to, "day", "[]")) {
             return transaction;
         }
     });
+
     const transactionsWithSearchMask = searchTransactionsByMask(transactionWithDateRange, mask);
-    console.log(transactionsWithSearchMask);
     const trasactions = transactionsWithSearchMask?.slice((currPage - 1) * settings?.itemsPerPage, currPage * settings?.itemsPerPage);
 
     const { mutate: deleteTransaction } = useMutation({ mutationFn: apiDeleteTransaction, onSuccess: succesHandle });
@@ -96,7 +91,7 @@ export default function TransactionView({ queryKey }: ITransactionView) {
                     <TransactionsList transactions={trasactions} onDeleteTransaction={deleteTransaction} />
                 )}
 
-                <Pagination transactionsPerPage={settings?.itemsPerPage} maxLength={transactionsWithSearchMask?.length} />
+                <Pagination transactionsPerPage={settings?.itemsPerPage || 10} maxLength={transactionsWithSearchMask?.length} />
             </Container>
         </Main>
     );

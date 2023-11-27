@@ -20,7 +20,7 @@ export default function AuthorizationLayout() {
             <StyledAuthorization>
 
                 <ImageContainer>
-                    <img src="/login.svg" />
+                    <img src="/loginImg.svg" />
                 </ImageContainer>
 
                 <StyledContainer>
