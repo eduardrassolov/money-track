@@ -10,8 +10,8 @@ import LoadingUi from '../../../components/spinner/LoadingUi';
 import convertToOneCurrency from '../../../services/createData';
 import { useBoundStore } from '../../../store/store';
 import { useUserSettings } from "../../../utils/hooks/useUserSettings";
-import { Container } from "../Dashboard.page.style";
-import { Div } from "./Diagram.style";
+
+import { Container, Div } from "./Diagram.style";
 
 interface IDiagramProps {
     transactions: Array<ITransaction> | undefined;
@@ -39,7 +39,7 @@ export default function Diagram({ transactions, isLoading, userId }: IDiagramPro
                         <h1>Diagram</h1>
                     </Div>
 
-                    <ResponsiveContainer width="100%" height={500}>
+                    <ResponsiveContainer width={"100%"} height={500}>
                         {isLoading ? <LoadingUi /> :
                             <AreaChart data={dataDiagram} margin={{ top: 20, right: 30, left: 50, bottom: 20 }}>
                                 <defs>

@@ -23,7 +23,6 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-
     padding: 1rem 0;
 `;
 
@@ -31,9 +30,13 @@ export const DateFilterContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    align-items: end;
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: start;
     margin: 2rem 0 0 0;
+
+    @media only screen and (min-width: ${devices.sm}px) {
+        align-items: flex-end;
+    }
 `;
 
 export const Main = styled.main`
@@ -44,7 +47,6 @@ export const Main = styled.main`
     height: 93vh;
     overflow: scroll;
     max-width: 1200px;
-    width: 100%;
     padding: 0 1rem;
 
     @media only screen and (min-width: ${devices.md}px) {

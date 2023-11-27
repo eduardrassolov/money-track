@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import isBetween from "dayjs/plugin/isBetween";
-import styled from 'styled-components';
 import { HiOutlineCreditCard, HiOutlineShoppingBag } from 'react-icons/hi2';
 import { User } from '@supabase/supabase-js';
 
@@ -12,14 +11,9 @@ import StatItem from './StatItem';
 import { ICurrency } from '../../../utils/hooks/useCurrency';
 import { loadTransactions } from '../../../components/transactionView/loadTransactions';
 import { QUERY_KEY } from '../../../config/queryClientKeys';
+import { StyledDiv } from './StatList.style';
 
 dayjs.extend(isBetween);
-
-const StyledDiv = styled.div`
-    width: 100%;
-    display: flex;
-    gap: 1rem;
-`
 
 interface IStatList {
     user: User,
