@@ -4,7 +4,7 @@ import { RouteObject, createBrowserRouter } from "react-router-dom";
 import HomePage from "./pages/home/Home.page.tsx";
 import ErrorELement from "./components/error/ErrorELement.tsx";
 import ProtectedLayout from "./pages/layout/ProtectedLayout.tsx";
-import Page404 from "./pages/errors/Page404.tsx";
+import Page404 from "./pages/errors/page404/Page404.tsx";
 import loaderTransactionById from "./pages/edit/loader.ts";
 import LoadingUi from "./components/spinner/LoadingUi.tsx";
 import AuthorizationLayout from "./pages/authorization/Authorization.page..tsx";
@@ -12,7 +12,6 @@ import LogIn from "./pages/authorization/login/LogIn.tsx";
 import SignUp from "./pages/authorization/signUp/SignUp.tsx";
 import { ROUTES } from "./config/routes.ts";
 import { QUERY_KEY } from "./config/queryClientKeys.ts";
-
 
 const AppLayout = lazy(() => import("./pages/layout/AppLayout.tsx"));
 const Dashboard = lazy(() => import("./pages/dashboard/Dashboard.page.tsx"));
