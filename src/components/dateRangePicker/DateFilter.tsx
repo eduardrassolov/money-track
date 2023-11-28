@@ -67,8 +67,8 @@ export default function DateFilter() {
                 )}
                 renderExtraFooter={() =>
                     <StyledList>
-                        {rangePresets?.map(rangeItem =>
-                            <li onClick={() => handleClickPreset(rangeItem.value)}>{rangeItem.label}</li>
+                        {rangePresets?.map((rangeItem, index) =>
+                            <li key={`rangeItem_${index}`} onClick={() => handleClickPreset(rangeItem.value)}>{rangeItem.label}</li>
                         )}
                     </StyledList>
                 }
