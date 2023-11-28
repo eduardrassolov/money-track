@@ -1,9 +1,7 @@
-import { useRouteError } from 'react-router-dom'
 
 export default function ErrorELement() {
-    const error = useRouteError();
-
+    // const error = useRouteError();
     return (
-        <div>{error.message}</div>
+        <div>{"Something gone wrong"}</div>
     )
 }

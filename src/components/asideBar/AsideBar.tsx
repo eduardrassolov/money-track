@@ -2,7 +2,8 @@ import { HiMiniArrowsUpDown, HiOutlineChartPie, HiOutlineCreditCard, HiOutlineSh
 
 import { asideMenuList } from "../../config/asideMenuList";
 import AsideItem from "./menuItem/AsideItem";
-import { Background, StyledAside, Ul } from "./asideBar.style";
+import { Background, StyledAside, Ul } from "./AsideBar.style";
+
 
 const icons: Array<JSX.Element> = [<HiOutlineChartPie />, <HiOutlineShoppingBag />, <HiOutlineCreditCard />, <HiMiniArrowsUpDown />];
 

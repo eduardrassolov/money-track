@@ -1,6 +1,7 @@
 import supabase from "../../../services/supabase";
+import { AppSettingsInputs } from "../tabs/appSettingsTab/ApplicationTab";
 
-export default async function updateSettingsData(userId, newData) {
+export default async function updateSettingsData(userId: string, newData: AppSettingsInputs) {
     console.log(newData);
     try {
         const { data, error } = await supabase

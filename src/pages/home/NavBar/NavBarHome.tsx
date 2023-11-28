@@ -4,8 +4,9 @@ import ThemeSwitch from "../../../components/swtich/ThemeSwitch";
 import NavLinks from "./navLinks/NavLinks";
 import Burger from "./burger/Burger";
 import { Nav, SwitchContainer } from "./NavBarHome.style";
-import { Background } from "../../../components/asideBar/asideBar.style";
+
 import Overlay from "../../../components/overlay/Overlay";
+
 
 interface INavBar {
     isOpen: boolean,
@@ -17,7 +18,7 @@ export default function NavBarHome({ isOpen, onClose }: INavBar) {
         <Nav>
             <Logo />
 
-            <Background $isOpen={isOpen} onClick={onClose} />
+            {/* <Background $isOpen={isOpen} onClick={onClose} /> */}
             <Overlay isShow={isOpen} onClose={onClose} />
 
             <SwitchContainer>

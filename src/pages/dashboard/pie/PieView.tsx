@@ -6,15 +6,18 @@ import isBetween from "dayjs/plugin/isBetween";
 
 import { SortBy } from '../../../types/sortBy.type';
 import { useBoundStore } from '../../../store/store';
-import PieItem from './PieItem';
+
 import LoadingUi from '../../../components/spinner/LoadingUi';
 import TYPES_TRANSACTION from '../../../config/typeTransactions';
 import { devices } from '../../../config/breakPoints';
 import { ICurrency } from '../../../utils/hooks/useCurrency';
 import { loadTransactions } from '../../../components/transactionView/loadTransactions';
 import { QUERY_KEY } from '../../../config/queryClientKeys';
+import { lazy } from 'react';
 
 dayjs.extend(isBetween);
+
+const PieItem = lazy(() => import("./PieItem.tsx"));
 
 export const sortBy: SortBy = { field: 'completed_at', direction: 'asc' };
 
