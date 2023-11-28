@@ -13,7 +13,6 @@ import useEdit from "./useEdit";
 import { queryClient } from "../../main";
 import { GetAllTransactionsDTO } from "../../services/api/dto/getTransactions.dto";
 import Input from "../../components/input/Input";
-import { Container, SectionFull } from "../settings/Settings.page";
 import DropDown from "../../components/dropDown/DropDown";
 import { useUser } from "../../utils/hooks/useUser";
 import { StyledSelect } from "../../components/dropDown/Select";
@@ -22,8 +21,9 @@ import { newTransactionSchema } from "../../components/newTransaction/newTrasact
 import { PrimaryBtn, SecondaryBtn } from "../../styles/Button.style";
 import ErrorLabel from "../../components/error/ErrorLabel";
 import { Header } from "../../ui/header/Header";
+import { Div, Label, Main } from "./EditTransaction.style";
 
-export default function EditPage() {
+export default function EditTransaction() {
     const [data] = useLoaderData() as Array<GetAllTransactionsDTO>;
     const { updateTransaction } = useEdit();
 
@@ -57,7 +57,7 @@ export default function EditPage() {
         });
 
     //TODO fix any
-    const onSubmit: SubmitHandler<any> = async ({ description, amount, completed_at }) => {
+    const onSubmit: SubmitHandler<any> = async ({ description, amount, completed_at, currency }) => {
         if (!description.trim() || !amount || !completed_at || !updatedCurrency)
             return;
 
@@ -77,13 +77,13 @@ export default function EditPage() {
     const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => setCurrency(e.target.value);
 
     return (
-        <SectionFull>
-            <Container>
+        <Main>
+            <Div>
                 <Header text="Edit transaction" />
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <FormGroup>
-                        <label htmlFor="description">Description:</label>
+                        <Label htmlFor="description">Description:</Label>
                         <Input register={register} type={"text"} placeHolder={"Enter description"} name={"description"} />
 
                         <ErrorLabel errMsg={errors?.description?.message} />
@@ -92,7 +92,7 @@ export default function EditPage() {
                     {defaultCategory
                         ?
                         <FormGroup>
-                            <label htmlFor="category">Category:</label>
+                            <Label htmlFor="category">Category:</Label>
                             <DropDown defaultOption={defaultCategory} customOption={userCategories} selected={updatedCategory} onSelect={changeTempCategory} currentTypeTransaction={1} />
 
                             <ErrorLabel />
@@ -101,21 +101,21 @@ export default function EditPage() {
                     }
 
                     <FormGroup>
-                        <label htmlFor="amount">Amount:</label>
+                        <Label htmlFor="amount">Amount:</Label>
                         <Input type={"number"} register={register} placeHolder={"0,00"} name={"amount"} />
 
                         <ErrorLabel errMsg={errors?.amount?.message} />
                     </FormGroup>
 
                     <FormGroup>
-                        <label htmlFor="completed_at">Date:</label>
+                        <Label htmlFor="completed_at">Date:</Label>
                         <Input type={"datetime-local"} register={register} name={"completed_at"} />
 
                         <ErrorLabel errMsg={errors?.completed_at?.message} />
                     </FormGroup>
 
                     <FormGroup>
-                        <label htmlFor="currency">Currency:</label>
+                        <Label htmlFor="currency">Currency:</Label>
                         <StyledSelect value={updatedCurrency} onChange={handleSelect}>
                             {optionCurrency?.map(currency => (
                                 <option key={currency.id} value={currency.id}>{currency.name}</option>
@@ -130,7 +130,7 @@ export default function EditPage() {
                         <PrimaryBtn type='submit'>Save</PrimaryBtn>
                     </FormFooter>
                 </form>
-            </Container>
-        </SectionFull >
+            </Div>
+        </Main >
     )
 }

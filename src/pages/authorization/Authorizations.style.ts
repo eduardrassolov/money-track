@@ -73,6 +73,7 @@ export const Input = styled.input`
     font-size: 1rem;
     padding: 0.8rem 1.2rem;
     transition: all 300ms ease-in-out;
+    border: 1px solid ${(props) => props.theme.border};
 
     &:focus {
         transition: all 300ms ease-in-out;

@@ -1,8 +1,13 @@
-import React from 'react'
-import { SmallText } from '../category/CategoryCard.style';
+import { ICurrency } from '../../../../utils/hooks/useCurrency';
 import { Div, StyledPrice } from './Price.style';
 
-export default function Price({ amount, currency, colorTransaction }) {
+interface IPrice {
+    amount: number,
+    currency: ICurrency,
+    colorTransaction: string
+}
+
+export default function Price({ amount, currency, colorTransaction }: IPrice) {
     const formattedAmount = new Intl.NumberFormat("en-IN", { style: "currency", currency: currency?.shortName || "USD" }).format(amount);
     return (
         <Div>
