@@ -63,7 +63,7 @@ export default function PieView({ user, currency }: { user: User, currency: ICur
 
     return (
         <Div>
-            {isExpenseLoading || isIncomesLoading || !expenses || !incomes ? <LoadingUi /> : <>
+            {isExpenseLoading || isIncomesLoading || !filteredIncomes || !fileterExpenses ? <LoadingUi /> : <>
                 <PieItem label={"Expenses by categories:"} transactions={fileterExpenses} currency={currency} />
                 <PieItem label={"Incomes by categories:"} transactions={filteredIncomes} currency={currency} />
             </>}

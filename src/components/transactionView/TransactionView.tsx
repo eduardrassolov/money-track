@@ -62,9 +62,10 @@ export default function TransactionView({ queryKey }: ITransactionView) {
     });
 
     const transactionsWithSearchMask = searchTransactionsByMask(transactionWithDateRange, mask);
-    const trasactions = transactionsWithSearchMask?.slice((currPage - 1) * settings?.itemsPerPage, currPage * settings?.itemsPerPage);
+    const trasactions = transactionsWithSearchMask?.slice((currPage - 1) * (settings?.itemsPerPage || 10), currPage * (settings?.itemsPerPage || 10));
 
     const { mutate: deleteTransaction } = useMutation({ mutationFn: apiDeleteTransaction, onSuccess: succesHandle });
+
     function succesHandle() {
         toast.success("Successfully deleted.");
         queryClient.invalidateQueries({ queryKey: [userId, queryKey, from, to, sortBy] });

@@ -57,7 +57,7 @@ export default function EditTransaction() {
         });
 
     //TODO fix any
-    const onSubmit: SubmitHandler<any> = async ({ description, amount, completed_at, currency }) => {
+    const onSubmit: SubmitHandler<any> = async ({ description, amount, completed_at }) => {
         if (!description.trim() || !amount || !completed_at || !updatedCurrency)
             return;
 

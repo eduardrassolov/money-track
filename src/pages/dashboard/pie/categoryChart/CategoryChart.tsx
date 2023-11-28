@@ -6,7 +6,7 @@ import { ISummary } from "../../../../utils/helpers/getStats.ts";
 import CustomLegend from "./legend/CustomLegend.tsx";
 import { useBoundStore } from "../../../../store/store.tsx";
 import { pieChartColors } from "../../../../config/chartPieColors.ts";
-import { CustomTooltip } from "./tooltip/CustomTooltip.tsx";
+import CustomTooltip from "./tooltip/CustomTooltip.tsx";
 
 export interface IChartData {
     id: string,
@@ -22,6 +22,7 @@ export interface IChartData {
 
 interface ICategoryChart {
     data: Array<ISummary>,
+    currencySymbol: string
 }
 
 const createData = (arr: Array<ISummary>): Array<IChartData> => {
@@ -36,7 +37,7 @@ const createData = (arr: Array<ISummary>): Array<IChartData> => {
     });
 };
 
-export function CategoryChart({ data }: ICategoryChart) {
+export function CategoryChart({ data, currencySymbol }: ICategoryChart) {
     //TODO fix this
     const { isSmallScreen } = useResize();
 
@@ -54,6 +55,8 @@ export function CategoryChart({ data }: ICategoryChart) {
     function handleClick(id: string) {
         setSelect(id);
     }
+
+    console.log(data);
 
     return (
         <ResponsiveContainer width="100%" height={500 + (defaultHeight * dt.length)}>
@@ -80,7 +83,7 @@ export function CategoryChart({ data }: ICategoryChart) {
                     )}
                 </Pie>
 
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip content={<CustomTooltip currencySymbol={currencySymbol} />} />
 
                 <Legend
                     verticalAlign={"bottom"}
@@ -88,7 +91,6 @@ export function CategoryChart({ data }: ICategoryChart) {
                     layout={"vertical"}
                     content={<CustomLegend data={dt} selected={selected} onSelect={handleSelect} />}
                 />
-
             </PieChart>
         </ResponsiveContainer >
     )

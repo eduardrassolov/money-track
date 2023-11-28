@@ -105,5 +105,6 @@ export default function CategoryTransaction({ categoryId, onChange, type, userId
             </Container>
 
 
-        </Descriptions >)
+        </Descriptions >
+    )
 }
