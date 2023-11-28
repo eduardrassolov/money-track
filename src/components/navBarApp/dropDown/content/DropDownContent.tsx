@@ -8,8 +8,6 @@ import { useMutation } from "@tanstack/react-query";
 import { apiLogout } from "../../../../services/api/apiUser";
 import useTheme from "../../../../utils/hooks/useTheme";
 
-
-
 export default function DropDownContent() {
     const navigate = useNavigate();
     const { changeTheme } = useTheme();

@@ -1,7 +1,7 @@
 import { HiMiniArrowsUpDown, HiOutlineChartPie, HiOutlineCreditCard, HiOutlineShoppingBag } from "react-icons/hi2";
 
 import { asideMenuList } from "../../config/asideMenuList";
-import AsideItem from "./AsideItem";
+import AsideItem from "./menuItem/AsideItem";
 import { Background, StyledAside, Ul } from "./asideBar.style";
 
 const icons: Array<JSX.Element> = [<HiOutlineChartPie />, <HiOutlineShoppingBag />, <HiOutlineCreditCard />, <HiMiniArrowsUpDown />];

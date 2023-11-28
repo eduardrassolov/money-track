@@ -1,4 +1,4 @@
-import Avatar from '../../../components/user/Avatar';
+import Avatar from '../../../components/user/avatar/Avatar';
 import { InformationContainer, P } from './SettingsHeader.style';
 
 interface ISettingsHeader {

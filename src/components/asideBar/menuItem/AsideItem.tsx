@@ -1,4 +1,3 @@
-import supabase from "../../services/supabase";
 import { useNavigate } from "react-router-dom";
 import { Icon, Li, StyledItem, Text } from "./asideItem.style";
 
@@ -7,15 +6,6 @@ type AsideItemProps = {
     path: string;
     icon: JSX.Element;
     onCloseBurger: () => void;
-}
-
-export const logout = async () => {
-    const { error } = await supabase.auth.signOut();
-
-    if (error) {
-        throw error.message;
-    }
-    return true;
 }
 
 export default function AsideItem({ name, path, icon, onCloseBurger }: AsideItemProps) {

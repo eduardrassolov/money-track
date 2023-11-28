@@ -21,6 +21,7 @@ interface IDropDown {
     currentTypeTransaction: number;
 }
 
+//TODO refactor this component
 export default function DropDown({ defaultOption, customOption = [], selected, onSelect, currentTypeTransaction }: IDropDown) {
     const queryClient = useQueryClient();
     const { deleteCategory, isCreateMode, openCloseCreateMode: changeState } = useCategorySelect();
