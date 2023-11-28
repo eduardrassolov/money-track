@@ -7,6 +7,7 @@ import { devices } from '../../config/breakPoints'
 const P = styled.p`
     overflow-wrap: break-word;
     display: none;
+    color: ${props => props.theme.text};
 
     @media only screen and (min-width: ${devices.sm}px){
         display: flex;

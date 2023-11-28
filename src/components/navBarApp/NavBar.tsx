@@ -1,7 +1,8 @@
-import MenuDropDown from "./menuDropDown/MenuDropDown";
+
 import BurgerMenu from "../burger/BurgerMenu";
 import { Nav } from "./NavBar.style";
 import Search from "./search/Search";
+import DropDownMenu from "./dropDown/DropDownMenu";
 
 export interface IBar {
     isOpen: boolean,
@@ -15,7 +16,7 @@ export function NavBar({ isOpen, onBurgerClick }: IBar) {
 
             <Search />
 
-            <MenuDropDown />
+            <DropDownMenu />
         </Nav >
     )
 }
