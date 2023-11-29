@@ -4,8 +4,7 @@ import ThemeSwitch from "../../../components/swtich/ThemeSwitch";
 import Overlay from "../../../components/overlay/Overlay";
 import NavLinks from "./navLinks/NavLinks";
 import Burger from "./burger/Burger";
-import { Nav, SwitchContainer } from "./NavBarHome.style";
-
+import { Nav, SwitchContainer } from "./NavbarHome.style";
 
 interface INavBar {
     isOpen: boolean,
