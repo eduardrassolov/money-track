@@ -1,7 +1,7 @@
 import { Suspense, lazy } from "react";
 import { RouteObject, createBrowserRouter } from "react-router-dom";
 
-import HomePage from "./pages/home/Home.page.tsx";
+import HomePage from "./pages/home/HomePage.tsx";
 import ErrorELement from "./components/error/ErrorELement.tsx";
 import ProtectedLayout from "./pages/layout/ProtectedLayout.tsx";
 import Page404 from "./pages/errors/page404/Page404.tsx";
