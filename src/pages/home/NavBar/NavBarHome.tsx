@@ -12,7 +12,7 @@ interface INavBar {
     onClose: () => void
 };
 
-export default function NavBarHome({ isOpen, onClose }: INavBar) {
+export default function NavbarHome({ isOpen, onClose }: INavBar) {
     return (
         <Nav>
             <Logo />
