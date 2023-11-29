@@ -1,7 +1,7 @@
 import { HiMiniArrowsUpDown, HiOutlineChartPie, HiOutlineCreditCard, HiOutlineShoppingBag } from "react-icons/hi2";
 import { asideMenuList } from "../../config/asideMenuList.ts";
 import AsideItem from "./menuItem/AsideItem.tsx";
-import { Background, StyledAside, Ul } from "./AsideBar.style.ts";
+import { Background, StyledAsideBar, Ul } from "./AsideBar.style.ts";
 
 const icons: Array<JSX.Element> = [<HiOutlineChartPie />, <HiOutlineShoppingBag />, <HiOutlineCreditCard />, <HiMiniArrowsUpDown />];
 
@@ -15,13 +15,13 @@ export default function AsideBar({ isOpen = false, onClose }: IAsideBar) {
         <>
             <Background $isOpen={isOpen} onClick={onClose} />
 
-            <StyledAside $isOpen={isOpen}>
+            <StyledAsideBar $isOpen={isOpen}>
                 <Ul>
                     {asideMenuList.map((item, index) => (
                         <AsideItem key={item.name} name={item.name} path={item.path} icon={icons[index]} onCloseBurger={onClose} />
                     ))}
                 </Ul>
-            </StyledAside>
+            </StyledAsideBar>
         </>
     );
 }

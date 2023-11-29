@@ -5,7 +5,7 @@ import { Container } from "./Home.page.style";
 import HeaderSection from "./headerSection/HeaderSection.tsx";
 import NavBarHome from "./navBar/NavBarHome.tsx";
 import Footer from "./footer/Footer.tsx";
-import { FeaturesSection } from "./features/FeaturesSection.tsx";
+import FeaturesSection from "./features/FeaturesSection.tsx";
 
 export default function HomePage() {
     const { isBurgerOpen, handleBurger } = useBurgerMenu();
