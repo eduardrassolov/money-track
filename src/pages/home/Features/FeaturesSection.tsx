@@ -1,8 +1,6 @@
 import { IFeatureData } from "./IFeatureData.ts";
 import FetItem from "./item/FetItem.tsx";
 
-
-
 const featuresData: Array<IFeatureData> = [
     {
         id: "feature1",
@@ -40,7 +38,7 @@ interface IHeader {
     id: string;
 }
 
-export function FeaturesSection({ id }: IHeader) {
+export default function FeaturesSection({ id }: IHeader) {
 
     return (
         <section id={id}>
