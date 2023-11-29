@@ -1,17 +1,16 @@
-import { HiMiniArrowsUpDown, HiOutlineChartPie, HiOutlineCreditCard, HiOutlineShoppingBag } from 'react-icons/hi2';
+import { HiMiniArrowsUpDown, HiOutlineChartPie, HiOutlineCreditCard, HiOutlineShoppingBag } from "react-icons/hi2";
 
 import { asideMenuList } from "../../config/asideMenuList";
-import AsideItem from "./AsideItem";
-import { Background, StyledAside, Ul } from "./asideBar.style";
+import AsideItem from "./menuItem/AsideItem";
+import { Background, StyledAside, Ul } from "./AsideBar.style";
 
-const icons: Array<JSX.Element> =
-    [<HiOutlineChartPie />, <HiOutlineShoppingBag />, <HiOutlineCreditCard />, <HiMiniArrowsUpDown />]
+
+const icons: Array<JSX.Element> = [<HiOutlineChartPie />, <HiOutlineShoppingBag />, <HiOutlineCreditCard />, <HiMiniArrowsUpDown />];
 
 interface IAsideBar {
-    isOpen: boolean,
-    onClose: () => void
+    isOpen: boolean;
+    onClose: () => void;
 }
-
 
 export default function AsideBar({ isOpen = false, onClose }: IAsideBar) {
     return (
@@ -20,15 +19,11 @@ export default function AsideBar({ isOpen = false, onClose }: IAsideBar) {
 
             <StyledAside $isOpen={isOpen}>
                 <Ul>
-                    {asideMenuList.map((item, index) =>
-                        <AsideItem
-                            key={item.name}
-                            name={item.name}
-                            path={item.path}
-                            icon={icons[index]}
-                            onCloseBurger={onClose}
-                        />)}
+                    {asideMenuList.map((item, index) => (
+                        <AsideItem key={item.name} name={item.name} path={item.path} icon={icons[index]} onCloseBurger={onClose} />
+                    ))}
                 </Ul>
-            </StyledAside></>
-    )
+            </StyledAside>
+        </>
+    );
 }

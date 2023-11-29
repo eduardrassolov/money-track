@@ -10,5 +10,5 @@ export async function getUser() {
         throw new Error(error.message);
     }
 
-    return data?.user;
+    return data.user;
 }

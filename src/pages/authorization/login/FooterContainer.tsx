@@ -17,7 +17,7 @@ const P = styled.p`
 
 export const BottomText = styled(P)`
   color: #8f8f8f;
-  margin: 1rem auto 0;
+  margin: 0.5rem auto;
   font-size: 0.8rem;
   width: fit-content;
   gap: 0.5rem;
@@ -31,7 +31,7 @@ export default function FooterContainer() {
     }
 
     return (
-        <>
+        <div>
             <BottomText>
                 <span>Don't have acount?</span>
                 <StyledLink to={ROUTES.SIGN_UP}>Sign Up</StyledLink>
@@ -43,6 +43,6 @@ export default function FooterContainer() {
             <BottomText>
                 <StyledLink to="/">Home page</StyledLink>
             </BottomText>
-        </>
+        </div>
     )
 }

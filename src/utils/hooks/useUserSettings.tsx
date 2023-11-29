@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { apiGetUserSettings } from "../../services/api/apiGetUserSettings";
+import { apiGetUserSettings } from "../../pages/settings/apiGetUserSettings";
 
 export function useUserSettings(userId: string) {
     const { data: userSettings, isLoading } = useQuery({

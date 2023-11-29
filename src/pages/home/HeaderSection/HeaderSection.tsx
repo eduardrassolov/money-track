@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../../../config/routes";
+import { ROUTES } from "../../../config/routes.ts";
 import { CTAButton, H2, Image, ImageContainer, Section, SmallImage, TextContainer, TitleText } from "./HeaderSection.style.ts";
+
 
 interface IHeader {
     id: string

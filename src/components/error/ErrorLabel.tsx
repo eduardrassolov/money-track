@@ -7,7 +7,7 @@ interface IErrorLabel {
 const StyledError = styled.p`
   font-size: 0.7rem;
   color: ${(props) => props.theme.error};
-  margin: 0.5rem 0 1rem;
+  margin: 0 0 1rem;
   transition: all 300ms;
 `;
 

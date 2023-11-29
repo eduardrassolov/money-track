@@ -1,8 +1,8 @@
+import { SELECT } from "../../components/transactionView/loadTransactions";
 import supabase from "../supabase";
-import { SELECT } from "./getTransactions";
 
 export default async function apiGetTransactionById(id: string) {
-    const { data, error } = await supabase.from("transactions").select(SELECT.ALL_TRANSACTIONS).eq("id", Number(id));
+    const { data, error } = await supabase.from("transactions").select(SELECT.FULL_TRANSACTION_INFO).eq("id", Number(id));
     console.log(data, error);
 
     return data;

@@ -1,54 +1,55 @@
-import { styled } from "styled-components";
+import styled from "styled-components";
 import { devices } from "../../config/breakPoints";
 
-const DashboardSection = styled.div`
-    background: ${(props) => props.theme.background2};
-
+export const Div = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    height: calc(100vh - 62px);
-    overflow: scroll;
-    padding: 0 1rem;
-`;
-
-const RowContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin: 0 0 1rem;
-
-    @media (max-width: 670px) {
-        margin: 0 0 0.5rem;
-    }
-`;
-
-const RowContainerCards = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    margin: 0;
-    gap: 1rem;
-`;
-
-const PieBlock = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-`;
-
-const PieContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    padding: 1.5rem 0;
-    margin: 0 0 1rem;
-    background: ${(props) => props.theme.background};
-    border-radius: 15px;
-    transition: all 300ms;
     justify-content: center;
     align-items: center;
+    width: 100%;
 
-    @media only screen and (min-width: ${devices.md}px) {
-        flex: 2;
-        flex-wrap: wrap;
+    h1 {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: ${(props) => props.theme.text};
     }
 `;
-export { DashboardSection, RowContainer, RowContainerCards, PieBlock, PieContainer };
+
+export const Container = styled.div`
+    background: ${(props) => props.theme.background};
+    border-radius: 15px;
+    border: 1px solid ${(props) => props.theme.border};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+`;
+
+export const DateFilterContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: start;
+    margin: 2rem 0 0 0;
+
+    @media only screen and (min-width: ${devices.sm}px) {
+        align-items: flex-end;
+    }
+`;
+
+export const Main = styled.main`
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 93vh;
+    overflow: scroll;
+    max-width: 1200px;
+    padding: 0 1rem;
+
+    @media only screen and (min-width: ${devices.md}px) {
+        width: 95%;
+    }
+`;
