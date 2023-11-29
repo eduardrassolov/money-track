@@ -4,6 +4,7 @@ import ThemeSwitch from "../../../components/swtich/ThemeSwitch";
 import Overlay from "../../../components/overlay/Overlay";
 import NavLinks from "./navLinks/NavLinks";
 import Burger from "./burger/Burger";
+//@ts-ignore
 import { Nav, SwitchContainer } from "./NavbarHome.style";
 
 interface INavBar {
