@@ -20,8 +20,9 @@ import TYPES_TRANSACTION from "../../config/typeTransactions";
 import { loadTransactions } from "./loadTransactions";
 import { sortBy } from "../../pages/dashboard/pie/PieView";
 import HeaderTransactionView from "./header/HeaderTransactionView";
-import { Main, StyledHeaderContainer } from "./TransactionView.style";
+
 import getAppSettings from "../../pages/settings/tabs/appSettingsTab/getAppSettings";
+import { Main, StyledHeaderContainer } from "./transactionView.style";
 
 dayjs.extend(isBetween);
 
