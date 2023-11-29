@@ -19,7 +19,7 @@ const contacts = [
     }
 ]
 
-export default function Footer() {
+export default function FooterContainer() {
     return (
         <StyledFooter>
             <p>Created by Eduard Rassolov.</p>

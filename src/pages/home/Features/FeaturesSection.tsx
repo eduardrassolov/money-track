@@ -1,3 +1,4 @@
+import { Section } from "./FeaturesSection.style.ts";
 import { IFeatureData } from "./IFeatureData.ts";
 import FetItem from "./item/FetItem.tsx";
 
@@ -41,8 +42,8 @@ interface IHeader {
 export default function FeaturesSection({ id }: IHeader) {
 
     return (
-        <section id={id}>
+        <Section id={id}>
             {featuresData.map((feature, index) => <FetItem key={feature.id} data={feature} side={index % 2 ? "right" : "left"} />)}
-        </section>
+        </Section>
     )
 }
