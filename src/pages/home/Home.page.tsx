@@ -6,13 +6,12 @@ import { Container } from "./Home.page.style";
 import Footer from "./footer/Footer";
 //@ts-ignore
 import FeaturesSection from "./features/FeaturesSection";
+//@ts-ignore
 import HeaderSection from "./header/HeaderSection";
 //@ts-ignore
 import NavbarHome from "./navbar/NavbarHome";
 //@ts-ignore
 import FooterContainer from "./footer/Footer";
-
-// import NavBarHome from "./navBar/NavBarHome";
 
 export default function HomePage() {
     const { isBurgerOpen, handleBurger } = useBurgerMenu();
@@ -26,7 +25,7 @@ export default function HomePage() {
 
                 <HeaderSection id={"header"} />
 
-                <FeaturesSection id={"feature"} />
+                {/* <FeaturesSection id={"feature"} /> */}
 
                 <FooterContainer />
             </Container>
