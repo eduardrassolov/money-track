@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
 
+
+import ThemeSwitch from "../../../../components/swtich/ThemeSwitch.tsx";
+import { ROUTES } from "../../../../config/routes.ts";
 import { A, Li, Ul } from "./NavLinks.style.ts";
-import ThemeSwitch from "../../../../components/swtich/ThemeSwitch";
-import { ROUTES } from "../../../../config/routes";
 
 type NavLinksProps = {
     isOpen?: boolean;
