@@ -29,7 +29,8 @@
             {
                 "name": "@styled/typescript-styled-plugin"
             }
-        ]
+        ],
+        "skipDefaultLibCheck": true
     },
     "include": ["src/**/*"],
     "references": [{ "path": "./tsconfig.node.json" }]
