@@ -3,10 +3,10 @@ import useBurgerMenu from "../../components/navBarApp/useBurger";
 import useTheme from "../../utils/hooks/useTheme";
 import { Container } from "./Home.page.style";
 
-import Footer from "./footer/Footer.tsx";
-import FeaturesSection from "./features/FeaturesSection.tsx";
-import HeaderSection from "./header/HeaderSection.tsx";
-import NavBarHome from "./navBar/NavBarHome.tsx";
+import Footer from "./footer/Footer";
+import FeaturesSection from "./features/FeaturesSection";
+import HeaderSection from "./header/HeaderSection";
+import NavBarHome from "./navBar/NavBarHome";
 
 export default function HomePage() {
     const { isBurgerOpen, handleBurger } = useBurgerMenu();
