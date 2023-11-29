@@ -1,7 +1,9 @@
-import { IFeatureData } from './FeaturesSection';
-import AnimatedContainer from '../../../components/animation/AnimatedContainer';
-import { slideUp } from '../../../config/animationCfg';
-import { FeaturesItem, ImageContainer, TextContainer } from './FeatureItem.style';
+
+import AnimatedContainer from '../../../../components/animation/AnimatedContainer';
+import { slideUp } from '../../../../config/animationCfg';
+import { IFeatureData } from '../IFeatureData';
+
+import { StyledFeaturesItem, ImageContainer, TextContainer } from './FeatureItem.style';
 
 type FeatureSide = "left" | "right";
 interface IFeature {
@@ -9,11 +11,11 @@ interface IFeature {
     side: FeatureSide;
 }
 
-export default function ({ data: { title, text, imgPath }, side }: IFeature) {
+export default function FetItem({ data: { title, text, imgPath }, side }: IFeature) {
 
     return (
         <AnimatedContainer direction={slideUp}>
-            <FeaturesItem $side={side} >
+            <StyledFeaturesItem $side={side} >
                 <TextContainer>
                     <h2>{title}</h2>
                     <p>{text}</p>
@@ -22,7 +24,7 @@ export default function ({ data: { title, text, imgPath }, side }: IFeature) {
                 <ImageContainer>
                     <img src={imgPath} alt={`${title} image`} />
                 </ImageContainer>
-            </FeaturesItem>
+            </StyledFeaturesItem>
         </AnimatedContainer>
     )
 }

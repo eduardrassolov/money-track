@@ -1,5 +1,7 @@
-import Feature from "./FeatureItem";
-import { Section } from "./FeaturesSection.style";
+import { IFeatureData } from "./IFeatureData.ts";
+import FetItem from "./item/FetItem.tsx";
+
+
 
 const featuresData: Array<IFeatureData> = [
     {
@@ -35,23 +37,14 @@ const featuresData: Array<IFeatureData> = [
 ]
 
 interface IHeader {
-    id: string
+    id: string;
 }
 
-export interface IFeatureData {
-    id: string,
-    title: string,
-    text: string,
-    imgPath: string
-}
-
-
-
-export default function FeaturesSection({ id }: IHeader) {
+export function FeaturesSection({ id }: IHeader) {
 
     return (
-        <Section id={id}>
-            {featuresData.map((feature, index) => <Feature key={feature.id} data={feature} side={index % 2 ? "right" : "left"} />)}
-        </Section>
+        <section id={id}>
+            {featuresData.map((feature, index) => <FetItem key={feature.id} data={feature} side={index % 2 ? "right" : "left"} />)}
+        </section>
     )
 }
