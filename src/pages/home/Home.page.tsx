@@ -6,9 +6,8 @@ import { Container } from "./Home.page.style";
 // import Footer from "./footer/Footer";
 // import FeaturesSection from "./features/FeaturesSection";
 import HeaderSection from "./header/HeaderSection";
-import NavBarHome from "./navbar/NavBarHome";
-import FeaturesSection from "./features/FeaturesSection";
-import Footer from "./footer/Footer";
+import NavbarHome from "./navbar/NavbarHome";
+
 // import NavBarHome from "./navBar/NavBarHome";
 
 export default function HomePage() {
@@ -19,13 +18,13 @@ export default function HomePage() {
         <ThemeProvider theme={theme}>
             <Container>
 
-                <NavBarHome isOpen={isBurgerOpen} onClose={handleBurger} />
+                <NavbarHome isOpen={isBurgerOpen} onClose={handleBurger} />
 
                 <HeaderSection id={"header"} />
 
-                <FeaturesSection id={"feature"} />
+                {/* <FeaturesSection id={"feature"} />
 
-                <Footer />
+                <Footer /> */}
             </Container>
         </ThemeProvider>
     )
