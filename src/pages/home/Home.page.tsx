@@ -7,6 +7,8 @@ import { Container } from "./Home.page.style";
 // import FeaturesSection from "./features/FeaturesSection";
 import HeaderSection from "./header/HeaderSection";
 import NavBarHome from "./navbar/NavBarHome";
+import FeaturesSection from "./features/FeaturesSection";
+import Footer from "./footer/Footer";
 // import NavBarHome from "./navBar/NavBarHome";
 
 export default function HomePage() {
@@ -21,9 +23,9 @@ export default function HomePage() {
 
                 <HeaderSection id={"header"} />
 
-                {/* <FeaturesSection id={"feature"} /> */}
+                <FeaturesSection id={"feature"} />
 
-                {/* <Footer /> */}
+                <Footer />
             </Container>
         </ThemeProvider>
     )
