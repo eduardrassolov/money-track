@@ -1,5 +1,5 @@
 import { AiOutlineGithub, AiFillLinkedin, AiOutlineMail } from "react-icons/ai";
-import { A, ContactList, StyledFooter } from "./Footer.style";
+import { A, ContactList, StyledFooter } from "./FooterContainer.style";
 
 const contacts = [
     {
