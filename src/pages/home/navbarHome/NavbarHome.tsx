@@ -3,7 +3,7 @@ import Logo from "../../../components/logo/Logo";
 import ThemeSwitch from "../../../components/swtich/ThemeSwitch";
 import Overlay from "../../../components/overlay/Overlay";
 import NavLinks from "./navLinks/NavLinks";
-import Burger from "./burger/Burger";
+import Burger from "./burgerHome/Burger";
 //@ts-ignore
 import { Nav, SwitchContainer } from "./NavbarHome.style";
 
