@@ -4,9 +4,9 @@ import useTheme from "../../utils/hooks/useTheme";
 import { Container } from "./Home.page.style";
 
 import HeaderSection from "./header/HeaderSection";
-import NavbarHome from "./navbar/NavbarHome";
+import NavbarHome from "./navbarHome/NavbarHome";
 import FooterContainer from "./footerHome/FooterContainer";
-import FeaturesSection from "./features/FeaturesSection";
+import FeaturesSection from "./featuresHome/FeaturesSection";
 
 export default function HomePage() {
     const { isBurgerOpen, handleBurger } = useBurgerMenu();
