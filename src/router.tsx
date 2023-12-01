@@ -15,7 +15,7 @@ import { QUERY_KEY } from "./config/queryClientKeys.ts";
 
 const AppLayout = lazy(() => import("./pages/layout/AppLayout.tsx"));
 const Dashboard = lazy(() => import("./pages/dashboard/Dashboard.page.tsx"));
-const TransactionView = lazy(() => import("./components/transactionView/TransactionView.tsx"));
+const TransactionView = lazy(() => import("./pages/transactionView/TransactionView.tsx"));
 const EditPage = lazy(() => import("./pages/edit/EditTransaction.page.tsx"));
 const Settings = lazy(() => import("./pages/settings/Settings.page.tsx"));
 

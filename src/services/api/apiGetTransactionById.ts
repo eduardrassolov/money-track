@@ -1,4 +1,4 @@
-import { SELECT } from "../../components/transactionView/loadTransactions";
+import { SELECT } from "../../pages/transactionView/loadTransactions";
 import supabase from "../supabase";
 
 export default async function apiGetTransactionById(id: string) {

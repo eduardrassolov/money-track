@@ -11,7 +11,7 @@ import LoadingUi from '../../../components/spinner/LoadingUi';
 import TYPES_TRANSACTION from '../../../config/typeTransactions';
 import { devices } from '../../../config/breakPoints';
 import { ICurrency } from '../../../utils/hooks/useCurrency';
-import { loadTransactions } from '../../../components/transactionView/loadTransactions';
+import { loadTransactions } from '../../transactionView/loadTransactions.ts';
 import { QUERY_KEY } from '../../../config/queryClientKeys';
 import { lazy } from 'react';
 

@@ -8,21 +8,21 @@ import { useUser } from "../../utils/hooks/useUser";
 import { useBoundStore } from "../../store/store";
 
 import TransactionsList from "./TransactionsList";
-import LoadingUi from "../spinner/LoadingUi";
-import Pagination from "../pagination/Pagination";
+import LoadingUi from "../../components/spinner/LoadingUi";
+import Pagination from "../../components/pagination/Pagination";
 import { searchTransactionsByMask } from "../../utils/helpers/searchTransactionsByMask";
-import usePagination from "../pagination/usePagination";
+import usePagination from "../../components/pagination/usePagination";
 import apiDeleteTransaction from "../../services/api/deleteTransaction";
-import { CreateNewTransactionForm } from "../newTransaction/CreateNewTransaction";
+import { CreateNewTransactionForm } from "../../components/newTransaction/CreateNewTransaction";
 import { QUERY_KEY } from "../../config/queryClientKeys";
 import TYPES_TRANSACTION from "../../config/typeTransactions";
 
 import { loadTransactions } from "./loadTransactions";
-import { sortBy } from "../../pages/dashboard/pie/PieView";
+import { sortBy } from "../dashboard/pie/PieView";
 import HeaderTransactionView from "./header/HeaderTransactionView";
 
-import getAppSettings from "../../pages/settings/tabs/appSettingsTab/getAppSettings";
-import { Main, StyledHeaderContainer } from "./transactionView.style";
+import getAppSettings from "../settings/tabs/appSettingsTab/getAppSettings";
+import { Section, StyledHeaderContainer } from "./transactionView.style";
 
 dayjs.extend(isBetween);
 
@@ -73,7 +73,7 @@ export default function TransactionView({ queryKey }: ITransactionView) {
     }
 
     return (
-        <Main>
+        <Section>
             <Container>
                 {queryKey === QUERY_KEY.TRANSACTIONS ? (
                     ""
@@ -95,6 +95,6 @@ export default function TransactionView({ queryKey }: ITransactionView) {
 
                 <Pagination transactionsPerPage={settings?.itemsPerPage || 10} maxLength={transactionsWithSearchMask?.length} />
             </Container>
-        </Main>
+        </Section>
     );
 }

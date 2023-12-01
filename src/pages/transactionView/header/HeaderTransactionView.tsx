@@ -1,5 +1,5 @@
 import { Header, Text } from './HeaderTransactionView.style'
-import DateFilter from '../../dateRangePicker/DateFilter'
+import DateFilter from '../../../components/dateRangePicker/DateFilter'
 
 export default function HeaderTransactionView() {
     return (

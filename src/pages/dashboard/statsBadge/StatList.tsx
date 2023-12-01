@@ -9,7 +9,7 @@ import { useBoundStore } from '../../../store/store';
 import { sortBy } from '../pie/PieView';
 import StatItem from './StatItem';
 import { ICurrency } from '../../../utils/hooks/useCurrency';
-import { loadTransactions } from '../../../components/transactionView/loadTransactions';
+import { loadTransactions } from '../../transactionView/loadTransactions';
 import { QUERY_KEY } from '../../../config/queryClientKeys';
 import { StyledDiv } from './StatList.style';
 

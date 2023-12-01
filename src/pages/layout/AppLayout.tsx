@@ -2,8 +2,8 @@ import { Outlet } from 'react-router-dom';
 import { useRef } from 'react';
 import "react-toastify/dist/ReactToastify.css";
 
-import { ContentContainer, Section, StyledLayout } from './AppLayout.style.ts';
-import AsideBar from '../../components/asideBar/AsideBar.tsx';
+import { ContentContainer, Main, StyledLayout } from './AppLayout.style.ts';
+import SideBarNav from '../../components/sideBarNav/SideBarNav.tsx';
 import { NavBar } from '../../components/navBarApp/NavBar.tsx';
 import useBurgerMenu from '../../components/navBarApp/useBurger.tsx';
 
@@ -14,14 +14,14 @@ export default function AppLayout() {
 
     return (
         <StyledLayout>
-            <AsideBar isOpen={isBurgerOpen} onClose={handleBurger} />
+            <SideBarNav isOpen={isBurgerOpen} onClose={handleBurger} />
 
             <ContentContainer>
                 <NavBar isOpen={isBurgerOpen} onBurgerClick={handleBurger} />
 
-                <Section ref={containter}>
+                <Main ref={containter}>
                     <Outlet />
-                </Section>
+                </Main>
             </ContentContainer>
         </StyledLayout>
     )

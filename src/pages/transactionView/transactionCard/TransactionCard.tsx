@@ -7,7 +7,7 @@ import Info from "./info/Info";
 import CategoryCard from "./category/CategoryCard";
 import Price from "./price/Price";
 import Operations from "./operations/Operations";
-import AnimatedContainer from "../../animation/AnimatedContainer";
+import AnimatedContainer from "../../../components/animation/AnimatedContainer";
 
 interface ITransactionProps {
     item: ITransaction;
