@@ -33,6 +33,8 @@ export default function SignUpPage() {
             toast.error(error.message);
             return null;
         }
+
+
         navigate(ROUTES.LOGIN);
     }
 

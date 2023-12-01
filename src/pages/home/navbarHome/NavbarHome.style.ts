@@ -11,7 +11,7 @@ export const Nav = styled.nav`
     align-items: center;
     justify-content: space-between;
     position: fixed;
-    width: 100%;
+    width: 100vw;
     transition: all 300ms;
     z-index: 5;
 `;

@@ -37,7 +37,7 @@ export default function FooterContainer() {
                 <StyledLink to={ROUTES.SIGN_UP}>Sign Up</StyledLink>
                 <span>or</span>
 
-                <StyledLink to={""} onClick={handleClickDemo}>Demo</StyledLink>
+                <StyledLink to={""} onClick={handleClickDemo}>test account</StyledLink>
             </BottomText>
 
             <BottomText>

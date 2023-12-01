@@ -15,10 +15,10 @@ export const Ul = styled.ul<{ $isOpen: boolean }>`
     display: ${(props) => (props.$isOpen ? "flex" : "none")};
     list-style: none;
     transition: all 300ms;
-    width: 35%;
 
     li {
-        margin: 1rem auto 2rem 0;
+        margin: 1rem 0 2rem 0;
+        padding: 0;
         text-align: start;
         cursor: pointer;
 

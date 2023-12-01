@@ -7,6 +7,7 @@ export const Container = styled.div`
   overflow: scroll;
   padding: 1rem;
   width: 100%;
+  transition: all 300ms;
 `
 
 export const FormContainer = styled.div`

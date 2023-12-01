@@ -1,7 +1,6 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-
 import { useLogin } from './useLogin';
 import { LoginBtn } from '../../../styles/Button.style';
 import { TLogin } from './login.type';

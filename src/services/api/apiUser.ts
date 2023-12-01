@@ -3,12 +3,9 @@ import supabase from "../supabase";
 
 export async function apiLogin({ email, password }: TLogin) {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-
     if (error) {
-        throw error.message;
+        throw error;
     }
-
-    console.log(data);
     return data;
 }
 
@@ -21,7 +18,7 @@ export async function apiLogout() {
 }
 
 export async function apiSignUp(email: string, password: string, firstName: string, lastName: string) {
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -32,6 +29,20 @@ export async function apiSignUp(email: string, password: string, firstName: stri
             },
         },
     });
+    console.log(data);
 
-    return { error };
+    const { user } = data;
+    if (!user) {
+        return { error };
+    }
+
+    await createSettingsForNewUser(user.id);
+
+    return { data };
+}
+
+async function createSettingsForNewUser(userId: string) {
+    const defaultCurrencyId = "ffcb6d59-a81a-4d9d-a821-36e33e84e683";
+
+    await supabase.from("Settings").insert({ userId, defaultCurrencyId });
 }
