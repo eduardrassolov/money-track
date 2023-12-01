@@ -1,14 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import { Icon, Li, StyledItem, Text } from "./asideItem.style";
+import { Icon, Li, StyledItem, Text } from "./sideBarItem.style.ts";
 
-type AsideItemProps = {
+type SideBarItemProp = {
     name: string;
     path: string;
     icon: JSX.Element;
     onCloseBurger: () => void;
 }
 
-export default function AsideItem({ name, path, icon, onCloseBurger }: AsideItemProps) {
+export default function SideBarItem({ name, path, icon, onCloseBurger }: SideBarItemProp) {
     const navigate = useNavigate();
 
     function handleClick(path: string) {

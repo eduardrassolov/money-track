@@ -12,7 +12,7 @@ export default function AuthorizationLayout() {
     const { isAuthenticated } = useUser();
 
     if (isAuthenticated) {
-        navigate(ROUTES.DASHBOARD)
+        navigate(ROUTES.DASHBOARD);
     }
 
     return (

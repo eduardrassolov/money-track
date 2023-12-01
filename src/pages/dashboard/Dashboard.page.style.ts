@@ -53,3 +53,15 @@ export const Main = styled.main`
         width: 95%;
     }
 `;
+
+export const H1 = styled.h1`
+    color: ${(props) => props.theme.text};
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 1.1px;
+
+    span {
+        color: gray;
+    }
+`;

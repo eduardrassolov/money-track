@@ -15,7 +15,6 @@ export default function HomePage() {
     return (
         <ThemeProvider theme={theme}>
             <Container>
-
                 <NavbarHome isOpen={isBurgerOpen} onClose={handleBurger} />
 
                 <HeaderSection id={"header"} />

@@ -14,10 +14,11 @@ import StatList from "./statsBadge/StatList.tsx";
 import { apiLoadTransactions } from "./apiLoadTransactions.ts";
 import { DateFilterContainer, Main } from "./Dashboard.page.style.ts";
 
+const PieView = lazy(() => import("./pie/PieView.tsx"));
+
 const sortBy: SortBy = { field: "completed_at", direction: "asc" };
 dayjs.extend(isBetween);
 
-const PieView = lazy(() => import("./pie/PieView.tsx"));
 
 export default function Dashboard() {
     const { user } = useUser();

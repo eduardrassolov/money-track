@@ -14,7 +14,7 @@ export const ContentContainer = styled.div`
     width: 100vw;
 `;
 
-export const Section = styled.section`
+export const Main = styled.main`
     background: ${(props) => props.theme.background};
     height: calc(100vh - 50px);
     transition: all 300ms;

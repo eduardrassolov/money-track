@@ -20,6 +20,7 @@ export const useLogin = () => {
         },
 
         onError: (error) => {
+            console.log(error);
             if (error instanceof Error) {
                 toast.error(error.message);
             }
